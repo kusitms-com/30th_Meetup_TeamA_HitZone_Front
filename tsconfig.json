@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    // 타입 루트 설정
+    "typeRoots": ["node_modules/@types", "src/types"],
+    
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,6 +24,7 @@
       "@/*": ["./*"]
     }
   },
+  
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
