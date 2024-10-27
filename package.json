@@ -10,7 +10,7 @@
     "lint-staged": "eslint --cache ."
   },
   "dependencies": {
-    "next": "14.2.14",
+    "next": "^15.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0"
@@ -19,9 +19,9 @@
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@eslint/js": "^9.13.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/node": "^20.17.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
     "eslint": "^8.57.1",
@@ -39,7 +39,7 @@
     "postcss": "^8",
     "prettier": "3.3.3",
     "tailwindcss": "^3.4.13",
-    "typescript": "^5",
+    "typescript": "^5.6.3",
     "typescript-eslint": "^8.11.0"
   }
 }
