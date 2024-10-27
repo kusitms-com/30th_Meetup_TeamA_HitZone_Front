@@ -7,6 +7,7 @@
 // 시작: npm run dev
 import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
+import '../styles/globals.css'; // global.css를 임포트합니다.
 
 import Header from '../components/layout/Header';
 import NavBar from '../components/layout/NavBar';
@@ -26,15 +27,15 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   // 현재 경로에 따라 컴포넌트 선택
   const renderComponent = () => {
     switch (currentPath) {
-        case '/temp':
-            return <Onboarding />;
         case '/':
+            return <Onboarding />;
+        case '/main':
             return <Main />;
     }
   };
-
+  
   return (
-    <div className="">
+    <div className="min-w-[500px]">
         <Header/>
         {renderComponent()}
         <NavBar />
