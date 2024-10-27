@@ -1,10 +1,9 @@
 ---
 name: "❌ Bug Report Template"
 about: 버그가 발생한 상황과 수정 내역을 적습니다.
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
 
 ## 🐞해결할 버그 요약
@@ -22,6 +21,7 @@ assignees: ''
 > 예상했던 정상적인 결과가 어떤 것이었는지 설명해주세요.
 
 ## 스크린샷
+
 > 버그 발생 화면을 스크린샷으로 남겨주세요.
 
 ## 📚참고할만한 자료(선택)

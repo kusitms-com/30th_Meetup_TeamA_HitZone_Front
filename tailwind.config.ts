@@ -16,14 +16,10 @@ const config: Config = {
         md: ["16px", "150%"],
         sm: ["14px", "150%"],
       },
-      
-      fontWeight: {
 
-      },
+      fontWeight: {},
 
-      colors: {
-
-      },
+      colors: {},
 
       screens: {
         desktop: "1080px",

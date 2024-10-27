@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "postinstall": "husky install",
-    "prettier-format": "prettier --cache --write .",
     "lint-staged": "eslint --cache ."
   },
   "dependencies": {
@@ -17,6 +16,8 @@
     "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@eslint/js": "^9.13.0",
     "@types/node": "^20",
     "@types/react": "^18",

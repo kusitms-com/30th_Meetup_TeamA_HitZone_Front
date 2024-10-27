@@ -1,10 +1,9 @@
 ---
 name: "\U0001F680 \bIssue Template"
 about: 기능 추가에 대한 작업 사항을 적습니다.
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
 
 ## 📄구현할 기능 요약

@@ -45,9 +45,12 @@
     ]
   },
   "settings": {
+    "react": {
+      "version": "detect" // 또는 특정 버전 (예: "17.0")
+    },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }
