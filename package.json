@@ -6,12 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "postinstall": "husky install",
+    "prettier-format": "prettier --cache --write .",
+    "lint-staged": "eslint --cache ."
   },
   "dependencies": {
     "next": "14.2.14",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -19,6 +22,8 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "postcss": "^8",
     "tailwindcss": "^3.4.13",
     "typescript": "^5"
