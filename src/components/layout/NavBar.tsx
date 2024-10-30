@@ -23,24 +23,27 @@ const NavBar = () => {
 
   return (
     <div className="fixed bottom-0 w-full max-w-[500px] bg-grayscale-0 border-t border-grayscale-10 flex justify-around p-2">
-      {menuItems.map((item) => (
-        <div
-          key={item.name}
-          className="flex flex-col items-center cursor-pointer"
-          onClick={() => {
-            if (router.pathname !== item.path) {
-              router.push(item.path);
-            }
-          }}
-        >
-          <Image
-            src={router.pathname === item.path ? item.activeIcon : item.icon}  // 현재 경로에 따라 아이콘 결정
-            alt={`${item.name} Icon`}
-            width={52}
-            height={45}
-          />
-        </div>
-      ))}
+      {menuItems.map((item) => {
+        const isActive = router.pathname === item.path;
+        return (
+          <div
+            key={item.name}
+            className="flex flex-col items-center cursor-pointer"
+            onClick={() => {
+              if (!isActive) {
+                router.push(item.path);
+              }
+            }}
+          >
+            <Image
+              src={isActive ? item.activeIcon : item.icon}
+              alt={`${item.name} Icon`}
+              width={52}
+              height={45}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
