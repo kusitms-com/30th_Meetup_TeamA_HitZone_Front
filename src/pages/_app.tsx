@@ -9,8 +9,6 @@ import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css'; // global.css를 임포트합니다.
 
-import Header from '../components/layout/Header';
-import NavBar from '../components/layout/NavBar';
 import Main from './Main/Main';
 import Onboarding from './Onboarding/Onboarding'; 
 
@@ -35,10 +33,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   };
   
   return (
-    <div className="min-w-[500px]">
-        <Header/>
+    <div className="items-center w-full max-w-[500px] mx-auto">
         {renderComponent()}
-        <NavBar />
     </div>
   );
 };
