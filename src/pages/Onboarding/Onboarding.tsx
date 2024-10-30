@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 
 import InitPage from "./components/InitPage"
 import LoginPage from "./components/LoginPage"
-import SignupPage from "./components/SignupPage"
+import SignupPage1 from "./components/SignupPage1"
+import SignupPage2 from "./components/SignupPage2"
 
 const Onboarding = () => {
     // 로딩 상태 관리
@@ -14,6 +15,10 @@ const Onboarding = () => {
     const [isFirstTimeUser, setIsFirstTimeUser] = useState(true);
     // useRouter 훅 사용
     const router = useRouter();
+
+    // 회원가입 단계 상태 관리
+    
+
 
     // 로딩 상태 시뮬레이션
     useEffect(() => {
@@ -36,12 +41,12 @@ const Onboarding = () => {
 
     // 로그아웃 상태시 렌더링
     if (!isLoggedIn) {
-        return <LoginPage />;
+        return <SignupPage2 />;
     }
 
     // 로그인 및 처음 사용자 상태시 렌더링
     if (isFirstTimeUser) {
-        return <SignupPage />;
+        return <SignupPage1 />
     }
 
     // 로그인 및 기존 사용자 상태시 렌더링하지 않고 /main으로 리디렉션
