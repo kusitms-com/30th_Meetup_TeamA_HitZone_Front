@@ -9,9 +9,9 @@ import mypageIcon from "../../assets/webp/mypage_gray.webp";
 const NavBar = () => {
   const router = useRouter();
 
-  // 경로와 해당 탭바 메뉴 선택시 분홍색으로 변경
+  // 페이지 경로와 아이콘/텍스트 정보
   const menuItems = [
-    { name: "홈", path: "/home", icon: homeIcon, activeIcon: "../assets/webp/home_pink.webp" },
+    { name: "홈", path: "/main", icon: homeIcon, activeIcon: "../assets/webp/home_pink.webp" },
     { name: "구역가이드", path: "/guide", icon: guideIcon, activeIcon: "../assets/webp/guide_pink.webp" },
     { name: "야구 문화", path: "/culture", icon: cultureIcon, activeIcon: "../assets/webp/culture_pink.webp" },
     { name: "마이페이지", path: "/mypage", icon: mypageIcon, activeIcon: "../assets/webp/mypage_pink.webp" },
