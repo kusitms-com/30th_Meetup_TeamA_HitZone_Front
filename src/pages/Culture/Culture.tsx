@@ -6,9 +6,9 @@ const Culture = () => {
   return (
     <div>
       <Header />
-      <main className="p-4">
+      <div className="p-4">
         <h1>야구 문화</h1>
-      </main>
+      </div>
       <NavBar />
     </div>
   );

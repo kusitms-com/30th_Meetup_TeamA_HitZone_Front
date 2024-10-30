@@ -7,10 +7,14 @@
 // 시작: npm run dev
 import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
-import '../styles/globals.css'; // global.css를 임포트합니다.
+import '../styles/globals.css';
 
-import Main from './Main/Main';
 import Onboarding from './Onboarding/Onboarding'; 
+import Main from './Main/Main';
+import Guide from './Guide/Guide';
+import Culture from './Culture/Culture';
+import MyPage from './MyPage/MyPage';
+
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   // 현재 URL 경로 가져오기
@@ -29,6 +33,12 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             return <Onboarding />;
         case '/main':
             return <Main />;
+        case '/guide':
+            return <Guide />;
+        case '/culture':
+            return <Culture />;
+        case '/mypage':
+            return <MyPage />;
     }
   };
   
