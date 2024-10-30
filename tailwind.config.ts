@@ -14,6 +14,7 @@ export default {
         lg: ["18px", "150%"],
         md: ["16px", "150%"],
         sm: ["14px", "150%"],
+        xs: ["12px", "150%"],
       },
 
       fontWeight: {
