@@ -6,9 +6,9 @@ const MyPage = () => {
   return (
     <div>
       <Header />
-      <main className="p-4">
+      <div className="p-4">
         <h1>마이 페이지</h1>
-      </main>
+      </div>
       <NavBar />
     </div>
   );

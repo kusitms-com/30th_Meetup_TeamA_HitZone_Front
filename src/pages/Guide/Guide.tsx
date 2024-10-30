@@ -6,9 +6,9 @@ const Guide = () => {
   return (
     <div>
       <Header />
-      <main className="p-4">
+      <div className="p-4">
         <h1>구역 가이드</h1>
-      </main>
+      </div>
       <NavBar />
     </div>
   );
