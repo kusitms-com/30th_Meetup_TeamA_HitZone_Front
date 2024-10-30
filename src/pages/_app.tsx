@@ -33,7 +33,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   };
   
   return (
-    <div className="items-center w-full max-w-[500px] mx-auto">
+    <div className="items-center p-4 w-full max-w-[500px] mx-auto">
         {renderComponent()}
     </div>
   );
