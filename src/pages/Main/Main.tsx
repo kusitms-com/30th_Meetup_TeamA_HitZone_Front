@@ -1,10 +1,16 @@
+import Header from "../../components/layout/Header";
+import NavBar from "../../components/layout/NavBar";
+
 const Main = () => {
-    return (
-        <div>
-            <h1>안녕</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Header />
+      <div className="content">
+        {/* 메인 컨텐츠 추가 */}
+      </div>
+      <NavBar />
+    </div>
+  );
+};
 
-
-export default Main
+export default Main;
