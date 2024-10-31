@@ -1,20 +1,9 @@
 import React, { useState } from 'react';
 import BackBar from "./BackBar"
 
+import AlarmQuestionDialog from "../../../components/dialogs/AlarmQuestionDialog"
+
 const Page = () => {
-    // 닉네임 상태 관리
-    const [nickname, setNickname] = useState('');
-
-    const handleNickNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const input = e.target.value;
-        
-        // 최대 20글자
-        if (input.length <= 20) {
-            setNickname(input);
-        }
-    };
-
-
     return (
         <div className="relative justify-center items-center w-full h-screen ">
             {/** 뒤로가기 바 */}
@@ -22,6 +11,9 @@ const Page = () => {
                  onClick={() => window.history.back()}>
                 <BackBar />
             </div>
+
+            {/**임시로 */}
+            <AlarmQuestionDialog/>
             
             {/** 상태 바 */}
             <div className="px-[16px]">
