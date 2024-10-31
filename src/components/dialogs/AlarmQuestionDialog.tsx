@@ -1,13 +1,13 @@
 
 import Image from 'next/image';
 
-import notification_main50_icon from '../../assets/webp/notification_main50.webp';
+import notificationMain50Icon from '../../assets/webp/notification_main50.webp';
 
 const Dialog = () => {
     return (
         <div className="flex flex-col border rounded-[12px] w-[324px] h-[125px]">
             <div className="flex justify-center items-center mt-[22px] mb-[22px] gap-[5px]">
-                <Image src={notification_main50_icon} alt="뒤로가기 버튼" width={24} height={24} />
+                <Image src={notificationMain50Icon} alt="뒤로가기 버튼" width={24} height={24} />
                 <p className="text-sm text-grayscale-90 font-semibold">
                     Hitzone.com 에서 알람을 보내려고 합니다.
                 </p>

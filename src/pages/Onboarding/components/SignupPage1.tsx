@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import BackBar from "./BackBar"
 
 import Image from 'next/image';
-import bcheck_button_green_icon from '../../../assets/webp/check_button_green.webp';
+import checkButtonGreenIcon from '../../../assets/webp/check_button_green.webp';
 
 
 const Page = () => {
@@ -64,7 +64,7 @@ const Page = () => {
                         {/** 글자수가 1글자 이상일 때 이미지 표시 */}
                         {nickname.length > 0 && (
                             <div className="absolute right-4 top-[50px] transform -translate-y-1/2 w-5 h-5">
-                                <Image src={bcheck_button_green_icon} alt="확인 완료 버튼" width={20} height={20} />
+                                <Image src={checkButtonGreenIcon} alt="확인 완료 버튼" width={20} height={20} />
                             </div>
                         )}
                     </div>
