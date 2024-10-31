@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import HitzoneLogo from "../../assets/svg/hitzone_logo.svg";
 import GuideIcon from "../../assets/webp/guide_header.webp";
-import NotificationIcon from "../../assets/webp/notification.webp";
+import NotificationIcon from "../../assets/webp/notification_gray.webp";
 
 const Header = () => {
   const router = useRouter();

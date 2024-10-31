@@ -41,7 +41,8 @@ const Onboarding = () => {
 
     // 로그아웃 상태시 렌더링
     if (!isLoggedIn) {
-        return <SignupPage2 />;
+        //return <LoginPage />;
+        return <SignupPage2 />
     }
 
     // 로그인 및 처음 사용자 상태시 렌더링
