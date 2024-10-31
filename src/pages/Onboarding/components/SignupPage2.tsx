@@ -15,8 +15,9 @@ const Page = () => {
             {/**임시로 */}
             <AlarmQuestionDialog/>
             
-            {/** 상태 바 */}
+            {/** 컨텐츠 */}
             <div className="px-[16px]">
+                {/** 상태 바 */}
                 <div className="py-[24px]">
                     <div className="flex items-center justify-start bg-main-40 rounded-full overflow-hidden w-full h-[7px] ">
                     </div>
@@ -59,7 +60,7 @@ const Page = () => {
 
             {/** next 버튼 */}
             <div className="absolute bottom-0 left-0 w-full px-[16px]">
-                <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px]">
+                <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[50px]">
                     <p className="text-md text-white font-semibold ">
                         다음
                     </p>
