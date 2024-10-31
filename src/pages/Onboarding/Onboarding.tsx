@@ -5,6 +5,7 @@ import InitPage from "./components/InitPage"
 import LoginPage from "./components/LoginPage"
 import SignupPage1 from "./components/SignupPage1"
 import SignupPage2 from "./components/SignupPage2"
+import SignupPage3 from "./components/SignupPage3"
 
 const Onboarding = () => {
     // 로딩 상태 관리
@@ -42,7 +43,7 @@ const Onboarding = () => {
     // 로그아웃 상태시 렌더링
     if (!isLoggedIn) {
         //return <LoginPage />;
-        return <SignupPage2 />
+        return <SignupPage3 userName={"서여니"} />
     }
 
     // 로그인 및 처음 사용자 상태시 렌더링
