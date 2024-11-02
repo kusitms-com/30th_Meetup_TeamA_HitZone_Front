@@ -2,10 +2,13 @@ import React from "react";
 import Header from "../../components/layout/Header";
 import NavBar from "../../components/layout/NavBar";
 import { useState } from "react";
+import BignnerGuide from "../../components/chips/BignnerGuide";
+import BignnerGuideDialog from "../../components/dialogs/BignnerGuideDialog";
 import Dropdown from "./components/Dropdown";
 
 function Main() {
   const [selectedStadium, setSelectedStadium] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const stadiums = [
     "잠실종합운동장 (잠실)",
@@ -19,6 +22,8 @@ function Main() {
   const handleStadiumSelect = (stadium: string) => {
     setSelectedStadium(stadium);
   };
+
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   return (
     <div>
@@ -35,7 +40,13 @@ function Main() {
             selectedOption={selectedStadium}
             onSelect={handleStadiumSelect}
           />
+
+          {/* 초보자 구역 가이드 버튼 */}
+          <BignnerGuide onClick={toggleModal} />
         </div>
+
+        {/* 초보자 구역 가이드 모달 */}
+        <BignnerGuideDialog isOpen={isModalOpen} onClose={toggleModal} />
       </div>
       <NavBar />
     </div>
