@@ -1,16 +1,45 @@
+import React from "react";
 import Header from "../../components/layout/Header";
 import NavBar from "../../components/layout/NavBar";
+import { useState } from "react";
+import Dropdown from "./components/Dropdown";
 
-const Main = () => {
+function Main() {
+  const [selectedStadium, setSelectedStadium] = useState("");
+
+  const stadiums = [
+    "잠실종합운동장 (잠실)",
+    "수원KT위즈파크",
+    "고척스카이돔 (키움)",
+    "기아 챔피언스 필드 (광주)",
+    "삼성 라이온즈 파크 (대구)",
+    "한화생명 이글스 파크 (대전)"
+  ];
+
+  const handleStadiumSelect = (stadium: string) => {
+    setSelectedStadium(stadium);
+  };
+
   return (
     <div>
       <Header />
-      <div className="content">
-        {/* 메인 컨텐츠 추가 */}
+      <div className="w-full max-w-[500px] mx-auto">
+        <p className="text-xl font-bold text-grayscale-90 pt-5">
+          오늘은 어떤 야구장에 방문하시나요?
+        </p>
+
+        {/* 야구장 드롭다운 */}
+        <div className="flex items-center gap-4 justify-between mt-4">
+          <Dropdown
+            options={stadiums}
+            selectedOption={selectedStadium}
+            onSelect={handleStadiumSelect}
+          />
+        </div>
       </div>
       <NavBar />
     </div>
   );
-};
+}
 
 export default Main;
