@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BackLogoBar from "./BackLogoBar"
+import BackLogoBar from "../components/BackLogoBar"
 
 import Image from 'next/image';
 import signupConfettiIcon from '../../../assets/svg/signup_confetti.svg';

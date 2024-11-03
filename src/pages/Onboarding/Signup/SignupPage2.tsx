@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BackBar from "./BackBar"
+import BackBar from "../components/BackBar"
 
 import AlarmQuestionDialog from "../../../components/dialogs/AlarmQuestionDialog"
 

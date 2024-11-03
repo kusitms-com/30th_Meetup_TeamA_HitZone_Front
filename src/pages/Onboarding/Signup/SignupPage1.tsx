@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackBar from "./BackBar"
+import BackBar from "../components/BackBar"
 
 import Image from 'next/image';
 import checkButtonGreenIcon from '../../../assets/webp/check_button_green.webp';

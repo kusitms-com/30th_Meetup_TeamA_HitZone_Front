@@ -1,20 +1,22 @@
+import React from 'react';
+import { signIn } from "next-auth/react";
+
 import Image from 'next/image';
-
 import logoIcon from '../../../assets/svg/hitzone_logo.svg';
-
 import ballWhiteIcon from '../../../assets/svg/ball_white.svg';
 import ballPinkIcon from '../../../assets/svg/ball_pink.svg';
-
 import loginNaverIcon from '../../../assets/svg/login_naver.svg';
 import loginKakaoIcon from '../../../assets/svg/login_kakao.svg';
 import loginGoogleIcon from '../../../assets/svg/login_google.svg';
 
 const Page = () => {
+
+    // 렌더링
     return (
         <div className="flex justify-center items-start w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center h-screen">
                 {/** 하얀 야구공 마크 */}
-                <div className="relative flex justify-center items-center w-full h-[111px] mb-[85px]">
+                <div className="flex justify-center items-center w-full h-[111px] mb-[85px]">
                     <div className="absolute left-[-15%] top-[30px]">
                         <Image src={ballWhiteIcon} alt="white baseball" width={111} height={111} />
                     </div>
@@ -29,7 +31,7 @@ const Page = () => {
                 </div>
 
                 {/** 핑크 야구공 마크 */}
-                <div className="relative flex justify-center items-center w-full h-[187px] mt-[100px]">
+                <div className="flex justify-center items-center w-full h-[187px] mt-[100px]">
                     <div className="absolute right-[-15%]">
                         <Image src={ballPinkIcon} alt="pink baseball" width={187} height={187} />
                     </div>
@@ -37,9 +39,15 @@ const Page = () => {
 
                 {/** 소셜 로그인 버튼 */}
                 <div className="absolute bottom-[75px] ">
-                    <Image src={loginNaverIcon} alt="pink baseball" className="mb-3" width={370} height={48} />
-                    <Image src={loginKakaoIcon} alt="pink baseball" className="mb-3" width={370} height={48} />
-                    <Image src={loginGoogleIcon} alt="pink baseball" className="mb-3" width={370} height={48} />
+                    <button  onClick={() => signIn("google", { callbackUrl: "/" })}>
+                        <Image src={loginNaverIcon} alt="pink baseball" className="mb-3" width={370} height={48}/>
+                    </button>
+                    <button  onClick={() => signIn("kakao", { callbackUrl: "/" })}>
+                        <Image src={loginKakaoIcon} alt="pink baseball" className="mb-3" width={370} height={48}/>
+                    </button>
+                    <button  onClick={() => signIn("naver", { callbackUrl: "/" })}>
+                        <Image src={loginGoogleIcon} alt="pink baseball" className="mb-3" width={370} height={48}/>
+                    </button>
                 </div>
             </div>
         </div>

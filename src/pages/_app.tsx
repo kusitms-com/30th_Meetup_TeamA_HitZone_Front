@@ -4,21 +4,26 @@
 // npm install next@latest typescript@latest @types/react@latest @types/react-dom@latest
 // npm install --save-dev @types/react @types/node
 // npm install --save-dev typescript
+// 소셜 로그인 관련
+// npm install next-auth
 // 시작: npm run dev
 import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 
 import Onboarding from './Onboarding/Onboarding'; 
-import SignupPage1 from './Onboarding/components/SignupPage1'; 
+import SignupPage1 from './Onboarding/Signup/SignupPage1'; 
 import Main from './Main/Main';
 import Question from './Recommendation/Question'; 
 import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
 
+// 전역 소셜로그인 상태 관리
+import { SessionProvider } from "next-auth/react";
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+
+const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pageProps } }) => {
   // 현재 URL 경로 가져오기
   const [currentPath, setCurrentPath] = useState<string>('');
 
@@ -49,9 +54,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   };
   
   return (
-    <div className="items-center p-4 w-full max-w-[500px] mx-auto">
-        {renderComponent()}
-    </div>
+    <SessionProvider session={session}>
+      <div className="items-center p-4 w-full max-w-[500px] mx-auto">
+          {renderComponent()}
+      </div>
+    </SessionProvider>
   );
 };
 

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 
-import InitPage from "./components/InitPage"
-import LoginPage from "./components/LoginPage"
-import SignupPage1 from "./components/SignupPage1"
-import SignupPage2 from "./components/SignupPage2"
-import SignupPage3 from "./components/SignupPage3"
+import InitPage from "./Login/InitPage"
+import LoginPage from "./Login/LoginPage"
+import SignupPage1 from "./Signup/SignupPage1"
+import SignupPage2 from "./Signup/SignupPage2"
+import SignupPage3 from "./Signup/SignupPage3"
+
 
 const Onboarding = () => {
     // 로딩 상태 관리
     const [loading, setLoading] = useState(true);
+
     // 로그인 상태 관리
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    //const [isAuthenticated, setIsAuthenticated] = useState(false);
+
     // 처음/기존 사용자 상태 관리
-    const [isFirstTimeUser, setIsFirstTimeUser] = useState(true);
-    // useRouter 훅 사용
-    const router = useRouter();
+    //const [isFirstTimeUser, setIsFirstTimeUser] = useState(true);
 
     // 회원가입 단계 상태 관리
     
@@ -35,27 +35,39 @@ const Onboarding = () => {
         return () => clearTimeout(timer);
     }, []);
 
+
     // 로딩 상태시 렌더링
     if (loading) {
         return <InitPage />;
     }
 
+    
     // 로그아웃 상태시 렌더링
-    if (!isLoggedIn) {
+    return <LoginPage />;
+    /*
+    if (!isAuthenticated) {
         return <LoginPage />;
+    }
+    */
+    
+    
+    // 로그인 및 처음 사용자 상태시 렌더링
+    /*
+    if (isAuthenticated && isFirstTimeUser) {
+        return <SignupPage1 />
         //return <SignupPage3 userName={"서여니"} />
     }
-
-    // 로그인 및 처음 사용자 상태시 렌더링
-    if (isFirstTimeUser) {
-        //return <SignupPage1 />
-        // 경로가 다른 페이지이므로, 렌더링이 아닌 /signup 경로로 리디렉션
-        router.push('/signup'); // 회원가입페이지로 이동
-    }
+    */
     
-    // 로그인 및 기존 사용자 상태시 렌더링하지 않고 / 경로로 리디렉션
-    router.push('/'); // Main으로 이동
+    
+    // 로그인된 기존 사용자일 경우 메인 페이지로 이동
+    /*
+    if (isAuthenticated && !isFirstTimeUser) {
+        router.replace('/');
+    }
+
     return null; // 리디렉션 중일 때 아무것도 렌더링하지 않음
+    */
 }
 
 export default Onboarding
