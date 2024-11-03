@@ -5,9 +5,10 @@ import BignnerGuide from "../../components/chips/BignnerGuide";
 import BignnerGuideDialog from "../../components/dialogs/BignnerGuideDialog";
 import Dropdown from "./components/Dropdown";
 import JamsilSeat from "./components/JamsilSeat";
+import KtwizSeat from "./components/KtwizSeat";
 
 function Main() {
-  const [selectedStadium, setSelectedStadium] = useState("");
+  const [selectedStadium, setSelectedStadium] = useState("잠실종합운동장 (잠실)");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const stadiums = [
@@ -48,9 +49,15 @@ function Main() {
         {/* 초보자 구역 가이드 모달 */}
         <BignnerGuideDialog isOpen={isModalOpen} onClose={toggleModal} />
 
-        {/* 야구장 좌석 이미지 */}
+        {/* 야구장 좌석 이미지 선택 */}
         <div className="mt-6 flex justify-center">
-          <JamsilSeat />
+          {selectedStadium === "잠실종합운동장 (잠실)" ? (
+            <JamsilSeat />
+          ) : selectedStadium === "수원KT위즈파크" ? (
+            <KtwizSeat />
+          ) : (
+            <p className="text-grayscale-90">해당 구장은 추후 업데이트 예정입니다 :)</p>
+          )}
         </div>
       </div>
       <NavBar />
