@@ -8,9 +8,10 @@ import signupZonePinkIcon from '../../../assets/svg/signup_zone_pink.svg';
 
 interface Props {
     userName: string;
+    nextStep: () => void;
 }
 
-const Page = ({userName}: Props) => {
+const Page = ({userName, nextStep}: Props) => {
     return (
         <div className="relative justify-center items-center w-full h-screen ">
             {/** 뒤로가기 바 */}
@@ -53,7 +54,7 @@ const Page = ({userName}: Props) => {
                     />
                     <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[50px]">
                         <p className="text-md text-white font-semibold ">
-                            Hitzone 시작하기
+                            <button onClick={nextStep}>Hitzone 시작하기</button>
                         </p>
                     </div>
                 </div>

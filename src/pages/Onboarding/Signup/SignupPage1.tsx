@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackBar from "../components/BackBar"
+import { Props } from "./SignupPage";
 
 import Image from 'next/image';
 import checkButtonGreenIcon from '../../../assets/webp/check_button_green.webp';
 
 
-const Page = () => {
+const Page = ({nextStep}: Props) => {
     // 닉네임 상태 관리
     const [nickname, setNickname] = useState('');
 
@@ -95,7 +96,7 @@ const Page = () => {
             <div className="absolute bottom-0 left-0 w-full px-[16px]">
                 <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px]  mb-[50px]">
                     <p className="text-md text-white font-semibold ">
-                        다음
+                        <button onClick={nextStep}>다음</button>
                     </p>
                 </div>
             </div>

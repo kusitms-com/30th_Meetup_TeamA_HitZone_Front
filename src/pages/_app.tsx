@@ -12,7 +12,7 @@ import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 
 import Onboarding from './Onboarding/Onboarding'; 
-import SignupPage1 from './Onboarding/Signup/SignupPage1'; 
+import { SignupPage } from './Onboarding/Signup/SignupPage'; 
 import Main from './Main/Main';
 import Question from './Recommendation/Question'; 
 import Guide from './Guide/Guide';
@@ -39,7 +39,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/login':
             return <Onboarding />;
         case '/signup':
-            return <SignupPage1 />;
+            return <SignupPage />;
         case '/':
             return <Main />;
         case '/recommend/question':
