@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import stadiumDropdownIcon from "../../../assets/webp/stadium_dropdown.webp";
 
@@ -25,7 +24,7 @@ export default function Dropdown({ options, selectedOption, onSelect }: Dropdown
       </button>
 
       {isDropdownOpen && (
-        <ul className="absolute left-0 w-full mt-2 font-medium bg-white border shadow-lg rounded-lg text-sm">
+        <ul className="absolute left-0 w-full mt-2 font-medium bg-white border shadow-lg rounded-lg text-sm z-10">
           {options.map((option, index, array) => (
             <li
               key={option}
