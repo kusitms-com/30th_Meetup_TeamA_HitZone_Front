@@ -4,12 +4,12 @@ import { Props } from "./SignupPage";
 
 import AlarmQuestionDialog from "../../../components/dialogs/AlarmQuestionDialog"
 
-const Page = ({nextStep}: Props) => {
+const Page = ({previousStep, nextStep}: Props) => {
     return (
         <div className="relative justify-center items-center w-full h-screen ">
             {/** 뒤로가기 바 */}
             <div className="w-full border-b border-grayscale-10 py-[15px]"
-                 onClick={() => window.history.back()}>
+                 onClick={previousStep}>
                 <BackBar />
             </div>
 
