@@ -32,7 +32,6 @@ const hexToRgb = (hex: string) => {
   return { r, g, b };
 };
 
-// RGB 비교 함수
 const isColorClose = (
   r: number,
   g: number,
@@ -47,12 +46,11 @@ const isColorClose = (
   );
 };
 
-const StadiumSeat = () => {
+const JamsilSeat = () => {
   const [seatImage, setSeatImage] = useState<StaticImageData>(defaultStadium);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-  // 캔버스에 이미지 로드
   const loadImageToCanvas = useCallback(() => {
     const image: HTMLImageElement = document.createElement("img");
     image.src = seatImage.src;
@@ -62,14 +60,13 @@ const StadiumSeat = () => {
         const ctx = canvas.getContext("2d");
         const scale = window.devicePixelRatio || 1;
 
-        // 고해상도 캔버스 설정
         canvas.width = 376 * scale;
         canvas.height = 356 * scale;
         canvas.style.width = "376px";
         canvas.style.height = "356px";
 
         if (ctx) {
-          ctx.scale(scale, scale); // Retina 디스플레이 대응
+          ctx.scale(scale, scale);
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(image, 0, 0, canvas.width / scale, canvas.height / scale);
           setIsImageLoaded(true);
@@ -121,4 +118,4 @@ const StadiumSeat = () => {
   );
 };
 
-export default StadiumSeat;
+export default JamsilSeat;

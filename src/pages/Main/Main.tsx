@@ -4,7 +4,7 @@ import NavBar from "../../components/layout/NavBar";
 import BignnerGuide from "../../components/chips/BignnerGuide";
 import BignnerGuideDialog from "../../components/dialogs/BignnerGuideDialog";
 import Dropdown from "./components/Dropdown";
-import StadiumSeat from "./components/StadiumSeat";
+import JamsilSeat from "./components/JamsilSeat";
 
 function Main() {
   const [selectedStadium, setSelectedStadium] = useState("");
@@ -50,7 +50,7 @@ function Main() {
 
         {/* 야구장 좌석 이미지 */}
         <div className="mt-6 flex justify-center">
-          <StadiumSeat />
+          <JamsilSeat />
         </div>
       </div>
       <NavBar />
