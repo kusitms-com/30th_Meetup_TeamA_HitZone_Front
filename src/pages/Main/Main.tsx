@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/layout/Header";
 import NavBar from "../../components/layout/NavBar";
-import { useState } from "react";
 import BignnerGuide from "../../components/chips/BignnerGuide";
 import BignnerGuideDialog from "../../components/dialogs/BignnerGuideDialog";
 import Dropdown from "./components/Dropdown";
+import StadiumSeat from "./components/StadiumSeat";
 
 function Main() {
   const [selectedStadium, setSelectedStadium] = useState("");
@@ -47,6 +47,11 @@ function Main() {
 
         {/* 초보자 구역 가이드 모달 */}
         <BignnerGuideDialog isOpen={isModalOpen} onClose={toggleModal} />
+
+        {/* 야구장 좌석 이미지 */}
+        <div className="mt-6 flex justify-center">
+          <StadiumSeat />
+        </div>
       </div>
       <NavBar />
     </div>
