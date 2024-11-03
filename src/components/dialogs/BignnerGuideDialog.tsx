@@ -40,8 +40,14 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
   ];
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg max-w-md max-h-[90vh] flex flex-col">
+    <div 
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      onClick={onClose} // 배경 클릭 시 모달 닫힘
+    >
+      <div 
+        className="bg-white rounded-lg max-w-md max-h-[90vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()} // 모달 안쪽 클릭 시 닫히지 않음
+      >
         {/* 모달창 타이틀 고정 */}
         <div className="flex justify-between items-center p-5">
           <h2 className="text-lg font-bold text-grayscale-90">야구장 초보 가이드</h2>
@@ -77,13 +83,14 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
                   <h3 className="text-lg font-bold mt-4 mb-2 text-grayscale-90">블록 특징</h3>
                   <div className="bg-grayscale-5 py-3 px-[14px] rounded-lg mb-2 font-medium text-sm">
                     <p className="text-grayscale-90">
-                        야구장에서 구역은 보통 블록으로 나뉘어져 있는데, 각 블록은 종별로 단가가 있어요. 각 종에서 경기를 다른 각도에서 볼 수 있으며, 위로 올라갈수록 먼 거리에서 경기를 관람할 수 있어요.
+                      야구장에서 구역은 보통 블록으로 나뉘어져 있는데, 각 블록은 종별로 단가가 있어요. 각 종에서 경기를 다른 각도에서 볼 수 있으며, 위로 올라갈수록 먼 거리에서 경기를 관람할 수 있어요.
                     </p>
                     <p className="text-grayscale-90 mt-4">
-                        <span className="text-main-50 font-semibold">*</span>잠실야구장은 블록이 종별로 단가가 있는 구조로, 각 종의 관람석이 서로 다른 높이에 배치되어 있어요!
+                      <span className="text-main-50 font-semibold">*</span>잠실야구장은 블록이 종별로 단가가 있는 구조로, 각 종의 관람석이 서로 다른 높이에 배치되어 있어요!
                     </p>
+                  </div>
                 </div>
-                </div>
+
                 {/* 구단별 예매 영역 */}
                 <div>
                   <h3 className="text-lg font-bold mb-2 text-grayscale-90">구단별 예매</h3>
