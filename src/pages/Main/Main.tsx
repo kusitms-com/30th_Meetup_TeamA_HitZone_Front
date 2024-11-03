@@ -6,6 +6,8 @@ import BignnerGuideDialog from "../../components/dialogs/BignnerGuideDialog";
 import Dropdown from "./components/Dropdown";
 import JamsilSeat from "./components/JamsilSeat";
 import KtwizSeat from "./components/KtwizSeat";
+import StadiumInfo from "./components/StadiumInfo";
+import SeatRecommendButton from "./components/SeatRecommendButton";
 
 function Main() {
   const [selectedStadium, setSelectedStadium] = useState("잠실종합운동장 (잠실)");
@@ -59,6 +61,11 @@ function Main() {
             <p className="text-grayscale-90">해당 구장은 추후 업데이트 예정입니다 :)</p>
           )}
         </div>
+        {/* 구장 정보 */}
+        <StadiumInfo stadium={selectedStadium} />
+
+        {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
+        <SeatRecommendButton stadium={selectedStadium} />
       </div>
       <NavBar />
     </div>
