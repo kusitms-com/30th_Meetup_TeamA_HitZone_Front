@@ -42,17 +42,19 @@ const Onboarding = () => {
 
     // 로그아웃 상태시 렌더링
     if (!isLoggedIn) {
-        //return <LoginPage />;
-        return <SignupPage3 userName={"서여니"} />
+        return <LoginPage />;
+        //return <SignupPage3 userName={"서여니"} />
     }
 
     // 로그인 및 처음 사용자 상태시 렌더링
     if (isFirstTimeUser) {
-        return <SignupPage1 />
+        //return <SignupPage1 />
+        // 경로가 다른 페이지이므로, 렌더링이 아닌 /signup 경로로 리디렉션
+        router.push('/signup'); // 회원가입페이지로 이동
     }
-
-    // 로그인 및 기존 사용자 상태시 렌더링하지 않고 /main으로 리디렉션
-    router.push('/main'); // /main으로 이동
+    
+    // 로그인 및 기존 사용자 상태시 렌더링하지 않고 / 경로로 리디렉션
+    router.push('/'); // Main으로 이동
     return null; // 리디렉션 중일 때 아무것도 렌더링하지 않음
 }
 

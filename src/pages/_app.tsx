@@ -10,7 +10,9 @@ import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 
 import Onboarding from './Onboarding/Onboarding'; 
+import SignupPage1 from './Onboarding/components/SignupPage1'; 
 import Main from './Main/Main';
+import Question from './Recommendation/Question'; 
 import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
@@ -29,10 +31,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   // 현재 경로에 따라 컴포넌트 선택
   const renderComponent = () => {
     switch (currentPath) {
-        case '/':
+        case '/login':
             return <Onboarding />;
-        case '/main':
+        case '/signup':
+            return <SignupPage1 />;
+        case '/':
             return <Main />;
+        case '/recommend/question':
+            return <Question />;
         case '/guide':
             return <Guide />;
         case '/culture':
