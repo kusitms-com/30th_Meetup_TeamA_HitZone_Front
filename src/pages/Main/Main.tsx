@@ -8,6 +8,7 @@ import JamsilSeat from "./components/JamsilSeat";
 import KtwizSeat from "./components/KtwizSeat";
 import StadiumInfo from "./components/StadiumInfo";
 import SeatRecommendButton from "./components/SeatRecommendButton";
+import ChatBot from "../../components/button/ChatBot";
 
 function Main() {
   const [selectedStadium, setSelectedStadium] = useState("잠실종합운동장 (잠실)");
@@ -66,6 +67,9 @@ function Main() {
 
         {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
         <SeatRecommendButton stadium={selectedStadium} />
+      
+         {/* 플로팅 챗봇 버튼 */}
+         <ChatBot />
       </div>
       <NavBar />
     </div>
