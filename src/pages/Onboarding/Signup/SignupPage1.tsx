@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackBar from "./BackBar"
+import BackBar from "../components/BackBar"
+import { Props } from "./SignupPage";
 
 import Image from 'next/image';
 import checkButtonGreenIcon from '../../../assets/webp/check_button_green.webp';
 
+interface MyProps extends Props {
+    nickname: string;
+    setNickname: (name: string) => void;
+}
 
-const Page = () => {
-    // 닉네임 상태 관리
-    const [nickname, setNickname] = useState('');
+const Page = ({previousStep, nextStep, nickname, setNickname}: MyProps) => {
 
     const handleNickNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value;
@@ -19,11 +22,19 @@ const Page = () => {
         }
     };
 
+    const handleNextStep = () => {
+        if (nickname.length > 1) {
+            nextStep(); // 다음 단계로 이동
+        }else {
+            alert("이름은 2자 이상이어야 합니다.");
+        }
+    }
+
     return (
         <div className="relative justify-center items-center w-full h-screen ">
             {/** 뒤로가기 바 */}
             <div className="w-full border-b border-grayscale-10 py-[15px]"
-                 onClick={() => window.history.back()}>
+                 onClick={previousStep}>
                 <BackBar />
             </div>
             
@@ -45,11 +56,7 @@ const Page = () => {
                         회원가입을 위해 닉네임을 입력해주세요.
                     </p>
 
-                    {/** 닉네임 입력 필드 
-                    <p className="text-sm text-grayscale-50 font-medium border border-grayscale-10 rounded-[8px] p-[18px] mt-[20px]">
-                        닉네임을 입력해주세요.
-                    </p>
-                    */}
+                    {/** 닉네임 입력 필드 */}
                     <div className="relative">
                         <input
                         type="text"
@@ -95,7 +102,7 @@ const Page = () => {
             <div className="absolute bottom-0 left-0 w-full px-[16px]">
                 <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px]  mb-[50px]">
                     <p className="text-md text-white font-semibold ">
-                        다음
+                        <button onClick={handleNextStep}>다음</button>
                     </p>
                 </div>
             </div>

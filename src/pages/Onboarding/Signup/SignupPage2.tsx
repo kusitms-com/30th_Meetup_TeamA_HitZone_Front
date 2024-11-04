@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import BackBar from "./BackBar"
+import BackBar from "../components/BackBar"
+import { Props } from "./SignupPage";
 
 import AlarmQuestionDialog from "../../../components/dialogs/AlarmQuestionDialog"
 
-const Page = () => {
+const Page = ({previousStep, nextStep}: Props) => {
     return (
         <div className="relative justify-center items-center w-full h-screen ">
             {/** 뒤로가기 바 */}
             <div className="w-full border-b border-grayscale-10 py-[15px]"
-                 onClick={() => window.history.back()}>
+                 onClick={previousStep}>
                 <BackBar />
             </div>
 
-            {/**임시로 */}
+            {/**임시로 
             <AlarmQuestionDialog/>
-            
+            */}
             {/** 컨텐츠 */}
             <div className="px-[16px]">
                 {/** 상태 바 */}
@@ -62,7 +63,7 @@ const Page = () => {
             <div className="absolute bottom-0 left-0 w-full px-[16px]">
                 <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[50px]">
                     <p className="text-md text-white font-semibold ">
-                        다음
+                        <button onClick={nextStep}>다음</button>
                     </p>
                 </div>
             </div>

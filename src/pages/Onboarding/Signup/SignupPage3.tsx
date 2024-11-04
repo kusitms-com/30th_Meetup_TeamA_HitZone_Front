@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import BackLogoBar from "./BackLogoBar"
+import BackLogoBar from "../components/BackLogoBar"
+import { Props } from "./SignupPage";
 
 import Image from 'next/image';
 import signupConfettiIcon from '../../../assets/svg/signup_confetti.svg';
 import signupRookieIcon from '../../../assets/svg/signup_rookie.svg';
 import signupZonePinkIcon from '../../../assets/svg/signup_zone_pink.svg';
 
-interface Props {
-    userName: string;
+interface MyProps extends Props {
+    nickname: string;
 }
 
-const Page = ({userName}: Props) => {
+const Page = ({previousStep, nextStep, nickname}: MyProps) => {
     return (
         <div className="relative justify-center items-center w-full h-screen ">
             {/** 뒤로가기 바 */}
             <div className="w-full border-b border-grayscale-10 py-[15px]"
-                 onClick={() => window.history.back()}>
+                 onClick={previousStep}>
                 <BackLogoBar />
             </div>
             
@@ -30,7 +31,7 @@ const Page = ({userName}: Props) => {
                         환영해요!
                     </p>
                     <p className="text-lg text-grayscale-90 font-semibold mt-[2px]">
-                        {userName}님의 즐거운 야구 관람을 도와주는<br/>HitZone입니다
+                        {nickname}님의 즐거운 야구 관람을 도와주는<br/>HitZone입니다
                     </p>
                 </div>
             </div>
@@ -53,7 +54,7 @@ const Page = ({userName}: Props) => {
                     />
                     <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[50px]">
                         <p className="text-md text-white font-semibold ">
-                            Hitzone 시작하기
+                            <button onClick={nextStep}>Hitzone 시작하기</button>
                         </p>
                     </div>
                 </div>
