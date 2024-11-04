@@ -5,7 +5,7 @@ import Image from 'next/image';
 import logoIcon from '../../assets/svg/hitzone_logo.svg';
 
 import HeaderBar from "./components/HeaderBar";
-import BackBar from "./components/BackBar";
+import HeaderBackBar from "./components/HeaderBackBar";
 import Question1 from "./Question/Question1";
 //import Question2 from "./Question/Question2";
 //import Question3 from "./Question/Question3";
@@ -50,7 +50,7 @@ const Page = () => {
             case 1:
                 return <HeaderBar stadium={"잠실종합운동장"}/>
             default:
-                return <BackBar/>;
+                return <HeaderBackBar stadium={"잠실종합운동장"}/>;
         }
     };
 
