@@ -136,14 +136,20 @@ const Page = () => {
         }
     };
 
+    // 닫기 버튼 이벤트
+    const close = () => {
+        // main 홈으로 이동
+        router.push("/");
+    }
+
 
     /** 렌더링 */
     const renderBar = () => {
         switch(step) {
             case 1:
-                return <HeaderBar stadium={"잠실종합운동장"}/>
+                return <HeaderBar stadium={"잠실종합운동장"} closeEvent={close}/>
             default:
-                return <HeaderBackBar stadium={"잠실종합운동장"}/>;
+                return <HeaderBackBar stadium={"잠실종합운동장"} prevEvent={previousStep} closeEvent={close}/>;
         }
     };
 
