@@ -15,7 +15,7 @@ const NavBar = () => {
 
   // 현재 경로와 일치하면 핑크 아이콘, 아니면 그레이 아이콘 표시
   const menuItems = [
-    { name: "홈", path: "/main", icon: homeGrayIcon, activeIcon: homePinkIcon },
+    { name: "홈", path: "/", icon: homeGrayIcon, activeIcon: homePinkIcon },
     { name: "구역 가이드", path: "/guide", icon: guideGrayIcon, activeIcon: guidePinkIcon },
     { name: "야구 문화", path: "/culture", icon: cultureGrayIcon, activeIcon: culturePinkIcon },
     { name: "마이 페이지", path: "/mypage", icon: mypageGrayIcon, activeIcon: mypagePinkIcon },

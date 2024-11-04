@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { QuestionProps } from "../Question"
+import { QuestionProps, SeatType } from "../Question"
 
 import Image from 'next/image';
 import logoIcon from '../../../assets/svg/hitzone_logo.svg';
@@ -9,13 +9,13 @@ import stickIcon from '../../../assets/svg/question01_stick.svg';
 
 
 interface Props extends QuestionProps {
-    selectedSeat: string;   // 백엔드에서 preference라는 이름으로 string 값으로 받음. "3루석" 이렇게
-    setSelectedSeat: (seat: string) => void;
+    selectedSeat: SeatType;   // 백엔드에서 preference라는 이름으로 string 값으로 받음. "3루석" 이렇게
+    setSelectedSeat: (seat: SeatType) => void;
 }
 
 const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) => {
 
-    const handleSelect = (seat: string) => {
+    const handleSelect = (seat: SeatType) => {
         setSelectedSeat(seat);
     };
 
@@ -39,8 +39,8 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                 {/** 버튼 */}
                 <div className="flex justify-center items-center gap-[10px] z-10">
                     <div className={`flex justify-center items-center bg-grayscale-5 border rounded-[8px] w-full p-[16px]"
-                         cursor-pointer ${selectedSeat === '1루석' ? 'border-main-50 text-main-50 bg-main-5' : 'border-transparent text-grayscale-80 bg-grayscale-5'}`}
-                         onClick={() => handleSelect('1루석')}
+                         cursor-pointer ${selectedSeat === SeatType.SEAT1 ? 'border-main-50 text-main-50 bg-main-5' : 'border-transparent text-grayscale-80 bg-grayscale-5'}`}
+                         onClick={() => handleSelect(SeatType.SEAT1)}
                     >
                         {/** text-center: 텍스트 가운데 정렬 */}
                         <p className="text-sm font-medium text-center py-[16px]">
@@ -48,8 +48,8 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                         </p>
                     </div>
                     <div className={`flex justify-center items-center bg-grayscale-5 border rounded-[8px] w-full p-[16px]"
-                         cursor-pointer ${selectedSeat === '3루석' ? 'border-main-50 text-main-50 bg-main-5' : 'border-transparent text-grayscale-80 bg-grayscale-5'}`}
-                         onClick={() => handleSelect('3루석')}
+                         cursor-pointer ${selectedSeat === SeatType.SEAT3 ? 'border-main-50 text-main-50 bg-main-5' : 'border-transparent text-grayscale-80 bg-grayscale-5'}`}
+                         onClick={() => handleSelect(SeatType.SEAT3)}
                     >
                         <p className="text-sm font-medium text-center py-[16px]">
                             나는 <strong>3루 원정팀 석</strong>에 <br/>앉고 싶어요
@@ -75,8 +75,12 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                         className="absolute bottom-[40px] left-[85%] transform -translate-x-1/2"
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
-                    <div className="flex justify-center items-center bg-grayscale-10 border rounded-[8px] h-[48px] mb-[50px] z-10 relative">
-                        <p className="text-md text-grayscale-70 font-semibold ">
+                    <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[50px] z-10 relative
+                                   ${selectedSeat === SeatType.NONE ? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
+                    >
+                        <p className={`text-md font-semibold 
+                                     ${selectedSeat === SeatType.NONE ? 'text-grayscale-70' : 'text-grayscale-0'}`}
+                         >
                             <button onClick={nextStep}>다음</button>
                         </p>
                     </div>
