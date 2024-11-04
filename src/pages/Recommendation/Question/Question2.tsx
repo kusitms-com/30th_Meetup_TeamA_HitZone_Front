@@ -73,7 +73,7 @@ const Page = ({previousStep, nextStep, selectedParter, handleParterKeywordItem}:
                         className="absolute bottom-[82px] left-[32%] transform -translate-x-1/2"
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
-                    <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[50px] z-10 relative
+                    <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
                                    ${selectedParter === Keyword.NONE ? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
                     >
                         <p className={`text-md font-semibold 

@@ -123,7 +123,7 @@ const Page = ({previousStep, nextStep, selectedZone, selectedKeywordItems, handl
                         className="absolute bottom-[15px] left-[68%] transform -translate-x-1/2"
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
-                    <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[50px] z-10 relative
+                    <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
                                    ${selectedKeywordItems.length < 2 ? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
                     >
                         <p className={`text-md font-semibold 

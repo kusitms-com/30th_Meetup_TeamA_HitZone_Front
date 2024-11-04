@@ -75,7 +75,7 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                         className="absolute bottom-[40px] left-[85%] transform -translate-x-1/2"
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
-                    <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[50px] z-10 relative
+                    <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
                                    ${selectedSeat === SeatType.NONE ? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
                     >
                         <p className={`text-md font-semibold 

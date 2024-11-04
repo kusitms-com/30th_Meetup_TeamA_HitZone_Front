@@ -52,7 +52,7 @@ const Page = ({previousStep, nextStep, nickname}: MyProps) => {
                         alt="루키" 
                         className="absolute bottom-[220px] left-1/2 transform -translate-x-1/2"
                     />
-                    <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[50px]">
+                    <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[40px]">
                         <p className="text-md text-white font-semibold ">
                             <button onClick={nextStep}>Hitzone 시작하기</button>
                         </p>
