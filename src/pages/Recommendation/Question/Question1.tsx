@@ -37,7 +37,7 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                     1개를 선택해주세요.
                 </p>
                 {/** 버튼 */}
-                <div className="flex justify-center items-center gap-[10px]">
+                <div className="flex justify-center items-center gap-[10px] z-10">
                     <div className={`flex justify-center items-center bg-grayscale-5 border rounded-[8px] w-full p-[16px]"
                          cursor-pointer ${selectedSeat === '1루석' ? 'border-main-50 text-main-50 bg-main-5' : 'border-transparent text-grayscale-80 bg-grayscale-5'}`}
                          onClick={() => handleSelect('1루석')}
