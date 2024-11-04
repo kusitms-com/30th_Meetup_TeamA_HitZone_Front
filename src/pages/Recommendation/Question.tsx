@@ -10,6 +10,9 @@ import Question1 from "./Question/Question1";
 //import Question2 from "./Question/Question2";
 //import Question3 from "./Question/Question3";
 
+
+// zone 관리: KT or 잠실
+// 부모로부터 인자로 받기
 export interface ZoneProps {
     stadium: string;
 }
@@ -20,8 +23,6 @@ export interface QuestionProps {
 }
 
 const Page = () => {
-    // zone 관리: KT or 잠실
-    // 부모로부터 인자로 받기
     
     // 선택한 좌석 관리
     const [selectedSeat, setSelectedSeat] = useState('');
@@ -47,7 +48,7 @@ const Page = () => {
     const renderBar = () => {
         switch(step) {
             case 1:
-                return <HeaderBar/>
+                return <HeaderBar stadium={"잠실종합운동장"}/>
             default:
                 return <BackBar/>;
         }
