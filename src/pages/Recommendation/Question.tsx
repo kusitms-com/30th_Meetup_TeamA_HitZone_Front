@@ -6,7 +6,7 @@ import HeaderBackBar from "./components/HeaderBackBar";
 import Question1 from "./Question/Question1";
 import Question2 from "./Question/Question2";
 import Question3 from "./Question/Question3";
-//import Question4 from "./Question/Question4";
+import Question4 from "./Question/Question4";
 
 
 // zone 관리: KT or 잠실
@@ -45,7 +45,11 @@ export enum Keyword {
     WISH4 = '음식 먹기 편한',
     WISH5 = '빠른 퇴장 가능',
     WISH6 = '선수들 가까이',
-    WISH7 = '삼겹살 구워먹기'
+    WISH7 = '삼겹살 구워먹기',
+    NOWISH1 = '햇빛 싫어요',
+    NOWISH2 = '큰 소리 싫어요',
+    NOWISH3 = '높은 곳 싫어요',
+    NOWISH4 = '비 맞기 싫어요'
 }
 
 const Page = () => {
@@ -64,19 +68,19 @@ const Page = () => {
     const handleKeywordItem = (newKeywordItem: Keyword) => {
         // 선택한 값이 파트너 값이면 중복 불가
         // 기존 파트너 값은 배열에서 제거하고 넣기
-        const keywordGroup = [Keyword.PARTNER1, Keyword.PARTNER2, Keyword.PARTNER3];
-        if(keywordGroup.includes(newKeywordItem)) {
+        const keywordPartnerGroup = [Keyword.PARTNER1, Keyword.PARTNER2, Keyword.PARTNER3];
+        if(keywordPartnerGroup.includes(newKeywordItem)) {
             setSelectedKeywordItems((prevKeywordItems) => {
                 return [
                     // 기존 파트너 값을 제외한 배열 값
-                    ...prevKeywordItems.filter((prevKeywordItem) => !keywordGroup.includes(prevKeywordItem)),
+                    ...prevKeywordItems.filter((prevKeywordItem) => !keywordPartnerGroup.includes(prevKeywordItem)),
                     // 새로운 파트너 값
                     newKeywordItem
                 ];
             });
             return;
         }
-        
+
         // 그 외는 중복 가능
         // 배열에 그냥 넣기
         setSelectedKeywordItems((prevKeywordItems) => {
@@ -90,6 +94,21 @@ const Page = () => {
             }
         });
     };
+
+
+    /** 선택한 위시 관리 */
+    const keywordWishGroup = [Keyword.WISH1, Keyword.WISH2, Keyword.WISH3,
+        Keyword.WISH4, Keyword.WISH5, Keyword.WISH6, Keyword.WISH7
+    ];
+    // 배열에 wish 값이 하나 이상 포함되어 있는 지 확인하는 함수
+    const hasWish = selectedKeywordItems.some((v) => keywordWishGroup.includes(v));
+
+
+    /** 선택한 노위시 관리 */
+    const keywordNowishGroup = [Keyword.NOWISH1, Keyword.NOWISH2, Keyword.NOWISH3, Keyword.NOWISH4];
+    // 배열에 nowish 값이 하나 이상 포함되어 있는 지 확인하는 함수
+    const hasNowish = selectedKeywordItems.some((v) => keywordNowishGroup.includes(v));
+
 
 
     /** 페이지 상태 관리 */
@@ -130,12 +149,18 @@ const Page = () => {
         
         // step3 페이지
         }else if(step < 4) {
-            // 다음 step 페이지로 이동
-            setStep(step + 1);
-            ''
-        // 질문 작성 완료 후 결과 페이지로 이동
+            // 값을 선택했으면
+            if(hasWish) {
+                // 다음 step 페이지로 이동
+                setStep(step + 1);
+            }
+        // step4 페이지
         }else {
-            router.push("/recommend/results");
+            // 값을 선택했으면
+            if(hasNowish) {
+                // 질문 작성 완료 후 결과 페이지로 이동
+                router.push("/recommend/results");
+            }
         }
     };
 
@@ -150,7 +175,7 @@ const Page = () => {
     const renderBar = () => {
         switch(step) {
             case 1:
-                return <HeaderBar stadium={ZoneType.JAMSIL} closeEvent={close}/>
+                return <HeaderBar stadium={ZoneType.KT} closeEvent={close}/>
             default:
                 return <HeaderBackBar stadium={ZoneType.KT} prevEvent={previousStep} closeEvent={close}/>;
         }
@@ -165,7 +190,10 @@ const Page = () => {
                 return <Question2 previousStep={previousStep} nextStep={nextStep} selectedParter={selectedParter} handleParterKeywordItem={handleParterKeywordItem}/>;
             
             case 3:
-                return <Question3 previousStep={previousStep} nextStep={nextStep} selectedZone={ZoneType.KT} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem}/>;
+                return <Question3 previousStep={previousStep} nextStep={nextStep} selectedZone={ZoneType.KT} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasWish={hasWish}/>;
+            
+            case 4:
+                return <Question4 previousStep={previousStep} nextStep={nextStep} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasNowish={hasNowish}/>;
             
             default:
                 return null;
@@ -173,7 +201,7 @@ const Page = () => {
     };
     
     return (
-        <div className="flex justify-center items-start bg-main-10 w-full h-screen bg-fff">
+        <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center w-full h-screen">
                 
                 {/** 헤더 */}
@@ -181,12 +209,6 @@ const Page = () => {
 
                 {/** 상태에 따라 다른 컴포넌트 렌더링 */}
                 {renderContents()}
-
-                {/** 버튼 
-                 * 
-      <button onClick={nextStep}>다음</button>
-                */}
-
             </div>
         </div>
     )

@@ -10,9 +10,10 @@ interface Props extends QuestionProps {
     selectedZone: ZoneType;
     selectedKeywordItems: Keyword[];
     handleKeywordItem: (keyword: Keyword) => void;
+    hasWish: boolean;
 }
 
-const Page = ({previousStep, nextStep, selectedZone, selectedKeywordItems, handleKeywordItem}: Props) => {
+const Page = ({previousStep, nextStep, selectedZone, selectedKeywordItems, handleKeywordItem, hasWish}: Props) => {
 
     return (
         <div className="w-full px-[16px]">
@@ -124,10 +125,10 @@ const Page = ({previousStep, nextStep, selectedZone, selectedKeywordItems, handl
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
                     <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
-                                   ${selectedKeywordItems.length < 2 ? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
+                                   ${!hasWish? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
                     >
                         <p className={`text-md font-semibold 
-                                     ${selectedKeywordItems.length < 2 ? 'text-grayscale-70' : 'text-grayscale-0'}`}
+                                     ${!hasWish? 'text-grayscale-70' : 'text-grayscale-0'}`}
                          >
                             <button onClick={nextStep}>다음</button>
                         </p>
