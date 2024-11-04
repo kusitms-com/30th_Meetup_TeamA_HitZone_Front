@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 
-import Image from 'next/image';
-import logoIcon from '../../assets/svg/hitzone_logo.svg';
-
 import HeaderBar from "./components/HeaderBar";
 import HeaderBackBar from "./components/HeaderBackBar";
 import Question1 from "./Question/Question1";
 import Question2 from "./Question/Question2";
-//import Question3 from "./Question/Question3";
+import Question3 from "./Question/Question3";
+//import Question4 from "./Question/Question4";
 
 
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
 export interface ZoneProps {
-    stadium: string;
+    stadium: ZoneType;
+}
+export enum ZoneType {
+    NONE = '',
+    JAMSIL = '잠실종합운동장',
+    KT = '수원KT위즈파크'
 }
 
 export interface QuestionProps {
@@ -125,7 +128,7 @@ const Page = () => {
                 // 이동 막음
             }
         
-        // step3 ~ step4 페이지
+        // step3 페이지
         }else if(step < 4) {
             // 다음 step 페이지로 이동
             setStep(step + 1);
@@ -147,9 +150,9 @@ const Page = () => {
     const renderBar = () => {
         switch(step) {
             case 1:
-                return <HeaderBar stadium={"잠실종합운동장"} closeEvent={close}/>
+                return <HeaderBar stadium={ZoneType.JAMSIL} closeEvent={close}/>
             default:
-                return <HeaderBackBar stadium={"잠실종합운동장"} prevEvent={previousStep} closeEvent={close}/>;
+                return <HeaderBackBar stadium={ZoneType.KT} prevEvent={previousStep} closeEvent={close}/>;
         }
     };
 
@@ -160,10 +163,10 @@ const Page = () => {
             
             case 2:
                 return <Question2 previousStep={previousStep} nextStep={nextStep} selectedParter={selectedParter} handleParterKeywordItem={handleParterKeywordItem}/>;
-            /*
+            
             case 3:
-                return <Question3 previousStep={previousStep} nextStep={nextStep} nickname={nickname}/>;
-            */
+                return <Question3 previousStep={previousStep} nextStep={nextStep} selectedZone={ZoneType.KT} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem}/>;
+            
             default:
                 return null;
         }
