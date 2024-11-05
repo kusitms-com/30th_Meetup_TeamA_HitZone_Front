@@ -60,11 +60,12 @@ function Main() {
   }
 
   return (
-    <div>
+    <div className="relative flex flex-col w-full h-screen">
       <Header />
-      <div className="w-full max-w-[500px] mx-auto">
-        <p className="text-xl font-bold text-grayscale-90 pt-5">
-          오늘은 어떤 야구장에 방문하시나요?
+
+      <div className="flex-1">
+        <p className="text-xl font-bold text-grayscale-90 pt-5 text-left w-full">
+          오늘은 어느 야구장에 방문하시나요?
         </p>
 
         {/* 야구장 드롭다운 */}
@@ -74,7 +75,6 @@ function Main() {
             selectedOption={selectedStadium}
             onSelect={handleStadiumSelect}
           />
-
           {/* 초보자 구역 가이드 버튼 */}
           <BignnerGuide onClick={toggleModal} />
         </div>
@@ -83,7 +83,7 @@ function Main() {
         <BignnerGuideDialog isOpen={isModalOpen} onClose={toggleModal} />
 
         {/* 야구장 좌석 이미지 선택 */}
-        <div className="mt-6 flex justify-center">
+        <div className="mt-4 flex justify-center">
           {selectedStadium === "잠실종합운동장 (잠실)" ? (
             <JamsilSeat />
           ) : selectedStadium === "수원KT위즈파크" ? (
@@ -92,16 +92,18 @@ function Main() {
             <p className="text-grayscale-90">해당 구장은 추후 업데이트 예정입니다 :)</p>
           )}
         </div>
+
         {/* 구장 정보 */}
         <StadiumInfo stadium={selectedStadium} />
 
         {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
         <SeatRecommendButton stadium={selectedStadium} />
-      
-         {/* 플로팅 챗봇 버튼 */}
-         <ChatBot />
       </div>
+      
       <NavBar />
+
+      {/* 플로팅 챗봇 버튼 */}
+      <ChatBot />
     </div>
   );
 }
