@@ -45,11 +45,11 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
       onClick={onClose} // 배경 클릭 시 모달 닫힘
     >
       <div 
-        className="bg-white rounded-lg max-w-md max-h-[90vh] flex flex-col"
+        className="bg-white rounded-xl max-w-md max-h-[90vh] flex flex-col overflow-hidden"
         onClick={(e) => e.stopPropagation()} // 모달 안쪽 클릭 시 닫히지 않음
       >
         {/* 모달창 타이틀 고정 */}
-        <div className="flex justify-between items-center p-5">
+        <div className="flex justify-between items-center p-5 border-b">
           <h2 className="text-lg font-bold text-grayscale-90">야구장 초보 가이드</h2>
           <button onClick={onClose}>
             <Image src={closeIcon} alt="닫기 버튼" width={24} height={24} />
@@ -73,65 +73,59 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
         </div>
 
         {/* 스크롤시 이동하는 영역 */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="px-5">
-            {/* 좌석 예매 */}
-            {activeTab === 'booking' ? (
-              <>
-                {/* 블록 특징 영역 */}
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold mt-4 mb-2 text-grayscale-90">블록 특징</h3>
-                  <div className="bg-grayscale-5 py-3 px-[14px] rounded-lg mb-2 font-medium text-sm">
-                    <p className="text-grayscale-90">
-                      야구장에서 구역은 보통 블록으로 나뉘어져 있는데, 각 블록은 종별로 단가가 있어요. 각 종에서 경기를 다른 각도에서 볼 수 있으며, 위로 올라갈수록 먼 거리에서 경기를 관람할 수 있어요.
-                    </p>
-                    <p className="text-grayscale-90 mt-4">
-                      <span className="text-main-50 font-semibold">*</span>잠실야구장은 블록이 종별로 단가가 있는 구조로, 각 종의 관람석이 서로 다른 높이에 배치되어 있어요!
-                    </p>
-                  </div>
+        <div className="flex-1 overflow-y-auto px-5">
+          {/* 좌석 예매 */}
+          {activeTab === 'booking' ? (
+            <>
+              {/* 블록 특징 영역 */}
+              <div className="mb-6">
+                <h3 className="text-lg font-bold mt-4 mb-2 text-grayscale-90">블록 특징</h3>
+                <div className="bg-grayscale-5 py-3 px-[14px] rounded-lg mb-2 font-medium text-sm">
+                  <p className="text-grayscale-90">
+                    야구장에서 구역은 보통 블록으로 나뉘어져 있는데, 각 블록은 종별로 단가가 있어요. 각 종에서 경기를 다른 각도에서 볼 수 있으며, 위로 올라갈수록 먼 거리에서 경기를 관람할 수 있어요.
+                  </p>
+                  <p className="text-grayscale-90 mt-4">
+                    <span className="text-main-50 font-semibold">*</span>잠실야구장은 블록이 종별로 단가가 있는 구조로, 각 종의 관람석이 서로 다른 높이에 배치되어 있어요!
+                  </p>
                 </div>
+              </div>
 
-                {/* 구단별 예매 영역 */}
-                <div>
-                  <h3 className="text-lg font-bold mb-2 text-grayscale-90">구단별 예매</h3>
-                  {ticketingGroups.map((group, index) => (
-                    <div key={index} className="mb-4 border p-4 rounded-md">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-grayscale-90 font-semibold">{group.title}</span>
-                        <Image
-                          src={reservationIcon}
-                          alt="예매하러가기"
-                          width={90}
-                          height={21}
-                          onClick={() => window.open(group.link, "_blank")}
-                          style={{ cursor: 'pointer' }}
-                        />
-                      </div>
-                      {group.teams && (
-                        <div className="bg-grayscale-5 p-4 rounded-lg">
-                          <p className="text-grayscale-60 font-medium text-xs">{group.teams}</p>
-                        </div>
-                      )}
+              {/* 구단별 예매 영역 */}
+              <h3 className="text-lg font-bold mt-4 mb-2 text-grayscale-90">구단별 예매</h3>
+              {ticketingGroups.map((group, index) => (
+                <div key={index} className="mb-4 border p-4 rounded-md">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-grayscale-90 font-semibold">{group.title}</span>
+                    <Image
+                      src={reservationIcon}
+                      alt="예매하러가기"
+                      width={90}
+                      height={21}
+                      onClick={() => window.open(group.link, "_blank")}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  </div>
+                  {group.teams && (
+                    <div className="bg-grayscale-5 p-4 rounded-lg">
+                      <p className="text-grayscale-60 font-medium text-xs">{group.teams}</p>
                     </div>
-                  ))}
+                  )}
                 </div>
-              </>
-            ) : (
-              <>
-                {/* 야구 직관 Tip */}
-                <div>
-                  <h3 className="text-lg font-bold mt-4 mb-2 text-grayscale-90">야구장 관람 매너</h3>
-                  {tips.map((tip, index) => (
-                    <TipItem key={index} index={index + 1} title={tip.title} description={tip.description} />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
+              ))}
+            </>
+          ) : (
+            <>
+              {/* 야구 직관 Tip */}
+              <h3 className="text-lg font-bold mt-4 mb-2 text-grayscale-90">야구장 관람 매너</h3>
+              {tips.map((tip, index) => (
+                <TipItem key={index} index={index + 1} title={tip.title} description={tip.description} />
+              ))}
+            </>
+          )}
         </div>
 
         {/* 챗봇 질문 고정 */}
-        <div className="p-5 bg-white">
+        <div className="p-5 bg-white rounded-b-xl">
           <button className="w-full py-3 text-center font-semibold text-sm text-main-50 bg-main-5 rounded-lg">
             챗봇에게 질문하러 가기
           </button>
