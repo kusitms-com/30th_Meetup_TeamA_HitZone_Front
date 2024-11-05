@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "postinstall": "husky install",
-    "lint-staged": "eslint --cache ."
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint-staged": "next lint --cache ."
   },
   "dependencies": {
     "next": "^15.0.2",
@@ -23,8 +24,8 @@
     "@types/node": "^20.17.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@typescript-eslint/eslint-plugin": "^8.11.0",
-    "@typescript-eslint/parser": "^8.11.0",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "14.2.14",
@@ -40,7 +41,12 @@
     "postcss": "^8",
     "prettier": "3.3.3",
     "tailwindcss": "^3.4.13",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.11.0"
+    "typescript": "^5.6.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "next lint --fix --cache",
+      "prettier --write"
+    ]
   }
 }

@@ -5,9 +5,7 @@
     "node": true
   },
   "extends": [
-    "react-app",
     "eslint:recommended",
-    "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "airbnb",
@@ -24,26 +22,8 @@
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "react/require-default-props": "off",
-    "react/jsx-props-no-spreading": 0,
-    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-    "no-alert": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never",
-        "json": "never"
-      }
-    ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      { "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/setupTests.ts"] }
-    ]
+    "react/jsx-props-no-spreading": "off",
+    "no-alert": "off"
   },
   "settings": {
     "react": {
