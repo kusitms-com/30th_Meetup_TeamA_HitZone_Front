@@ -24,30 +24,37 @@ export default function Dropdown({ options, selectedOption, onSelect }: Dropdown
       </button>
 
       <div
-        className={`absolute left-0 w-full mt-2 font-medium bg-white border shadow-lg rounded-lg text-sm z-10 transition-all duration-300 ease-in-out ${
-          isDropdownOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+        className={`absolute left-0 w-full mt-2 font-medium bg-white shadow-lg text-sm z-10 transition-all duration-300 ease-in-out rounded-lg ${
+          isDropdownOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0 scale-95"
         } overflow-hidden`}
       >
-        <ul className="list-none">
-          {options.map((option, index, array) => (
-            <li
-              key={option}
-              onClick={() => {
-                onSelect(option);
-                setIsDropdownOpen(false);
-              }}
-              className={`px-4 py-[10px] cursor-pointer 
-                ${option === selectedOption ? "bg-main-5 text-main-30" : 
-                  option === "고척스카이돔 (키움)" || option === "기아 챔피언스 필드 (광주)" || option === "삼성 라이온즈 파크 (대구)" || option === "한화생명 이글스 파크 (대전)" 
-                  ? "bg-[#000000] bg-opacity-50 text-grayscale-80" 
-                  : "hover:bg-gray-100"}
-                ${index === 0 ? "rounded-t-lg" : ""}
-                ${index === array.length - 1 ? "rounded-b-lg" : ""}`}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
+        <div className="max-h-60 overflow-y-auto">
+          <ul className="list-none">
+            {options.map((option, index) => {
+              const isSelected = option === selectedOption;
+              const isGrayBackground = index > 1;
+
+              return (
+                <li
+                  key={option}
+                  onClick={() => {
+                    onSelect(option);
+                    setIsDropdownOpen(false);
+                  }}
+                  className={`px-4 py-[10px] cursor-pointer
+                    ${isSelected ? "bg-main-5 text-main-30 font-semibold" : 
+                      isGrayBackground ? "bg-[#000000] bg-opacity-50 text-grayscale-80" : ""}
+                    ${index === 0 ? "rounded-t-lg" : ""}
+                    ${index === options.length - 1 ? "rounded-b-lg" : ""}
+                    ${!isSelected && "hover:bg-gray-100"}
+                  `}
+                >
+                  {option}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );
