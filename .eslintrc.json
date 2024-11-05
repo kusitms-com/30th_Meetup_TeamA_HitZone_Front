@@ -27,11 +27,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": 0,
-    // .tsx에서도 jsx사용
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-    // import 플러그인은 확장자를 명시해야 하는데 ts는 확장자를 생략하므로 무시하도록 함
     "no-alert": "off",
-    // floatingButton에서 알림창을 띄우기위해 no-alert 룰을 비활성화 함
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -42,16 +39,15 @@
         "tsx": "never",
         "json": "never"
       }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/setupTests.ts"] }
     ]
   },
   "settings": {
     "react": {
-      "version": "detect" // 또는 특정 버전 (예: "17.0")
-    },
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
+      "version": "detect"
     }
   }
 }
