@@ -111,7 +111,7 @@ const JamsilSeat = () => {
     <div className="relative flex justify-center mt-6">
       <canvas
         ref={canvasRef}
-        className="w-[376px] h-[356px]"
+        className="max-w-[376px] max-h-[356px]"
         onClick={handleCanvasClick}
       />
     </div>

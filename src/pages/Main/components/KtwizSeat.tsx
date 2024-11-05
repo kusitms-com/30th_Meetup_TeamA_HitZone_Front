@@ -119,7 +119,7 @@ const KtwizSeat = () => {
     <div className="relative flex justify-center mt-6">
       <canvas
         ref={canvasRef}
-        className="w-[366px] h-[400px]"
+        className="max-w-[366px] max-h-[400px]"
         onClick={handleCanvasClick}
       />
     </div>

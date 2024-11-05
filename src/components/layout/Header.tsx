@@ -16,20 +16,21 @@ const Header = () => {
   };
 
   return (
-    <div className="flex gap-[156px] p-4 border-b border-grayscale-10 w-full">
-      <div className="flex items-center">
-        <Image 
-          src={HitzoneLogo} 
-          alt="Hitzone" 
-          width={154} 
-          height={27} 
-          onClick={handleLogoClick}
-          className="cursor-pointer"
-        />
-      </div>
-      <div className="flex space-x-3 ml-auto">
-        <Image src={GuideIcon} alt="Guide Icon" width={28} height={20} />
-        <Image src={NotificationIcon} alt="Notification Icon" width={28} height={20} />
+    <div className="flex justify-between items-center pb-4 border-b border-grayscale-10 w-full">
+      {/* 히트존 로고 */}
+      <Image 
+        src={HitzoneLogo} 
+        alt="Hitzone Logo" 
+        width={154} 
+        height={27} 
+        onClick={handleLogoClick}
+        className="cursor-pointer"
+      />
+
+      {/* 코치마크, 알림 아이콘 */}
+      <div className="flex space-x-3">
+        <Image src={GuideIcon} alt="Guide Icon" width={24} height={24} />
+        <Image src={NotificationIcon} alt="Notification Icon" width={24} height={24} />
       </div>
     </div>
   );
