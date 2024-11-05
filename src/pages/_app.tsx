@@ -1,12 +1,20 @@
+////////////////////////////////////////////////////
+// pull 받을 때마다 매번 해야하는 명령어
 // npm install react react-dom
+////////////////////////////////////////////////////
+// 처음 한 번만 실행하는 명령어
 // npm install --save-dev @types/react @types/react-dom
 // npm install next
 // npm install next@latest typescript@latest @types/react@latest @types/react-dom@latest
 // npm install --save-dev @types/react @types/node
 // npm install --save-dev typescript
+////////////////////////////////////////////////////
 // 소셜 로그인 관련
 // npm install next-auth
-// 시작: npm run dev
+////////////////////////////////////////////////////
+// 시작
+// npm run dev
+////////////////////////////////////////////////////
 import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
@@ -15,6 +23,7 @@ import Onboarding from './Onboarding/Onboarding';
 import { SignupPage } from './Onboarding/Signup/SignupPage'; 
 import Main from './Main/Main';
 import Question from './Recommendation/Question'; 
+import Result from './Recommendation/Result'; 
 import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
@@ -44,6 +53,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
             return <Main />;
         case '/recommend/question':
             return <Question />;
+        case '/recommend/results':
+            return <Result />;
         case '/guide':
             return <Guide />;
         case '/culture':
