@@ -27,6 +27,10 @@ import Result from './Recommendation/Result';
 import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
+import QA from "./Main/QA"
+import Dialog1 from "../components/dialogs/AlarmQuestionDialog"
+import Dialog3 from "../components/dialogs/ChooseBaseballTeamDialog"
+import Dialog4 from "../components/dialogs/SeatTipDialog"
 
 // 전역 소셜로그인 상태 관리
 import { SessionProvider } from "next-auth/react";
@@ -50,6 +54,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/signup':
             return <SignupPage />;
         case '/':
+            return <QA />;
+        case '/main':
             return <Main />;
         case '/recommend/question':
             return <Question />;
@@ -61,6 +67,12 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
             return <Culture />;
         case '/mypage':
             return <MyPage />;
+        case '/dialog1':
+            return <Dialog1/>;
+        case '/dialog3':
+            return <Dialog3/>;
+        case '/dialog4':
+            return <Dialog4/>;
     }
   };
   

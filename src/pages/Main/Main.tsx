@@ -35,6 +35,7 @@ function Main() {
   ///////////////////////////////////////////////////////////
   // 🐻 INAE 추가 코드
   // 로그인, 회원가입 상태 관리
+  /*
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -52,6 +53,7 @@ function Main() {
       }
     }
   }, [status, router]);
+  */
   ///////////////////////////////////////////////////////////
 
   if (status === "loading") {
