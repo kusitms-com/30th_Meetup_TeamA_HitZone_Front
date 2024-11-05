@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from "next/router";
 import Image from "next/image";
 import reservationIcon from "../../assets/svg/reservation.svg";
 import closeIcon from "../../assets/webp/close_button_gray.webp";
@@ -22,6 +23,7 @@ const TipItem = ({ index, title, description }: { index: number; title: string; 
 
 const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
   const [activeTab, setActiveTab] = useState<'booking' | 'tips'>('booking');
+  const router = useRouter();
 
   if (!isOpen) return null;
 
@@ -126,7 +128,10 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
 
         {/* 챗봇 질문 고정 */}
         <div className="p-5 bg-white rounded-b-xl">
-          <button className="w-full py-3 text-center font-semibold text-sm text-main-50 bg-main-5 rounded-lg">
+        <button 
+            className="w-full py-3 text-center font-semibold text-sm text-main-50 bg-main-5 rounded-lg"
+            onClick={() => router.push("/chatbot")}
+          >
             챗봇에게 질문하러 가기
           </button>
         </div>
