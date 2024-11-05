@@ -61,7 +61,7 @@ const Page = ({previousStep, nextStep}: Props) => {
 
             {/** next 버튼 */}
             <div className="absolute bottom-0 left-0 w-full px-[16px]">
-                <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[50px]">
+                <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[40px]">
                     <p className="text-md text-white font-semibold ">
                         <button onClick={nextStep}>다음</button>
                     </p>

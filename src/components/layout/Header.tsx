@@ -10,8 +10,8 @@ const Header = () => {
 
   // 로고 클릭 시 Main 페이지로 이동
   const handleLogoClick = () => {
-    if (router.pathname !== "/main") {
-      router.push("/main");
+    if (router.pathname !== "/") {
+      router.push("/");
     }
   };
 
