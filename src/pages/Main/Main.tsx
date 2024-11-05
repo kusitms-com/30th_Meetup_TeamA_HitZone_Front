@@ -11,7 +11,7 @@ import JamsilSeat from "./components/JamsilSeat";
 import KtwizSeat from "./components/KtwizSeat";
 import StadiumInfo from "./components/StadiumInfo";
 import SeatRecommendButton from "./components/SeatRecommendButton";
-import ChatBot from "../../components/button/ChatBot";
+import ChatBot from "../../components/button/FloatingChatbotButton";
 
 function Main() {
   const [selectedStadium, setSelectedStadium] = useState("잠실종합운동장 (잠실)");
