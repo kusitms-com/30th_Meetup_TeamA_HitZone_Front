@@ -22,7 +22,7 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full max-w-[500px] mx-auto bg-grayscale-0 border-t border-grayscale-10 flex justify-between px-6 py-3">
+    <nav className="fixed bottom-0 left-0 right-0 w-full max-w-[500px] mx-auto bg-grayscale-0 border-t border-grayscale-10 flex justify-between px-6 py-3" aria-label="Main Navigation">
       {menuItems.map((item) => {
         // 홈 경로와 나머지 경로 구분
         const isActive = item.path === "/"
@@ -49,7 +49,7 @@ const NavBar = () => {
           </div>
         );
       })}
-    </div>
+    </nav>
   );
 };
 
