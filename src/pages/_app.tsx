@@ -20,7 +20,7 @@ import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 
 import Onboarding from './Onboarding/Onboarding'; 
-import { SignupPage } from './Onboarding/Signup/SignupPage'; 
+import SignupPage from './Onboarding/Signup/SignupPage'; 
 import Main from './Main/Main';
 import Question from './Recommendation/Question'; 
 import Result from './Recommendation/Result'; 
