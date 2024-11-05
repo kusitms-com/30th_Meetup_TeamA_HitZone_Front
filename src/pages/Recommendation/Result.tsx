@@ -15,6 +15,9 @@ import tipPinkIcon from '../../assets/webp/recommend_tip_pink.webp';
 
 import SeatTipDialog from "../../components/dialogs/SeatTipDialog"
 
+import ChooseBaseballTeamDialog from "../../components/dialogs/ChooseBaseballTeamDialog"
+
+
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
 export interface ZoneProps {
@@ -200,7 +203,11 @@ const Page = () => {
     return (
         <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center w-full h-screen ">
-                <SeatTipDialog/>
+
+                {/** 임시 확인
+                <ChooseBaseballTeamDialog/>
+                <SeatTipDialog/> */}
+
                 {/** 헤더 */}
                 <HeaderBar />
 
