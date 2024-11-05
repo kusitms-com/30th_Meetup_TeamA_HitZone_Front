@@ -7,12 +7,13 @@ import Question2 from "./Question/Question2";
 import Question3 from "./Question/Question3";
 import Question4 from "./Question/Question4";
 
-
 import Image from 'next/image';
 import crownGoldIcon from '../../assets/webp/recommend_crown_gold.webp';
 import crownSilverIcon from '../../assets/webp/recommend_crown_silver.webp';
 import crownBronzeIcon from '../../assets/webp/recommend_crown_bronze.webp';
 import tipPinkIcon from '../../assets/webp/recommend_tip_pink.webp';
+
+import SeatTipDialog from "../../components/dialogs/SeatTipDialog"
 
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
@@ -199,7 +200,7 @@ const Page = () => {
     return (
         <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center w-full h-screen ">
-                
+                <SeatTipDialog/>
                 {/** 헤더 */}
                 <HeaderBar />
 
