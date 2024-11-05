@@ -35,23 +35,24 @@ function Main() {
   ///////////////////////////////////////////////////////////
   // 🐻 INAE 추가 코드
   // 로그인, 회원가입 상태 관리
-  const { data: session, status } = useSession();
-  const router = useRouter();
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      // 로그인 페이지로 리디렉션 (이동)
-      router.push("/login");
+  // const { data: session, status } = useSession();
+  // const router = useRouter();
 
-    } else if (status === "authenticated") {
-      const isFirstTimeUser = true; // 예시로 설정, 실제 사용자 DB 정보로 확인 필요
+  // useEffect(() => {
+  //   if (status === "unauthenticated") {
+  //     // 로그인 페이지로 리디렉션 (이동)
+  //     router.push("/login");
 
-      // 회원 가입 페이지로 리디렉션 (이동)
-      if (isFirstTimeUser) {
-        router.push("/signup");
-      }
-    }
-  }, [status, router]);
+  //   } else if (status === "authenticated") {
+  //     const isFirstTimeUser = true; // 예시로 설정, 실제 사용자 DB 정보로 확인 필요
+
+  //     // 회원 가입 페이지로 리디렉션 (이동)
+  //     if (isFirstTimeUser) {
+  //       router.push("/signup");
+  //     }
+  //   }
+  // }, [status, router]);
   ///////////////////////////////////////////////////////////
 
   if (status === "loading") {
