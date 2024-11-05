@@ -13,7 +13,7 @@ import mypagePinkIcon from "../../assets/webp/mypage_pink.webp";
 const NavBar = () => {
   const router = useRouter();
 
-  // 현재 경로와 일치하면 핑크 아이콘, 아니면 그레이 아이콘 표시
+  // 메뉴 아이템 목록과 각 아이콘
   const menuItems = [
     { name: "홈", path: "/", icon: homeGrayIcon, activeIcon: homePinkIcon },
     { name: "구역 가이드", path: "/guide", icon: guideGrayIcon, activeIcon: guidePinkIcon },
@@ -22,9 +22,13 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 w-full max-w-[500px] bg-grayscale-0 border-t border-grayscale-10 flex justify-around p-2">
+    <div className="fixed bottom-0 left-0 right-0 w-full max-w-[500px] mx-auto bg-grayscale-0 border-t border-grayscale-10 flex justify-between px-6 py-3">
       {menuItems.map((item) => {
-        const isActive = router.pathname === item.path;
+        // 홈 경로와 나머지 경로 구분
+        const isActive = item.path === "/"
+          ? router.asPath.split('?')[0] === "/"
+          : router.asPath.startsWith(item.path);
+
         return (
           <div
             key={item.name}
@@ -38,8 +42,9 @@ const NavBar = () => {
             <Image
               src={isActive ? item.activeIcon : item.icon}
               alt={`${item.name} Icon`}
-              width={52}
+              width={54} 
               height={45}
+              priority={item.path === "/"}
             />
           </div>
         );
