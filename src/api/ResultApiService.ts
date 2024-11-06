@@ -2,21 +2,45 @@
 import { AxiosInstance, V1_URL } from './axiosInstance';
 
 // API 연동 타입
-import { clovaURL, ClovaPostParamsType, ClovaPostRequestType,
-         guideURL, GuideGetParamsType} from "./ChatbotApiType";
+import { profileURL, ProfileGetParamsType,
+         saveURL, SavePostParamsType, SavePostRequestType,
+         zonesURL, ZoneGetParamsType} from "./ResultApiType";
 
 
 /** 백엔드와 API 연동 */
+// 조회: GET 요청 및 응답받기
+export const getProfile = async ({resultId}: ProfileGetParamsType) => {
+  try {
+    const response = await AxiosInstance.get(`${V1_URL}${profileURL}`, 
+      // 쿼리 파라미터 전달
+      {
+        params: {resultId},
+      }
+    );
+
+    // 백엔드 서버로부터 API의 응답 데이터 받은 후 리턴
+    return response.data;
+    
+  } catch (error) {
+    // 이 부분은 나중에 errorHandler.ts 만들어서 에러별로 다르게 처리 가능
+    console.error(`profile GET에서 오류 발생:`, error);
+    
+    // 에러를 반환해서(던져서) 컴포넌트에서 처리해도 됨
+    throw error;
+  }
+};
+
+
 // 추가: POST 요청 및 응답받기
-export const postClova = async (
-  {  }: ClovaPostParamsType,
-  {message}: ClovaPostRequestType) => {
+export const postZone = async (
+  {  }: SavePostParamsType,
+  {stadium, preference, clientKeywords}: SavePostRequestType) => {
   
   try {
-    const response = await AxiosInstance.post(`${V1_URL}${clovaURL}`, 
+    const response = await AxiosInstance.post(`${V1_URL}${saveURL}`, 
       // Request Data 전달
       {
-        message,
+        stadium, preference, clientKeywords
       },
       // 쿼리 파라미터 전달
       {
@@ -29,7 +53,7 @@ export const postClova = async (
 
   } catch (error) {
     // 이 부분은 나중에 errorHandler.ts 만들어서 에러별로 다르게 처리 가능
-    console.error(`clova POST에서 오류 발생:`, error);
+    console.error(`구역 추천 결과 저장 POST에서 오류 발생:`, error);
     
     // 에러를 반환해서(던져서) 컴포넌트에서 처리해도 됨
     throw error;
@@ -38,12 +62,12 @@ export const postClova = async (
 
 
 // 조회: GET 요청 및 응답받기
-export const getGuide = async ({stadiumName, categoryName, orderNumber}: GuideGetParamsType) => {
+export const getZones = async ({resultId, count}: ZoneGetParamsType) => {
   try {
-    const response = await AxiosInstance.get(`${V1_URL}${guideURL}`, 
+    const response = await AxiosInstance.get(`${V1_URL}${zonesURL}`, 
       // 쿼리 파라미터 전달
       {
-        params: {stadiumName, categoryName, orderNumber},
+        params: {resultId, count},
       }
     );
 
@@ -52,7 +76,7 @@ export const getGuide = async ({stadiumName, categoryName, orderNumber}: GuideGe
     
   } catch (error) {
     // 이 부분은 나중에 errorHandler.ts 만들어서 에러별로 다르게 처리 가능
-    console.error(`guide GET에서 오류 발생:`, error);
+    console.error(`추천 구역 리스트 GET에서 오류 발생:`, error);
     
     // 에러를 반환해서(던져서) 컴포넌트에서 처리해도 됨
     throw error;
