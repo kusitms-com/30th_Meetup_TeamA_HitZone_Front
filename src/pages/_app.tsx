@@ -8,9 +8,12 @@
 // npm install next@latest typescript@latest @types/react@latest @types/react-dom@latest
 // npm install --save-dev @types/react @types/node
 // npm install --save-dev typescript
+// npm install axios
 ////////////////////////////////////////////////////
 // 소셜 로그인 관련
 // npm install next-auth
+// npm install js-cookie
+// npm install --save-dev @types/js-cookie
 ////////////////////////////////////////////////////
 // 시작
 // npm run dev
@@ -47,7 +50,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
     switch (currentPath) {
         case '/login':
             return <Onboarding />;
-        case '/signup':
+        case '/onboarding':
             return <SignupPage />;
         case '/':
             return <Main />;

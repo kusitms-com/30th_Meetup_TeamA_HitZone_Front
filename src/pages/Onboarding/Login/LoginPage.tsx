@@ -1,5 +1,5 @@
 import React from 'react';
-import { signIn } from "next-auth/react";
+import { BASE_URL } from '../../../api/axiosInstance';  // 백엔드 서버 주소
 
 import Image from 'next/image';
 import logoIcon from '../../../assets/svg/hitzone_logo.svg';
@@ -10,6 +10,12 @@ import loginKakaoIcon from '../../../assets/svg/login_kakao.svg';
 import loginGoogleIcon from '../../../assets/svg/login_google.svg';
 
 const Page = () => {
+    // 로그인 이벤트 (클라이언트 리다이렉트)
+    // 로그인 버튼 클릭 시, 각 소셜 로그인 URL로 리다이렉트
+    const handleLogin = (provider: string) => {
+        // provider를 이용하여 소셜마다 다 다른 동적 url로 이동
+        window.location.href = `${BASE_URL}/oauth2/authorization/${provider}`;
+    };
 
     // 렌더링
     return (
@@ -39,6 +45,7 @@ const Page = () => {
 
                 {/** 소셜 로그인 버튼 */}
                 <div className="absolute bottom-[75px] ">
+                    {/*
                     <button  onClick={() => signIn("google", { callbackUrl: "/" })}>
                         <Image src={loginNaverIcon} alt="pink baseball" className="mb-3" width={370} height={48}/>
                     </button>
@@ -47,6 +54,27 @@ const Page = () => {
                     </button>
                     <button  onClick={() => signIn("naver", { callbackUrl: "/" })}>
                         <Image src={loginGoogleIcon} alt="pink baseball" className="mb-3" width={370} height={48}/>
+                    </button>
+                    */}
+                    {/*
+                    <button onClick={() => (window.location.href = "https://git.hitzone.store/oauth2/authorization/google")}>
+                        <Image src={loginGoogleIcon} alt="Google 로그인" width={370} height={48} className="mb-3" />
+                    </button>
+                    <button onClick={() => (window.location.href = "https://git.hitzone.store/oauth2/authorization/kakao")}>
+                        <Image src={loginKakaoIcon} alt="Kakao 로그인" width={370} height={48} className="mb-3" />
+                    </button>
+                    <button onClick={() => (window.location.href = "https://git.hitzone.store/oauth2/authorization/naver")}>
+                        <Image src={loginNaverIcon} alt="Naver 로그인" width={370} height={48} className="mb-3" />
+                    </button>
+                    */}
+                    <button onClick={() => handleLogin("naver")}>
+                        <Image src={loginNaverIcon} alt="Naver 로그인" width={370} height={48} className="mb-3" />
+                    </button>
+                    <button onClick={() => handleLogin("kakao")}>
+                        <Image src={loginKakaoIcon} alt="Kakao 로그인" width={370} height={48} className="mb-3" />
+                    </button>
+                    <button onClick={() => handleLogin("google")}>
+                        <Image src={loginGoogleIcon} alt="Google 로그인" width={370} height={48} className="mb-3" />
                     </button>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import SignupPage1 from "./SignupPage1";
 import SignupPage2 from "./SignupPage2";
 import SignupPage3 from "./SignupPage3";
 
+import { handleSignup } from "../../../api/UserApiHandler";
 
 export interface Props {
     previousStep: () => void;
@@ -27,11 +28,16 @@ export const SignupPage = () => {
         else window.history.back();
     };
 
-    const nextStep = () => {
+    const nextStep = async () => {
         // 다음 step 페이지로 이동
-        if (step < 3) setStep(step + 1);
-        // 회원가입 완료 후 메인 페이지로 이동
-        else router.push("/");
+        if (step < 3) {
+            setStep(step + 1);
+            
+        // 마지막 페이지에선 회원가입 이벤트 수행
+        }else {
+            // Promise<boolean>을 반환하는 비동기 함수
+            handleSignup({nickname});
+        }
     };
 
 
