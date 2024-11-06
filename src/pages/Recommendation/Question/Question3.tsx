@@ -1,13 +1,14 @@
 import React from 'react'
 
-import { QuestionProps, ZoneType, Keyword } from "../Question"
+import { QuestionProps } from "../Question"
+import { StadiumType, Keyword } from "../../../constants/ZoneData"
 
 import Image from 'next/image';
 import gloveIcon from '../../../assets/svg/question03.svg';
 
 
 interface Props extends QuestionProps {
-    selectedZone: ZoneType;
+    selectedZone: StadiumType;
     selectedKeywordItems: Keyword[];
     handleKeywordItem: (keyword: Keyword) => void;
     hasWish: boolean;
@@ -95,7 +96,7 @@ const Page = ({previousStep, nextStep, selectedZone, selectedKeywordItems, handl
                 </div>
                 
                 {/** KT 구역일 땐 아이템 하나 더 추가 */}
-                {selectedZone === ZoneType.KT ?
+                {selectedZone === StadiumType.KT ?
                     <div className="flex justify-center items-center gap-[12px] mb-[12px] z-10">
                         <div className={`flex justify-center items-center bg-grayscale-5 border rounded-[8px] w-full p-[16px]"
                             cursor-pointer ${selectedKeywordItems.includes(Keyword.WISH7) ? 'border-main-50 text-main-50 bg-main-5':'border-transparent text-grayscale-80 bg-grayscale-5'}`}

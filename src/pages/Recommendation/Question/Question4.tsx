@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { QuestionProps, Keyword } from "../Question"
+import { QuestionProps } from "../Question"
+import { Keyword } from "../../../constants/ZoneData"
 
 import Image from 'next/image';
 import pinkZoneIcon from '../../../assets/svg/question04.svg';

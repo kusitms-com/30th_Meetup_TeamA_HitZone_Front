@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { QuestionProps, SeatType } from "../Question"
+import { QuestionProps } from "../Question"
+import { SeatType } from "../../../constants/ZoneData"
 
 import Image from 'next/image';
 import logoIcon from '../../../assets/svg/hitzone_logo.svg';
