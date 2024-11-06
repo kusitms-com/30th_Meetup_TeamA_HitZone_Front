@@ -6,11 +6,18 @@ import { signupURL, SignupPostParamsType, SignupPostRequestType,
          userInfoURL, UserInfoGetParamsType,
          nicknameCheckURL, NicknameCheckPostParamsType, NicknameCheckPostRequestType} from "./UserApiType"
 
+// 쿠키
+import Cookies from "js-cookie";
+
 /** 백엔드와 API 연동 */
 // 추가: POST 요청 및 응답받기
 export const postSignup = async (
   {  }: SignupPostParamsType,
   {nickname}: SignupPostRequestType) => {
+  
+  // 쿠키에 저장된 레지스터 토큰 가져오기
+  const registerToken = Cookies.get("registerToken");
+  if (!registerToken) return false;
 
   try {
     const response = await AxiosInstance.post(`${BASE_URL}${signupURL}`, 
@@ -21,8 +28,15 @@ export const postSignup = async (
       // 쿼리 파라미터 전달
       {
         params: {  },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${registerToken}`,
+        },
       }
     );
+
+    // 쿠키에서 레지스터 토큰 삭제
+    Cookies.remove("registerToken");
     
     // 백엔드 서버로부터 API의 응답 데이터 받은 후 리턴
     return response.data;

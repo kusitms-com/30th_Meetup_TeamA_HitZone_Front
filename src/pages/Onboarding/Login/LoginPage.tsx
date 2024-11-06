@@ -1,5 +1,5 @@
 import React from 'react';
-import { signIn } from "next-auth/react";
+import { BASE_URL } from '../../../api/axiosInstance';  // 백엔드 서버 주소
 
 import Image from 'next/image';
 import logoIcon from '../../../assets/svg/hitzone_logo.svg';
@@ -12,9 +12,9 @@ import loginGoogleIcon from '../../../assets/svg/login_google.svg';
 const Page = () => {
     // 로그인 이벤트 (클라이언트 리다이렉트)
     // 로그인 버튼 클릭 시, 각 소셜 로그인 URL로 리다이렉트
-    const handleLogin = (provider: string) => { // provider를 이용하여 소셜마다 다 다른 동적 url로 이동
-        const baseURL = "https://git.hitzone.store/oauth2/authorization";
-        window.location.href = `${baseURL}/${provider}`;
+    const handleLogin = (provider: string) => {
+        // provider를 이용하여 소셜마다 다 다른 동적 url로 이동
+        window.location.href = `${BASE_URL}/oauth2/authorization/${provider}`;
     };
 
     // 렌더링
