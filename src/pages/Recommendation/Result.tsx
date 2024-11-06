@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 
-import HeaderBar from "./Result/HeaderBar";
+import HeaderBar from "../../components/layout/ResultHeader";
 import Question1 from "./Question/Question1";
 import Question2 from "./Question/Question2";
 import Question3 from "./Question/Question3";
