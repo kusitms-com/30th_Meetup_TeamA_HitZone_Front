@@ -1,6 +1,6 @@
 /** URL */
 // 온보딩 회원가입
-export const signupURL = "/api/v1/signup";
+export const signupURL = "/signup";
 
 /** API Type */
 // POST 파라미터
@@ -17,7 +17,7 @@ export interface SignupPostRequestType {
 ////////////////////////////////////////////////////////
 /** URL */
 // 유저 회원 정보
-export const userInfoURL = "/api/v1/user-info";
+export const userInfoURL = "/user-info";
 
 /** API Type */
 // GET 파라미터
@@ -35,7 +35,7 @@ export interface UserInfoGetResponseType {
 ////////////////////////////////////////////////////////
 /** URL */
 // 닉네임 중복 유무 정보
-export const nicknameCheckURL = "/api/v1/nickname/check"
+export const nicknameCheckURL = "/check"
 
 /** API Type */
 // POST 파라미터

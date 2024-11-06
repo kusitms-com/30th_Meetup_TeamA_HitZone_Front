@@ -7,6 +7,8 @@ import axios from "axios";
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;      // Next.js
 //export const BASE_URL = import.meta.env.VITE_REACT_APP_BASE_URL   // Vite
 
+export const V1_URL = `${BASE_URL}/api/v1`;
+
 /// Axios 인스턴스 생성
 export const AxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -15,3 +17,10 @@ export const AxiosInstance = axios.create({
     "Content-Type": "application/json", // JSON 형식
   },
 });
+
+// 최상단 Response Type
+export interface ResponseType {
+  isSuccess: boolean;
+  code: string;
+  message: string;
+}
