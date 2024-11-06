@@ -46,10 +46,14 @@ export const handleSave = async ({stadium, seat, keywords}: RecommendQuestionPro
 
     // API 통신
     // 유저에게 닉네임을 받은 후, 바디에 닉네임 넣어서 API를 요청
-    await postZone(
+    const response = await postZone(
         {  },
         { stadium:s, preference:p, clientKeywords:c }
     );
+
+    // 확인
+    console.log("🐻 추천 구역 데이터를 백엔드에 전송했습니당: ");
+    console.log(response);
 
   } catch (error) {
       console.error('회원가입 중 오류 발생:', error);

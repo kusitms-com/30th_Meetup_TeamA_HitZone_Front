@@ -25,8 +25,8 @@ import '../styles/globals.css';
 import Onboarding from './Onboarding/Onboarding'; 
 import { SignupPage } from './Onboarding/Signup/SignupPage'; 
 import Main from './Main/Main';
-import Question from './Recommendation/Question'; 
-import Result from './Recommendation/Result'; 
+import Question from './Recommend/Question'; 
+import Result from './Recommend/Result'; 
 import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
@@ -41,7 +41,7 @@ import { StadiumType, SeatType, Keyword } from "../constants/ZoneData"
 const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pageProps } }) => {
   // 스타디움 관리
   const [selectedStadium, setSelectedStadium] = useState(StadiumType.JAMSIL);   // 첫 화면은 잠실로 초기화
-  
+
 
   // 현재 URL 경로 가져오기
   const [currentPath, setCurrentPath] = useState<string>('');
@@ -75,11 +75,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
   };
   
   return (
-    <SessionProvider session={session}>
+    //<SessionProvider session={session}>
       <div className="items-center p-4 w-full max-w-[500px] mx-auto">
           {renderComponent()}
       </div>
-    </SessionProvider>
+    //</SessionProvider>
   );
 };
 
