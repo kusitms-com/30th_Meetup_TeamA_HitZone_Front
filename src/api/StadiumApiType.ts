@@ -1,4 +1,5 @@
 /** URL */
+// 안 쓸거 같긴 해
 // 스타디움 구역 목록
 export const zoneURL = "/stadium/zones";
 
