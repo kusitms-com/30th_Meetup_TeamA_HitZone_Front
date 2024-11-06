@@ -30,7 +30,7 @@ const Onboarding = () => {
             // setIsLoggedIn(true); // 로그인 상태 업데이트
             // setIsFirstTimeUser(false); // 기존 사용자로 업데이트
 
-        }, 2000); // 2초 후 로딩 종료
+        }, 1000); // 1초 후 로딩 종료
 
         return () => clearTimeout(timer);
     }, []);

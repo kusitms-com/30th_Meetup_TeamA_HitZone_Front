@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import SignupPage1 from "./SignupPage1";
 import SignupPage2 from "./SignupPage2";
 import SignupPage3 from "./SignupPage3";
+import Cookies from "js-cookie";
 
 
 export interface Props {
@@ -27,11 +28,51 @@ export const SignupPage = () => {
         else window.history.back();
     };
 
-    const nextStep = () => {
+    const nextStep = async () => {
         // 다음 step 페이지로 이동
-        if (step < 3) setStep(step + 1);
-        // 회원가입 완료 후 메인 페이지로 이동
-        else router.push("/");
+        if (step < 3) {
+            setStep(step + 1);
+        }else {
+            // Promise<boolean>을 반환하는 비동기 함수
+            const submit = await handleOnboardingSubmit();
+
+            // 회원가입 성공 후 메인 페이지로 이동
+            if(submit === true)
+                router.push("/");
+        }
+    };
+
+
+    // 회원가입 이벤트 (API로 정보 전송)
+    // 신규 유저 온보딩 처리
+    const handleOnboardingSubmit = async () => {
+        // 쿠키에 저장된 토큰 가져오기
+        const registerToken = Cookies.get("registerToken");
+        if (!registerToken) return false;
+
+        try {
+            await fetch("https://localhost:5173/api/onboarding", {
+            method: "POST",
+            
+            // 토큰
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${registerToken}`,
+            },
+
+            // 닉네임 전송
+            body: JSON.stringify({ nickname }),
+            });
+            Cookies.remove("registerToken");
+            router.push("/");
+
+            return true;
+
+        } catch (error) {
+            console.error("Onboarding error:", error);
+        }
+
+        return false;
     };
 
 
