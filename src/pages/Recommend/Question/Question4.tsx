@@ -85,12 +85,13 @@ const Page = ({previousStep, nextStep, selectedKeywordItems, handleKeywordItem, 
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
                     <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
-                                   ${!hasNowish? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
+                                   ${!hasNowish? 'bg-grayscale-10' : 'bg-grayscale-80 cursor-pointer'}`}
+                         onClick={nextStep}
                     >
                         <p className={`text-md font-semibold 
                                     ${!hasNowish? 'text-grayscale-70' : 'text-grayscale-0'}`}
                          >
-                            <button onClick={nextStep}>나에게 딱 맞는 구역 추천 받기</button>
+                            나에게 딱 맞는 구역 추천 받기
                         </p>
                     </div>
                 </div>

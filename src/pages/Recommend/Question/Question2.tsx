@@ -75,12 +75,13 @@ const Page = ({previousStep, nextStep, selectedParter, handleParterKeywordItem}:
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
                     <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
-                                   ${selectedParter === Keyword.NONE ? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
+                                   ${selectedParter === Keyword.NONE ? 'bg-grayscale-10' : 'bg-grayscale-80 cursor-pointer'}`}
+                         onClick={nextStep}
                     >
                         <p className={`text-md font-semibold 
                                      ${selectedParter === Keyword.NONE ? 'text-grayscale-70' : 'text-grayscale-0'}`}
                          >
-                            <button onClick={nextStep}>다음</button>
+                            다음
                         </p>
                     </div>
                 </div>
