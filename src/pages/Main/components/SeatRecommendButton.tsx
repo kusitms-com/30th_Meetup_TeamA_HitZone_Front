@@ -5,18 +5,12 @@ interface FindSectionButtonProps {
   stadium: string;
 }
 
-// 추후 Props로 각각 맞는 추천 질문으로 수정 예정
-const stadiumRouteMap: { [key: string]: string } = {
-  "잠실종합운동장 (잠실)": "/Recommend/Question",
-  "수원KT위즈파크": "/Recommend/Question",
-};
-
 const FindSectionButton: React.FC<FindSectionButtonProps> = ({ stadium }) => {
   const router = useRouter();
 
+  // 추천 질문 페이지로 이동
   const handleClick = () => {
-    const route = stadiumRouteMap[stadium] || "/Recommend/Question";
-    router.push(route);
+    router.push("/recommend/question");
   };
 
   return (

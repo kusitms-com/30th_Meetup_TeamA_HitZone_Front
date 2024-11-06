@@ -40,8 +40,8 @@ import { StadiumType, SeatType, Keyword } from "../constants/ZoneData"
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pageProps } }) => {
   // 스타디움 관리
-  const [selectedStadium, setSelectedStadium] = useState(StadiumType.NONE);
-
+  const [selectedStadium, setSelectedStadium] = useState(StadiumType.JAMSIL);   // 첫 화면은 잠실로 초기화
+  
 
   // 현재 URL 경로 가져오기
   const [currentPath, setCurrentPath] = useState<string>('');
