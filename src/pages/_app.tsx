@@ -36,6 +36,7 @@ import { SessionProvider } from "next-auth/react";
 
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pageProps } }) => {
+  
   // 현재 URL 경로 가져오기
   const [currentPath, setCurrentPath] = useState<string>('');
 

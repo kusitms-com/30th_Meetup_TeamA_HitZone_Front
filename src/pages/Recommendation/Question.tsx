@@ -9,6 +9,7 @@ import Question3 from "./Question/Question3";
 import Question4 from "./Question/Question4";
 
 import { StadiumType, SeatType, Keyword } from "../../constants/ZoneData"
+import { handleSave } from "../../api/ResultApiHandler";
 
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
@@ -131,6 +132,8 @@ const Page = ({stadium}: Props) => {
             if(hasNowish) {
                 // 질문 작성 완료 후 결과 페이지로 이동
                 router.push("/recommend/results");
+                // 백엔드에 데이터 전송 (API 통신)
+                handleSave({stadium, seat:selectedSeat, keywords:selectedKeywordItems});
             }
         }
     };
