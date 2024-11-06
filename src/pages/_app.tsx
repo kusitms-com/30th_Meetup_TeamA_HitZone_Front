@@ -34,9 +34,15 @@ import MyPage from './MyPage/MyPage';
 // 전역 소셜로그인 상태 관리
 import { SessionProvider } from "next-auth/react";
 
+// Enum으로 추천 구역 Data 관리
+import { StadiumType, SeatType, Keyword } from "../constants/ZoneData"
+
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pageProps } }) => {
-  
+  // 스타디움 관리
+  const [selectedStadium, setSelectedStadium] = useState(StadiumType.NONE);
+
+
   // 현재 URL 경로 가져오기
   const [currentPath, setCurrentPath] = useState<string>('');
 
@@ -54,11 +60,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/onboarding':
             return <SignupPage />;
         case '/':
-            return <Main />;
+            return <Main selectedStadium={selectedStadium} setSelectedStadium={setSelectedStadium}/>;
         case '/recommend/question':
-            return <Question />;
+            return <Question stadium={selectedStadium}/>;
         case '/recommend/results':
-            return <Result />;
+            return <Result stadium={selectedStadium}/>;
         case '/guide':
             return <Guide />;
         case '/culture':

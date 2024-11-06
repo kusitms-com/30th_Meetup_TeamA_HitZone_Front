@@ -17,51 +17,16 @@ import SeatTipDialog from "../../components/dialogs/SeatTipDialog"
 
 import ChooseBaseballTeamDialog from "../../components/dialogs/ChooseBaseballTeamDialog"
 
+// Enum으로 추천 구역 Data 관리
+import { StadiumType, SeatType, Keyword } from "../../constants/ZoneData"
 
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
-export interface ZoneProps {
-    stadium: ZoneType;
-}
-export enum ZoneType {
-    NONE = '',
-    JAMSIL = '잠실종합운동장',
-    KT = '수원KT위즈파크'
+export interface Props {
+    stadium: StadiumType;
 }
 
-export interface QuestionProps {
-    previousStep: () => void;
-    nextStep: () => void;
-}
-
-
-// Seat 관리
-export enum SeatType {
-    NONE = '',
-    SEAT1 = '1루석',
-    SEAT3 = '3루석'
-}
-
-// keyword 관리
-export enum Keyword {
-    NONE = '',
-    PARTNER1 = '나 혼자',
-    PARTNER2 = '같은 팀 팬과',
-    PARTNER3 = '다른 팀 팬과',
-    WISH1 = '열정적인 응원',
-    WISH2 = '경기장 한눈에 보기',
-    WISH3 = '편리한 화장실 이용',
-    WISH4 = '음식 먹기 편한',
-    WISH5 = '빠른 퇴장 가능',
-    WISH6 = '선수들 가까이',
-    WISH7 = '삼겹살 구워먹기',
-    NOWISH1 = '햇빛 싫어요',
-    NOWISH2 = '큰 소리 싫어요',
-    NOWISH3 = '높은 곳 싫어요',
-    NOWISH4 = '비 맞기 싫어요'
-}
-
-const Page = () => {
+const Page = ({stadium}: Props) => {
     /** 선택한 좌석 관리 */
     const [selectedSeat, setSelectedSeat] = useState(SeatType.NONE);
 
@@ -190,7 +155,7 @@ const Page = () => {
                 return <Question2 previousStep={previousStep} nextStep={nextStep} selectedParter={selectedParter} handleParterKeywordItem={handleParterKeywordItem}/>;
             
             case 3:
-                return <Question3 previousStep={previousStep} nextStep={nextStep} selectedZone={ZoneType.KT} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasWish={hasWish}/>;
+                return <Question3 previousStep={previousStep} nextStep={nextStep} selectedZone={stadium} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasWish={hasWish}/>;
             
             case 4:
                 return <Question4 previousStep={previousStep} nextStep={nextStep} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasNowish={hasNowish}/>;
