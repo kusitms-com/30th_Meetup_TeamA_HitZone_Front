@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import backLeftButtonGrayIcon from '../../../assets/webp/back_left_button_gray.webp';
+import backLeftButtonGrayIcon from '../../assets/webp/back_left_button_gray.webp';
 
 const BackBar = () => {
     return (

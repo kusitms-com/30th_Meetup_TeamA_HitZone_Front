@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import logoIcon from '../../../assets/svg/hitzone_logo.svg';
-import backLeftButtonGrayIcon from '../../../assets/webp/back_left_button_gray.webp';
+import logoIcon from '../../assets/svg/hitzone_logo.svg';
+import backLeftButtonGrayIcon from '../../assets/webp/back_left_button_gray.webp';
 
 const BackBar = () => {
     return (
