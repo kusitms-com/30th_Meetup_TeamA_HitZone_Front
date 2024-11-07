@@ -69,7 +69,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/recommend/question':
             return <Question stadium={selectedStadium} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/recommend/results':
-            return <Result stadium={selectedStadium}/>;
+            return <Result stadium={selectedStadium} recommendedZoneList={recommendedZoneList} />;
         case '/guide':
             return <Guide />;
         case '/culture':

@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import HeaderBar from "./Result/HeaderBar";
-import Question1 from "./Question/Question1";
-import Question2 from "./Question/Question2";
-import Question3 from "./Question/Question3";
-import Question4 from "./Question/Question4";
 
 import Image from 'next/image';
 import crownGoldIcon from '../../assets/webp/recommend_crown_gold.webp';
@@ -13,83 +9,48 @@ import crownSilverIcon from '../../assets/webp/recommend_crown_silver.webp';
 import crownBronzeIcon from '../../assets/webp/recommend_crown_bronze.webp';
 import tipPinkIcon from '../../assets/webp/recommend_tip_pink.webp';
 
-import SeatTipDialog from "../../components/dialogs/SeatTipDialog"
-
-import ChooseBaseballTeamDialog from "../../components/dialogs/ChooseBaseballTeamDialog"
-
 // Enum으로 추천 구역 Data 관리
-import { StadiumType, SeatType, Keyword } from "../../constants/ZoneData"
+import { StadiumType} from "../../constants/ZoneData"
+
+// 백엔드로부터 받은 추천 지역 관리
+import { ZoneGetResponseType } from "../../api/ResultApiType";
 
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
 export interface Props {
     stadium: StadiumType;
+    recommendedZoneList: ZoneGetResponseType[] | null;
 }
 
-const Page = ({stadium}: Props) => {
-    /** 선택한 좌석 관리 */
-    const [selectedSeat, setSelectedSeat] = useState(SeatType.NONE);
 
-    /** 선택한 파트너 관리 */
-    const [selectedParter, setSelectedParter] = useState(Keyword.NONE);
-    const handleParterKeywordItem = (keyword: Keyword) => {
-        setSelectedParter(keyword);
-        handleKeywordItem(keyword);
-    }
-
-    /** 선택한 키워드 배열 관리 */
-    const [selectedKeywordItems, setSelectedKeywordItems] = useState<Keyword[]>([]);
-    const handleKeywordItem = (newKeywordItem: Keyword) => {
-        // 선택한 값이 파트너 값이면 중복 불가
-        // 기존 파트너 값은 배열에서 제거하고 넣기
-        const keywordPartnerGroup = [Keyword.PARTNER1, Keyword.PARTNER2, Keyword.PARTNER3];
-        if(keywordPartnerGroup.includes(newKeywordItem)) {
-            setSelectedKeywordItems((prevKeywordItems) => {
-                return [
-                    // 기존 파트너 값을 제외한 배열 값
-                    ...prevKeywordItems.filter((prevKeywordItem) => !keywordPartnerGroup.includes(prevKeywordItem)),
-                    // 새로운 파트너 값
-                    newKeywordItem
-                ];
-            });
-            return;
-        }
-
-        // 그 외는 중복 가능
-        // 배열에 그냥 넣기
-        setSelectedKeywordItems((prevKeywordItems) => {
-            // 기존 배열에 존재하는 아이템이면
-            if (prevKeywordItems.includes(newKeywordItem)) {
-                // 배열에서 제거
-                return prevKeywordItems.filter((item) => item !== newKeywordItem);
-            } else {
-                // 배열에 없으면 추가
-                return [...prevKeywordItems, newKeywordItem];
-            }
-        });
-    };
-
-
-    /** 선택한 위시 관리 */
-    const keywordWishGroup = [Keyword.WISH1, Keyword.WISH2, Keyword.WISH3,
-        Keyword.WISH4, Keyword.WISH5, Keyword.WISH6, Keyword.WISH7
-    ];
-    // 배열에 wish 값이 하나 이상 포함되어 있는 지 확인하는 함수
-    const hasWish = selectedKeywordItems.some((v) => keywordWishGroup.includes(v));
-
-
-    /** 선택한 노위시 관리 */
-    const keywordNowishGroup = [Keyword.NOWISH1, Keyword.NOWISH2, Keyword.NOWISH3, Keyword.NOWISH4];
-    // 배열에 nowish 값이 하나 이상 포함되어 있는 지 확인하는 함수
-    const hasNowish = selectedKeywordItems.some((v) => keywordNowishGroup.includes(v));
-
-
-    /** API로 받은 데이터 관리 */
-    
+const Page = ({stadium, recommendedZoneList}: Props) => {
     return (
         <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center w-full h-screen ">
 
+                <div>
+                    {recommendedZoneList ? (
+                        recommendedZoneList.map((zone) => (
+                        <div key={zone.zoneId}>
+                            <h2>{zone.name}</h2>
+                            <p>{zone.explanations.join(", ")}</p>
+                            <p>{zone.tip}</p>
+                            {zone.referencesGroup.map((group, index) => (
+                            <div key={index}>
+                                <h3>{group.groupTitle}</h3>
+                                {group.references.map((ref, refIndex) => (
+                                <p key={refIndex}>
+                                    <strong>{ref.title}</strong>: {ref.content}
+                                </p>
+                                ))}
+                            </div>
+                            ))}
+                        </div>
+                        ))
+                    ) : (
+                        <p>No data available</p>
+                    )}
+                </div>
                 {/** 임시 확인
                 <ChooseBaseballTeamDialog/>
                 <SeatTipDialog/> */}

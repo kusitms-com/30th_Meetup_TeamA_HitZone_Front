@@ -99,7 +99,10 @@ const Page = ({stadium, setRecommendedZoneList}: Props) => {
 
         // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
         const zoneList: ZoneGetResponseType[] = (await handleAllPrint(resultId)) ?? [];
-        
+
+        // 확인
+        console.log("스타디움에 대해 추천 좌석 받았댱: ");
+        console.log(zoneList);
         // 데이터 업뎃
         if (zoneList !== undefined)
             setRecommendedZoneList(zoneList);
@@ -152,14 +155,14 @@ const Page = ({stadium, setRecommendedZoneList}: Props) => {
         }else {
             // 값을 선택했으면
             if(hasNowish) {
-                // API 통신
+                // API 통신:  추천 질문 데이터 전송 후 ResultId 받는 이벤트 호출
                 handleGetResultId();
+                
+                // API 통신:  추천 지역 결과 받는 이벤트 호출
+                handleGetZoneList();
 
                 // 질문 작성 완료 후 결과 페이지로 이동
                 //router.push("/recommend/results");
-                
-                // API 통신
-                handleGetZoneList();
             }
         }
     };
