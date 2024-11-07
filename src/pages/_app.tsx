@@ -37,10 +37,15 @@ import { SessionProvider } from "next-auth/react";
 // Enum으로 추천 구역 Data 관리
 import { StadiumType, SeatType, Keyword } from "../constants/ZoneData"
 
+import { ZoneGetResponseType } from "../api/ResultApiType";
+
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pageProps } }) => {
   // 스타디움 관리
   const [selectedStadium, setSelectedStadium] = useState(StadiumType.JAMSIL);   // 첫 화면은 잠실로 초기화
+
+  // 선택된 스타디움의 추천된 존 관리
+  const [recommendedZoneList, setRecommendedZoneList] = useState<ZoneGetResponseType[] | null>(null);
 
 
   // 현재 URL 경로 가져오기
@@ -62,7 +67,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/':
             return <Main selectedStadium={selectedStadium} setSelectedStadium={setSelectedStadium}/>;
         case '/recommend/question':
-            return <Question stadium={selectedStadium}/>;
+            return <Question stadium={selectedStadium} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/recommend/results':
             return <Result stadium={selectedStadium}/>;
         case '/guide':

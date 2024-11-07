@@ -109,7 +109,7 @@ export const handleAllPrint = async (resultId: number | null) => {
     //console.log(data.length);
     
     // 데이터 파싱 (배열)
-    const parsedData = data.map((zone: ZoneGetResponseType) => ({
+    const parsedData: ZoneGetResponseType[] = data.map((zone: ZoneGetResponseType) => ({
       name: zone.name,
       explanations: zone.explanations.join(', '),
       tip: zone.tip,
@@ -124,7 +124,6 @@ export const handleAllPrint = async (resultId: number | null) => {
     }));
 
     return parsedData;
-
 
   } catch (error) {
       console.error('회원가입 중 오류 발생:', error);

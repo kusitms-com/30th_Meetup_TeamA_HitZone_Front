@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
 import HeaderBar from "./Question/HeaderBar";
@@ -17,6 +17,7 @@ import { ZoneGetResponseType } from "../../api/ResultApiType";
 // 부모로부터 인자로 받기
 export interface Props {
     stadium: StadiumType;
+    setRecommendedZoneList: Dispatch<SetStateAction<ZoneGetResponseType[] | null>>;
 }
 
 export interface QuestionProps {
@@ -26,7 +27,7 @@ export interface QuestionProps {
 
 
 
-const Page = ({stadium}: Props) => {
+const Page = ({stadium, setRecommendedZoneList}: Props) => {
     /** 선택한 좌석 관리 */
     const [selectedSeat, setSelectedSeat] = useState(SeatType.NONE);
 
@@ -83,7 +84,7 @@ const Page = ({stadium}: Props) => {
     // 배열에 nowish 값이 하나 이상 포함되어 있는 지 확인하는 함수
     const hasNowish = selectedKeywordItems.some((v) => keywordNowishGroup.includes(v));
 
-    // 백엔드에서 반환받은 값 저장하는 함수
+    // 백엔드에 추천 질문 데이터 전송 후 반환받은 resultId 값 저장하는 변수/함수
     const [resultId, setResultId] = useState<number | null>(null);  //useState(0);  // 0 또는 -1로 초기화
     const handleGetResultId = async () => {
         // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
@@ -92,10 +93,16 @@ const Page = ({stadium}: Props) => {
         // 반환 값 저장
         setResultId(data);
     }
-    const handlePostResultId = async () => {
+
+    // 백엔드에서 존 리스트 받는 함수
+    const handleGetZoneList = async () => {
 
         // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
-        const data = await handleAllPrint(resultId);
+        const zoneList: ZoneGetResponseType[] = (await handleAllPrint(resultId)) ?? [];
+        
+        // 데이터 업뎃
+        if (zoneList !== undefined)
+            setRecommendedZoneList(zoneList);
     }
 
     /** 페이지 상태 관리 */
@@ -152,7 +159,7 @@ const Page = ({stadium}: Props) => {
                 //router.push("/recommend/results");
                 
                 // API 통신
-                const zoneList = handlePostResultId();
+                handleGetZoneList();
             }
         }
     };
