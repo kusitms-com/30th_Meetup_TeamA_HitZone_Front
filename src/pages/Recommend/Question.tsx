@@ -9,7 +9,9 @@ import Question3 from "./Question/Question3";
 import Question4 from "./Question/Question4";
 
 import { StadiumType, SeatType, Keyword } from "../../constants/ZoneData"
-import { handleSave } from "../../api/ResultApiHandler";
+import { handleSave, handleAllPrint } from "../../api/ResultApiHandler";
+
+import { ZoneGetResponseType } from "../../api/ResultApiType";
 
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
@@ -81,7 +83,20 @@ const Page = ({stadium}: Props) => {
     // 배열에 nowish 값이 하나 이상 포함되어 있는 지 확인하는 함수
     const hasNowish = selectedKeywordItems.some((v) => keywordNowishGroup.includes(v));
 
+    // 백엔드에서 반환받은 값 저장하는 함수
+    const [resultId, setResultId] = useState<number | null>(null);  //useState(0);  // 0 또는 -1로 초기화
+    const handleGetResultId = async () => {
+        // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
+        const data = await handleSave({stadium, seat:selectedSeat, keywords:selectedKeywordItems});
 
+        // 반환 값 저장
+        setResultId(data);
+    }
+    const handlePostResultId = async () => {
+
+        // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
+        const data = await handleAllPrint(resultId);
+    }
 
     /** 페이지 상태 관리 */
     const [step, setStep] = useState(1);
@@ -130,11 +145,14 @@ const Page = ({stadium}: Props) => {
         }else {
             // 값을 선택했으면
             if(hasNowish) {
-                // 백엔드에 데이터 전송 (API 통신)
-                handleSave({stadium, seat:selectedSeat, keywords:selectedKeywordItems});
-                
+                // API 통신
+                handleGetResultId();
+
                 // 질문 작성 완료 후 결과 페이지로 이동
-                router.push("/recommend/results");
+                //router.push("/recommend/results");
+                
+                // API 통신
+                const zoneList = handlePostResultId();
             }
         }
     };
