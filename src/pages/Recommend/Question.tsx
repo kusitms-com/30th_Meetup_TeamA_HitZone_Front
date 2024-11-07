@@ -17,6 +17,7 @@ import { ZoneGetResponseType } from "../../api/ResultApiType";
 // 부모로부터 인자로 받기
 export interface Props {
     stadium: StadiumType;
+    recommendedZoneList: ZoneGetResponseType[] | null;
     setRecommendedZoneList: Dispatch<SetStateAction<ZoneGetResponseType[] | null>>;
 }
 
@@ -27,7 +28,7 @@ export interface QuestionProps {
 
 
 
-const Page = ({stadium, setRecommendedZoneList}: Props) => {
+const Page = ({stadium, recommendedZoneList, setRecommendedZoneList}: Props) => {
     /** 선택한 좌석 관리 */
     const [selectedSeat, setSelectedSeat] = useState(SeatType.NONE);
 
@@ -85,36 +86,48 @@ const Page = ({stadium, setRecommendedZoneList}: Props) => {
     const hasNowish = selectedKeywordItems.some((v) => keywordNowishGroup.includes(v));
 
     // 백엔드에 추천 질문 데이터 전송 후 반환받은 resultId 값 저장하는 변수/함수
-    const [resultId, setResultId] = useState<number | null>(null);  //useState(0);  // 0 또는 -1로 초기화
+    const [resultId, setResultId] = useState<number | null>(null);  //useState(0);  // 0 또는 -1로 초기화'
+    // API 통신 및 로컬 데이터 업뎃
     const handleGetResultId = async () => {
         // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
         const data = await handleSave({stadium, seat:selectedSeat, keywords:selectedKeywordItems});
 
         // 반환 값 저장
-        await setResultId(data);
-    }
+        setResultId(data);
 
+        // resultId 반환
+        return data;
+    }
     // 백엔드에서 존 리스트 받는 함수
-    const handleGetZoneList = async (resultId: number) => {
+    const handleGetZoneList = async () => {
+        // 추천 질문 데이터 전송 후 ResultId 받는 이벤트 호출
+        // handleGetResultId를 호출하고 결과를 기다린 후, resultId를 사용
+        const resultId = await handleGetResultId();
 
         // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
         const zoneList: ZoneGetResponseType[] = (await handleAllPrint(resultId)) ?? [];
 
         // 확인
-        console.log("스타디움에 대해 추천 좌석 받았댱: ");
+        console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱: ");
         console.log(zoneList);
-        // 데이터 업뎃
-        if (zoneList !== undefined)
-            setRecommendedZoneList(zoneList);
-    }
 
-    // 두 비동기 함수를 순차적으로 호출하기 위헤ㄴ
-    useEffect(() => {
-        if (resultId !== null) {handleGetZoneList
-            // API 통신:  추천 지역 결과 받는 이벤트 호출
-            handleGetZoneList(resultId);
-        }
-      }, [resultId]);
+        // 데이터 업뎃 (비동기적으로 작동)
+        setRecommendedZoneList(zoneList);
+
+        return zoneList; // 다음 작업을 위해 zoneList 반환
+    }
+    // 상태 업데이트 이후 후속 작업 실행
+    const handleRedirect = async () => {
+        const zoneList = await handleGetZoneList(); // 순차적으로 resultId 설정 후 zoneList 가져오기
+        console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱2: ");
+        console.log(zoneList);
+    
+        // 질문 작성 완료 후 결과 페이지로 이동 및 데이터 전달
+        router.push({
+            pathname: '/recommend/results',
+            query: { recommendedZoneList: JSON.stringify(recommendedZoneList) }
+        });
+    };
 
 
     /** 페이지 상태 관리 */
@@ -164,12 +177,7 @@ const Page = ({stadium, setRecommendedZoneList}: Props) => {
         }else {
             // 값을 선택했으면
             if(hasNowish) {
-                // API 통신 및 로컬 데이터 업뎃
-                // API 통신:  추천 질문 데이터 전송 후 ResultId 받는 이벤트 호출
-                handleGetResultId();
-
-                // 질문 작성 완료 후 결과 페이지로 이동
-                //router.push("/recommend/results");
+                handleRedirect();
             }
         }
     };

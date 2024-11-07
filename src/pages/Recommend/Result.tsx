@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import HeaderBar from "./Result/HeaderBar";
@@ -19,37 +19,32 @@ import { ZoneGetResponseType } from "../../api/ResultApiType";
 // 부모로부터 인자로 받기
 export interface Props {
     stadium: StadiumType;
-    recommendedZoneList: ZoneGetResponseType[] | null;
 }
 
+const Page = ({stadium}: Props) => {
+    const router = useRouter();
+    const { recommendedZoneList } = router.query;
 
-const Page = ({stadium, recommendedZoneList}: Props) => {
+    // recommendedZoneList를 파싱
+    const parsedZoneList: ZoneGetResponseType[] | null = (() => {
+        try {
+        if (typeof recommendedZoneList === 'string') {
+            return JSON.parse(recommendedZoneList);
+        } else if (Array.isArray(recommendedZoneList)) {
+            return recommendedZoneList.map((item) => JSON.parse(item));
+        }
+        return null;
+        } catch (error) {
+        console.error("Error parsing recommendedZoneList:", error);
+        return null;
+        }
+    })();
+
     return (
         <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center w-full h-screen ">
-
+            <p>{JSON.stringify(parsedZoneList, null, 2)}</p>
                 <div>
-                    {recommendedZoneList ? (
-                        recommendedZoneList.map((zone) => (
-                        <div key={zone.zoneId}>
-                            <h2>{zone.name}</h2>
-                            <p>{zone.explanations.join(", ")}</p>
-                            <p>{zone.tip}</p>
-                            {zone.referencesGroup.map((group, index) => (
-                            <div key={index}>
-                                <h3>{group.groupTitle}</h3>
-                                {group.references.map((ref, refIndex) => (
-                                <p key={refIndex}>
-                                    <strong>{ref.title}</strong>: {ref.content}
-                                </p>
-                                ))}
-                            </div>
-                            ))}
-                        </div>
-                        ))
-                    ) : (
-                        <p>No data available</p>
-                    )}
                 </div>
                 {/** 임시 확인
                 <ChooseBaseballTeamDialog/>
