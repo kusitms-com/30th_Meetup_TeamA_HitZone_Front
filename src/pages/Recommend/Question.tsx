@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
 import HeaderBar from "./Question/HeaderBar";
@@ -91,11 +91,11 @@ const Page = ({stadium, setRecommendedZoneList}: Props) => {
         const data = await handleSave({stadium, seat:selectedSeat, keywords:selectedKeywordItems});
 
         // 반환 값 저장
-        setResultId(data);
+        await setResultId(data);
     }
 
     // 백엔드에서 존 리스트 받는 함수
-    const handleGetZoneList = async () => {
+    const handleGetZoneList = async (resultId: number) => {
 
         // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
         const zoneList: ZoneGetResponseType[] = (await handleAllPrint(resultId)) ?? [];
@@ -107,6 +107,15 @@ const Page = ({stadium, setRecommendedZoneList}: Props) => {
         if (zoneList !== undefined)
             setRecommendedZoneList(zoneList);
     }
+
+    // 두 비동기 함수를 순차적으로 호출하기 위헤ㄴ
+    useEffect(() => {
+        if (resultId !== null) {handleGetZoneList
+            // API 통신:  추천 지역 결과 받는 이벤트 호출
+            handleGetZoneList(resultId);
+        }
+      }, [resultId]);
+
 
     /** 페이지 상태 관리 */
     const [step, setStep] = useState(1);
@@ -155,11 +164,9 @@ const Page = ({stadium, setRecommendedZoneList}: Props) => {
         }else {
             // 값을 선택했으면
             if(hasNowish) {
+                // API 통신 및 로컬 데이터 업뎃
                 // API 통신:  추천 질문 데이터 전송 후 ResultId 받는 이벤트 호출
                 handleGetResultId();
-                
-                // API 통신:  추천 지역 결과 받는 이벤트 호출
-                handleGetZoneList();
 
                 // 질문 작성 완료 후 결과 페이지로 이동
                 //router.push("/recommend/results");
