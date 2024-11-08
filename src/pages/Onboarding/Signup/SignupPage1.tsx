@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackBar from "../components/BackBar"
+import BackBar from "../../../components/layout/BackBar"
 import { Props } from "./SignupPage";
 
 import Image from 'next/image';

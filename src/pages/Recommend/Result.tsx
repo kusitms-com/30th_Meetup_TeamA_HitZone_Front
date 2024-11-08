@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
-import HeaderBar from "./Result/HeaderBar";
+import HeaderBar from "../../components/layout/ResultHeader";
 
 import Image from 'next/image';
 import crownGoldIcon from '../../assets/webp/recommend_crown_gold.webp';

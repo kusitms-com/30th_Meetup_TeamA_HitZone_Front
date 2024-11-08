@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BackLogoBar from "../components/BackLogoBar"
+import BackLogoBar from "../../../components/layout/BackLogoBar"
 import { Props } from "./SignupPage";
 
 import Image from 'next/image';

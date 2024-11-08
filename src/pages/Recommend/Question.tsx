@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
-import HeaderBar from "./Question/HeaderBar";
-import HeaderBackBar from "./Question/HeaderBackBar";
+import HeaderBar from "../../components/layout/HeaderBar";
+import HeaderBackBar from "../../components/layout/HeaderBackBar";
 import Question1 from "./Question/Question1";
 import Question2 from "./Question/Question2";
 import Question3 from "./Question/Question3";

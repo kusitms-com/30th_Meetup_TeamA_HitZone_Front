@@ -2,7 +2,7 @@ import React, { useState, Dispatch, SetStateAction } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-import Header from "../../components/layout/Header";
+import Header from "../../components/layout/MainHeader";
 import NavBar from "../../components/layout/NavBar";
 import BignnerGuide from "../../components/chips/BignnerGuide";
 import BignnerGuideDialog from "../../components/dialogs/BignnerGuideDialog";

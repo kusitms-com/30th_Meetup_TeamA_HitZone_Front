@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import chatbotIcon from "../../assets/svg/chatbot_button.svg";
 
@@ -7,7 +7,7 @@ const FloatingChatbotButton = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/Chatbot/Chatbot");
+    router.push("/chatbot"); 
   };
 
   return (

@@ -30,6 +30,8 @@ import Result from './Recommend/Result';
 import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
+import Chatbot from './Chatbot/Chatbot';
+
 
 // 전역 소셜로그인 상태 관리
 import { SessionProvider } from "next-auth/react";
@@ -78,6 +80,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
             return <Culture />;
         case '/mypage':
             return <MyPage />;
+        case '/chatbot':
+            return <Chatbot />;
     }
   };
   
