@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { QuestionProps, SeatType } from "../Question"
+import { QuestionProps } from "../Question"
+import { SeatType } from "../../../constants/ZoneData"
 
 import Image from 'next/image';
 import logoIcon from '../../../assets/svg/hitzone_logo.svg';
@@ -76,12 +77,13 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
                     <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
-                                   ${selectedSeat === SeatType.NONE ? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
+                                   ${selectedSeat === SeatType.NONE ? 'bg-grayscale-10' : 'bg-grayscale-80 cursor-pointer'}`}
+                         onClick={nextStep}
                     >
                         <p className={`text-md font-semibold 
                                      ${selectedSeat === SeatType.NONE ? 'text-grayscale-70' : 'text-grayscale-0'}`}
                          >
-                            <button onClick={nextStep}>다음</button>
+                            다음
                         </p>
                     </div>
                 </div>

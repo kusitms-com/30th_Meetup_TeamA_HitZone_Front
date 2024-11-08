@@ -25,8 +25,8 @@ import '../styles/globals.css';
 import Onboarding from './Onboarding/Onboarding'; 
 import { SignupPage } from './Onboarding/Signup/SignupPage'; 
 import Main from './Main/Main';
-import Question from './Recommendation/Question'; 
-import Result from './Recommendation/Result'; 
+import Question from './Recommend/Question'; 
+import Result from './Recommend/Result'; 
 import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
@@ -36,8 +36,22 @@ import Chatbot from './Chatbot/Chatbot';
 // 전역 소셜로그인 상태 관리
 import { SessionProvider } from "next-auth/react";
 
+// Enum으로 추천 구역 Data 관리
+import { StadiumType, SeatType, Keyword } from "../constants/ZoneData"
+
+import { ZoneGetResponseType } from "../api/ResultApiType";
+
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pageProps } }) => {
+  // 스타디움 관리
+  const [selectedStadium, setSelectedStadium] = useState(StadiumType.JAMSIL);   // 첫 화면은 잠실로 초기화
+
+  // 백엔드에 추천 질문 데이터 전송 후 반환받은 resultId 값 저장하는 변수/함수
+  const [resultId, setResultId] = useState<number | null>(null);  //useState(0);  // 0 또는 -1로 초기화'
+  
+  // 선택된 스타디움의 추천된 존 관리
+  const [recommendedZoneList, setRecommendedZoneList] = useState<ZoneGetResponseType[]>([]);
+
   // 현재 URL 경로 가져오기
   const [currentPath, setCurrentPath] = useState<string>('');
 
@@ -55,11 +69,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/onboarding':
             return <SignupPage />;
         case '/':
-            return <Main />;
+            return <Main selectedStadium={selectedStadium} setSelectedStadium={setSelectedStadium}/>;
         case '/recommend/question':
-            return <Question />;
+            return <Question stadium={selectedStadium} setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/recommend/results':
-            return <Result />;
+            return <Result stadium={selectedStadium} resultId={resultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/guide':
             return <Guide />;
         case '/culture':
@@ -72,11 +86,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
   };
   
   return (
-    <SessionProvider session={session}>
+    //<SessionProvider session={session}>
       <div className="items-center p-4 w-full max-w-[500px] mx-auto">
           {renderComponent()}
       </div>
-    </SessionProvider>
+    //</SessionProvider>
   );
 };
 

@@ -1,13 +1,14 @@
 import React from 'react'
 
-import { QuestionProps, ZoneType, Keyword } from "../Question"
+import { QuestionProps } from "../Question"
+import { StadiumType, Keyword } from "../../../constants/ZoneData"
 
 import Image from 'next/image';
 import gloveIcon from '../../../assets/svg/question03.svg';
 
 
 interface Props extends QuestionProps {
-    selectedZone: ZoneType;
+    selectedZone: StadiumType;
     selectedKeywordItems: Keyword[];
     handleKeywordItem: (keyword: Keyword) => void;
     hasWish: boolean;
@@ -95,7 +96,7 @@ const Page = ({previousStep, nextStep, selectedZone, selectedKeywordItems, handl
                 </div>
                 
                 {/** KT 구역일 땐 아이템 하나 더 추가 */}
-                {selectedZone === ZoneType.KT ?
+                {selectedZone === StadiumType.SUWON_KT ?
                     <div className="flex justify-center items-center gap-[12px] mb-[12px] z-10">
                         <div className={`flex justify-center items-center bg-grayscale-5 border rounded-[8px] w-full p-[16px]"
                             cursor-pointer ${selectedKeywordItems.includes(Keyword.WISH7) ? 'border-main-50 text-main-50 bg-main-5':'border-transparent text-grayscale-80 bg-grayscale-5'}`}
@@ -125,12 +126,13 @@ const Page = ({previousStep, nextStep, selectedZone, selectedKeywordItems, handl
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
                     <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
-                                   ${!hasWish? 'bg-grayscale-10' : 'bg-grayscale-80'}`}
+                                   ${!hasWish? 'bg-grayscale-10' : 'bg-grayscale-80 cursor-pointer'}`}
+                         onClick={nextStep}
                     >
                         <p className={`text-md font-semibold 
                                      ${!hasWish? 'text-grayscale-70' : 'text-grayscale-0'}`}
                          >
-                            <button onClick={nextStep}>다음</button>
+                            다음
                         </p>
                     </div>
                 </div>

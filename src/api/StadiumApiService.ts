@@ -2,34 +2,28 @@
 import { AxiosInstance, V1_URL } from './axiosInstance';
 
 // API 연동 타입
-import { clovaURL, ClovaPostParamsType, ClovaPostRequestType,
-         guideURL, GuideGetParamsType} from "./ChatbotApiType";
+import { zoneURL, ZoneGetParamsType,
+         guideURL, GuideGetParamsType} from "./StadiumApiType";
 
 
 /** 백엔드와 API 연동 */
-// 추가: POST 요청 및 응답받기
-export const postClova = async (
-  {  }: ClovaPostParamsType,
-  {message}: ClovaPostRequestType) => {
-  
+// 안 쓸거 같긴 해
+// 조회: GET 요청 및 응답받기
+export const getZone = async ({stadiumName}: ZoneGetParamsType) => {
   try {
-    const response = await AxiosInstance.post(`${V1_URL}${clovaURL}`, 
-      // Request Data 전달
-      {
-        message,
-      },
+    const response = await AxiosInstance.get(`${V1_URL}${zoneURL}`, 
       // 쿼리 파라미터 전달
       {
-        params: {  },
+        params: {stadiumName},
       }
     );
-    
+
     // 백엔드 서버로부터 API의 응답 데이터 받은 후 리턴
     return response.data;
-
+    
   } catch (error) {
     // 이 부분은 나중에 errorHandler.ts 만들어서 에러별로 다르게 처리 가능
-    console.error(`clova POST에서 오류 발생:`, error);
+    console.error(`구역 목록 GET에서 오류 발생:`, error);
     
     // 에러를 반환해서(던져서) 컴포넌트에서 처리해도 됨
     throw error;
@@ -37,13 +31,14 @@ export const postClova = async (
 };
 
 
+
 // 조회: GET 요청 및 응답받기
-export const getGuide = async ({stadiumName, categoryName, orderNumber}: GuideGetParamsType) => {
+export const getGuide = async ({stadiumName, zoneName}: GuideGetParamsType) => {
   try {
     const response = await AxiosInstance.get(`${V1_URL}${guideURL}`, 
       // 쿼리 파라미터 전달
       {
-        params: {stadiumName, categoryName, orderNumber},
+        params: {stadiumName, zoneName},
       }
     );
 
@@ -52,7 +47,7 @@ export const getGuide = async ({stadiumName, categoryName, orderNumber}: GuideGe
     
   } catch (error) {
     // 이 부분은 나중에 errorHandler.ts 만들어서 에러별로 다르게 처리 가능
-    console.error(`guide GET에서 오류 발생:`, error);
+    console.error(`구역 가이드 정보 GET에서 오류 발생:`, error);
     
     // 에러를 반환해서(던져서) 컴포넌트에서 처리해도 됨
     throw error;

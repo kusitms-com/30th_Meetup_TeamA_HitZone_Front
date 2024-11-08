@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
 import HeaderBar from "../../components/layout/HeaderBar";
@@ -8,16 +8,18 @@ import Question2 from "./Question/Question2";
 import Question3 from "./Question/Question3";
 import Question4 from "./Question/Question4";
 
+import { StadiumType, SeatType, Keyword } from "../../constants/ZoneData"
+import { handleSave, handleAllPrint } from "../../api/ResultApiHandler";
+
+import { ZoneGetResponseType } from "../../api/ResultApiType";
 
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
-export interface ZoneProps {
-    stadium: ZoneType;
-}
-export enum ZoneType {
-    NONE = '',
-    JAMSIL = '잠실종합운동장',
-    KT = '수원KT위즈파크'
+export interface Props {
+    stadium: StadiumType;
+    setResultId: Dispatch<SetStateAction<number | null>>;
+    recommendedZoneList: ZoneGetResponseType[];
+    setRecommendedZoneList: Dispatch<SetStateAction<ZoneGetResponseType[]>>;
 }
 
 export interface QuestionProps {
@@ -26,33 +28,8 @@ export interface QuestionProps {
 }
 
 
-// Seat 관리
-export enum SeatType {
-    NONE = '',
-    SEAT1 = '1루석',
-    SEAT3 = '3루석'
-}
 
-// keyword 관리
-export enum Keyword {
-    NONE = '',
-    PARTNER1 = '나 혼자',
-    PARTNER2 = '같은 팀 팬과',
-    PARTNER3 = '다른 팀 팬과',
-    WISH1 = '열정적인 응원',
-    WISH2 = '경기장 한눈에 보기',
-    WISH3 = '편리한 화장실 이용',
-    WISH4 = '음식 먹기 편한',
-    WISH5 = '빠른 퇴장 가능',
-    WISH6 = '선수들 가까이',
-    WISH7 = '삼겹살 구워먹기',
-    NOWISH1 = '햇빛 싫어요',
-    NOWISH2 = '큰 소리 싫어요',
-    NOWISH3 = '높은 곳 싫어요',
-    NOWISH4 = '비 맞기 싫어요'
-}
-
-const Page = () => {
+const Page = ({stadium, setResultId, recommendedZoneList, setRecommendedZoneList}: Props) => {
     /** 선택한 좌석 관리 */
     const [selectedSeat, setSelectedSeat] = useState(SeatType.NONE);
 
@@ -109,6 +86,50 @@ const Page = () => {
     // 배열에 nowish 값이 하나 이상 포함되어 있는 지 확인하는 함수
     const hasNowish = selectedKeywordItems.some((v) => keywordNowishGroup.includes(v));
 
+    // API 통신 및 로컬 데이터 업뎃
+    const handleGetResultId = async () => {
+        // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
+        const data = await handleSave({stadium, seat:selectedSeat, keywords:selectedKeywordItems});
+
+        // 반환 값 저장
+        setResultId(data);
+
+        // resultId 반환
+        return data;
+    }
+    
+    // 백엔드에서 존 리스트 받는 함수
+    const handleGetZoneList = async () => {
+        // 추천 질문 데이터 전송 후 ResultId 받는 이벤트 호출
+        // handleGetResultId를 호출하고 결과를 기다린 후, resultId를 사용
+        const resultId = await handleGetResultId();
+
+        // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
+        const zoneList: ZoneGetResponseType[] = (await handleAllPrint(resultId)) ?? [];
+
+        // 확인
+        console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱: ");
+        console.log(zoneList);
+
+        // 데이터 업뎃 (비동기적으로 작동)
+        setRecommendedZoneList(zoneList);
+
+        return zoneList; // 다음 작업을 위해 zoneList 반환
+    }
+
+    // 상태 업데이트 이후 후속 작업 실행
+    const handleRedirect = async () => {
+        const zoneList = await handleGetZoneList(); // 순차적으로 resultId 설정 후 zoneList 가져오기
+        console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱2: ");
+        console.log(zoneList);
+    
+        // 질문 작성 완료 후 결과 페이지로 이동
+        //router.push('/recommend/results');
+        router.push({
+          pathname: '/recommend/results',
+          query: { recommendedZoneList: JSON.stringify(zoneList) }, // 쿼리 파라미터로 JSON 문자열을 전달
+        });
+    };
 
 
     /** 페이지 상태 관리 */
@@ -158,8 +179,8 @@ const Page = () => {
         }else {
             // 값을 선택했으면
             if(hasNowish) {
-                // 질문 작성 완료 후 결과 페이지로 이동
-                router.push("/recommend/results");
+                // API 연동 및 결과 페이지로 리다이렉트
+                handleRedirect();
             }
         }
     };
@@ -175,9 +196,9 @@ const Page = () => {
     const renderBar = () => {
         switch(step) {
             case 1:
-                return <HeaderBar stadium={ZoneType.KT} closeEvent={close}/>
+                return <HeaderBar stadium={stadium} closeEvent={close}/>
             default:
-                return <HeaderBackBar stadium={ZoneType.KT} prevEvent={previousStep} closeEvent={close}/>;
+                return <HeaderBackBar stadium={stadium} prevEvent={previousStep} closeEvent={close}/>;
         }
     };
 
@@ -190,7 +211,7 @@ const Page = () => {
                 return <Question2 previousStep={previousStep} nextStep={nextStep} selectedParter={selectedParter} handleParterKeywordItem={handleParterKeywordItem}/>;
             
             case 3:
-                return <Question3 previousStep={previousStep} nextStep={nextStep} selectedZone={ZoneType.KT} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasWish={hasWish}/>;
+                return <Question3 previousStep={previousStep} nextStep={nextStep} selectedZone={stadium} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasWish={hasWish}/>;
             
             case 4:
                 return <Question4 previousStep={previousStep} nextStep={nextStep} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasNowish={hasNowish}/>;

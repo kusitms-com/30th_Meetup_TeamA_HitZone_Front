@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -13,21 +13,20 @@ import StadiumInfo from "./components/StadiumInfo";
 import SeatRecommendButton from "./components/SeatRecommendButton";
 import ChatBot from "../../components/button/FloatingChatbotButton";
 
-function Main() {
-  const [selectedStadium, setSelectedStadium] = useState("잠실종합운동장 (잠실)");
+// Enum으로 추천 구역 Data 관리
+import { StadiumType, SeatType, Keyword, stadiumTypeToString, stringToStadiumType, frontStadiums } from "../../constants/ZoneData"
+
+export interface Props {
+  selectedStadium: StadiumType;
+  setSelectedStadium: Dispatch<SetStateAction<StadiumType>>;
+}
+
+
+const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const stadiums = [
-    "잠실종합운동장 (잠실)",
-    "수원KT위즈파크",
-    "고척스카이돔 (키움)",
-    "기아 챔피언스 필드 (광주)",
-    "삼성 라이온즈 파크 (대구)",
-    "한화생명 이글스 파크 (대전)"
-  ];
-
+  
   const handleStadiumSelect = (stadium: string) => {
-    setSelectedStadium(stadium);
+    setSelectedStadium(stringToStadiumType[stadium]);
   };
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
@@ -72,8 +71,8 @@ function Main() {
         {/* 야구장 드롭다운 */}
         <div className="flex items-center gap-4 justify-between mt-4">
           <Dropdown
-            options={stadiums}
-            selectedOption={selectedStadium}
+            options={frontStadiums}
+            selectedOption={stadiumTypeToString[selectedStadium]}
             onSelect={handleStadiumSelect}
           />
           {/* 초보자 구역 가이드 버튼 */}
@@ -85,9 +84,9 @@ function Main() {
 
         {/* 야구장 좌석 이미지 선택 */}
         <div className="mt-4 flex justify-center">
-          {selectedStadium === "잠실종합운동장 (잠실)" ? (
+          {selectedStadium === StadiumType.JAMSIL ? (
             <JamsilSeat />
-          ) : selectedStadium === "수원KT위즈파크" ? (
+          ) : selectedStadium === StadiumType.SUWON_KT ? (
             <KtwizSeat />
           ) : (
             <p className="text-grayscale-90">해당 구장은 추후 업데이트 예정입니다 :)</p>
