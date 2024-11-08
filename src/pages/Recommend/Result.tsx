@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
 import HeaderBar from "./Result/HeaderBar";
@@ -15,35 +15,43 @@ import { StadiumType} from "../../constants/ZoneData"
 // 백엔드로부터 받은 추천 지역 관리
 import { ZoneGetResponseType } from "../../api/ResultApiType";
 
+import { handleSave, handleAllPrint } from "../../api/ResultApiHandler";
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
 export interface Props {
     stadium: StadiumType;
+    resultId: number | null;
+    recommendedZoneList: ZoneGetResponseType[];
+    setRecommendedZoneList: Dispatch<SetStateAction<ZoneGetResponseType[]>>;
 }
 
-const Page = ({stadium}: Props) => {
+const Page = ({stadium, resultId, recommendedZoneList, setRecommendedZoneList}: Props) => {
+    
     const router = useRouter();
-    const { recommendedZoneList } = router.query;
-
-    // recommendedZoneList를 파싱
-    const parsedZoneList: ZoneGetResponseType[] | null = (() => {
-        try {
-        if (typeof recommendedZoneList === 'string') {
-            return JSON.parse(recommendedZoneList);
-        } else if (Array.isArray(recommendedZoneList)) {
-            return recommendedZoneList.map((item) => JSON.parse(item));
+    useEffect(() => {
+        // 쿼리 파라미터에서 추천 존 리스트를 가져오기
+        if (router.query.recommendedZoneList) {
+        const parsedZoneList = JSON.parse(router.query.recommendedZoneList as string);
+        setRecommendedZoneList(parsedZoneList);
         }
-        return null;
-        } catch (error) {
-        console.error("Error parsing recommendedZoneList:", error);
-        return null;
-        }
-    })();
+    }, [router.query]); // 쿼리 파라미터가 변경될 때마다 실행
 
+    
     return (
         <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center w-full h-screen ">
-            <p>{JSON.stringify(parsedZoneList, null, 2)}</p>
+            
+            <ul>
+                {recommendedZoneList !== null ? (
+                    recommendedZoneList.map((zone, index) => (
+                        <li key={index}>
+                            {zone.name} {/* Assuming each item in the list has a 'name' property */}
+                        </li>
+                    ))
+                ) : (
+                    <li>No recommended zones available.</li>
+                )}
+            </ul>
                 <div>
                 </div>
                 {/** 임시 확인

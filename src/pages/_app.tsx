@@ -44,9 +44,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
   // 스타디움 관리
   const [selectedStadium, setSelectedStadium] = useState(StadiumType.JAMSIL);   // 첫 화면은 잠실로 초기화
 
+  // 백엔드에 추천 질문 데이터 전송 후 반환받은 resultId 값 저장하는 변수/함수
+  const [resultId, setResultId] = useState<number | null>(null);  //useState(0);  // 0 또는 -1로 초기화'
+  
   // 선택된 스타디움의 추천된 존 관리
-  const [recommendedZoneList, setRecommendedZoneList] = useState<ZoneGetResponseType[] | null>(null);
-
+  const [recommendedZoneList, setRecommendedZoneList] = useState<ZoneGetResponseType[]>([]);
 
   // 현재 URL 경로 가져오기
   const [currentPath, setCurrentPath] = useState<string>('');
@@ -67,9 +69,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/':
             return <Main selectedStadium={selectedStadium} setSelectedStadium={setSelectedStadium}/>;
         case '/recommend/question':
-            return <Question stadium={selectedStadium} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
+            return <Question stadium={selectedStadium} setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/recommend/results':
-            return <Result stadium={selectedStadium} />;
+            return <Result stadium={selectedStadium} resultId={resultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/guide':
             return <Guide />;
         case '/culture':
