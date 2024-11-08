@@ -78,19 +78,15 @@ export const handleSave = async ({stadium, seat, keywords}: RecommendQuestionPro
 
 ////////////////////////////////////////////////////////
 // 추천 구역 데이터를 가져와서 출력하는 이벤트
-
-// 카톡 공유용 최소 개수인 1개를 가져오는 함수
-
-// 최대 개수인 3개를 가져오는 함수
-export const handleAllPrint = async (resultId: number | null) => {
+// count
+// 1) 카톡 공유용: 최소인 1개
+// 2) 구역 추천 결과: 최대인 3개
+export const handlePrint = async (count: number, resultId: number | null) => {
   // null 값이면 API 요청 ㄴㄴ
   if (resultId === null)
     return;
 
   try {
-    // 최대 개수 요청
-    const count = 3;
-
     // API 통신
     const response = await getZones(
         { resultId, count }

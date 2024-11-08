@@ -9,7 +9,7 @@ import Question3 from "./Question/Question3";
 import Question4 from "./Question/Question4";
 
 import { StadiumType, SeatType, Keyword } from "../../constants/ZoneData"
-import { handleSave, handleAllPrint } from "../../api/ResultApiHandler";
+import { handleSave, handlePrint } from "../../api/ResultApiHandler";
 
 import { ZoneGetResponseType } from "../../api/ResultApiType";
 
@@ -104,8 +104,8 @@ const Page = ({stadium, setResultId, recommendedZoneList, setRecommendedZoneList
         // handleGetResultId를 호출하고 결과를 기다린 후, resultId를 사용
         const resultId = await handleGetResultId();
 
-        // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
-        const zoneList: ZoneGetResponseType[] = (await handleAllPrint(resultId)) ?? [];
+        // 백엔드에 데이터 전송 후 반환 값(최대 3개) 가져오기 (API 통신)
+        const zoneList: ZoneGetResponseType[] = (await handlePrint(3, resultId)) ?? [];
 
         // 확인
         console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱: ");
