@@ -13,7 +13,7 @@ export interface Props {
     nextStep: () => void;
 }
 
-export const SignupPage = () => {
+const SignupPage = () => {
     // 닉네임 상태 관리
     const [nickname, setNickname] = useState('');
 
@@ -62,3 +62,5 @@ export const SignupPage = () => {
     );
     */
 };
+
+export default SignupPage;
