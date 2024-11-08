@@ -7,6 +7,8 @@ import plusIcon from "../../assets/webp/chatbot_plus.webp";
 const Chatbot = () => {
   const [selectedStadium, setSelectedStadium] = useState<string | null>(null);
   const [showInitialMessages, setShowInitialMessages] = useState(false);
+  // const [chatbotAnswers, setChatbotAnswers] = useState<string[]>([]);
+  // const [error, setError] = useState<string | null>(null);
 
   const stadiums = [
     "고척 스카이돔 (키움)",
@@ -32,11 +34,34 @@ const Chatbot = () => {
     setSelectedStadium(stadium);
   };
 
+  // // API 요청 함수
+  // const fetchChatbotGuide = async (stadiumName: string, categoryName: string, orderNumber: string) => {
+  //   try {
+  //     const response = await fetch(
+  //       `/api/v1/chatbot/guide?stadiumName=${encodeURIComponent(stadiumName)}&categoryName=${encodeURIComponent(categoryName)}&orderNumber=${encodeURIComponent(orderNumber)}`
+  //     );
+  //     const data = await response.json();
+
+  //     if (data.isSuccess) {
+  //       setChatbotAnswers(data.payload.answers || []);
+  //       setError(null);
+  //     } else {
+  //       setError("API 요청에 실패했습니다.");
+  //     }
+  //   } catch (err) {
+  //     setError("API 요청 중 오류가 발생했습니다.");
+  //     console.error(err);
+  //   }
+  // };
+
+  // const handleStadiumSelect = (stadium: string) => {
+  //   fetchChatbotGuide(stadium, "경기장 정보", "1"); // 예시 카테고리와 질문 번호
+  // };
+
   return (
     <>
       <BackLogoBar />
       <div className="flex justify-center items-center h-screen bg-gray-100">
-        {/* 중앙 정렬과 최대 너비 제한 */}
         <div className="flex flex-col h-full max-w-[500px] w-full bg-grayscale-10">
 
           {/* 챗봇 대화 내용 */}
@@ -49,7 +74,7 @@ const Chatbot = () => {
               </span>
             </div>
 
-            {/* 챗봇 인사 메시지 (2초 지연 후 표시) */}
+            {/* 챗봇 인사 메시지 */}
             {showInitialMessages && (
               <>
                 <div className="flex items-start mb-2 transition-opacity duration-1000">
@@ -90,7 +115,7 @@ const Chatbot = () => {
             )}
           </div>
 
-          {/* 입력창 고정 */}
+          {/* 채팅 입력창 */}
           <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full p-4 bg-white flex items-center">
             <Image src={plusIcon} alt="첨부 아이콘" width={18} height={18} className="mr-3" />
             <input
@@ -99,6 +124,7 @@ const Chatbot = () => {
               className="flex-1 border-none rounded-full px-4 py-2 bg-grayscale-5 text-grayscale-60 text-xs font-medium outline-none"
             />
             <button className="ml-2 bg-main-50 rounded-full p-2 flex items-center justify-center">
+              {/* 임시 아이콘 (이후 수정) */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
