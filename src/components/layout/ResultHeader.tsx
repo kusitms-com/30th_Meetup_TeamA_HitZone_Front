@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import shareButtonGrayIcon from '../../../assets/webp/share_gray.webp';
+import shareButtonGrayIcon from '../../assets/webp/share_gray.webp';
 
 const Bar = () => {
     return (

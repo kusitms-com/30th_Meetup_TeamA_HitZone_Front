@@ -5,7 +5,7 @@ import backLeftButtonGrayIcon from '../../assets/webp/back_left_button_gray.webp
 
 const BackBar = () => {
     return (
-        <div className="flex px-[15px]">
+        <div className="flex py-[14px]">
             <div className="flex justify-start">
                 <Image src={backLeftButtonGrayIcon} alt="뒤로가기 버튼" width={24} height={24} />
             </div>
