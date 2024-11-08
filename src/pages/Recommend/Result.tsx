@@ -43,6 +43,19 @@ const Page = ({stadium, resultId, recommendedZoneList, setRecommendedZoneList}: 
     ];
 
 
+    // 추천 다시 받기 버튼 클릭 시 리다이렉트 이벤트
+    const handleRedirectToRecommendation = () => {
+        // 추천 다시 받기 페이지로 리다이렉트
+        router.push('/recommend/question');  // '/recommend'는 추천 페이지의 URL입니다. 수정할 수 있습니다.
+    };
+
+    // 예매하러 가기 버튼 클릭 시 모달창 띄우기 이벤트
+    const handleBooking = () => {
+        // 예매 페이지로 리다이렉트
+        //router.push('/booking');  // '/booking'은 예매 페이지의 URL입니다. 수정할 수 있습니다.
+    };
+
+
     return (
         <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center w-full h-screen ">
@@ -234,12 +247,12 @@ const Page = ({stadium, resultId, recommendedZoneList, setRecommendedZoneList}: 
 
                 {/** 다음 버튼, 맨 아래에 배치 */}
                 <div className="relative flex justify-center items-center text-center border border-0 rounded-[8px] h-[48px] mb-[40px] w-full gap-[8px] z-10 mt-[20px] px-[16px]">
-                    <div className="bg-main-10 border border-0 rounded-[8px] ">
-                        <p className="text-md text-main-70 font-semibold min-w-[120px] px-[8px] py-[12px]">
+                    <div className="bg-main-10 border border-0 rounded-[8px] cursor-pointer" onClick={handleRedirectToRecommendation}>
+                        <p className="text-md text-main-70 font-semibold min-w-[135px] px-[8px] py-[12px]">
                             추천 다시 받기
                         </p>
                     </div>
-                    <div className="bg-main-50 border border-0 rounded-[8px] w-full">
+                    <div className="bg-main-50 border border-0 rounded-[8px] w-full cursor-pointer" onClick={handleBooking}>
                         <p className="text-md text-main-0 font-semibold px-[8px] py-[12px]">
                             예매하러 가기
                         </p>
