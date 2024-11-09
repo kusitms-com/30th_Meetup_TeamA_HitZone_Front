@@ -12,7 +12,14 @@ export interface ZoneGetParamsType {
 // GET 응답
 // response.paylode
 export interface ZoneGetResponseType { 
-    names: string[];
+    imgUrl: string;
+    introduction: string;
+    zones: ZoneType[];
+}
+
+export interface ZoneType { 
+    zoneName: string;
+    zoneColor: string;
 }
 
 
