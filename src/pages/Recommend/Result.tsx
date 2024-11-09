@@ -135,10 +135,13 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                 
                 {/** 야구장 유형 */}
                 <div className="flex justify-start w-full mt-[20px] px-[16px]">
-                    <div className="bg-main-50 border border-[0px] rounded-[8px] w-[102px] h-[102px]">
+                    {/** 프로필 이미지 */}
+                    <div className="w-[102px] h-[102px]">
                         {profileData ? (
-                            <Image src={profileData.imgUrl} alt="프로필 이미지" width={102} height={102} />
-                        ) : null}
+                            <Image src={profileData.imgUrl} alt="프로필 이미지" width={120} height={120} />
+                        ) : 
+                        <div className="bg-main-5 border border-[0px] rounded-full w-[106px] h-[106px]"/>
+                        }
                     </div>
 
                     {/** Profile API 연동 데이터 */}
