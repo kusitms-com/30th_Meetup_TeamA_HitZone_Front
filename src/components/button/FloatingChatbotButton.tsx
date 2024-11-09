@@ -13,7 +13,7 @@ const FloatingChatbotButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-20 right-4 md:right-[calc(50%-250px)] flex items-center justify-center transition ease-in-out"
+      className="fixed bottom-[78px] right-4 md:right-[calc(50%-250px)] flex items-center justify-center transition ease-in-out"
       aria-label="히트존 챗봇"
     >
       <Image src={chatbotIcon} alt="히트존 챗봇" width={48} height={48} />

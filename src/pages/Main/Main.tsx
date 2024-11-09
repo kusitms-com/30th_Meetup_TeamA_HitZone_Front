@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+// import { useSession } from "next-auth/react";
+// import { useRouter } from "next/router";
 
 import Header from "../../components/layout/MainHeader";
 import NavBar from "../../components/layout/NavBar";
@@ -14,17 +14,16 @@ import SeatRecommendButton from "./components/SeatRecommendButton";
 import ChatBot from "../../components/button/FloatingChatbotButton";
 
 // Enum으로 추천 구역 Data 관리
-import { StadiumType, SeatType, Keyword, stadiumList } from "../../constants/ZoneData"
+import { StadiumType, stadiumList } from "../../constants/ZoneData";
 
 export interface Props {
   selectedStadium: StadiumType;
   setSelectedStadium: Dispatch<SetStateAction<StadiumType>>;
 }
 
-
 const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const handleStadiumSelect = (stadium: StadiumType) => {
     setSelectedStadium(stadium);
   };
@@ -60,16 +59,16 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   }
 
   return (
-    <div className="relative flex flex-col w-full h-screen">
+    <div className="flex flex-col w-full overflow-hidden">
       <Header />
 
-      <div className="flex-1">
+      <div className="flex-1 overflow-y-auto px-4 pb-20">
         <p className="text-xl font-bold text-grayscale-90 pt-5 text-left w-full">
           오늘은 어느 야구장에 방문하시나요?
         </p>
 
         {/* 야구장 드롭다운 */}
-        <div className="flex items-center gap-4 justify-between mt-4">
+        <div className="flex items-center gap-4 justify-between mt-4 w-full">
           <Dropdown
             options={stadiumList}
             selectedOption={selectedStadium}
@@ -97,9 +96,12 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
         <StadiumInfo stadium={selectedStadium} />
 
         {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
-        <SeatRecommendButton stadium={selectedStadium} />
+        <div className="flex justify-center">
+          <SeatRecommendButton />
+        </div>
       </div>
-      
+
+      {/* 하단 네비게이션 바 */}
       <NavBar />
 
       {/* 플로팅 챗봇 버튼 */}

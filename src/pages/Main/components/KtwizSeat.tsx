@@ -68,10 +68,10 @@ const KtwizSeat = () => {
         const ctx = canvas.getContext("2d");
         const scale = window.devicePixelRatio || 1;
 
-        canvas.width = 376 * scale;
-        canvas.height = 356 * scale;
-        canvas.style.width = "366px";
-        canvas.style.height = "400px";
+        canvas.width = 366 * scale;
+        canvas.height = 400 * scale;
+        canvas.style.width = "100%";
+        canvas.style.height = "auto";
 
         if (ctx) {
           ctx.scale(scale, scale);
@@ -116,10 +116,10 @@ const KtwizSeat = () => {
   };
 
   return (
-    <div className="relative flex justify-center mt-6">
+    <div className="flex justify-center mt-6">
       <canvas
         ref={canvasRef}
-        className="max-w-[366px] max-h-[400px]"
+        className="max-w-[366px] w-full mx-auto"
         onClick={handleCanvasClick}
       />
     </div>

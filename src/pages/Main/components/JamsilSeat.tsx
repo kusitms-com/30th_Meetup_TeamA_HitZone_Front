@@ -60,15 +60,18 @@ const JamsilSeat = () => {
         const ctx = canvas.getContext("2d");
         const scale = window.devicePixelRatio || 1;
 
-        canvas.width = 376 * scale;
-        canvas.height = 356 * scale;
-        canvas.style.width = "376px";
-        canvas.style.height = "356px";
+        const canvasWidth = 376;
+        const canvasHeight = 356;
+        canvas.width = canvasWidth * scale;
+        canvas.height = canvasHeight * scale;
+        
+        canvas.style.width = "100%";
+        canvas.style.height = "auto";
 
         if (ctx) {
           ctx.scale(scale, scale);
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(image, 0, 0, canvas.width / scale, canvas.height / scale);
+          ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+          ctx.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           setIsImageLoaded(true);
         }
       }
@@ -108,10 +111,10 @@ const JamsilSeat = () => {
   };
 
   return (
-    <div className="relative flex justify-center mt-6">
+    <div className="flex justify-center mt-6">
       <canvas
         ref={canvasRef}
-        className="max-w-[376px] max-h-[356px]"
+        className="w-full max-w-[376px] mx-auto"
         onClick={handleCanvasClick}
       />
     </div>
