@@ -77,6 +77,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
             return <Result stadium={selectedStadium} resultId={resultId} setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/guide':
             return <Guide />;
+        case '/guide/zone':
+            return <GuideDetailContent />;
         case '/culture':
             return <Culture />;
         case '/mypage':
