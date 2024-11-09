@@ -7,12 +7,19 @@ import tipIcon from "../../../assets/svg/tip_button.svg";
 import { handleGuide } from "@/src/api/StadiumApiHandler";
 import { GuideGetParamsType, GuideGetResponseType, ReferenceGroup, Reference } from "@/src/api/StadiumApiType";
 
+import useModal from '@/src/hooks/useModal';
+import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
+
+
 export default function GuideDetailContent({stadiumName, zoneName}: GuideGetParamsType) {
   // 공통 클래스 정의
   const containerClass = "bg-grayscale-0 p-3 rounded-lg";
   const sectionTitleClass = "text-sm font-semibold text-grayscale-80 bg-gray-100 px-2 py-1 rounded inline-block";
   const sectionContentClass = "text-sm font-regular text-black mt-2";
   
+  // 모달창 이벤트
+  const { isOpen, openModal, closeModal } = useModal();
+
   // 가이드 데이터 관리
   const [guideData, setGuideData] = useState<GuideGetResponseType>();
   const handleGuideData = async () => {
@@ -43,8 +50,17 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
               onSelect={(option) => console.log(option)}
             />
             <button className="ml-auto w-[54px] h-[30px] flex items-center justify-center">
-              <Image src={tipIcon} alt="Tip" width={54} height={30} />
+              <Image src={tipIcon} alt="Tip" width={54} height={30} onClick={openModal} />
             </button>
+            {isOpen && guideData.referencesGroup && guideData.referencesGroup.length > 0 && (
+              <SeatTipDialog
+                zoneName={guideData.zoneName}
+                zoneColor={guideData.zoneColor}
+                tip={guideData.tip}
+                referencesGroup={guideData.referencesGroup[0]} // 첫 번째 referencesGroup만 전달
+                onClose={closeModal} // 모달 닫기 함수
+              />
+            )}
         </div>
 
         {/* 야구장 좌석 이미지 */}
