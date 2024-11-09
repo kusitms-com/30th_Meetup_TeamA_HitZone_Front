@@ -11,7 +11,8 @@ import { zoneURL, ZoneGetParamsType,
 // 조회: GET 요청 및 응답받기
 export const getZone = async ({stadiumName}: ZoneGetParamsType) => {
   try {
-    const response = await AxiosInstance.get(`${V1_URL}${zoneURL}`, 
+    const response = await AxiosInstance.get(`https://git.hitzone.store/api/v1/stadium/zones`, 
+//    const response = await AxiosInstance.get(`${V1_URL}${zoneURL}`, 
       // 쿼리 파라미터 전달
       {
         params: {stadiumName},
@@ -35,7 +36,8 @@ export const getZone = async ({stadiumName}: ZoneGetParamsType) => {
 // 조회: GET 요청 및 응답받기
 export const getGuide = async ({stadiumName, zoneName}: GuideGetParamsType) => {
   try {
-    const response = await AxiosInstance.get(`${V1_URL}${guideURL}`, 
+    const response = await AxiosInstance.get(`https://git.hitzone.store/api/v1/stadium/zones/guide`, 
+//    const response = await AxiosInstance.get(`${V1_URL}${guideURL}`, 
       // 쿼리 파라미터 전달
       {
         params: {stadiumName, zoneName},

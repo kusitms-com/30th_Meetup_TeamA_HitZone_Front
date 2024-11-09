@@ -12,6 +12,7 @@ export interface ProfileGetParamsType {
 // response.paylode.zones   // 1개 ~ 3개
 export interface ProfileGetResponseType {       // interface Zone으로 할지 고민
     profileId: number;
+    imgUrl: string;
     nickname: string;
     type: string;
     explanation: string;
