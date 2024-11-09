@@ -89,47 +89,25 @@ const Page = ({stadium, setResultId, recommendedZoneList, setRecommendedZoneList
     // API 통신 및 로컬 데이터 업뎃
     const handleGetResultId = async () => {
         // 백엔드에 데이터 전송 후 반환 값 가져오기 (API 통신)
-        const data = await handleSave({stadium, seat:selectedSeat, keywords:selectedKeywordItems});
+        const resultId = await handleSave({stadium, seat:selectedSeat, keywords:selectedKeywordItems});
+        console.log("🐻‍❄️ 추천 질문 데이터 전송하구 resultId 받았당! ");
+        console.log(resultId);
 
         // 반환 값 저장
-        setResultId(data);
+        setResultId(resultId);
 
-        // resultId 반환
-        return data;
-    }
-    
-    // 백엔드에서 존 리스트 받는 함수
-    const handleGetZoneList = async () => {
-        // 추천 질문 데이터 전송 후 ResultId 받는 이벤트 호출
-        // handleGetResultId를 호출하고 결과를 기다린 후, resultId를 사용
-        const resultId = await handleGetResultId();
-
-        // 백엔드에 데이터 전송 후 반환 값(최대 3개) 가져오기 (API 통신)
-        const zoneList: ZoneGetResponseType[] = (await handlePrint(3, resultId)) ?? [];
-
-        // 확인
-        console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱: ");
-        console.log(zoneList);
-
-        // 데이터 업뎃 (비동기적으로 작동)
-        setRecommendedZoneList(zoneList);
-
-        return zoneList; // 다음 작업을 위해 zoneList 반환
-    }
-
-    // 상태 업데이트 이후 후속 작업 실행
-    const handleRedirect = async () => {
-        const zoneList = await handleGetZoneList(); // 순차적으로 resultId 설정 후 zoneList 가져오기
-        console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱2: ");
-        console.log(zoneList);
-    
         // 질문 작성 완료 후 결과 페이지로 이동
         //router.push('/recommend/results');
+
+        // 질문 작성 완료 후 결과 페이지로 이동 및 백엔드로부터 받은 resultId 전송
         router.push({
-          pathname: '/recommend/results',
-          query: { recommendedZoneList: JSON.stringify(zoneList) }, // 쿼리 파라미터로 JSON 문자열을 전달
+            pathname: '/recommend/results',
+            query: { resultId: JSON.stringify(resultId) }, // 쿼리 파라미터로 JSON 문자열을 전달
         });
-    };
+
+        // resultId 반환
+        //return resultId;
+    }
 
 
     /** 페이지 상태 관리 */
@@ -180,7 +158,7 @@ const Page = ({stadium, setResultId, recommendedZoneList, setRecommendedZoneList
             // 값을 선택했으면
             if(hasNowish) {
                 // API 연동 및 결과 페이지로 리다이렉트
-                handleRedirect();
+                handleGetResultId();
             }
         }
     };

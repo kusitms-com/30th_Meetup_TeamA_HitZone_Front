@@ -103,7 +103,8 @@ export const handleProfile = async (resultId: number | null) => {
     //console.log(data.length);
     
     // 데이터 파싱 (배열)
-    const parsedData: ProfileGetResponseType[] = data.map((profile: ProfileGetResponseType) => ({
+    /*
+    const parsedData: ProfileGetResponseType = data.map((profile: ProfileGetResponseType) => ({
       profileId: profile.profileId,
       nickname: profile.nickname,
       type: profile.type,
@@ -112,6 +113,18 @@ export const handleProfile = async (resultId: number | null) => {
     }));
 
     return parsedData;
+    */
+    
+    // 데이터 파싱 (하나)
+    const { profileId, nickname, type, explanation, hashTags } = data;
+    
+    return {  // ProfileGetResponseType 형식으로 객체 생성하여 반환
+      profileId,
+      nickname,
+      type,
+      explanation,
+      hashTags
+    };
 
   } catch (error) {
       console.error('프로필 데이터 가져오는 중 오류 발생:', error);
@@ -131,6 +144,8 @@ export const handlePrint = async (count: number, resultId: number | null) => {
 
   try {
     // API 통신
+    console.log("id 맞니:")
+    console.log(resultId);
     const response = await getZones(
         { resultId, count }
     );
