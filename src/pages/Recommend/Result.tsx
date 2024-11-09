@@ -2,6 +2,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
 import HeaderBar from "../../components/layout/ResultHeader";
+import NavBar from "../../components/layout/NavBar";
 
 import Image from 'next/image';
 import crownGoldIcon from '../../assets/webp/recommend_crown_gold.webp';
@@ -335,6 +336,8 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                         </p>
                     </div>
                 </div>
+
+              <NavBar />
             </div>
         </div>
     )
