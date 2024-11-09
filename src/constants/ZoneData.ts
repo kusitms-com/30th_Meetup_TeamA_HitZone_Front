@@ -1,48 +1,23 @@
 // Stadium 관리
-// (1) 백엔드에 보내는 데이터
 export enum StadiumType {
     NONE = '',
-    JAMSIL = '잠실종합운동장',
-    SUWON_KT = '수원KT위즈파크',
+    JAMSIL = "잠실종합운동장 (잠실)",
+    SUWON_KT = "수원KT위즈파크",
 
-    GOCHEOK_SKY_DOME = '더미1',
-    KIA_CHAMPIONS_FIELD = '더미2',
-    SAMSUNG_LIONS_PARK = '더미3',
-    HANWHA_EAGLES_PARK = '더미4'
+    GOCHEOK_SKY_DOME = "고척스카이돔 (키움)",
+    KIA_CHAMPIONS_FIELD = "기아 챔피언스 필드 (광주)",
+    SAMSUNG_LIONS_PARK = "삼성 라이온즈 파크 (대구)",
+    HANWHA_EAGLES_PARK = "한화생명 이글스 파크 (대전)"
 }
 
-export const frontStadiums = [
-    "잠실종합운동장 (잠실)",
-    "수원KT위즈파크",
-    "고척스카이돔 (키움)",
-    "기아 챔피언스 필드 (광주)",
-    "삼성 라이온즈 파크 (대구)",
-    "한화생명 이글스 파크 (대전)"
+export const stadiumList = [
+    StadiumType.JAMSIL,
+    StadiumType.SUWON_KT,
+    StadiumType.GOCHEOK_SKY_DOME,
+    StadiumType.KIA_CHAMPIONS_FIELD,
+    StadiumType.SAMSUNG_LIONS_PARK,
+    StadiumType.HANWHA_EAGLES_PARK
 ];
-
-// (2) 프론트엔드에서 보여줄 데이터
-// StadiumType을 frontStadiums 값으로 mapping
-export const stadiumTypeToString: { [key in StadiumType]: string } = {
-    [StadiumType.NONE]: "",
-    [StadiumType.JAMSIL]: frontStadiums[0],
-    [StadiumType.SUWON_KT]: frontStadiums[1],
-    [StadiumType.GOCHEOK_SKY_DOME]: frontStadiums[2],
-    [StadiumType.KIA_CHAMPIONS_FIELD]: frontStadiums[3],
-    [StadiumType.SAMSUNG_LIONS_PARK]: frontStadiums[4],
-    [StadiumType.HANWHA_EAGLES_PARK]: frontStadiums[5]
-};
-
-// frontStadiums을 StadiumType 값으로 mapping
-export const stringToStadiumType: { [key: string]: StadiumType } = {
-    "": StadiumType.NONE,
-    [frontStadiums[0]]: StadiumType.JAMSIL,
-    [frontStadiums[1]]: StadiumType.SUWON_KT,
-    [frontStadiums[2]]: StadiumType.GOCHEOK_SKY_DOME,
-    [frontStadiums[3]]: StadiumType.KIA_CHAMPIONS_FIELD,
-    [frontStadiums[4]]: StadiumType.SAMSUNG_LIONS_PARK,
-    [frontStadiums[5]]: StadiumType.HANWHA_EAGLES_PARK
-};
-
 
 // 잠실 Zone 관리
 
