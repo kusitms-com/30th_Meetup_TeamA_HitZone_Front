@@ -5,13 +5,17 @@ import SeatDropdown from "./SeatDropdown";
 import tipIcon from "../../../assets/svg/tip_button.svg";
 
 import { handleGuide } from "@/src/api/StadiumApiHandler";
-import { GuideGetParamsType, GuideGetResponseType, ReferenceGroup, Reference } from "@/src/api/StadiumApiType";
+import { GuideGetParamsType, GuideGetResponseType, ReferenceGroup, Reference, ZoneType } from "@/src/api/StadiumApiType";
 
 import useModal from '@/src/hooks/useModal';
 import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 
 
-export default function GuideDetailContent({stadiumName, zoneName}: GuideGetParamsType) {
+interface Props extends GuideGetParamsType {
+  zoneNameList: string[];
+}
+
+export default function GuideDetailContent({stadiumName, zoneName, zoneNameList}: Props) {
   // 공통 클래스 정의
   const containerClass = "bg-grayscale-0 p-3 rounded-lg";
   const sectionTitleClass = "text-sm font-semibold text-grayscale-80 bg-gray-100 px-2 py-1 rounded inline-block";
@@ -36,7 +40,6 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
     handleGuideData();
   }, [stadiumName, zoneName]); // 쿼리 파라미터가 변경될 때마다 실행
 
-
   return (
     <div className="relative mb-[84px]">
     {/* 가이드 데이터가 null이 아닐 때 렌더링 */}
@@ -45,7 +48,7 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
         {/* 좌석 선택 드롭다운 및 Tip 버튼 */}
         <div className="flex items-center mb-4">
             <SeatDropdown
-              options={["레드석", "블루석", "오렌지석", "네이비석", "프리미엄석", "테이블석", "익사이팅석", "외야그린석"]}
+              options={zoneNameList}
               selectedOption={guideData.zoneName}
               onSelect={(option) => console.log(option)}
             />

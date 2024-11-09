@@ -25,6 +25,10 @@ const Guide = () => {
     setSelectedSection(zoneName);
   };
 
+
+  // zoneName만 추출
+  const [zoneNameList, setZonNameList] = useState<string[]>([]);
+
   // 스타디움 데이터 관리
   const [stadiumInfo, setStadiumInfo] = useState<ZoneGetResponseType>();
   const handleStadiumInfo = async () => {
@@ -35,24 +39,29 @@ const Guide = () => {
     const stadiumApiData = await handleGetStadiumInfo(params);
     if(stadiumApiData) {
       setStadiumInfo(stadiumApiData);
+
+      console.log("did");
+      console.log(stadiumApiData.zones);
+      setZonNameList(stadiumApiData.zones.map(zone => zone.zoneName));
     }
+
   }
   
   useEffect(() => {
     handleStadiumInfo();
   }, [selectedStadium]); // 쿼리 파라미터가 변경될 때마다 실행
 
+
   return (
     <div className="flex flex-col h-screen">
       <Header />
     
       <div className="flex-1 overflow-y-auto mt-[15px]">
-        {selectedSection ? (
+        {(selectedSection?
           <div>
-            <GuideDetailContent stadiumName={selectedStadium} zoneName={selectedSection}/>
+            <GuideDetailContent stadiumName={selectedStadium} zoneName={selectedSection} zoneNameList={zoneNameList}/>
           </div>
-        ) : (
-          stadiumInfo ? (
+        : stadiumInfo ? (
           <>
             <Dropdown options={stadiumList} selectedOption={selectedStadium} onSelect={handleStadiumSelect} />
             <div className="mt-4">
