@@ -9,16 +9,6 @@ import jamsilRed from "../../assets/svg/seat/jamsil_red.svg";
 
 import { StadiumType } from "@/src/constants/ZoneData";
 
-// 예시 데이터 (잠실종합운동장 - 레드석)
-const dummyData = {
-  title: "레드석",
-  image: jamsilRed,
-  description: "해당 구역은 다양한 것들을 모두 적절히 즐길 수 있는 구역이에요.",
-  gateInfo: "[1루] 2-3 Gate [3루] 2-1 Gate",
-  stepInfo: "[1루] 약 24~30cm(10열), 약 33~38cm(20열) / [3루] 약 24~30cm(1nn열), 약 33~38cm(22열)",
-  seatSpaceInfo: "[1루] 약 25cm [3루] 약 25cm",
-};
-
 const Guide = () => {
   const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
@@ -54,7 +44,7 @@ const Guide = () => {
       <div className="flex-1 overflow-y-auto mt-[15px]">
         {selectedSection ? (
           <div>
-            <GuideDetailContent {...dummyData} />
+            <GuideDetailContent stadiumName={StadiumType.JAMSIL} zoneName="레드석" />
           </div>
         ) : (
           <>

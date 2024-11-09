@@ -58,14 +58,10 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
     }, [resultId]);
     
     const handleResultData = async () => {
-        console.log("ahah");
-        console.log(resultId);
 
         // handlePrint (handleGetZoneList) 호출
         // 전체 추천 개수 가져오기
         const parsedZoneList = await handlePrint(3, resultId);
-        console.log("fsdfdsf");
-        console.log(parsedZoneList);
 
         if (parsedZoneList) {  // undefined가 아니면 처리
             setRecommendedZoneList(parsedZoneList);
@@ -73,8 +69,13 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
 
         // handleProfile 호출!!!!!!!
         const parsedProfileData = await handleProfile(resultId);
-        console.log("뮁");
+        
+        // 확인
+        /*
+        console.log(resultId);
+        console.log(parsedZoneList);
         console.log(parsedProfileData);
+        */
         
         if (parsedProfileData) {  // undefined가 아니면 처리
             setProfileData(parsedProfileData);
