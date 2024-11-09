@@ -31,6 +31,7 @@ import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
 import Chatbot from './Chatbot/Chatbot';
+import GuideDetailContent from './Guide/components/GuideDetailContent';
 
 
 // 전역 소셜로그인 상태 관리
