@@ -51,3 +51,10 @@ export interface Reference {
     title: string;
     content: string;
 }
+
+export interface GuideDetail {
+    zoneName: string;
+    zoneColor: string;
+    tip: string;
+    referencesGroup: ReferenceGroup;
+}
