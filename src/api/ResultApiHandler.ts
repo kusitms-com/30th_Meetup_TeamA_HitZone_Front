@@ -116,10 +116,11 @@ export const handleProfile = async (resultId: number | null) => {
     */
     
     // 데이터 파싱 (하나)
-    const { profileId, nickname, type, explanation, hashTags } = data;
-    
+    const { profileId, imgUrl, nickname, type, explanation, hashTags } = data;
+
     return {  // ProfileGetResponseType 형식으로 객체 생성하여 반환
       profileId,
+      imgUrl,
       nickname,
       type,
       explanation,
