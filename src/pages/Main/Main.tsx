@@ -6,6 +6,7 @@ import Header from "../../components/layout/MainHeader";
 import NavBar from "../../components/layout/NavBar";
 import BignnerGuide from "../../components/chips/BignnerGuide";
 import BignnerGuideDialog from "../../components/dialogs/BignnerGuideDialog";
+import ReadyStadiumDialog from "../../components/dialogs/ReadyStadiumDialog";
 import Dropdown from "./components/Dropdown";
 import JamsilSeat from "./components/JamsilSeat";
 import KtwizSeat from "./components/KtwizSeat";
@@ -23,12 +24,19 @@ export interface Props {
 
 const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // 준비 중 팝업 상태
 
   const handleStadiumSelect = (stadium: StadiumType) => {
-    setSelectedStadium(stadium);
+    // 준비 중인 구장을 선택했을 경우 팝업을 띄웁니다.
+    if (stadium !== StadiumType.JAMSIL && stadium !== StadiumType.SUWON_KT) {
+      setIsPopupOpen(true);
+    } else {
+      setSelectedStadium(stadium);
+    }
   };
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const closePopup = () => setIsPopupOpen(false);
 
   ///////////////////////////////////////////////////////////
   // 🐻 INAE 추가 코드
@@ -106,8 +114,11 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
 
       {/* 플로팅 챗봇 버튼 */}
       <ChatBot />
+
+      {/* 준비 중인 구장 선택 시 나오는 팝업 */}
+      <ReadyStadiumDialog isOpen={isPopupOpen} onClose={closePopup} />
     </div>
   );
-}
+};
 
 export default Main;

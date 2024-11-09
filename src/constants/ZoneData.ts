@@ -7,7 +7,10 @@ export enum StadiumType {
     GOCHEOK_SKY_DOME = "고척스카이돔 (키움)",
     KIA_CHAMPIONS_FIELD = "기아 챔피언스 필드 (광주)",
     SAMSUNG_LIONS_PARK = "삼성 라이온즈 파크 (대구)",
-    HANWHA_EAGLES_PARK = "한화생명 이글스 파크 (대전)"
+    HANWHA_EAGLES_PARK = "한화생명 이글스 파크 (대전)",
+    LOTTE_GIANTS_PARK = "사직 야구장 (부산)",
+    SSG_LENDERS_FIELD = "SSG 랜더스필드 (인천)",
+    CHANDWON_NC_PARK = "창원 NC 파크 (창원)"
 }
 
 export const stadiumList = [
@@ -16,7 +19,10 @@ export const stadiumList = [
     StadiumType.GOCHEOK_SKY_DOME,
     StadiumType.KIA_CHAMPIONS_FIELD,
     StadiumType.SAMSUNG_LIONS_PARK,
-    StadiumType.HANWHA_EAGLES_PARK
+    StadiumType.HANWHA_EAGLES_PARK,
+    StadiumType.LOTTE_GIANTS_PARK,
+    StadiumType.SSG_LENDERS_FIELD,
+    StadiumType.CHANDWON_NC_PARK
 ];
 
 // 잠실 Zone 관리
