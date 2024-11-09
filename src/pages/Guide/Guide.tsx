@@ -15,6 +15,7 @@ import { ZoneGetParamsType, ZoneGetResponseType, ZoneType } from "@/src/api/Stad
 const Guide = () => {
   const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  const [selectedSectionColor, setSelectedSectionColor] = useState<string>("#000000");
 
   const handleStadiumSelect = (stadium: StadiumType) => {
     setSelectedStadium(stadium);
@@ -43,6 +44,11 @@ const Guide = () => {
       console.log("did");
       console.log(stadiumApiData.zones);
       setZonNameList(stadiumApiData.zones.map(zone => zone.zoneName));
+
+      const selectedZoneColor = stadiumApiData.zones.find(zone => zone.zoneName === selectedSection)?.zoneColor;
+      if(selectedZoneColor) {
+        setSelectedSectionColor(selectedZoneColor);
+      }
     }
 
   }
@@ -52,6 +58,12 @@ const Guide = () => {
   }, [selectedStadium]); // 쿼리 파라미터가 변경될 때마다 실행
 
 
+  
+  useEffect(() => {
+    
+    handleStadiumInfo();
+  }, [selectedSection]); // 쿼리 파라미터가 변경될 때마다 실행
+
   return (
     <div className="flex flex-col h-screen">
       <Header />
@@ -59,7 +71,7 @@ const Guide = () => {
       <div className="flex-1 overflow-y-auto mt-[15px]">
         {(selectedSection?
           <div>
-            <GuideDetailContent stadiumName={selectedStadium} zoneName={selectedSection} zoneNameList={zoneNameList}/>
+            <GuideDetailContent stadiumName={selectedStadium} zoneName={selectedSection} zoneColor={selectedSectionColor} zoneNameList={zoneNameList} onSelectZone={handleSectionClick}/>
           </div>
         : stadiumInfo ? (
           <>

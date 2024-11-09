@@ -12,10 +12,12 @@ import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 
 
 interface Props extends GuideGetParamsType {
+  zoneColor: string;
   zoneNameList: string[];
+  onSelectZone: (option: string) => void;
 }
 
-export default function GuideDetailContent({stadiumName, zoneName, zoneNameList}: Props) {
+export default function GuideDetailContent({stadiumName, zoneName, zoneColor, zoneNameList, onSelectZone}: Props) {
   // 공통 클래스 정의
   const containerClass = "bg-grayscale-0 p-3 rounded-lg";
   const sectionTitleClass = "text-sm font-semibold text-grayscale-80 bg-gray-100 px-2 py-1 rounded inline-block";
@@ -50,7 +52,8 @@ export default function GuideDetailContent({stadiumName, zoneName, zoneNameList}
             <SeatDropdown
               options={zoneNameList}
               selectedOption={guideData.zoneName}
-              onSelect={(option) => console.log(option)}
+              onSelect={onSelectZone}
+              selectedColor={zoneColor}
             />
             <button className="ml-auto w-[54px] h-[30px] flex items-center justify-center">
               <Image src={tipIcon} alt="Tip" width={54} height={30} onClick={openModal} />
