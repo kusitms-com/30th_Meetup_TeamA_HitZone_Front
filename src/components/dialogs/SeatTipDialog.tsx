@@ -1,4 +1,5 @@
 
+import React from "react";
 import Image from 'next/image';
 
 import recommendTipGrayIcon from '../../assets/webp/recommend_tip_gray.webp';
@@ -6,7 +7,10 @@ import closeButtonGrayIcon from '../../assets/webp/close_button_gray.webp';
 
 import { GuideDetail } from "@/src/api/StadiumApiType";
 
-const Dialog = ({zoneName, zoneColor, tip, referencesGroup}: GuideDetail) => {
+
+const Dialog = ({zoneName, zoneColor, tip, referencesGroup}: GuideDetail,
+                { onClose }: { onClose: () => void }) => {
+    
     return (
         <div className="flex flex-col border border-0 rounded-[12px] w-[324px] h-[426px]">
             {/** 헤더 */}
@@ -17,7 +21,7 @@ const Dialog = ({zoneName, zoneColor, tip, referencesGroup}: GuideDetail) => {
                         TIP
                     </p>
                 </div>
-                <Image src={closeButtonGrayIcon} alt="닫기 버튼" className="w-[24px] h-[24px]" />
+                <Image src={closeButtonGrayIcon} alt="닫기 버튼" className="w-[24px] h-[24px]" onClick={onClose}/>
 
             </div>
 
