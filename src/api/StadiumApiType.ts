@@ -41,6 +41,8 @@ export interface GuideGetResponseType {       // interface Zone으로 할지 고
     zoneName: string;
     zoneColor: string;
     explanation: string;
+    firstBaseSide: string;
+    thirdBaseSide: string;
     entrance: string;
     stepSpacing: string;
     seatSpacing: string;
@@ -56,7 +58,7 @@ export interface ReferenceGroup {
 
 export interface Reference {
     title: string;
-    content: string;
+    contents: string[];
 }
 
 export interface GuideDetail {

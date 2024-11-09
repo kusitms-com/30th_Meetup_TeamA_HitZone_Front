@@ -75,6 +75,8 @@ export const handleGuide = async ({stadiumName, zoneName}: GuideGetParamsType) =
       zoneName: data.zoneName,
       zoneColor: data.zoneColor,
       explanation: data.explanation,
+      firstBaseSide: data.firstBaseSide,
+      thirdBaseSide: data.thirdBaseSide,
       entrance: data.entrance,
       stepSpacing: data.stepSpacing,
       seatSpacing: data.seatSpacing,
@@ -84,7 +86,7 @@ export const handleGuide = async ({stadiumName, zoneName}: GuideGetParamsType) =
         groupTitle: group.groupTitle,
         references: group.references.map((ref: any) => ({
           title: ref.title,
-          content: ref.content,
+          contents: ref.contents,
         }))
       }))
     };

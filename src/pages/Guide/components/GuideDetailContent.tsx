@@ -69,7 +69,7 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
         </div>
 
         {/* 구장 정보 */}
-        <StadiumInfo stadium={guideData.zoneName} />
+        <StadiumInfo stadiumName={stadiumName} firstBase={guideData.firstBaseSide} thirdBase={guideData.thirdBaseSide} />
 
         <div className="bg-grayscale-5 p-4 rounded-lg mt-4">
           {/* 상단 타이틀 섹션 */}

@@ -57,7 +57,12 @@ const Dialog = ({zoneName, zoneColor, tip, referencesGroup, onClose }: DialogPro
                                             • {reference.title}
                                         </p>
                                         <p className="text-sm text-grayscale-90 font-regular ">
-                                            {reference.content}
+                                            {reference.contents.map((content, contentIndex) => (
+                                                <span key={contentIndex}>
+                                                {content}
+                                                <br />
+                                                </span>
+                                            ))}
                                         </p>
                                     </div>
                                 ))}
