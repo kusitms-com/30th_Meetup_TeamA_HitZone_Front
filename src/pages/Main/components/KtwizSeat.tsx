@@ -87,7 +87,22 @@ const KtwizSeat = () => {
     loadImageToCanvas();
   }, [loadImageToCanvas]);
 
+  useEffect(() => {
+    // 캔버스 외부를 클릭했을 때 기본 이미지로 되돌리는 핸들러
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (canvasRef.current && !canvasRef.current.contains(event.target as Node)) {
+        setSeatImage(defaultStadium);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    event.stopPropagation(); // 이벤트 버블링 방지
     if (!isImageLoaded) return;
 
     const canvas = canvasRef.current;
@@ -116,7 +131,7 @@ const KtwizSeat = () => {
   };
 
   return (
-    <div className="flex justify-center mt-6">
+    <div className="flex justify-center mt-6" onClick={() => setSeatImage(defaultStadium)}>
       <canvas
         ref={canvasRef}
         className="max-w-[366px] w-full mx-auto"
