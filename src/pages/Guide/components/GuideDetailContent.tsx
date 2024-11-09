@@ -58,7 +58,7 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
         <div className="bg-grayscale-5 p-4 rounded-lg mt-4">
           {/* 상단 타이틀 섹션 */}
           <div className={containerClass}>
-            <h2 className="text-lg font-bold" >{guideData.zoneName}</h2>
+            <h2 className="text-lg font-bold"  style={{ color: guideData.zoneColor }}>{guideData.zoneName}</h2>
             <p className="text-sm text-gray-700 mt-2">{guideData.explanation}</p>
           </div>
 

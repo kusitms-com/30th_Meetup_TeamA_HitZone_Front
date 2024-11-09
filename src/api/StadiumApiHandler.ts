@@ -64,6 +64,7 @@ export const handleGuide = async ({stadiumName, zoneName}: GuideGetParamsType) =
     const parsedData: GuideGetResponseType = {
       imgUrl: data.imgUrl,
       zoneName: data.zoneName,
+      zoneColor: data.zoneColor,
       explanation: data.explanation,
       entrance: data.entrance,
       stepSpacing: data.stepSpacing,

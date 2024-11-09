@@ -32,6 +32,7 @@ export interface GuideGetParamsType {
 export interface GuideGetResponseType {       // interface Zone으로 할지 고민
     imgUrl: string;
     zoneName: string;
+    zoneColor: string;
     explanation: string;
     entrance: string;
     stepSpacing: string;
