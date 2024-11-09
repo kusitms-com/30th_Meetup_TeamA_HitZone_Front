@@ -1,15 +1,16 @@
 import React from "react";
+import { StadiumType } from "@/src/constants/ZoneData";
 
 interface StadiumInfoProps {
   stadium: string;
 }
 
 const stadiumInfoData: { [key: string]: { firstBase: string; thirdBase: string } } = {
-  "잠실종합운동장 (잠실)": {
+  [StadiumType.JAMSIL]: {
     firstBase: "두산베어스, LG 트윈스",
     thirdBase: "상대팀",
   },
-  "수원KT위즈파크": {
+  [StadiumType.SUWON_KT]: {
     firstBase: "KT WIZ",
     thirdBase: "상대팀",
   },

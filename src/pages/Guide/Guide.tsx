@@ -7,6 +7,8 @@ import GuideDetailContent from "./components/GuideDetailContent";
 import guideJamsil from "../../assets/svg/guide_jamsil.svg";
 import jamsilRed from "../../assets/svg/seat/jamsil_red.svg";
 
+import { StadiumType } from "@/src/constants/ZoneData";
+
 // 예시 데이터 (잠실종합운동장 - 레드석)
 const dummyData = {
   title: "레드석",
@@ -18,10 +20,10 @@ const dummyData = {
 };
 
 const Guide = () => {
-  const [selectedStadium, setSelectedStadium] = useState<string>("잠실종합운동장 (잠실)");
+  const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
 
-  const handleStadiumSelect = (stadium: string) => {
+  const handleStadiumSelect = (stadium: StadiumType) => {
     setSelectedStadium(stadium);
     setSelectedSection(null);
   };
@@ -56,7 +58,7 @@ const Guide = () => {
           </div>
         ) : (
           <>
-            <Dropdown options={["잠실종합운동장 (잠실)"]} selectedOption={selectedStadium} onSelect={handleStadiumSelect} />
+            <Dropdown options={[StadiumType.JAMSIL]} selectedOption={selectedStadium} onSelect={handleStadiumSelect} />
             <div className="mt-4">
               <Image
                 src={stadiumInfo.image}

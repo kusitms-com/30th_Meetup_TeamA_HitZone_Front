@@ -14,7 +14,7 @@ import SeatRecommendButton from "./components/SeatRecommendButton";
 import ChatBot from "../../components/button/FloatingChatbotButton";
 
 // Enum으로 추천 구역 Data 관리
-import { StadiumType, SeatType, Keyword, stadiumTypeToString, stringToStadiumType, frontStadiums } from "../../constants/ZoneData"
+import { StadiumType, SeatType, Keyword, stadiumList } from "../../constants/ZoneData"
 
 export interface Props {
   selectedStadium: StadiumType;
@@ -25,8 +25,8 @@ export interface Props {
 const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const handleStadiumSelect = (stadium: string) => {
-    setSelectedStadium(stringToStadiumType[stadium]);
+  const handleStadiumSelect = (stadium: StadiumType) => {
+    setSelectedStadium(stadium);
   };
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
@@ -71,8 +71,8 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
         {/* 야구장 드롭다운 */}
         <div className="flex items-center gap-4 justify-between mt-4">
           <Dropdown
-            options={frontStadiums}
-            selectedOption={stadiumTypeToString[selectedStadium]}
+            options={stadiumList}
+            selectedOption={selectedStadium}
             onSelect={handleStadiumSelect}
           />
           {/* 초보자 구역 가이드 버튼 */}

@@ -45,7 +45,7 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                     >
                         {/** text-center: 텍스트 가운데 정렬 */}
                         <p className="text-sm font-medium text-center py-[16px]">
-                            나는 <strong>1루 홀팀 석</strong>에 <br/>앉고 싶어요
+                            나는 <strong>1루 홈팀 석</strong>에 <br/>앉고 싶어요
                         </p>
                     </div>
                     <div className={`flex justify-center items-center bg-grayscale-5 border rounded-[8px] w-full p-[16px]"

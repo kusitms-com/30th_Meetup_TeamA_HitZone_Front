@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import stadiumDropdownIcon from "../../../assets/webp/stadium_dropdown.webp";
 
+import { StadiumType } from "@/src/constants/ZoneData";
+
 interface DropdownProps {
-  options: string[];
-  selectedOption: string;
-  onSelect: (option: string) => void;
+  options: StadiumType[];
+  selectedOption: StadiumType;
+  onSelect: (option: StadiumType) => void;
 }
 
 export default function Dropdown({ options, selectedOption, onSelect }: DropdownProps) {
