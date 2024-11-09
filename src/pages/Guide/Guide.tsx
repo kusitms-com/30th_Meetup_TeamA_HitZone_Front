@@ -75,7 +75,7 @@ const Guide = () => {
                   onClick={() => handleSectionClick(zone.zoneName)}
                   style={{ color: zone.zoneColor }}
                 >
-                  <div className={`w-3 h-3 rounded-sm ml-3 mr-2 ${zone.zoneColor}`} />
+                  <div className="w-3 h-3 rounded-sm ml-3 mr-2" style={{ backgroundColor: zone.zoneColor }}/>
                   <span className="text-gray-700 text-sm font-medium">{zone.zoneName}</span>
                 </button>
               ))}
