@@ -30,6 +30,7 @@ export interface GuideGetParamsType {
 
 // GET 응답
 export interface GuideGetResponseType {       // interface Zone으로 할지 고민
+    imgUrl: string;
     zoneName: string;
     explanation: string;
     entrance: string;

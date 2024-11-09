@@ -62,6 +62,7 @@ export const handleGuide = async ({stadiumName, zoneName}: GuideGetParamsType) =
     
     // 데이터 파싱
     const parsedData: GuideGetResponseType = {
+      imgUrl: data.imgUrl,
       zoneName: data.zoneName,
       explanation: data.explanation,
       entrance: data.entrance,
