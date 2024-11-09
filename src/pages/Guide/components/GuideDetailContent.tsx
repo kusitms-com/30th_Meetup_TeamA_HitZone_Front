@@ -81,16 +81,18 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
           {/* 세부 정보 섹션 */}
           <div className={`${containerClass} mt-3 space-y-4`}>
             {[
-              { title: "출입구 위치", content: guideData.entrance },
-              { title: "단차 정보", content: guideData.stepSpacing },
-              { title: "좌석 간 간격 (무릎 간격) 정보", content: guideData.seatSpacing },
-              { title: "이용 정보", content: guideData.usageInformation },
+              { title: "출입구 위치", contents: guideData.entrance },
+              { title: "단차 정보", contents: guideData.stepSpacing },
+              { title: "좌석 간 간격 (무릎 간격) 정보", contents: guideData.seatSpacing },
+              { title: "이용 정보", contents: guideData.usageInformation },
             ].map((section, index) => (
               // content가 빈 문자열(null, undefined, "")이 아닌 경우에만 출력
-              section.content ? (
+              section.contents && section.contents.some(content => content.trim() !== "") ? (
                 <div key={index}>
                   <h3 className={sectionTitleClass}>{section.title}</h3>
-                  <p className={sectionContentClass}>{section.content}</p>
+                  {section.contents.map((content: string, contentIndex: number) => (
+                    <p key={contentIndex} className={sectionContentClass}>{content}</p>
+                  ))}
                 </div>
               ) : null
             ))}

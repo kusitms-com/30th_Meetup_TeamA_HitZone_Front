@@ -43,10 +43,10 @@ export interface GuideGetResponseType {       // interface Zone으로 할지 고
     explanation: string;
     firstBaseSide: string;
     thirdBaseSide: string;
-    entrance: string;
-    stepSpacing: string;
-    seatSpacing: string;
-    usageInformation: string;
+    entrance: string[];
+    stepSpacing: string[];
+    seatSpacing: string[];
+    usageInformation: string[];
     tip: string;
     referencesGroup: ReferenceGroup[];
 }
