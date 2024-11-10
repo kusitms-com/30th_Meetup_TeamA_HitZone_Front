@@ -13,6 +13,7 @@ import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 import { useRouter } from 'next/router';  // useRouter를 임포트합니다.
 
 import { StadiumType } from "@/src/constants/ZoneData";
+import NavBar from "@/src/components/layout/NavBar";
 /*
 interface Props extends GuideGetParamsType {
   zoneColor: string;
@@ -134,6 +135,7 @@ export default function GuideDetailContent() {
         </>
       ):
       null}
+      <NavBar/>
     </div>
   );
 }
