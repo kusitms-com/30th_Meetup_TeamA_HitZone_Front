@@ -4,8 +4,8 @@ import { ZoneGetParamsType, ZoneGetResponseType } from "@/src/api/StadiumApiType
 import { handleGetStadiumInfo } from "@/src/api/StadiumApiHandler"; // API 호출 함수
 
 export const useStadiumSelector = () => {
-  const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL);
-  const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL); // 첫 화면은 잠실로 초기화
+  const [selectedSection, setSelectedSection] = useState<string>("");
   const [selectedSectionColor, setSelectedSectionColor] = useState<string>("#000000");
 
   const [zoneNameList, setZoneNameList] = useState<string[]>([]);
@@ -38,7 +38,7 @@ export const useStadiumSelector = () => {
   // 스타디움 선택 핸들러
   const handleStadiumSelect = (stadium: StadiumType) => {
     setSelectedStadium(stadium);
-    setSelectedSection(null);  // 스타디움이 바뀌면 구역을 초기화
+    setSelectedSection("");  // 스타디움이 바뀌면 구역을 초기화
   };
 
   // 구역 클릭 핸들러

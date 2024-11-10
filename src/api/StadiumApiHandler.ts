@@ -42,8 +42,7 @@ export const handleGetStadiumInfo = async ({stadiumName}: ZoneGetParamsType) => 
       })),
     };
 
-    console.log("삥");
-    console.log(stadiumInfo);
+    //console.log(stadiumInfo);
 
     return stadiumInfo;
 

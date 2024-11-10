@@ -10,6 +10,7 @@ import { GuideGetParamsType, GuideGetResponseType, ReferenceGroup, Reference, Zo
 import useModal from '@/src/hooks/useModal';
 import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 
+import { useRouter } from 'next/router';  // useRouter를 임포트합니다.
 
 interface Props extends GuideGetParamsType {
   zoneColor: string;
@@ -39,8 +40,28 @@ export default function GuideDetailContent({stadiumName, zoneName, zoneColor, zo
 
   // 상태 변경될 때마다 호출
   useEffect(() => {
+    console.log(stadiumName);
+    console.log(zoneName);
     handleGuideData();
   }, [stadiumName, zoneName]); // 쿼리 파라미터가 변경될 때마다 실행
+
+
+  const router = useRouter();  // useRouter 훅을 사용하여 router 객체를 가져옵니다.
+  useEffect(() => {
+      // 쿼리 파라미터에서 추천 존 리스트를 가져오기
+      if (router.query.zoneName) {
+          const zoneName = JSON.parse(router.query.zoneName as string);
+          console.log("추천 구역 결과 페이지로 리다이렉트 했슴다: ")
+          console.log(zoneName);
+      }
+      // 쿼리 파라미터에서 추천 존 리스트를 가져오기
+      if (router.query.zoneColor) {
+          const zoneColor = JSON.parse(router.query.zoneColor as string);
+          console.log("추천 구역 결과 페이지로 리다이렉트 했슴다: ")
+          console.log(zoneColor);
+      }
+
+  }, [router.query]); // 쿼리 파라미터가 변경될 때마다 실행
 
   return (
     <div className="relative mb-[84px]">

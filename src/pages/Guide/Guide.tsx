@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, SetStateAction } from "react";
 import Image from "next/image";
 import Header from "../../components/layout/HeaderCenter";
 import NavBar from "../../components/layout/NavBar";
@@ -11,58 +11,53 @@ import { StadiumType, stadiumList } from "@/src/constants/ZoneData";
 import { handleGetStadiumInfo } from "@/src/api/StadiumApiHandler";
 import { ZoneGetParamsType, ZoneGetResponseType, ZoneType } from "@/src/api/StadiumApiType";
 
+interface StadiumInfoProps {
+  selectedStadium: StadiumType;
+  setSelectedStadium: (stadium: SetStateAction<StadiumType>) => void;
+  selectedSection: string;
+  setSelectedSection: (section: SetStateAction<string>) => void;
+  selectedSectionColor: string;
+  setSelectedSectionColor: (color: SetStateAction<string>) => void;
+  zoneNameList: string[];
+  setZoneNameList: (zoneNameList: SetStateAction<string[]>) => void;
+  handleStadiumSelect: (stadium: StadiumType) => void;
+  handleSectionClick: (zoneName: string) => void;
+  stadiumInfo: ZoneGetResponseType | undefined;
+  setStadiumInfo: (stadiumInfo: SetStateAction<ZoneGetResponseType | undefined>) => void;
+}
+import { useRouter } from 'next/router';  // useRouter를 임포트합니다.
 
-const Guide = () => {
-  const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL);
-  const [selectedSection, setSelectedSection] = useState<string | null>(null);
-  const [selectedSectionColor, setSelectedSectionColor] = useState<string>("#000000");
 
-  const handleStadiumSelect = (stadium: StadiumType) => {
-    setSelectedStadium(stadium);
-    setSelectedSection(null);
-  };
-
-  const handleSectionClick = (zoneName: string) => {
-    setSelectedSection(zoneName);
-  };
-
-
-  // zoneName만 추출
-  const [zoneNameList, setZonNameList] = useState<string[]>([]);
-
-  // 스타디움 데이터 관리
-  const [stadiumInfo, setStadiumInfo] = useState<ZoneGetResponseType>();
-  const handleStadiumInfo = async () => {
-    const params: ZoneGetParamsType = {
-      stadiumName: selectedStadium as string,
-    };
-    
-    const stadiumApiData = await handleGetStadiumInfo(params);
-    if(stadiumApiData) {
-      setStadiumInfo(stadiumApiData);
-
-      console.log("did");
-      console.log(stadiumApiData.zones);
-      setZonNameList(stadiumApiData.zones.map(zone => zone.zoneName));
-
-      const selectedZoneColor = stadiumApiData.zones.find(zone => zone.zoneName === selectedSection)?.zoneColor;
-      if(selectedZoneColor) {
-        setSelectedSectionColor(selectedZoneColor);
-      }
+const Guide: React.FC<StadiumInfoProps> = ({
+  selectedStadium,
+  setSelectedStadium,
+  selectedSection,
+  setSelectedSection,
+  selectedSectionColor,
+  setSelectedSectionColor,
+  zoneNameList,
+  setZoneNameList,
+  handleStadiumSelect,
+  handleSectionClick,
+  stadiumInfo,
+  setStadiumInfo
+}) => {
+  
+  const router = useRouter();  // useRouter 훅을 사용하여 router 객체를 가져옵니다.
+  /*
+  useEffect(() => {
+    if (selectedSection) {
+      // selectedSection이 있을 경우, /guide로 리다이렉트
+      router.push({
+        pathname: '/guide/zone`', // 리다이렉트할 경로
+        query: { 
+          zoneName: selectedSection,   // selectedSection을 쿼리 파라미터로 전달
+          zoneColor: selectedSectionColor,  // zoneColor를 쿼리 파라미터로 전달
+        },
+      });
     }
-
-  }
-  
-  useEffect(() => {
-    handleStadiumInfo();
-  }, [selectedStadium]); // 쿼리 파라미터가 변경될 때마다 실행
-
-
-  
-  useEffect(() => {
-    
-    handleStadiumInfo();
-  }, [selectedSection]); // 쿼리 파라미터가 변경될 때마다 실행
+  }, [selectedSection, selectedSectionColor, router]);  // selectedSection이나 selectedSectionColor가 바뀔 때마다 실행
+*/
 
   return (
     <div className="flex flex-col h-screen">
