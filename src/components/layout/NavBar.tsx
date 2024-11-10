@@ -34,9 +34,7 @@ const NavBar = () => {
             key={item.name}
             className="flex flex-col items-center cursor-pointer"
             onClick={() => {
-              if (!isActive) {
-                router.push(item.path);
-              }
+              router.push(item.path);
             }}
           >
             <Image
