@@ -110,9 +110,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
   
   return (
     //<SessionProvider session={session}>
-      <div className="items-center p-4 w-full max-w-[500px] mx-auto">
-          {renderComponent()}
-      </div>
+    <div className="flex flex-col h-screen max-w-[500px] mx-auto">
+      {renderComponent()}
+    </div>
     //</SessionProvider>
   );
 };

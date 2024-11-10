@@ -16,7 +16,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center pb-4 border-b border-grayscale-10 w-full">
+    <div className="flex justify-between items-center p-4 border-b border-grayscale-10 w-full">
       {/* 히트존 로고 */}
       <Image 
         src={HitzoneLogo} 
