@@ -20,6 +20,10 @@ import { ZoneGetResponseType } from "../../api/ResultApiType";
 import { handleProfile, handlePrint } from "../../api/ResultApiHandler";
 import { ProfileGetResponseType } from "../../api/ResultApiType";
 
+// TIP 모달창 관련
+import useModal from '@/src/hooks/useModal';
+import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
+
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
 export interface Props {
@@ -125,6 +129,10 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
     };
 
 
+    // 모달창 이벤트
+    const { isOpen, openModal, closeModal } = useModal();
+
+
     return (
         <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff">
             <div className="relative flex flex-col items-center w-full h-screen ">
@@ -178,22 +186,6 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                             */}
                         </div>
                     </div>
-
-                    {/** Profile 더미데이터 */}
-                    {/*
-                    <div className="ml-[16px]">
-                        <p className="text-lg text-grayscale-90 font-semibold">
-                            나의 야구장 유형은
-                        </p>
-                        <p className="text-3xl text-main-50 font-black relative top-[-5px]">
-                            이러다 공까지 먹어버러
-                        </p>
-                        <div className="relative bg-main-5 text-sm text-main-90 font-medium px-[14px] py-[8px] mt-[2px] rounded-lg max-w-xs text-center">
-                            야구가 참 맛있고 음식이 재밌어요
-                            <div className="absolute top-2 left-[-12px] w-0 h-0 border-b-[12px] border-r-[12px] border-t-transparent border-b-transparent border-r-main-5"></div>
-                        </div>
-                    </div>
-                    */}
                 </div>
 
 
@@ -217,7 +209,16 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                                         <p className="text-md text-grayscale-90 font-semibold mr-[8px]">
                                             {index+1} {zone.name}
                                         </p>
-                                        <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px]"/>
+                                        <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px]" onClick={openModal}/>
+                                        {isOpen && zone.referencesGroup && zone.referencesGroup.length > 0 && (
+                                            <SeatTipDialog
+                                                zoneName={zone.name}
+                                                zoneColor={zone.color}
+                                                tip={zone.tip}
+                                                referencesGroup={zone.referencesGroup[0]} // 첫 번째 referencesGroup만 전달
+                                                onClose={closeModal} // 모달 닫기 함수
+                                            />
+                                        )}
                                     </div>
                                     <div className="bg-main-0 border border-[0px] rounded-[4px] mt-[4px]">
                                         <p className="text-xs text-grayscale-90 font-regular px-[8px] py-[5px]">
@@ -228,57 +229,8 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                             )
                         })
                     ) : (
-                        <div>
-                            {/** 추천 구역 블록 1 */}
-                            <div className="bg-grayscale-5 border border-[0px] rounded-[4px] h-[104px] mt-[12px] p-[12px]">
-                                <Image src={crownGoldIcon} alt="골드 왕관 이미지" className="w-[17px] h-[9px]"/>
-                                <div className="flex w-full justify-start items-center">
-                                    <p className="text-md text-grayscale-90 font-semibold mr-[8px]">
-                                        1 레드석
-                                    </p>
-                                    <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px]"/>
-                                </div>
-                                <div className="bg-main-0 border border-[0px] rounded-[4px] mt-[4px]">
-                                    <p className="text-xs text-grayscale-90 font-regular px-[8px] py-[5px]">
-                                        응원도 적당히 즐길 수 있지만, 야구나 함께 온 동행자와의 대화에도<br/>
-                                        집중할 수 있는 구역
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/** 추천 구역 블록 2 */}
-                            <div className="bg-grayscale-5 border border-[0px] rounded-[4px] h-[104px] mt-[12px] p-[12px]">
-                                <Image src={crownSilverIcon} alt="골드 왕관 이미지" className="w-[17px] h-[9px]"/>
-                                <div className="flex w-full justify-start items-center">
-                                    <p className="text-md text-grayscale-90 font-semibold mr-[8px]">
-                                        2 블루석
-                                    </p>
-                                    <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px]"/>
-                                </div>
-                                <div className="bg-main-0 border border-[0px] rounded-[4px] mt-[4px]">
-                                    <p className="text-xs text-grayscale-90 font-regular px-[8px] py-[5px]">
-                                        언제는 옆 오렌지석과 힘차게 응원하고, 언제는 야구에 집중하며 둘 다<br/>\
-                                        즐길 수 있는 구역이에요!
-                                    </p>
-                                </div>
-                            </div>
-
-
-                            {/** 추천 구역 블록 3 */}
-                            <div className="bg-grayscale-5 border border-[0px] rounded-[4px] mt-[12px] p-[12px]">
-                                <Image src={crownBronzeIcon} alt="골드 왕관 이미지" className="w-[17px] h-[9px]"/>
-                                <div className="flex w-full justify-start items-center">
-                                    <p className="text-md text-grayscale-90 font-semibold mr-[8px]">
-                                        3 네이비석
-                                    </p>
-                                    <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px]"/>
-                                </div>
-                                <div className="bg-main-0 border border-[0px] rounded-[4px] mt-[4px]">
-                                    <p className="text-xs text-grayscale-90 font-regular px-[8px] py-[5px]">
-                                        높은 곳에서 야구를 전체적으로 볼 수 있는 구역이에요!
-                                    </p>
-                                </div>
-                            </div>
+                        <div className="bg-grayscale-5 border border-[0px] rounded-[4px] h-[104px] mt-[12px] p-[12px]">
+                            추천 구역이 없습니다!
                         </div>
                     )}
                 </div>
