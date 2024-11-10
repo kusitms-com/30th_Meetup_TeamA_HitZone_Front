@@ -11,7 +11,8 @@ import { profileURL, ProfileGetParamsType,
 // 조회: GET 요청 및 응답받기
 export const getProfile = async ({resultId}: ProfileGetParamsType) => {
   try {
-    const response = await AxiosInstance.get(`${V1_URL}${profileURL}`, 
+    const response = await AxiosInstance.get(`https://git.hitzone.store/api/v1/results/profile`, 
+//    const response = await AxiosInstance.get(`${V1_URL}${profileURL}`, 
       // 쿼리 파라미터 전달
       {
         params: {resultId},
@@ -37,7 +38,8 @@ export const postZone = async (
   {stadium, preference, clientKeywords}: SavePostRequestType) => {
   
   try {
-    const response = await AxiosInstance.post(`${V1_URL}${saveURL}`, 
+    const response = await AxiosInstance.post(`https://git.hitzone.store/api/v1/results/save`, 
+//    const response = await AxiosInstance.post(`${V1_URL}${saveURL}`, 
       // Request Data 전달
       {
         stadium, preference, clientKeywords
@@ -64,7 +66,8 @@ export const postZone = async (
 // 조회: GET 요청 및 응답받기
 export const getZones = async ({resultId, count}: ZoneGetParamsType) => {
   try {
-    const response = await AxiosInstance.get(`${V1_URL}${zonesURL}`, 
+    const response = await AxiosInstance.get(`https://git.hitzone.store/api/v1/results/zones`, 
+//    const response = await AxiosInstance.get(`${V1_URL}${zonesURL}`, 
       // 쿼리 파라미터 전달
       {
         params: {resultId, count},

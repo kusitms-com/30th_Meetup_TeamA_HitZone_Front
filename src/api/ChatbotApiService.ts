@@ -13,7 +13,8 @@ export const postClova = async (
   {message}: ClovaPostRequestType) => {
   
   try {
-    const response = await AxiosInstance.post(`${V1_URL}${clovaURL}`, 
+    const response = await AxiosInstance.post(`https://git.hitzone.store/api/v1/chatbot/clova`, 
+//    const response = await AxiosInstance.post(`${V1_URL}${clovaURL}`, 
       // Request Data 전달
       {
         message,
@@ -40,7 +41,8 @@ export const postClova = async (
 // 조회: GET 요청 및 응답받기
 export const getGuide = async ({stadiumName, categoryName, orderNumber}: GuideGetParamsType) => {
   try {
-    const response = await AxiosInstance.get(`${V1_URL}${guideURL}`, 
+    const response = await AxiosInstance.get(`https://git.hitzone.store/api/v1/chatbot/guide`, 
+//    const response = await AxiosInstance.get(`${V1_URL}${guideURL}`, 
       // 쿼리 파라미터 전달
       {
         params: {stadiumName, categoryName, orderNumber},

@@ -7,11 +7,11 @@ import { zoneURL, ZoneGetParamsType,
 
 
 /** 백엔드와 API 연동 */
-// 안 쓸거 같긴 해
-// 조회: GET 요청 및 응답받기
-export const getZone = async ({stadiumName}: ZoneGetParamsType) => {
+// 선택된 스타디움 정보 조회: GET 요청 및 응답받기
+export const getStadiumInfo = async ({stadiumName}: ZoneGetParamsType) => {
   try {
-    const response = await AxiosInstance.get(`${V1_URL}${zoneURL}`, 
+    const response = await AxiosInstance.get(`https://git.hitzone.store/api/v1/stadium/zones`, 
+//    const response = await AxiosInstance.get(`${V1_URL}${zoneURL}`, 
       // 쿼리 파라미터 전달
       {
         params: {stadiumName},
@@ -32,10 +32,11 @@ export const getZone = async ({stadiumName}: ZoneGetParamsType) => {
 
 
 
-// 조회: GET 요청 및 응답받기
+// 선택된 구역별 가이드 조회: GET 요청 및 응답받기
 export const getGuide = async ({stadiumName, zoneName}: GuideGetParamsType) => {
   try {
-    const response = await AxiosInstance.get(`${V1_URL}${guideURL}`, 
+    const response = await AxiosInstance.get(`https://git.hitzone.store/api/v1/stadium/zones/guide`, 
+//    const response = await AxiosInstance.get(`${V1_URL}${guideURL}`, 
       // 쿼리 파라미터 전달
       {
         params: {stadiumName, zoneName},
