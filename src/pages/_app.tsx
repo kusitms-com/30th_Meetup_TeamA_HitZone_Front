@@ -31,6 +31,7 @@ import Guide from './Guide/Guide';
 import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
 import Chatbot from './Chatbot/Chatbot';
+import GuideDetailContent from './Guide/components/GuideDetailContent';
 
 
 // 전역 소셜로그인 상태 관리
@@ -41,10 +42,30 @@ import { StadiumType, SeatType, Keyword } from "../constants/ZoneData"
 
 import { ZoneGetResponseType } from "../api/ResultApiType";
 
+import { useStadiumSelector } from '@/src/hooks/useStadiumSelector';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pageProps } }) => {
-  // 스타디움 관리
-  const [selectedStadium, setSelectedStadium] = useState(StadiumType.JAMSIL);   // 첫 화면은 잠실로 초기화
+  // 메인홈 스타디움 관리
+  const {
+    selectedStadium: selectedMainStadium,
+    setSelectedStadium: setSelectedMainStadium
+  } = useStadiumSelector();
+
+  // 가이드 스타디움 관리
+  const {
+    selectedStadium: selectedGuideStadium,
+    setSelectedStadium: setSelectedGuideStadium,
+    selectedSection: selectedGuideSection,
+    setSelectedSection: setSelectedGuideSection,
+    selectedSectionColor: selectedGuideSectionColor,
+    setSelectedSectionColor: setSelectedGuideSectionColor,
+    zoneNameList: guideZoneNameList,
+    setZoneNameList: setGuideZoneNameList,
+    handleStadiumSelect: handleGuideStadiumSelect,
+    handleSectionClick: handleGuideSectionClick,
+    stadiumInfo: guideStadiumInfo,
+    setStadiumInfo: setGuideStadiumInfo
+  } = useStadiumSelector();
 
   // 백엔드에 추천 질문 데이터 전송 후 반환받은 resultId 값 저장하는 변수/함수
   const [resultId, setResultId] = useState<number | null>(null);  //useState(0);  // 0 또는 -1로 초기화'
@@ -69,13 +90,15 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/onboarding':
             return <SignupPage />;
         case '/':
-            return <Main selectedStadium={selectedStadium} setSelectedStadium={setSelectedStadium}/>;
+            return <Main selectedStadium={selectedMainStadium} setSelectedStadium={setSelectedMainStadium}/>;
         case '/recommend/question':
-            return <Question stadium={selectedStadium} setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
+            return <Question stadium={selectedMainStadium} setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/recommend/results':
-            return <Result stadium={selectedStadium} resultId={resultId} setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
+            return <Result stadium={selectedMainStadium} resultId={resultId} setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/guide':
-            return <Guide />;
+            return <Guide/>
+        case '/guide/zone':
+            return <GuideDetailContent />
         case '/culture':
             return <Culture />;
         case '/mypage':

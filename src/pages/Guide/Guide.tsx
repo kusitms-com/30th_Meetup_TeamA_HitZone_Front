@@ -12,25 +12,29 @@ import { handleGetStadiumInfo } from "@/src/api/StadiumApiHandler";
 import { ZoneGetParamsType, ZoneGetResponseType, ZoneType } from "@/src/api/StadiumApiType";
 
 
+import { useStadiumSelector } from '@/src/hooks/useStadiumSelector';
+import { useRouter } from 'next/router';  // useRouter를 임포트합니다.
+
 const Guide = () => {
-  const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL);
-  const [selectedSection, setSelectedSection] = useState<string | null>(null);
 
-  const handleStadiumSelect = (stadium: StadiumType) => {
-    setSelectedStadium(stadium);
-    setSelectedSection(null);
-  };
+  // 가이드 스타디움 관리
+  const {
+    selectedStadium,
+    setSelectedStadium,
+    selectedSection,
+    setSelectedSection,
+    selectedSectionColor,
+    setSelectedSectionColor,
+    zoneNameList,
+    setZoneNameList,
+    handleStadiumSelect,
+    //handleSectionClick,
+    stadiumInfo,
+    setStadiumInfo
+  } = useStadiumSelector();
 
-  const handleSectionClick = (zoneName: string) => {
-    setSelectedSection(zoneName);
-  };
+  // 스타디움 선택시 API 연동
 
-
-  // zoneName만 추출
-  const [zoneNameList, setZonNameList] = useState<string[]>([]);
-
-  // 스타디움 데이터 관리
-  const [stadiumInfo, setStadiumInfo] = useState<ZoneGetResponseType>();
   const handleStadiumInfo = async () => {
     const params: ZoneGetParamsType = {
       stadiumName: selectedStadium as string,
@@ -39,17 +43,64 @@ const Guide = () => {
     const stadiumApiData = await handleGetStadiumInfo(params);
     if(stadiumApiData) {
       setStadiumInfo(stadiumApiData);
+      //console.log(stadiumApiData.zones);
+      setZoneNameList(stadiumApiData.zones.map(zone => zone.zoneName));
 
-      console.log("did");
-      console.log(stadiumApiData.zones);
-      setZonNameList(stadiumApiData.zones.map(zone => zone.zoneName));
+      const selectedZoneColor = stadiumApiData.zones.find(zone => zone.zoneName === selectedSection)?.zoneColor;
+      if(selectedZoneColor) {
+        setSelectedSectionColor(selectedZoneColor);
+      }
     }
-
   }
-  
   useEffect(() => {
     handleStadiumInfo();
   }, [selectedStadium]); // 쿼리 파라미터가 변경될 때마다 실행
+  // Zone 클릭시 가이드 세부 페이지로 이동 및 API 데이터를 쿼리 파라미터로 전달
+  const router = useRouter();
+  const handleSectionClick = (selectedZone: string) => {
+    setSelectedSection(selectedZone);
+    if(stadiumInfo){
+      const selectedZoneColor = stadiumInfo.zones.find(zone => zone.zoneName === selectedSection)?.zoneColor;
+      
+      if(selectedZoneColor) {
+        setSelectedSectionColor(selectedZoneColor);
+      }
+    }
+  };
+
+  useEffect(() => {
+    // zone을 클릭했으면
+    if (selectedSection !== "" && selectedSectionColor !== "") {
+      moveDetailPage();
+    }
+  }, [selectedSection, selectedSectionColor]);
+
+  const moveDetailPage = () => {
+    // 선택된 섹션에 따라 리다이렉트
+    router.push({
+      pathname: '/guide/zone',  // 리다이렉트할 경로
+      query: {                  // 쿼리 파라미터 전달
+        stadiumName: selectedStadium,
+        zoneName: selectedSection,
+        zoneColor: selectedSectionColor,
+        zoneNameList: zoneNameList,
+      },
+    });
+  
+    setTimeout(() => {
+      setSelectedSection("");
+      setSelectedSectionColor("");
+    }, 100);  // 100ms 지연 후 초기화
+  }
+
+  // router가 '/guide/zone' 경로로 이동할 때 상태 초기화
+  useEffect(() => {
+    console.log(router.pathname);
+    if (router.pathname !== '/guide') {
+      setSelectedSection("");
+      setSelectedSectionColor("");
+    }
+  }, [router.pathname]);
 
 
   return (
@@ -58,9 +109,9 @@ const Guide = () => {
       <div className="flex-1 overflow-y-auto pb-20 mt-[15px] px-4">
         {(selectedSection ? (
           <div>
-            <GuideDetailContent stadiumName={selectedStadium} zoneName={selectedSection} zoneNameList={zoneNameList}/>
+            <GuideDetailContent stadiumName={selectedStadium} zoneName={selectedSection} zoneColor={selectedSectionColor} zoneNameList={zoneNameList} onSelectZone={handleSectionClick}/>
           </div>
-        ): stadiumInfo ? (
+        : */stadiumInfo ? (
           <>
             <Dropdown options={stadiumList} selectedOption={selectedStadium} onSelect={handleStadiumSelect} />
             <div className="mt-4">
