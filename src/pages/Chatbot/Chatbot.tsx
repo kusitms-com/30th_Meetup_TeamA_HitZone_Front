@@ -35,13 +35,15 @@ const Chatbot = () => {
 
   return (
     <>
-      <BackLogoBar />
-      <div className="flex justify-center items-center h-screen bg-grayscale-50">
+      <div>
+        <BackLogoBar />
+      </div>
+      <div className="flex justify-center items-center h-screen bg-grayscale-50 mt-[55px]">
         <div className="flex flex-col h-full max-w-[500px] w-full bg-grayscale-10">
           <div className="flex-1 p-4 overflow-y-auto mb-10">
       
             {/* 오늘 날짜 */}
-            <div className="flex justify-center mt-1 mb-6">
+            <div className="flex justify-center mb-6">
               <span className="bg-grayscale-5 px-6 py-[3px] text-grayscale-90 text-xs font-regular rounded-full">
                 {currentDate}
               </span>
