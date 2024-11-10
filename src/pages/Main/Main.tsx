@@ -94,7 +94,7 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
         </div>
 
         {/* 구장 정보 */}
-        <StadiumInfo stadium={selectedStadium} />
+        <StadiumInfo stadiumName={selectedStadium} />
 
         {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
         <SeatRecommendButton stadium={selectedStadium} />
