@@ -21,7 +21,7 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
     };
 
     return (
-        <div className="w-full px-[16px]">
+        <div className="w-full max-w-[500px] px-[16px] overflow-hidden">
             {/** 상태 바: 1/4 단계 */}
             <div className="py-[24px]">
                 <div className="flex items-center justify-start bg-grayscale-5 rounded-r-full overflow-hidden w-full h-[7px] ">
@@ -72,7 +72,7 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                     <Image src={ballPinkIcon} alt="핑크 야구공 이미지" width={66} height={66}
                         className="absolute bottom-[40px] left-[13%] transform -translate-x-1/2"
                     />
-                    <Image src={stickIcon} alt="배트 이미지" width={285} height={408}
+                    <Image src={stickIcon} alt="배트 이미지" width={120} height={184}
                         className="absolute bottom-[40px] left-[85%] transform -translate-x-1/2"
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
