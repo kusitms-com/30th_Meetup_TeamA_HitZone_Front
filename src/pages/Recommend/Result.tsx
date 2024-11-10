@@ -148,16 +148,34 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                     </div>
 
                     {/** Profile API 연동 데이터 */}
-                    <div className="ml-[16px]">
+                    <div className="flex-grow ml-[16px]">
                         <p className="text-lg text-grayscale-90 font-semibold">
                             나의 야구장 유형은
                         </p>
                         <p className="text-3xl text-main-50 font-black relative top-[-5px]">
                             {profileData?.nickname}
                         </p>
-                        <div className="relative bg-main-5 text-sm text-main-90 font-medium px-[14px] py-[8px] mt-[2px] rounded-lg max-w-xs text-center">
+                        <div className="relative text-start bg-main-5 text-sm text-main-90 font-medium px-[14px] py-[8px] mt-[2px] rounded-lg w-full text-center">
+                            <div className="flex gap-[6px] mb-[6px]">
+                                {/** 해시 태그 */}
+                                {profileData?.hashTags !== null ? (profileData?.hashTags.map((hashTag, index) => (
+                                    <p className="text-xs px-[6px] py-[2px] text-grayscale-90 font-medium bg-main-0 border border-0 rounded-md">
+                                        {hashTag}
+                                    </p>
+                                ))
+                                ) : (
+                                    <>
+                                    </>
+                                )}
+                            </div>
                             {profileData?.type}
-                            <div className="absolute top-2 left-[-12px] w-0 h-0 border-b-[12px] border-r-[12px] border-t-transparent border-b-transparent border-r-main-5"></div>
+                            <div className="absolute top-2 left-[-12px] w-0 h-0 border-b-[12px] border-r-[12px] border-t-transparent border-b-transparent border-r-main-5"/>
+
+                            {/** 문구
+                            <p>
+                                {profileData?.explanation}
+                            </p>
+                            */}
                         </div>
                     </div>
 
@@ -179,64 +197,10 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                 </div>
 
 
-                {/** 야구장 태그 */}
-                <div className="w-full px-[16px]">
-                    {/** 회색 상자 */}
-                    <div className="bg-grayscale-5 border border-[0px] rounded-[8px] w-full h-[116px] p-[16px] mt-[15px]">
-                        <div className="flex justify-center items-center gap-[12px]">
-                                {/** 해시 태그 */}
-                                {/** Profile API 연동 데이터 */}
-                                {profileData?.hashTags !== null ? (profileData?.hashTags.map((hashTag, index) => (
-                                    <div className="bg-main-0 border border-[0px] rounded-[8px] px-[10px] py-[6px]">
-                                        <p className="text-xs text-grayscale-90 font-medium">
-                                            {hashTag}
-                                        </p>
-                                    </div>
-                                ))
-                                ) : (
-                                    <>
-                                    </>
-                                )}
-
-                                {/** Profile 더미데이터 */}
-                                {/*
-                                <div className="bg-main-0 border border-[0px] rounded-[8px] px-[10px] py-[6px]">
-                                    <p className="text-xs text-grayscale-90 font-medium">
-                                        #먹으러왔는데야구도한다?
-                                    </p>
-                                </div>
-                                <div className="bg-main-0 border border-[0px] rounded-[8px] px-[10px] py-[6px]">
-                                    <p className="text-xs text-grayscale-90 font-medium">
-                                        #그래서여기구장맛있는거뭐라고?
-                                    </p>
-                                </div>
-                                */}
-                            </div>
-
-                        {/** 문구 */}
-                        {/** Profile API 연동 데이터 */}
-                        <div className="flex justify-center items-center text-center mt-[12px]">
-                            <p className="text-xs text-grayscale-90 font-medium">
-                                {profileData?.explanation}
-                            </p>
-                        </div>
-                        {/** Profile 더미데이터 */}
-                        {/*
-                        <div className="flex justify-center items-center text-center mt-[12px]">
-                            <p className="text-xs text-grayscale-90 font-medium">
-                                야구장에서 먹는 재미까지 놓치지 않는 당신! <br/>
-                                야구장을 두 배로 재밌게 즐기는군요?
-                            </p>
-                        </div>
-                        */}
-                    </div>
-                </div>
-
-
                 {/** 추천 구역 */}
-                <div className="w-full px-[16px]">
+                <div className="w-full px-[16px] mt-[32px]">
                     {/** 타이틀 */}
-                    <p className="text-md text-grayscale-90 font-bold mt-[12px]">
+                    <p className="text-md text-grayscale-90 font-bold ">
                         나의 추천 구역
                     </p>
                     
