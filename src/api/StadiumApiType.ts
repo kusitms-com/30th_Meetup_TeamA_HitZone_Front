@@ -12,7 +12,14 @@ export interface ZoneGetParamsType {
 // GET 응답
 // response.paylode
 export interface ZoneGetResponseType { 
-    names: string[];
+    imgUrl: string;
+    introduction: string;
+    zones: ZoneType[];
+}
+
+export interface ZoneType { 
+    zoneName: string;
+    zoneColor: string;
 }
 
 
@@ -34,10 +41,12 @@ export interface GuideGetResponseType {       // interface Zone으로 할지 고
     zoneName: string;
     zoneColor: string;
     explanation: string;
-    entrance: string;
-    stepSpacing: string;
-    seatSpacing: string;
-    usageInformation: string;
+    firstBaseSide: string;
+    thirdBaseSide: string;
+    entrance: string[];
+    stepSpacing: string[];
+    seatSpacing: string[];
+    usageInformation: string[];
     tip: string;
     referencesGroup: ReferenceGroup[];
 }
@@ -49,7 +58,7 @@ export interface ReferenceGroup {
 
 export interface Reference {
     title: string;
-    content: string;
+    contents: string[];
 }
 
 export interface GuideDetail {

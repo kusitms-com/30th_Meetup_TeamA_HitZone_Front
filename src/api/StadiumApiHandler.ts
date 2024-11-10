@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-
 // API 연동 함수
 import { getStadiumInfo, getGuide } from './StadiumApiService'; // API 함수들 가져오기
-import { ZoneGetParamsType, ZoneGetResponseType,
+import { ZoneGetParamsType, ZoneGetResponseType, ZoneType,
          GuideGetParamsType, GuideGetResponseType, ReferenceGroup, Reference } from "./StadiumApiType";
-
-import { StadiumType, SeatType, Keyword } from "../constants/ZoneData";
 
 
 ////////////////////////////////////////////////////////
@@ -23,6 +19,7 @@ export const handleGetStadiumInfo = async ({stadiumName}: ZoneGetParamsType) => 
     console.log("🐻 스타디움 정보를 받았습니당: ");
     console.log(response);
 
+    const payload = response.payload;
     // 파싱 (swagger 보면서 작성)
     /** response 참고
      * {
@@ -30,11 +27,23 @@ export const handleGetStadiumInfo = async ({stadiumName}: ZoneGetParamsType) => 
         "code": "201",
         "message": "추천 받은 유저성향과 구역을 저장하였습니다.",
         "payload": {
-          "names": []
+          "imgUrl": "",
+          "introduction": "",
+          "zones": []
         }
       }
      */
-    const stadiumInfo = response.payload;
+    const stadiumInfo: ZoneGetResponseType = {
+      imgUrl: payload.imgUrl,
+      introduction: payload.introduction,
+      zones: payload.zones.map((zone: any) => ({
+        zoneName: zone.zoneName,
+        zoneColor: zone.zoneColor,
+      })),
+    };
+
+    console.log("삥");
+    console.log(stadiumInfo);
 
     return stadiumInfo;
 
@@ -66,6 +75,8 @@ export const handleGuide = async ({stadiumName, zoneName}: GuideGetParamsType) =
       zoneName: data.zoneName,
       zoneColor: data.zoneColor,
       explanation: data.explanation,
+      firstBaseSide: data.firstBaseSide,
+      thirdBaseSide: data.thirdBaseSide,
       entrance: data.entrance,
       stepSpacing: data.stepSpacing,
       seatSpacing: data.seatSpacing,
@@ -75,7 +86,7 @@ export const handleGuide = async ({stadiumName, zoneName}: GuideGetParamsType) =
         groupTitle: group.groupTitle,
         references: group.references.map((ref: any) => ({
           title: ref.title,
-          content: ref.content,
+          contents: ref.contents,
         }))
       }))
     };

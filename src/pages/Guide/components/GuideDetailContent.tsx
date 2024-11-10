@@ -5,13 +5,17 @@ import SeatDropdown from "./SeatDropdown";
 import tipIcon from "../../../assets/svg/tip_button.svg";
 
 import { handleGuide } from "@/src/api/StadiumApiHandler";
-import { GuideGetParamsType, GuideGetResponseType, ReferenceGroup, Reference } from "@/src/api/StadiumApiType";
+import { GuideGetParamsType, GuideGetResponseType, ReferenceGroup, Reference, ZoneType } from "@/src/api/StadiumApiType";
 
 import useModal from '@/src/hooks/useModal';
 import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 
 
-export default function GuideDetailContent({stadiumName, zoneName}: GuideGetParamsType) {
+interface Props extends GuideGetParamsType {
+  zoneNameList: string[];
+}
+
+export default function GuideDetailContent({stadiumName, zoneName, zoneNameList}: Props) {
   // 공통 클래스 정의
   const containerClass = "bg-grayscale-0 p-3 rounded-lg";
   const sectionTitleClass = "text-sm font-semibold text-grayscale-80 bg-gray-100 px-2 py-1 rounded inline-block";
@@ -36,7 +40,6 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
     handleGuideData();
   }, [stadiumName, zoneName]); // 쿼리 파라미터가 변경될 때마다 실행
 
-
   return (
     <div className="relative mb-[84px]">
     {/* 가이드 데이터가 null이 아닐 때 렌더링 */}
@@ -45,7 +48,7 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
         {/* 좌석 선택 드롭다운 및 Tip 버튼 */}
         <div className="flex items-center mb-4">
             <SeatDropdown
-              options={["레드석", "블루석", "오렌지석", "네이비석", "프리미엄석", "테이블석", "익사이팅석", "외야그린석"]}
+              options={zoneNameList}
               selectedOption={guideData.zoneName}
               onSelect={(option) => console.log(option)}
             />
@@ -69,7 +72,7 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
         </div>
 
         {/* 구장 정보 */}
-        <StadiumInfo stadium={guideData.zoneName} />
+        <StadiumInfo stadiumName={stadiumName} firstBase={guideData.firstBaseSide} thirdBase={guideData.thirdBaseSide} />
 
         <div className="bg-grayscale-5 p-4 rounded-lg mt-4">
           {/* 상단 타이틀 섹션 */}
@@ -81,14 +84,20 @@ export default function GuideDetailContent({stadiumName, zoneName}: GuideGetPara
           {/* 세부 정보 섹션 */}
           <div className={`${containerClass} mt-3 space-y-4`}>
             {[
-              { title: "출입구 위치", content: guideData.entrance },
-              { title: "단차 정보", content: guideData.stepSpacing },
-              { title: "좌석 간 간격 (무릎 간격) 정보", content: guideData.seatSpacing },
+              { title: "출입구 위치", contents: guideData.entrance },
+              { title: "단차 정보", contents: guideData.stepSpacing },
+              { title: "좌석 간 간격 (무릎 간격) 정보", contents: guideData.seatSpacing },
+              { title: "이용 정보", contents: guideData.usageInformation },
             ].map((section, index) => (
-              <div key={index}>
-                <h3 className={sectionTitleClass}>{section.title}</h3>
-                <p className={sectionContentClass}>{section.content}</p>
-              </div>
+              // content가 빈 문자열(null, undefined, "")이 아닌 경우에만 출력
+              section.contents && section.contents.some(content => content.trim() !== "") ? (
+                <div key={index}>
+                  <h3 className={sectionTitleClass}>{section.title}</h3>
+                  {section.contents.map((content: string, contentIndex: number) => (
+                    <p key={contentIndex} className={sectionContentClass}>{content}</p>
+                  ))}
+                </div>
+              ) : null
             ))}
           </div>
         </div>
