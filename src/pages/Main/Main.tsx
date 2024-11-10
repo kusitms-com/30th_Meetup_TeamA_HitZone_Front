@@ -27,10 +27,8 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false); // 준비 중 팝업 상태
 
   const handleStadiumSelect = (stadium: StadiumType) => {
-    // 준비 중인 구장을 선택했을 경우 팝업을 띄웁니다.
-    if (stadium !== StadiumType.JAMSIL && stadium !== StadiumType.SUWON_KT) {
-      setIsPopupOpen(true);
-    } else {
+    // 선택 가능한 구장인지 확인
+    if (stadium === StadiumType.JAMSIL || stadium === StadiumType.SUWON_KT) {
       setSelectedStadium(stadium);
     }
   };
