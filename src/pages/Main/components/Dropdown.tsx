@@ -34,21 +34,23 @@ export default function Dropdown({ options, selectedOption, onSelect }: Dropdown
           <ul className="list-none">
             {options.map((option, index) => {
               const isSelected = option === selectedOption;
-              const isGrayBackground = index > 1;
+              const isAvailable = option === StadiumType.JAMSIL || option === StadiumType.SUWON_KT;
 
               return (
                 <li
                   key={option}
                   onClick={() => {
-                    onSelect(option);
-                    setIsDropdownOpen(false);
+                    if (isAvailable) { // 선택 가능할 때만 동작
+                      onSelect(option);
+                      setIsDropdownOpen(false);
+                    }
                   }}
                   className={`px-4 py-[10px] cursor-pointer
-                    ${isSelected ? "bg-main-5 text-main-30 font-semibold" : 
-                      isGrayBackground ? "bg-[#000000] bg-opacity-50 text-grayscale-80" : ""}
+                    ${isSelected ? "bg-main-5 text-main-30 font-semibold" : ""}
+                    ${!isAvailable ? "bg-[#000000] bg-opacity-50 text-grayscale-80 cursor-not-allowed" : ""}
                     ${index === 0 ? "rounded-t-lg" : ""}
                     ${index === options.length - 1 ? "rounded-b-lg" : ""}
-                    ${!isSelected && "hover:bg-gray-100"}
+                    ${!isSelected && isAvailable && "hover:bg-gray-100"}
                   `}
                 >
                   {option}

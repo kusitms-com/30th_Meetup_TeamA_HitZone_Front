@@ -38,10 +38,10 @@ const Guide = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col w-full">
       <Header />
 
-      <div className="flex-1 overflow-y-auto mt-[15px]">
+      <div className="flex-1 overflow-y-auto pb-20 mt-[15px] px-4">
         {selectedSection ? (
           <div>
             <GuideDetailContent stadiumName={StadiumType.JAMSIL} zoneName="레드석" />
