@@ -12,13 +12,17 @@ import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 
 import { useRouter } from 'next/router';  // useRouter를 임포트합니다.
 
+import { StadiumType } from "@/src/constants/ZoneData";
+/*
 interface Props extends GuideGetParamsType {
   zoneColor: string;
   zoneNameList: string[];
   onSelectZone: (option: string) => void;
 }
+*/
 
-export default function GuideDetailContent({stadiumName, zoneName, zoneColor, zoneNameList, onSelectZone}: Props) {
+//export default function GuideDetailContent({stadiumName, zoneName, zoneColor, zoneNameList, onSelectZone}: Props) {
+export default function GuideDetailContent() {
   // 공통 클래스 정의
   const containerClass = "bg-grayscale-0 p-3 rounded-lg";
   const sectionTitleClass = "text-sm font-semibold text-grayscale-80 bg-gray-100 px-2 py-1 rounded inline-block";
@@ -27,41 +31,43 @@ export default function GuideDetailContent({stadiumName, zoneName, zoneColor, zo
   // 모달창 이벤트
   const { isOpen, openModal, closeModal } = useModal();
 
+  // 쿼리 파라미터에서 값 가져오기
+  const router = useRouter();  // useRouter 훅을 사용하여 router 객체를 가져옵니다.
+  const { stadiumName, zoneName, zoneColor, zoneNameList } = router.query as {
+    stadiumName?: StadiumType;
+    zoneName?: string;
+    zoneColor?: string;
+    zoneNameList?: string[];
+  };
+  
+  const [selectedZone, setSelectedZone] = useState<string>("");
+  
   // 가이드 데이터 관리
   const [guideData, setGuideData] = useState<GuideGetResponseType>();
   const handleGuideData = async () => {
-    // API 호출
-    const guideData = await handleGuide({stadiumName, zoneName});
-
-    if (guideData) {  // undefined가 아니면 처리
-      setGuideData(guideData);
+    if(typeof stadiumName === 'string' && selectedZone) {
+      // API 호출
+      const guideData = await handleGuide({stadiumName, zoneName:selectedZone});
+      
+      if (guideData) {  // undefined가 아니면 처리
+        setGuideData(guideData);
+      }
     }
   }
 
-  // 상태 변경될 때마다 호출
+  // 상태 변경될 때마다 실행
+  const handleZoneClick = (zoneName: string) => {
+    setSelectedZone(zoneName);
+  };
   useEffect(() => {
-    console.log(stadiumName);
-    console.log(zoneName);
+    if(zoneName)
+      handleZoneClick(zoneName);
+  }, [stadiumName, zoneName]); // 쿼리 파라미터가 변경될 때마다 API 호출
+
+  useEffect(() => {
     handleGuideData();
-  }, [stadiumName, zoneName]); // 쿼리 파라미터가 변경될 때마다 실행
+  }, [selectedZone]); // 쿼리 파라미터가 변경될 때마다 API 호출
 
-
-  const router = useRouter();  // useRouter 훅을 사용하여 router 객체를 가져옵니다.
-  useEffect(() => {
-      // 쿼리 파라미터에서 추천 존 리스트를 가져오기
-      if (router.query.zoneName) {
-          const zoneName = JSON.parse(router.query.zoneName as string);
-          console.log("추천 구역 결과 페이지로 리다이렉트 했슴다: ")
-          console.log(zoneName);
-      }
-      // 쿼리 파라미터에서 추천 존 리스트를 가져오기
-      if (router.query.zoneColor) {
-          const zoneColor = JSON.parse(router.query.zoneColor as string);
-          console.log("추천 구역 결과 페이지로 리다이렉트 했슴다: ")
-          console.log(zoneColor);
-      }
-
-  }, [router.query]); // 쿼리 파라미터가 변경될 때마다 실행
 
   return (
     <div className="relative mb-[84px]">
@@ -71,10 +77,10 @@ export default function GuideDetailContent({stadiumName, zoneName, zoneColor, zo
         {/* 좌석 선택 드롭다운 및 Tip 버튼 */}
         <div className="flex items-center mb-4">
             <SeatDropdown
-              options={zoneNameList}
-              selectedOption={guideData.zoneName}
-              onSelect={onSelectZone}
-              selectedColor={zoneColor}
+              options={zoneNameList?? []}
+              selectedOption={selectedZone}
+              onSelect={handleZoneClick}
+              selectedColor={guideData.zoneColor?? zoneColor}
             />
             <button className="ml-auto w-[54px] h-[30px] flex items-center justify-center">
               <Image src={tipIcon} alt="Tip" width={54} height={30} onClick={openModal} />
@@ -96,7 +102,7 @@ export default function GuideDetailContent({stadiumName, zoneName, zoneColor, zo
         </div>
 
         {/* 구장 정보 */}
-        <StadiumInfo stadiumName={stadiumName} firstBase={guideData.firstBaseSide} thirdBase={guideData.thirdBaseSide} />
+        <StadiumInfo stadiumName={stadiumName?? ""} firstBase={guideData.firstBaseSide} thirdBase={guideData.thirdBaseSide} />
 
         <div className="bg-grayscale-5 p-4 rounded-lg mt-4">
           {/* 상단 타이틀 섹션 */}

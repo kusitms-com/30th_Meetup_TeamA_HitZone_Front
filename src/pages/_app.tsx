@@ -96,28 +96,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/recommend/results':
             return <Result stadium={selectedMainStadium} resultId={resultId} setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/guide':
-            return <Guide
-              selectedStadium={selectedGuideStadium}
-              setSelectedStadium={setSelectedGuideStadium}
-              selectedSection={selectedGuideSection}
-              setSelectedSection={setSelectedGuideSection}
-              selectedSectionColor={selectedGuideSectionColor}
-              setSelectedSectionColor={setSelectedGuideSectionColor}
-              zoneNameList={guideZoneNameList}
-              setZoneNameList={setGuideZoneNameList}
-              handleStadiumSelect={handleGuideStadiumSelect}
-              handleSectionClick={handleGuideSectionClick}
-              stadiumInfo={guideStadiumInfo}
-              setStadiumInfo={setGuideStadiumInfo}
-            />
+            return <Guide/>
         case '/guide/zone':
-            return <GuideDetailContent
-              stadiumName={selectedGuideStadium}
-              zoneName={selectedGuideSection}
-              zoneColor={selectedGuideSectionColor}
-              zoneNameList={guideZoneNameList}
-              onSelectZone={handleGuideSectionClick}
-            />
+            return <GuideDetailContent />
         case '/culture':
             return <Culture />;
         case '/mypage':

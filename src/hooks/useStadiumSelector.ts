@@ -6,10 +6,13 @@ import { handleGetStadiumInfo } from "@/src/api/StadiumApiHandler"; // API 호�
 export const useStadiumSelector = () => {
   const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL); // 첫 화면은 잠실로 초기화
   const [selectedSection, setSelectedSection] = useState<string>("");
-  const [selectedSectionColor, setSelectedSectionColor] = useState<string>("#000000");
+  const [selectedSectionColor, setSelectedSectionColor] = useState<string>("");
 
+  // zoneName만 추출
   const [zoneNameList, setZoneNameList] = useState<string[]>([]);
-  const [stadiumInfo, setStadiumInfo] = useState<ZoneGetResponseType | undefined>(undefined);
+
+  // 스타디움 API 데이터 관리
+  const [stadiumInfo, setStadiumInfo] = useState<ZoneGetResponseType>();
 
   // 스타디움 변경 시, 스타디움 정보 및 구역명 리스트를 가져옵니다.
   const handleStadiumInfo = async () => {
@@ -38,13 +41,15 @@ export const useStadiumSelector = () => {
   // 스타디움 선택 핸들러
   const handleStadiumSelect = (stadium: StadiumType) => {
     setSelectedStadium(stadium);
-    setSelectedSection("");  // 스타디움이 바뀌면 구역을 초기화
+    setSelectedSection(StadiumType.NONE);  // 스타디움이 바뀌면 구역을 초기화
   };
 
   // 구역 클릭 핸들러
   const handleSectionClick = (zoneName: string) => {
     setSelectedSection(zoneName);
   };
+
+  
 
   return {
     selectedStadium,
