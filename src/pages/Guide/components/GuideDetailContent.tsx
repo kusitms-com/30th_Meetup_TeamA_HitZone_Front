@@ -69,7 +69,6 @@ export default function GuideDetailContent() {
     handleGuideData();
   }, [selectedZone]); // 쿼리 파라미터가 변경될 때마다 API 호출
 
-
   return (
     <div className="relative mb-[84px]">
       {/* 가이드 데이터가 null이 아닐 때 렌더링 */}
