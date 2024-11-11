@@ -1,14 +1,15 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
-import HeaderBar from "../../components/layout/ResultHeader";
-import NavBar from "../../components/layout/NavBar";
+import HeaderBar from "@/src/components/layout/ResultHeader";
+import NavBar from "@/src/components/layout/NavBar";
 
 import Image from 'next/image';
-import crownGoldIcon from '../../assets/webp/recommend_crown_gold.webp';
-import crownSilverIcon from '../../assets/webp/recommend_crown_silver.webp';
-import crownBronzeIcon from '../../assets/webp/recommend_crown_bronze.webp';
-import tipPinkIcon from '../../assets/webp/recommend_tip_pink.webp';
+import crownGoldIcon from '@/src/assets/webp/recommend_crown_gold.webp';
+import crownSilverIcon from '@/src/assets/webp/recommend_crown_silver.webp';
+import crownBronzeIcon from '@/src/assets/webp/recommend_crown_bronze.webp';
+import tipPinkIcon from '@/src/assets/webp/recommend_tip_pink.webp';
+import rightArrowIcon from "@/src/assets/webp/recommend_right_arrow.webp"
 
 // Enum으로 추천 구역 Data 관리
 import { StadiumType} from "../../constants/ZoneData"
@@ -127,7 +128,7 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
                     <div className="w-[102px] h-[102px] relative">
                         {/** Profile API 연동 데이터 : 더미 데이터(그냥 동그라미) */}
                         {profileData ? (
-                            <Image src={profileData.imgUrl} alt="프로필 이미지" layout="fill" objectFit="cover" />
+                            <Image src={profileData.imgUrl} alt="프로필 이미지" layout="fill" objectFit="cover "/>
                         ) : 
                         <div className="bg-main-5 border border-[0px] rounded-full w-full h-full" />
                         }
@@ -142,7 +143,7 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
                             {profileData?.nickname}
                         </p>
                         <div className="relative text-start bg-main-5 text-sm text-main-90 font-medium px-[14px] py-[8px] mt-[2px] rounded-lg w-full text-center">
-                            <div className="flex gap-[6px] mb-[6px]">
+                            <div className="flex gap-[6px] mb-[6px] ">
                                 {/** 해시 태그 */}
                                 {profileData?.hashTags !== null ? (profileData?.hashTags.map((hashTag, index) => (
                                     <p key={index} className="text-xs px-[6px] py-[2px] text-grayscale-90 font-medium bg-main-0 border border-0 rounded-md">
@@ -191,20 +192,28 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
                             return (
                                 <div key={index} className="bg-grayscale-5 border border-[0px] rounded-[4px] h-[104px] mt-[12px] p-[12px]">
                                     <Image src={selectedCrownIcon} alt="왕관 이미지" className="w-[17px] h-[9px]"/>
-                                    <div className="flex w-full justify-start items-center">
-                                        <p className="text-md text-grayscale-90 font-semibold mr-[8px]">
-                                            {index+1} {zone.name}
-                                        </p>
-                                        <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px] cursor-pointer" onClick={openModal}/>
-                                        {openModalIndex === index && zone.referencesGroup.length > 0 && (
-                                            <SeatTipDialog
-                                                zoneName={zoneName}
-                                                zoneColor={zoneColor}
-                                                tip={zoneTip}
-                                                referencesGroup={zone.referencesGroup[0]}
-                                                onClose={closeModal}
-                                            />
-                                        )}
+                                    <div className="flex w-full justify-between ">
+                                        <div className="flex w-full justify-start items-center">
+                                            <p className="text-md text-grayscale-90 font-semibold mr-[8px]">
+                                                {index+1} {zone.name}
+                                            </p>
+                                            <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px] cursor-pointer " onClick={openModal}/>
+                                            {openModalIndex === index && zone.referencesGroup.length > 0 && (
+                                                <SeatTipDialog
+                                                    zoneName={zoneName}
+                                                    zoneColor={zoneColor}
+                                                    tip={zoneTip}
+                                                    referencesGroup={zone.referencesGroup[0]}
+                                                    onClose={closeModal}
+                                                />
+                                            )}
+                                        </div>
+                                        <div className="flex flex-glow justify-end  items-center text-center min-w-[100px] gap-[4px] cursor-pointer">
+                                            <p className="text-xxs text-grayscale-30 font-medium ">
+                                                자세히 보러가기
+                                            </p>
+                                            <Image src={rightArrowIcon} alt="자세히 보러가기 아이콘" width={5} height={5} className="flex-glow justify-end "/>
+                                        </div>
                                     </div>
                                     <div className="bg-main-0 border border-[0px] rounded-[4px] mt-[4px]">
                                         <p className="text-xs text-grayscale-90 font-regular px-[8px] py-[5px]">
