@@ -196,11 +196,12 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
                                             {index+1} {zone.name}
                                         </p>
                                         <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px] cursor-pointer" onClick={openModal}/>
-                                        {openModalIndex === index  && (
+                                        {openModalIndex === index && zone.referencesGroup.length > 0 && (
                                             <SeatTipDialog
                                                 zoneName={zoneName}
                                                 zoneColor={zoneColor}
                                                 tip={zoneTip}
+                                                referencesGroup={zone.referencesGroup[0]}
                                                 onClose={closeModal}
                                             />
                                         )}
