@@ -1,8 +1,9 @@
 
 import Image from 'next/image';
 
-import closeButtonGrayIcon from '../../assets/webp/close_button_gray.webp';
+import closeButtonGrayIcon from '@/src/assets/webp/close_button_gray.webp';
 
+import { teamsReservationData } from "@/src/constants/ReservationData";
 
 interface Props {
     onClose: () => void;
@@ -24,56 +25,15 @@ const Dialog = ({onClose}: Props) => {
 
                 {/** 좌석 */}
                 <div className="flex flex-col justify-start px-[20px] gap-[12px]">
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            두산베어스
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            롯데 자이언츠
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            삼성 라이온즈
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            키움히어로즈
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            한화이글스
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            KIA 타이거즈
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            KIA wiz
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            LG 트윈스
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            NC 다이노스
-                        </p>
-                    </div>
-                    <div className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
-                        <p className="text-xs text-grayscale-90 font-regular">
-                            SSG 랜더스
-                        </p>
-                    </div>
+                    {teamsReservationData.map((team, index) => (
+                        <div key={index} className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
+                            <a href={team.url} target="_blank" rel="noopener noreferrer">
+                                <p className="text-xs text-grayscale-90 font-regular">
+                                    {team.name}
+                                </p>
+                            </a>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
