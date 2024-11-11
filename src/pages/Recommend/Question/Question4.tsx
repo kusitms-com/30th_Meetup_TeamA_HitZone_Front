@@ -80,8 +80,8 @@ const Page = ({previousStep, nextStep, selectedKeywordItems, handleKeywordItem, 
             <div className="absolute bottom-0 left-0 w-full px-[16px]">
                 {/** 상대 위치로 핑크 존 이미지를 시작하기 버튼으로부터 7px 위에, 왼쪽으로부터 70% 위치에 배치 */}
                 <div className="relative">
-                    <Image src={pinkZoneIcon} alt="핑크 야구장 이미지" width={205} height={205}
-                        className="absolute bottom-[7px] left-[70%] transform -translate-x-1/2"
+                    <Image src={pinkZoneIcon} alt="핑크 야구장 이미지"
+                        className="absolute bottom-[27px] right-0 w-[80%]"
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
                     <div className={`flex justify-center items-center border rounded-[8px] h-[48px] mb-[40px] z-10 relative
