@@ -29,50 +29,47 @@ import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 export interface Props {
     stadium: StadiumType;
     resultId: number | null;
-    recommendedZoneList: ZoneGetResponseType[];
     setResultId: Dispatch<SetStateAction<number | null>>;
-    setRecommendedZoneList: Dispatch<SetStateAction<ZoneGetResponseType[]>>;
 }
 
-const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommendedZoneList}: Props) => {
+const Page = ({stadium, resultId, setResultId}: Props) => {
+    /////////////////////////////////////////////
     // Question 페이지와 상태 동기화
     const router = useRouter();
     const [profileData, setProfileData] = useState<ProfileGetResponseType>();
     useEffect(() => {
-        // 확인
-        /*
-        console.log("머임:")
-        console.log(stadium);
-        console.log(resultId);
-        console.log(recommendedZoneList);
-        */
-
-        // 쿼리 파라미터에서 추천 존 리스트를 가져오기
+        // 추천 존 리스트를 쿼리 파라미터로 가져오기
         if (router.query.resultId) {
             const resultId = JSON.parse(router.query.resultId as string);
+            
+            // 확인
             console.log("추천 구역 결과 페이지로 리다이렉트 했슴다: ")
             console.log(resultId);
+            //console.log(stadium);
+            //console.log(recommendedZoneList);
             setResultId(resultId);
         }
 
-    }, [router.query]); // 쿼리 파라미터가 변경될 때마다 실행
+    }, [router.query]); // 쿼리 파라미터가 변경될 때마다(결과 페이지로 전환시) 실행
 
-    useEffect(() => {
-        handleResultData();
-    }, [resultId]);
-    
+
+
+    /////////////////////////////////////////////
+    // 추천 구역 이벤트
+    const [recommendedZoneList, setRecommendedZoneList] = useState<ZoneGetResponseType[]>([]);
     const handleResultData = async () => {
+        // 사용자 정보 가져오기
+        const parsedProfileData = await handleProfile(resultId);
+        if (parsedProfileData) {  // undefined가 아니면 처리
+            setProfileData(parsedProfileData);
+        }
 
-        // handlePrint (handleGetZoneList) 호출
-        // 전체 추천 개수 가져오기
-        const parsedZoneList = await handlePrint(3, resultId);
-
+        // 전체(최대 3개) 구역 추천 정보 가져오기
+        const parsedZoneList = await handlePrint(3, resultId);  // handlePrint (= handleGetZoneList)
         if (parsedZoneList) {  // undefined가 아니면 처리
             setRecommendedZoneList(parsedZoneList);
         } 
 
-        // handleProfile 호출!!!!!!!
-        const parsedProfileData = await handleProfile(resultId);
         
         // 확인
         /*
@@ -80,33 +77,10 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
         console.log(parsedZoneList);
         console.log(parsedProfileData);
         */
-        
-        if (parsedProfileData) {  // undefined가 아니면 처리
-            setProfileData(parsedProfileData);
-        }
     }
-
-    /*
-    const handleGetZoneList = async () => {
-        // 추천 질문 데이터 전송 후 ResultId 받는 이벤트 호출
-        // handleGetResultId를 호출하고 결과를 기다린 후, resultId를 사용
-        const resultId = await handleGetResultId();
-        console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱2: ");
-        console.log(zoneList);
-
-        // 백엔드에 데이터 전송 후 반환 값(최대 3개) 가져오기 (API 통신)
-        const zoneList: ZoneGetResponseType[] = (await handlePrint(3, resultId)) ?? [];
-
-        // 확인
-        console.log("🐻‍❄️ 선택한 스타디움에 대한 추천 좌석 받았댱: ");
-        console.log(zoneList);
-
-        // 데이터 업뎃 (비동기적으로 작동)
-        setRecommendedZoneList(zoneList);
-
-        return zoneList; // 다음 작업을 위해 zoneList 반환
-    }
-    */
+    useEffect(() => {
+        handleResultData();
+    }, [resultId]);
 
     // index마다 다른 왕관 이미지 띄우기
     const crownIcons = [
@@ -115,22 +89,26 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
         crownBronzeIcon
     ];
 
+    // TIP 모달창 이벤트
+    const [openModalIndex, setOpenModalIndex] = useState<number | null>(null); // 열린 모달의 인덱스를 저장
+    //const { isOpen, openModal, closeModal } = useModal();
+    
 
+
+    /////////////////////////////////////////////
     // 추천 다시 받기 버튼 클릭 시 리다이렉트 이벤트
     const handleRedirectToRecommendation = () => {
         // 추천 다시 받기 페이지로 리다이렉트
         router.push('/recommend/question');  // '/recommend'는 추천 페이지의 URL입니다. 수정할 수 있습니다.
     };
 
+
+    /////////////////////////////////////////////
     // 예매하러 가기 버튼 클릭 시 모달창 띄우기 이벤트
     const handleBooking = () => {
         // 예매 페이지로 리다이렉트
         //router.push('/booking');  // '/booking'은 예매 페이지의 URL입니다. 수정할 수 있습니다.
     };
-
-
-    // 모달창 이벤트
-    const { isOpen, openModal, closeModal } = useModal();
 
 
     return (
@@ -167,7 +145,7 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                             <div className="flex gap-[6px] mb-[6px]">
                                 {/** 해시 태그 */}
                                 {profileData?.hashTags !== null ? (profileData?.hashTags.map((hashTag, index) => (
-                                    <p className="text-xs px-[6px] py-[2px] text-grayscale-90 font-medium bg-main-0 border border-0 rounded-md">
+                                    <p key={index} className="text-xs px-[6px] py-[2px] text-grayscale-90 font-medium bg-main-0 border border-0 rounded-md">
                                         {hashTag}
                                     </p>
                                 ))
@@ -197,10 +175,18 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                     </p>
                     
                     {/** Zones API 연동 데이터 : 더미데이터 */}
-                    {recommendedZoneList !== null ? (
+                    {recommendedZoneList ? (
                         recommendedZoneList.map((zone, index) => {
                             // 인덱스에 맞는 이미지 선택
                             const selectedCrownIcon = crownIcons[index % crownIcons.length];  // index가 배열 길이를 넘어갈 경우 반복
+                            const zoneName = recommendedZoneList[index].name;
+                            const zoneColor = zone.color;
+                            const zoneTip = recommendedZoneList[index].tip;
+                            console.log(zoneColor);
+                            console.log(zoneColor);
+                            
+                            const openModal = () => setOpenModalIndex(index);
+                            const closeModal = () => setOpenModalIndex(null);
                     
                             return (
                                 <div key={index} className="bg-grayscale-5 border border-[0px] rounded-[4px] h-[104px] mt-[12px] p-[12px]">
@@ -209,14 +195,13 @@ const Page = ({stadium, resultId, recommendedZoneList, setResultId, setRecommend
                                         <p className="text-md text-grayscale-90 font-semibold mr-[8px]">
                                             {index+1} {zone.name}
                                         </p>
-                                        <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px]" onClick={openModal}/>
-                                        {isOpen && zone.referencesGroup && zone.referencesGroup.length > 0 && (
+                                        <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px] cursor-pointer" onClick={openModal}/>
+                                        {openModalIndex === index  && (
                                             <SeatTipDialog
-                                                zoneName={zone.name}
-                                                zoneColor={zone.color}
-                                                tip={zone.tip}
-                                                referencesGroup={zone.referencesGroup[0]} // 첫 번째 referencesGroup만 전달
-                                                onClose={closeModal} // 모달 닫기 함수
+                                                zoneName={zoneName}
+                                                zoneColor={zoneColor}
+                                                tip={zoneTip}
+                                                onClose={closeModal}
                                             />
                                         )}
                                     </div>
