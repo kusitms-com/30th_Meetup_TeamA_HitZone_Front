@@ -90,7 +90,7 @@ const Page = ({previousStep, nextStep, selectedZone, selectedKeywordItems, handl
                          onClick={() => handleKeywordItem(Keyword.WISH6)}
                     >
                         <p className="text-sm font-medium text-center py-[16px]">
-                            🍗 선수들 가까이
+                            🙋 선수들 가까이
                         </p>
                     </div>
                 </div>
