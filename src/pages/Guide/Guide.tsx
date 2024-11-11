@@ -11,9 +11,9 @@ import { StadiumType, stadiumList } from "@/src/constants/ZoneData";
 import { handleGetStadiumInfo } from "@/src/api/StadiumApiHandler";
 import { ZoneGetParamsType, ZoneGetResponseType, ZoneType } from "@/src/api/StadiumApiType";
 
+
 import { useStadiumSelector } from '@/src/hooks/useStadiumSelector';
 import { useRouter } from 'next/router';  // useRouter를 임포트합니다.
-
 
 const Guide = () => {
 
@@ -33,8 +33,8 @@ const Guide = () => {
     setStadiumInfo
   } = useStadiumSelector();
 
-
   // 스타디움 선택시 API 연동
+
   const handleStadiumInfo = async () => {
     const params: ZoneGetParamsType = {
       stadiumName: selectedStadium as string,
@@ -55,8 +55,6 @@ const Guide = () => {
   useEffect(() => {
     handleStadiumInfo();
   }, [selectedStadium]); // 쿼리 파라미터가 변경될 때마다 실행
-
-
   // Zone 클릭시 가이드 세부 페이지로 이동 및 API 데이터를 쿼리 파라미터로 전달
   const router = useRouter();
   const handleSectionClick = (selectedZone: string) => {

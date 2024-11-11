@@ -9,10 +9,12 @@ interface SeatDropdownProps {
   selectedColor: string;
 }
 
+
 export default function SeatDropdown({ options, selectedOption, onSelect, selectedColor }: SeatDropdownProps) {
   // 드롭 다운 토글 기능
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
 
   return (
     <div className="relative w-[220px]">

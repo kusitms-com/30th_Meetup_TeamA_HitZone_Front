@@ -70,7 +70,7 @@ const Page = ({previousStep, nextStep, selectedParter, handleParterKeywordItem}:
             <div className="absolute bottom-0 left-0 w-full px-[16px]">
                 {/** 상대 위치로 배트 이미지를 시작하기 버튼으로부터 82px 위에, 왼쪽으로부터 32% 위치에 배치 */}
                 <div className="relative">
-                    <Image src={baseballBatIcon} alt="야구 방망이 이미지" width={369} height={241}
+                    <Image src={baseballBatIcon} alt="야구 방망이 이미지" width={319} height={181}
                         className="absolute bottom-[82px] left-[32%] transform -translate-x-1/2"
                     />
                     {/**z-10 relative:  맨 위에 배치 */}
