@@ -131,7 +131,12 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
     // 추천 다시 받기 버튼 클릭 시 리다이렉트 이벤트
     const handleRedirectToRecommendation = () => {
         // 추천 다시 받기 페이지로 리다이렉트
-        router.push('/recommend/question');  // '/recommend'는 추천 페이지의 URL입니다. 수정할 수 있습니다.
+        router.push({
+            pathname: '/recommend/question',  // 리다이렉트할 경로
+            query: {                          // 쿼리 파라미터 전달
+            stadiumName: selectedStadium,
+            },
+        });
     };
 
 
