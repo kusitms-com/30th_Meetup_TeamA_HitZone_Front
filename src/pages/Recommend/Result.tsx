@@ -76,6 +76,7 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
         /*
         console.log(resultId);
         console.log(parsedZoneList);
+        console.log(recommendedZoneList);
         console.log(parsedProfileData);
         */
     }
@@ -95,6 +96,25 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
     //const { isOpen, openModal, closeModal } = useModal();
     
 
+
+    /////////////////////////////////////////////
+    // 지세히 보러가기 이벤트
+    const handleDetailPage = (index: number) => {
+        moveDetailPage(index);
+    }
+
+    const moveDetailPage = (index: number) => {
+        // 선택된 섹션에 따라 리다이렉트
+        router.push({
+        pathname: '/guide/zone',  // 리다이렉트할 경로
+        query: {                  // 쿼리 파라미터 전달
+            stadiumName: stadium,
+            zoneName: recommendedZoneList[index].name,
+            zoneColor: recommendedZoneList[index].color,
+            zoneNameList: [],
+        },
+        });
+    }
 
     /////////////////////////////////////////////
     // 추천 다시 받기 버튼 클릭 시 리다이렉트 이벤트
@@ -208,7 +228,8 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
                                                 />
                                             )}
                                         </div>
-                                        <div className="flex flex-glow justify-end  items-center text-center min-w-[100px] gap-[4px] cursor-pointer">
+                                        <div className="flex flex-glow justify-end  items-center text-center min-w-[100px] gap-[4px] cursor-pointer "
+                                             onClick={() => handleDetailPage(index)}>
                                             <p className="text-xxs text-grayscale-30 font-medium ">
                                                 자세히 보러가기
                                             </p>
