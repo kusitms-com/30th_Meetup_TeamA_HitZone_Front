@@ -25,6 +25,9 @@ import { ProfileGetResponseType } from "../../api/ResultApiType";
 import useModal from '@/src/hooks/useModal';
 import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 
+// 예약 모달창 관련
+import ChooseBaseballTeamDialog from "@/src/components/dialogs/ChooseBaseballTeamDialog";
+
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
 export interface Props {
@@ -93,7 +96,6 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
 
     // TIP 모달창 이벤트
     const [openModalIndex, setOpenModalIndex] = useState<number | null>(null); // 열린 모달의 인덱스를 저장
-    //const { isOpen, openModal, closeModal } = useModal();
     
 
 
@@ -126,6 +128,8 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
 
     /////////////////////////////////////////////
     // 예매하러 가기 버튼 클릭 시 모달창 띄우기 이벤트
+    const {isOpen:isReservationOpen, openModal:openReservationModal, closeModal:closeReservationModal } = useModal();
+    
     const handleBooking = () => {
         // 예매 페이지로 리다이렉트
         //router.push('/booking');  // '/booking'은 예매 페이지의 URL입니다. 수정할 수 있습니다.
@@ -263,13 +267,16 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
                             추천 다시 받기
                         </p>
                     </div>
-                    <div className="bg-main-50 border border-0 rounded-[8px] w-full cursor-pointer" onClick={handleBooking}>
+                    <div className="bg-main-50 border border-0 rounded-[8px] w-full cursor-pointer" onClick={openReservationModal}>
                         <p className="text-md text-main-0 font-semibold px-[8px] py-[12px]">
                             예매하러 가기
                         </p>
                     </div>
                 </div>
-
+                {isReservationOpen && (
+                <ChooseBaseballTeamDialog
+                />
+              )}
               <NavBar />
             </div>
         </div>
