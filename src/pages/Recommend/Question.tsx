@@ -85,7 +85,10 @@ const Page = ({/*stadium,*/ setResultId, recommendedZoneList, setRecommendedZone
     const keywordNowishGroup = [Keyword.NOWISH1, Keyword.NOWISH2, Keyword.NOWISH3, Keyword.NOWISH4];
     // 배열에 nowish 값이 하나 이상 포함되어 있는 지 확인하는 함수
     const hasNowish = selectedKeywordItems.some((v) => keywordNowishGroup.includes(v));
-
+    // 배열에서 nowish 아이템 모두 제거하는 함수
+    const removeAllNowishItems = () => {
+    };
+    
 
 
     //////////////////////////////////////////////////////////
@@ -220,7 +223,7 @@ const Page = ({/*stadium,*/ setResultId, recommendedZoneList, setRecommendedZone
                 return <Question3 previousStep={previousStep} nextStep={nextStep} selectedZone={selectedStadium} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasWish={hasWish}/>;
             
             case 4:
-                return <Question4 previousStep={previousStep} nextStep={nextStep} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasNowish={hasNowish}/>;
+                return <Question4 previousStep={previousStep} nextStep={nextStep} selectedKeywordItems={selectedKeywordItems} handleKeywordItem={handleKeywordItem} hasNowish={hasNowish} removeAllNowishItems={removeAllNowishItems}/>;
             
             default:
                 return null;

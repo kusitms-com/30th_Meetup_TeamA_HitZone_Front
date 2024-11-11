@@ -11,9 +11,13 @@ interface Props extends QuestionProps {
     selectedKeywordItems: Keyword[];
     handleKeywordItem: (keyword: Keyword) => void;
     hasNowish: boolean;
+    removeAllNowishItems: () => void;
 }
 
-const Page = ({previousStep, nextStep, selectedKeywordItems, handleKeywordItem, hasNowish}: Props) => {
+const Page = ({previousStep, nextStep, selectedKeywordItems, handleKeywordItem, hasNowish, removeAllNowishItems}: Props) => {
+
+    const handleNoneNowish = () => {
+    }
 
     return (
         <div className="w-full px-[16px]">
@@ -69,6 +73,16 @@ const Page = ({previousStep, nextStep, selectedKeywordItems, handleKeywordItem, 
                     >
                         <p className="text-sm font-medium text-center py-[16px]">
                             ☔️ 비맞기 싫어요
+                        </p>
+                    </div>
+                </div>
+
+                <div className="flex justify-center items-center gap-[12px] mb-[12px] z-10">
+                    <div className={`flex justify-center items-center bg-grayscale-5 border rounded-[8px] w-full p-[16px]"
+                         cursor-pointer ${!hasNowish? 'border-main-50 text-main-50 bg-main-5':'border-transparent text-grayscale-80 bg-grayscale-5'}`}
+                    >
+                        <p className="text-sm font-medium text-center py-[16px]" onClick={handleNoneNowish}>
+                            해당 없음
                         </p>
                     </div>
                 </div>
