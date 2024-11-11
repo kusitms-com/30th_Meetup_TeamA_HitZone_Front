@@ -31,12 +31,15 @@ import ChooseBaseballTeamDialog from "@/src/components/dialogs/ChooseBaseballTea
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
 export interface Props {
-    stadium: StadiumType;
+    //stadium: StadiumType;
     resultId: number | null;
     setResultId: Dispatch<SetStateAction<number | null>>;
 }
 
-const Page = ({stadium, resultId, setResultId}: Props) => {
+const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
+    // 스타디움
+    const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.NONE);
+    
     /////////////////////////////////////////////
     // Question 페이지와 상태 동기화
     const router = useRouter();
@@ -52,6 +55,12 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
             //console.log(stadium);
             //console.log(recommendedZoneList);
             setResultId(resultId);
+        }
+
+        if (router.query.selectedStadium) {
+            const selectedStadium = router.query.selectedStadium as StadiumType;
+
+            setSelectedStadium(selectedStadium);
         }
 
     }, [router.query]); // 쿼리 파라미터가 변경될 때마다(결과 페이지로 전환시) 실행
@@ -110,7 +119,7 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
         router.push({
         pathname: '/guide/zone',  // 리다이렉트할 경로
         query: {                  // 쿼리 파라미터 전달
-            stadiumName: stadium,
+            stadiumName: selectedStadium,
             zoneName: recommendedZoneList[index].name,
             zoneColor: recommendedZoneList[index].color,
             zoneNameList: [],
