@@ -16,12 +16,12 @@ const BackBar = () => {
                     alt="뒤로가기 버튼"
                     width={24}
                     height={24}
-                    onClick={() => router.back()}
                     className="cursor-pointer"
+                    onClick={() => router.back()}
                 />
             </div>
             <div className="flex justify-center flex-grow">
-                <Image src={logoIcon} alt="Logo" width={154} height={27} />
+                <Image src={logoIcon} alt="Logo" width={154} height={27} className="cursor-pointer"/>
             </div>
         </div>
     );

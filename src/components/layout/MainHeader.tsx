@@ -29,8 +29,8 @@ const Header = () => {
 
       {/* 코치마크, 알림 아이콘 */}
       <div className="flex space-x-3">
-        <Image src={GuideIcon} alt="Guide Icon" width={24} height={24} />
-        <Image src={NotificationIcon} alt="Notification Icon" width={24} height={24} />
+        <Image src={GuideIcon} alt="Guide Icon" width={24} height={24} className="cursor-pointer" />
+        <Image src={NotificationIcon} alt="Notification Icon" width={24} height={24} className="cursor-pointer" />
       </div>
     </div>
   );
