@@ -47,7 +47,7 @@ const Page = ({stadium, setResultId, recommendedZoneList, setRecommendedZoneList
         // 기존 파트너 값은 배열에서 제거하고 넣기
         const keywordPartnerGroup = [Keyword.PARTNER1, Keyword.PARTNER2, Keyword.PARTNER3];
         if(keywordPartnerGroup.includes(newKeywordItem)) {
-            setSelectedKeywordItems((prevKeywordItems) => {
+            setSelectedKeywordItems((prevKeywordItems: Keyword[]) => {
                 return [
                     // 기존 파트너 값을 제외한 배열 값
                     ...prevKeywordItems.filter((prevKeywordItem) => !keywordPartnerGroup.includes(prevKeywordItem)),
@@ -60,7 +60,7 @@ const Page = ({stadium, setResultId, recommendedZoneList, setRecommendedZoneList
 
         // 그 외는 중복 가능
         // 배열에 그냥 넣기
-        setSelectedKeywordItems((prevKeywordItems) => {
+        setSelectedKeywordItems((prevKeywordItems: Keyword[]) => {
             // 기존 배열에 존재하는 아이템이면
             if (prevKeywordItems.includes(newKeywordItem)) {
                 // 배열에서 제거
@@ -210,7 +210,7 @@ const Page = ({stadium, setResultId, recommendedZoneList, setRecommendedZoneList
                 {renderContents()}
             </div>
         </div>
-    )
+    );
 }
 
 
