@@ -275,6 +275,7 @@ const Page = ({stadium, resultId, setResultId}: Props) => {
                 </div>
                 {isReservationOpen && (
                 <ChooseBaseballTeamDialog
+                  onClose={closeReservationModal} // 모달 닫기 함수
                 />
               )}
               <NavBar />

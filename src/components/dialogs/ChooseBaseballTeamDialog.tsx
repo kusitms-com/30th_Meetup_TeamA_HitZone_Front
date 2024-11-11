@@ -4,7 +4,11 @@ import Image from 'next/image';
 import closeButtonGrayIcon from '../../assets/webp/close_button_gray.webp';
 
 
-const Dialog = () => {
+interface Props {
+    onClose: () => void;
+}
+
+const Dialog = ({onClose}: Props) => {
     return (
         <div className="flex flex-col border border-0 rounded-[12px] w-[324px]">
             {/** 헤더 */}
@@ -14,7 +18,7 @@ const Dialog = () => {
                         어느 구단의 예매처를 원하시나요?
                     </p>
                 </div>
-                <Image src={closeButtonGrayIcon} alt="닫기 버튼" className="w-[24px] h-[24px]" />
+                <Image src={closeButtonGrayIcon} alt="닫기 버튼" className="w-[24px] h-[24px]" onClick={onClose}/>
             </div>
 
             {/** 좌석 */}
