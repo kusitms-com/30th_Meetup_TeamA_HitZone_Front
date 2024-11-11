@@ -24,7 +24,7 @@ const Dialog = ({onClose}: Props) => {
                 </div>
 
                 {/** 좌석 */}
-                <div className="flex flex-col justify-start px-[20px] gap-[12px]">
+                <div className="flex flex-col justify-start px-[20px] gap-[12px] pb-[20px]">
                     {teamsReservationData.map((team, index) => (
                         <div key={index} className="justify-center items-center text-center bg-grayscale-5 border border-0 rounded-[4px] py-[7px]">
                             <a href={team.url} target="_blank" rel="noopener noreferrer">
