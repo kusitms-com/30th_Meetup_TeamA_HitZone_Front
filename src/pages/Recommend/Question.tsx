@@ -190,10 +190,17 @@ const Page = ({/*stadium,*/ setResultId, recommendedZoneList, setRecommendedZone
         // step4 페이지
         }else {
             // 값을 선택했으면
+            /*
             if(hasNowish) {
                 // API 연동 및 결과 페이지로 리다이렉트
                 handleGetResultId();
+                console.log(selectedKeywordItems);
             }
+            */
+
+            // API 연동 및 결과 페이지로 리다이렉트
+            handleGetResultId();
+            console.log(selectedKeywordItems);
         }
     };
 
