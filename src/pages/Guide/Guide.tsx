@@ -105,7 +105,9 @@ const Guide = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <Header />
+      <div className="sticky top-0 z-10 bg-white"> 
+        <Header />
+      </div>
       <div className="flex-1 overflow-y-auto pb-20 mt-[15px] px-4">
         {(stadiumInfo ? (
           <>
