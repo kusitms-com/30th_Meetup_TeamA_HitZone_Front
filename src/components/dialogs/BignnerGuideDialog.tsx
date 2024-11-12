@@ -14,6 +14,11 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
   const [activeTipIndex, setActiveTipIndex] = useState(0);
   const router = useRouter();
 
+  const handleClose = () => {
+    setActiveTipIndex(0); // 모달 닫힐 때 인덱스를 0으로 초기화
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   const handleNextTip = () => {
@@ -23,7 +28,7 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
   return (
     <div 
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div 
         className="bg-white rounded-xl w-[324px] max-h-[90vh] flex flex-col overflow-hidden"
@@ -32,7 +37,7 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
         {/* 상단 타이틀 고정 */}
         <div className="flex justify-between items-center p-5">
           <h2 className="text-lg font-bold text-grayscale-90">야구 직관 Tip</h2>
-          <button onClick={onClose}>
+          <button onClick={handleClose}>
             <Image src={closeIcon} alt="닫기 버튼" width={24} height={24} />
           </button>
         </div>
@@ -51,7 +56,9 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
             alt={`Tip ${activeTipIndex + 1}`} 
             className="w-full h-auto mb-2 rounded-lg" 
           />
-          <p className="text-sm text-grayscale-90 bg-grayscale-5 px-[15px] py-3 rounded-lg min-h-[109px]">{tips[activeTipIndex].description}</p>
+          <p className="text-sm text-grayscale-90 bg-grayscale-5 px-[15px] py-3 rounded-lg min-h-[109px]">
+            {tips[activeTipIndex].description}
+          </p>
         </div>
 
         {/* 다음 버튼 */}
