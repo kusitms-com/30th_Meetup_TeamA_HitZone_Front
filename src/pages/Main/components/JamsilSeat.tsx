@@ -2,15 +2,15 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { StaticImageData } from "next/image";
-import defaultStadium from "../../../assets/svg/seat/jamsil_default.svg";
-import redStadium from "../../../assets/svg/seat/jamsil_red.svg";
-import orangeStadium from "../../../assets/svg/seat/jamsil_orange.svg";
-import navyStadium from "../../../assets/svg/seat/jamsil_navy.svg";
-import blueStadium from "../../../assets/svg/seat/jamsil_blue.svg";
-import tableStadium from "../../../assets/svg/seat/jamsil_table.svg";
-import premiumStadium from "../../../assets/svg/seat/jamsil_premium.svg";
-import greenStadium from "../../../assets/svg/seat/jamsil_green.svg";
-import excitingStadium from "../../../assets/svg/seat/jamsil_exciting.svg";
+import defaultStadium from "../../../assets/webp/seat/jamsil_default.webp";
+import redStadium from "../../../assets/webp/seat/jamsil_red.webp";
+import orangeStadium from "../../../assets/webp/seat/jamsil_orange.webp";
+import navyStadium from "../../../assets/webp/seat/jamsil_navy.webp";
+import blueStadium from "../../../assets/webp/seat/jamsil_blue.webp";
+import tableStadium from "../../../assets/webp/seat/jamsil_table.webp";
+import premiumStadium from "../../../assets/webp/seat/jamsil_premium.webp";
+import greenStadium from "../../../assets/webp/seat/jamsil_green.webp";
+import excitingStadium from "../../../assets/webp/seat/jamsil_exciting.webp";
 
 // 좌석별 색상 매핑
 const colorMap: { [key: string]: StaticImageData } = {
@@ -58,7 +58,7 @@ const JamsilSeat = () => {
       const canvas = canvasRef.current;
       if (canvas) {
         const ctx = canvas.getContext("2d");
-        const scale = window.devicePixelRatio || 1;
+        const scale = window.devicePixelRatio || 1;  // 화면의 배율에 따라 픽셀 밀도를 조절
 
         const canvasWidth = 376;
         const canvasHeight = 356;
@@ -69,6 +69,9 @@ const JamsilSeat = () => {
         canvas.style.height = "auto";
 
         if (ctx) {
+          // 이미지 품질 설정
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
           ctx.scale(scale, scale);
           ctx.clearRect(0, 0, canvasWidth, canvasHeight);
           ctx.drawImage(image, 0, 0, canvasWidth, canvasHeight);
@@ -108,7 +111,7 @@ const JamsilSeat = () => {
 
       const ctx = canvas.getContext("2d");
       if (ctx) {
-        const scale = window.devicePixelRatio || 1;
+        const scale = window.devicePixelRatio || 1;  // 스케일링 값을 다시 가져옴
         const pixelData = ctx.getImageData(x * scale, y * scale, 1, 1).data;
         const [r, g, b] = [pixelData[0], pixelData[1], pixelData[2]];
 
