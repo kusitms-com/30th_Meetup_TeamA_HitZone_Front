@@ -2,19 +2,19 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { StaticImageData } from "next/image";
-import defaultStadium from "../../../assets/svg/seat/kt_default.svg";
-import cheerSeat from "../../../assets/svg/seat/kt_cheer.svg";
-import skySeat from "../../../assets/svg/seat/kt_sky.svg";
-import skyZoneSeat from "../../../assets/svg/seat/kt_skyzone.svg";
-import kidsLandSeat from "../../../assets/svg/seat/kt_kidsland.svg";
-import centralSeat from "../../../assets/svg/seat/kt_central.svg";
-import genieTvSeat from "../../../assets/svg/seat/kt_genietv.svg";
-import yboxSeat from "../../../assets/svg/seat/kt_ybox.svg";
-import alphaShoppingSeat from "../../../assets/svg/seat/kt_alphashopping.svg";
-import genieZoneSeat from "../../../assets/svg/seat/kt_geniezone.svg";
-import excitingSeat from "../../../assets/svg/seat/kt_exciting.svg";
-import outfieldSeat from "../../../assets/svg/seat/kt_outfield.svg";
-import tvingSeat from "../../../assets/svg/seat/kt_tving.svg";
+import defaultStadium from "../../../assets/webp/seat/kt_default.webp";
+import cheerSeat from "../../../assets/webp/seat/kt_cheer.webp";
+import skySeat from "../../../assets/webp/seat/kt_sky.webp";
+import skyZoneSeat from "../../../assets/webp/seat/kt_skyzone.webp";
+import kidsLandSeat from "../../../assets/webp/seat/kt_kidsland.webp";
+import centralSeat from "../../../assets/webp/seat/kt_central.webp";
+import genieTvSeat from "../../../assets/webp/seat/kt_genietv.webp";
+import yboxSeat from "../../../assets/webp/seat/kt_ybox.webp";
+import alphaShoppingSeat from "../../../assets/webp/seat/kt_alphashopping.webp";
+import genieZoneSeat from "../../../assets/webp/seat/kt_geniezone.webp";
+import excitingSeat from "../../../assets/webp/seat/kt_exciting.webp";
+import outfieldSeat from "../../../assets/webp/seat/kt_outfield.webp";
+import tvingSeat from "../../../assets/webp/seat/kt_tving.webp";
 
 // 좌석별 색상 매핑
 const colorMap: { [key: string]: StaticImageData } = {
@@ -66,17 +66,23 @@ const KtwizSeat = () => {
       const canvas = canvasRef.current;
       if (canvas) {
         const ctx = canvas.getContext("2d");
-        const scale = window.devicePixelRatio || 1;
+        const scale = window.devicePixelRatio || 1; // 화면의 배율에 따라 픽셀 밀도를 조절
 
-        canvas.width = 366 * scale;
-        canvas.height = 400 * scale;
+        const canvasWidth = 366;
+        const canvasHeight = 400;
+        canvas.width = canvasWidth * scale;
+        canvas.height = canvasHeight * scale;
+
         canvas.style.width = "100%";
         canvas.style.height = "auto";
 
         if (ctx) {
+          // 이미지 품질 설정ㄴ
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
           ctx.scale(scale, scale);
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(image, 0, 0, canvas.width / scale, canvas.height / scale);
+          ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+          ctx.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           setIsImageLoaded(true);
         }
       }
