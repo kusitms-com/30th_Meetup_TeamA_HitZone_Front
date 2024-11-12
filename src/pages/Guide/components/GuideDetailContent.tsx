@@ -75,7 +75,7 @@ export default function GuideDetailContent() {
       <div className="sticky top-0 z-10 bg-white mb-[54px]">
         <Header />
       </div>
-      <div className="relative px-4 pb-20 pt-5">
+      <div className="relative px-4 pb-20 pt-5 overflow-y-auto scrollbar-hide">
         {/* 가이드 데이터가 null이 아닐 때 렌더링 */}
         {guideData ? (
           <>
