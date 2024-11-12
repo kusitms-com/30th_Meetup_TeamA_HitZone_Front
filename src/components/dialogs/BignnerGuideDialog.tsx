@@ -56,14 +56,15 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
             alt={`Tip ${activeTipIndex + 1}`} 
             className="w-full h-auto mb-2 rounded-lg" 
           />
-          <p className="text-sm text-grayscale-90 bg-grayscale-5 px-[15px] py-3 rounded-lg min-h-[109px]">
+          <p className="text-[12px] font-regular text-grayscale-90 bg-grayscale-5 p-3 rounded-lg min-h-[79px]"
+            style={{ textAlign: 'justify' }}>
             {tips[activeTipIndex].description}
           </p>
         </div>
 
         {/* 다음 버튼 */}
         <div className="flex justify-end px-5 pb-3">
-          <button onClick={handleNextTip} className="flex items-center gap-1 text-sm">
+          <button onClick={handleNextTip} className="flex items-center gap-1 text-sm text-grayscale-50">
             다음
             <Image src={nextButtonIcon} alt="Next Button" width={14} height={14} />
           </button>
