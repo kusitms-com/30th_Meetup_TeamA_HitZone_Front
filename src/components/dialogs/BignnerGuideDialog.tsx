@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import closeIcon from "../../assets/webp/close_button_gray.webp";
 import nextButtonIcon from "../../assets/webp/next_button.webp";
+import backButtonIcon from "../../assets/webp/back_button.webp";
 import { tips } from "../../constants/tipData";
 
 interface ChipModalProps {
@@ -22,13 +23,16 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
   if (!isOpen) return null;
 
   const handleNextTip = () => {
-    setActiveTipIndex((prevIndex) => (prevIndex + 1) % tips.length);
+    setActiveTipIndex((prevIndex) => Math.min(prevIndex + 1, tips.length - 1));
+  };
+
+  const handlePreviousTip = () => {
+    setActiveTipIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
   return (
     <div 
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-      onClick={handleClose}
     >
       <div 
         className="bg-white rounded-xl w-[324px] max-h-[90vh] flex flex-col overflow-hidden"
@@ -62,12 +66,22 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
           </p>
         </div>
 
-        {/* 다음 버튼 */}
-        <div className="flex justify-end px-5 pb-3">
-          <button onClick={handleNextTip} className="flex items-center gap-1 text-sm text-grayscale-50">
-            다음
-            <Image src={nextButtonIcon} alt="Next Button" width={14} height={14} />
-          </button>
+        {/* 이전 및 다음 버튼 */}
+        <div className="flex justify-between px-5 pb-3">
+          {activeTipIndex > 0 && (
+            <button onClick={handlePreviousTip} className="flex items-center gap-1 text-sm text-grayscale-50">
+              <Image src={backButtonIcon} alt="Previous Button" width={14} height={14} />
+              이전
+            </button>
+          )}
+          {activeTipIndex < tips.length - 1 ? (
+            <button onClick={handleNextTip} className="flex items-center gap-1 text-sm text-grayscale-50 ml-auto">
+              다음
+              <Image src={nextButtonIcon} alt="Next Button" width={14} height={14} />
+            </button>
+          ) : (
+            <div className="ml-auto" />
+          )}
         </div>
 
         {/* 챗봇 질문 버튼 고정 */}
