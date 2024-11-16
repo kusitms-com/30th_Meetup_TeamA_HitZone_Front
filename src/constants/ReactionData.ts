@@ -25,7 +25,7 @@ export const ImageDimensions: Record<StadiumType, Record<ScreenWidthSize, ImageS
         [ScreenWidthSize.SMALL]: { width: 316, height: 345 },
         [ScreenWidthSize.MEDIUM]: { width: 343, height: 374 },
         [ScreenWidthSize.LARGE]: { width: 366, height: 400 },
-        [ScreenWidthSize.EXTRA_LARGE]: { width: 366, height: 400 },
+        [ScreenWidthSize.EXTRA_LARGE]: { width: 467, height: 510 },
     },
 
 
