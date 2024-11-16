@@ -11,6 +11,7 @@ import tableStadium from "../../../assets/webp/seat/jamsil_table.webp";
 import premiumStadium from "../../../assets/webp/seat/jamsil_premium.webp";
 import greenStadium from "../../../assets/webp/seat/jamsil_green.webp";
 import excitingStadium from "../../../assets/webp/seat/jamsil_exciting.webp";
+import { ScreenSize } from "@/src/constants/ReactionData"
 
 // 각 색상별 이미지와 오차값 포함
 const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } } = {
