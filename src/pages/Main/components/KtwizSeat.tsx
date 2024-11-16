@@ -15,7 +15,9 @@ import genieZoneSeat from "../../../assets/webp/seat/kt_geniezone.webp";
 import excitingSeat from "../../../assets/webp/seat/kt_exciting.webp";
 import outfieldSeat from "../../../assets/webp/seat/kt_outfield.webp";
 import tvingSeat from "../../../assets/webp/seat/kt_tving.webp";
-import { ScreenWidthSize } from "@/src/constants/ReactionData"
+
+import { StadiumType } from "@/src/constants/ZoneData";
+import { getImageDimensions } from "@/src/constants/ReactionData"
 
 // 각 색상별 이미지와 오차값 포함
 const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } } = {
@@ -74,8 +76,8 @@ const KtwizSeat = ({ screenWidth }: Props) => {
         const ctx = canvas.getContext("2d");
         const scale = window.devicePixelRatio || 1; // 화면 배율에 따라 픽셀 밀도 조절
 
-        const canvasWidth = 343;
-        const canvasHeight = 374;
+        const canvasWidth = getImageDimensions(StadiumType.SUWON_KT, screenWidth).width;
+        const canvasHeight = getImageDimensions(StadiumType.SUWON_KT, screenWidth).height;
         canvas.width = canvasWidth * scale;
         canvas.height = canvasHeight * scale;
 
@@ -153,7 +155,7 @@ const KtwizSeat = ({ screenWidth }: Props) => {
     <div className="flex justify-center mt-6" onClick={() => setSeatImage(defaultStadium)}>
       <canvas
         ref={canvasRef}
-        className="max-w-[343px] w-full mx-auto"
+        className={`w-full max-w-[${getImageDimensions(StadiumType.SUWON_KT, screenWidth).height}px] mx-auto`}
         onClick={handleCanvasClick}
       />
     </div>
