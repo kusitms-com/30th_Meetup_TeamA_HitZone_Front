@@ -81,6 +81,10 @@ const KtwizSeat = ({ screenWidth }: Props) => {
         canvas.width = canvasWidth * scale;
         canvas.height = canvasHeight * scale;
 
+        console.log("화면 width: "+screenWidth)
+        console.log("KT 이미지 width: "+canvasWidth);
+        console.log("KT 이미지 height "+canvasHeight);
+
         canvas.style.width = "100%";
         canvas.style.height = "auto";
 
@@ -155,7 +159,7 @@ const KtwizSeat = ({ screenWidth }: Props) => {
     <div className="flex justify-center mt-6" onClick={() => setSeatImage(defaultStadium)}>
       <canvas
         ref={canvasRef}
-        className={`w-full max-w-[${getImageDimensions(StadiumType.SUWON_KT, screenWidth).height}px] mx-auto`}
+        className={`w-full max-w-[${getImageDimensions(StadiumType.SUWON_KT, screenWidth).width}px] mx-auto`}
         onClick={handleCanvasClick}
       />
     </div>
