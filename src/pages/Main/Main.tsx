@@ -90,9 +90,9 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
         {/* 야구장 좌석 이미지 선택 */}
         <div className="mt-4 flex justify-center">
           {selectedStadium === StadiumType.JAMSIL ? (
-            <JamsilSeat />
+            <JamsilSeat screenWidth={window.innerWidth} />
           ) : selectedStadium === StadiumType.SUWON_KT ? (
-            <KtwizSeat />
+            <KtwizSeat screenWidth={window.innerWidth} />
           ) : (
             <p className="text-grayscale-90">해당 구장은 추후 업데이트 예정입니다 :)</p>
           )}
