@@ -15,7 +15,7 @@ import genieZoneSeat from "../../../assets/webp/seat/kt_geniezone.webp";
 import excitingSeat from "../../../assets/webp/seat/kt_exciting.webp";
 import outfieldSeat from "../../../assets/webp/seat/kt_outfield.webp";
 import tvingSeat from "../../../assets/webp/seat/kt_tving.webp";
-import { ScreenSize } from "@/src/constants/ReactionData"
+import { ScreenWidthSize } from "@/src/constants/ReactionData"
 
 // 각 색상별 이미지와 오차값 포함
 const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } } = {
