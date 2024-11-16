@@ -12,6 +12,9 @@ import premiumStadium from "../../../assets/webp/seat/jamsil_premium.webp";
 import greenStadium from "../../../assets/webp/seat/jamsil_green.webp";
 import excitingStadium from "../../../assets/webp/seat/jamsil_exciting.webp";
 
+import { StadiumType } from "@/src/constants/ZoneData";
+import { getImageDimensions } from "@/src/constants/ReactionData"
+
 // 각 색상별 이미지와 오차값 포함
 const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } } = {
   "#DC032A": { image: redStadium, tolerance: 15 },      // 빨강 좌석: tolerance 30
@@ -47,7 +50,11 @@ const isColorClose = (
   );
 };
 
-const JamsilSeat = () => {
+interface Props {
+  screenWidth: number;
+};
+
+const JamsilSeat = ({ screenWidth }: Props) => {
   const [seatImage, setSeatImage] = useState<StaticImageData>(defaultStadium);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -61,8 +68,8 @@ const JamsilSeat = () => {
         const ctx = canvas.getContext("2d");
         const scale = window.devicePixelRatio || 1;  // 화면 배율에 따른 픽셀 밀도 조절
 
-        const canvasWidth = 376;
-        const canvasHeight = 356;
+        const canvasWidth = getImageDimensions(StadiumType.JAMSIL, screenWidth).width;
+        const canvasHeight = getImageDimensions(StadiumType.JAMSIL, screenWidth).height;
         canvas.width = canvasWidth * scale;
         canvas.height = canvasHeight * scale;
 
@@ -133,7 +140,7 @@ const JamsilSeat = () => {
     <div className="flex justify-center mt-6" onClick={() => setSeatImage(defaultStadium)}>
       <canvas
         ref={canvasRef}
-        className="w-full max-w-[376px] mx-auto"
+        className={`w-full max-w-[${getImageDimensions(StadiumType.JAMSIL, screenWidth).height}px] mx-auto`}
         onClick={handleCanvasClick}
       />
     </div>

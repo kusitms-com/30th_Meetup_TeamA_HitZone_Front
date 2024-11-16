@@ -16,20 +16,23 @@ import excitingSeat from "../../../assets/webp/seat/kt_exciting.webp";
 import outfieldSeat from "../../../assets/webp/seat/kt_outfield.webp";
 import tvingSeat from "../../../assets/webp/seat/kt_tving.webp";
 
+import { StadiumType } from "@/src/constants/ZoneData";
+import { getImageDimensions } from "@/src/constants/ReactionData"
+
 // 각 색상별 이미지와 오차값 포함
 const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } } = {
-  "#B23039": { image: cheerSeat, tolerance: 2 },        // 빨간색 좌석: cheerSeat
+  "#B23039": { image: cheerSeat, tolerance: 10 },        // 빨간색 좌석: cheerSeat
   "#65C5DE": { image: skySeat, tolerance: 20 },         // 하늘색 좌석: skySeat
-  "#292F46": { image: skyZoneSeat, tolerance: 20 },     // 남색 좌석: skyZoneSeat
-  "#008FD7": { image: kidsLandSeat, tolerance: 20 },    // 파랑 좌석: kidsLandSeat
+  "#292F46": { image: skyZoneSeat, tolerance: 35 },     // 남색 좌석: skyZoneSeat
+  "#008FD7": { image: kidsLandSeat, tolerance: 30 },    // 파랑 좌석: kidsLandSeat
   "#5E346E": { image: centralSeat, tolerance: 20 },     // 보라색 좌석: centralSeat
   "#599741": { image: genieTvSeat, tolerance: 10 },     // 녹색 좌석: genieTvSeat
   "#F5A545": { image: yboxSeat, tolerance: 10 },        // 주황색 좌석: yboxSeat
-  "#E95560": { image: alphaShoppingSeat, tolerance: 5 }, // 핑크 좌석: alphaShoppingSeat
-  "#35659E": { image: genieZoneSeat, tolerance: 5 },    // 짙은 파랑 좌석: genieZoneSeat
-  "#3EA6A5": { image: excitingSeat, tolerance: 5 },     // 민트 좌석: excitingSeat
-  "#CEDA82": { image: outfieldSeat, tolerance: 20 },    // 연노랑 좌석: outfieldSeat
-  "#E3A3B1": { image: tvingSeat, tolerance: 5 },        // 연분홍 좌석: tvingSeat
+  "#E95560": { image: alphaShoppingSeat, tolerance: 20 }, // 핑크 좌석: alphaShoppingSeat
+  "#35659E": { image: genieZoneSeat, tolerance: 15 },    // 짙은 파랑 좌석: genieZoneSeat
+  "#3EA6A5": { image: excitingSeat, tolerance: 35 },     // 민트 좌석: excitingSeat
+  "#CEDA82": { image: outfieldSeat, tolerance: 30 },    // 연노랑 좌석: outfieldSeat
+  "#E3A3B1": { image: tvingSeat, tolerance: 15 },        // 연분홍 좌석: tvingSeat
 };
 
 // HEX 색상을 RGB로 변환하는 함수
@@ -55,7 +58,11 @@ const isColorClose = (
   );
 };
 
-const KtwizSeat = () => {
+interface Props {
+  screenWidth: number;
+};
+
+const KtwizSeat = ({ screenWidth }: Props) => {
   const [seatImage, setSeatImage] = useState<StaticImageData>(defaultStadium);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -69,8 +76,8 @@ const KtwizSeat = () => {
         const ctx = canvas.getContext("2d");
         const scale = window.devicePixelRatio || 1; // 화면 배율에 따라 픽셀 밀도 조절
 
-        const canvasWidth = 366;
-        const canvasHeight = 400;
+        const canvasWidth = getImageDimensions(StadiumType.SUWON_KT, screenWidth).width;
+        const canvasHeight = getImageDimensions(StadiumType.SUWON_KT, screenWidth).height;
         canvas.width = canvasWidth * scale;
         canvas.height = canvasHeight * scale;
 
@@ -124,24 +131,31 @@ const KtwizSeat = () => {
         const [r, g, b] = [pixelData[0], pixelData[1], pixelData[2]];
 
         // 클릭한 색상에 따라 해당 좌석 이미지로 변경
-        let matchedImage = defaultStadium;
-        Object.keys(colorMap).forEach((hex) => {
-          const { image, tolerance } = colorMap[hex];
-          const targetColor = hexToRgb(hex);
-          if (isColorClose(r, g, b, targetColor, tolerance)) {
-            matchedImage = image;
-          }
-        });
-        setSeatImage(matchedImage);
+        
+        if (seatImage === defaultStadium) {
+          // Default 상태에서 클릭한 경우
+          let matchedImage = defaultStadium;
+          Object.keys(colorMap).forEach((hex) => {
+            const { image, tolerance } = colorMap[hex];
+            const targetColor = hexToRgb(hex);
+            if (isColorClose(r, g, b, targetColor, tolerance)) {
+              matchedImage = image;
+            }
+          });
+          setSeatImage(matchedImage);
+        } else {
+          // ColorMap 상태에서 클릭한 경우 Default로 되돌림
+          setSeatImage(defaultStadium);
+        }
       }
     }
   };
-
+  //
   return (
     <div className="flex justify-center mt-6" onClick={() => setSeatImage(defaultStadium)}>
       <canvas
         ref={canvasRef}
-        className="max-w-[366px] w-full mx-auto"
+        className={`w-full max-w-[${getImageDimensions(StadiumType.SUWON_KT, screenWidth).height}px] mx-auto`}
         onClick={handleCanvasClick}
       />
     </div>
