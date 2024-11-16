@@ -19,7 +19,7 @@ export const ImageDimensions: Record<StadiumType, Record<ScreenWidthSize, ImageS
         [ScreenWidthSize.SMALL]: { width: 337, height: 319 },
         [ScreenWidthSize.MEDIUM]: { width: 350, height: 331 },
         [ScreenWidthSize.LARGE]: { width: 376, height: 356 },
-        [ScreenWidthSize.EXTRA_LARGE]: { width: 376, height: 356 },
+        [ScreenWidthSize.EXTRA_LARGE]: { width: 476, height: 451 },
     },
     [StadiumType.SUWON_KT]: {
         [ScreenWidthSize.SMALL]: { width: 316, height: 345 },
@@ -89,8 +89,10 @@ const getScreenWidthSizeFromWindow = (width: number): ScreenWidthSize => {
         return ScreenWidthSize.SMALL;
     } else if (width > ScreenWidthSize.SMALL && width < ScreenWidthSize.LARGE) {
         return ScreenWidthSize.MEDIUM;
-    } else {
+    } else if (width >= ScreenWidthSize.LARGE && width < ScreenWidthSize.EXTRA_LARGE) {
         return ScreenWidthSize.LARGE;
+    } else {
+        return ScreenWidthSize.EXTRA_LARGE;
     }
 };
 
