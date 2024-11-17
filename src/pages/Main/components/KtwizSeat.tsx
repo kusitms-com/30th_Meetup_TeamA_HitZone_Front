@@ -155,7 +155,7 @@ const KtwizSeat = ({ screenWidth }: Props) => {
   };
   //
   return (
-    <div className="flex justify-center mt-6">
+    <div className="flex justify-center">
       <canvas
         ref={canvasRef}
         className={`w-full max-w-[${getImageDimensions(StadiumType.SUWON_KT, screenWidth).width}px] mx-auto`}
