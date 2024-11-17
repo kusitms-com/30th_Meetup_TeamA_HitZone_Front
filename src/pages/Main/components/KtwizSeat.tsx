@@ -25,11 +25,11 @@ const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } }
   "#65C5DE": { image: skySeat, tolerance: 20 },         // 하늘색 좌석: skySeat
   "#292F46": { image: skyZoneSeat, tolerance: 35 },     // 남색 좌석: skyZoneSeat
   "#008FD7": { image: kidsLandSeat, tolerance: 30 },    // 파랑 좌석: kidsLandSeat
-  "#5E346E": { image: centralSeat, tolerance: 20 },     // 보라색 좌석: centralSeat
+  "#5E346E": { image: centralSeat, tolerance: 25 },     // 보라색 좌석: centralSeat
   "#599741": { image: genieTvSeat, tolerance: 10 },     // 녹색 좌석: genieTvSeat
-  "#F5A545": { image: yboxSeat, tolerance: 10 },        // 주황색 좌석: yboxSeat
+  "#F5A545": { image: yboxSeat, tolerance: 15 },        // 주황색 좌석: yboxSeat
   "#E95560": { image: alphaShoppingSeat, tolerance: 20 }, // 핑크 좌석: alphaShoppingSeat
-  "#35659E": { image: genieZoneSeat, tolerance: 15 },    // 짙은 파랑 좌석: genieZoneSeat
+  "#35659E": { image: genieZoneSeat, tolerance: 25 },    // 짙은 파랑 좌석: genieZoneSeat
   "#3EA6A5": { image: excitingSeat, tolerance: 35 },     // 민트 좌석: excitingSeat
   "#CEDA82": { image: outfieldSeat, tolerance: 30 },    // 연노랑 좌석: outfieldSeat
   "#E3A3B1": { image: tvingSeat, tolerance: 15 },        // 연분홍 좌석: tvingSeat
