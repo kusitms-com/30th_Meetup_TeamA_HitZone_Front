@@ -17,14 +17,14 @@ import { getImageDimensions } from "@/src/constants/ReactionData"
 
 // 각 색상별 이미지와 오차값 포함
 const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } } = {
-  "#DC032A": { image: redStadium, tolerance: 15 },      // 빨강 좌석: tolerance 30
-  "#E16900": { image: orangeStadium, tolerance: 35 },   // 주황 좌석: tolerance 35
-  "#242953": { image: navyStadium, tolerance: 20 },     // 남색 좌석: tolerance 20
-  "#4699F2": { image: blueStadium, tolerance: 25 },     // 파랑 좌석: tolerance 25
-  "#7C0065": { image: tableStadium, tolerance: 20 },    // 보라색 좌석: tolerance 20
-  "#185DDD": { image: premiumStadium, tolerance: 25 },  // 프리미엄 블루 좌석: tolerance 25
-  "#339600": { image: greenStadium, tolerance: 35 },    // 녹색 좌석: tolerance 35
-  "#6D6D6D": { image: excitingStadium, tolerance: 15 }, // 회색 좌석: tolerance 15
+  "#DC032A": { image: redStadium, tolerance: 15 },      // 빨강 좌석
+  "#E16900": { image: orangeStadium, tolerance: 35 },   // 주황 좌석
+  "#242953": { image: navyStadium, tolerance: 20 },     // 남색 좌석
+  "#4699F2": { image: blueStadium, tolerance: 25 },     // 파랑 좌석
+  "#7C0065": { image: tableStadium, tolerance: 20 },    // 보라색 좌석
+  "#185DDD": { image: premiumStadium, tolerance: 25 },  // 프리미엄 블루 좌석
+  "#339600": { image: greenStadium, tolerance: 35 },    // 녹색 좌석
+  "#FFE23E": { image: excitingStadium, tolerance: 15 }, // 회색 좌석
 };
 
 // HEX 색상을 RGB로 변환하는 함수
