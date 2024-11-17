@@ -73,6 +73,10 @@ const JamsilSeat = ({ screenWidth }: Props) => {
         canvas.width = canvasWidth * scale;
         canvas.height = canvasHeight * scale;
 
+        console.log("화면 width: "+screenWidth)
+        console.log("잠실 이미지 width: "+canvasWidth);
+        console.log("잠실 이미지 height "+canvasHeight);
+
         canvas.style.width = "100%";
         canvas.style.height = "auto";
 
@@ -140,7 +144,7 @@ const JamsilSeat = ({ screenWidth }: Props) => {
     <div className="flex justify-center mt-6" onClick={() => setSeatImage(defaultStadium)}>
       <canvas
         ref={canvasRef}
-        className={`w-full max-w-[${getImageDimensions(StadiumType.JAMSIL, screenWidth).height}px] mx-auto`}
+        className={`w-full max-w-[${getImageDimensions(StadiumType.JAMSIL, screenWidth).width}px] mx-auto`}
         onClick={handleCanvasClick}
       />
     </div>

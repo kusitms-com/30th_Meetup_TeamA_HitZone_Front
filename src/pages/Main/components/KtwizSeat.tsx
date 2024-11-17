@@ -25,11 +25,11 @@ const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } }
   "#65C5DE": { image: skySeat, tolerance: 20 },         // 하늘색 좌석: skySeat
   "#292F46": { image: skyZoneSeat, tolerance: 35 },     // 남색 좌석: skyZoneSeat
   "#008FD7": { image: kidsLandSeat, tolerance: 30 },    // 파랑 좌석: kidsLandSeat
-  "#5E346E": { image: centralSeat, tolerance: 20 },     // 보라색 좌석: centralSeat
+  "#5E346E": { image: centralSeat, tolerance: 25 },     // 보라색 좌석: centralSeat
   "#599741": { image: genieTvSeat, tolerance: 10 },     // 녹색 좌석: genieTvSeat
-  "#F5A545": { image: yboxSeat, tolerance: 10 },        // 주황색 좌석: yboxSeat
+  "#F5A545": { image: yboxSeat, tolerance: 15 },        // 주황색 좌석: yboxSeat
   "#E95560": { image: alphaShoppingSeat, tolerance: 20 }, // 핑크 좌석: alphaShoppingSeat
-  "#35659E": { image: genieZoneSeat, tolerance: 15 },    // 짙은 파랑 좌석: genieZoneSeat
+  "#35659E": { image: genieZoneSeat, tolerance: 25 },    // 짙은 파랑 좌석: genieZoneSeat
   "#3EA6A5": { image: excitingSeat, tolerance: 35 },     // 민트 좌석: excitingSeat
   "#CEDA82": { image: outfieldSeat, tolerance: 30 },    // 연노랑 좌석: outfieldSeat
   "#E3A3B1": { image: tvingSeat, tolerance: 15 },        // 연분홍 좌석: tvingSeat
@@ -81,6 +81,10 @@ const KtwizSeat = ({ screenWidth }: Props) => {
         canvas.width = canvasWidth * scale;
         canvas.height = canvasHeight * scale;
 
+        console.log("화면 width: "+screenWidth)
+        console.log("KT 이미지 width: "+canvasWidth);
+        console.log("KT 이미지 height "+canvasHeight);
+
         canvas.style.width = "100%";
         canvas.style.height = "auto";
 
@@ -94,7 +98,7 @@ const KtwizSeat = ({ screenWidth }: Props) => {
         }
       }
     };
-  }, [seatImage]);
+  }, [seatImage, seatImage.src]);
 
   useEffect(() => {
     loadImageToCanvas();
@@ -131,7 +135,6 @@ const KtwizSeat = ({ screenWidth }: Props) => {
         const [r, g, b] = [pixelData[0], pixelData[1], pixelData[2]];
 
         // 클릭한 색상에 따라 해당 좌석 이미지로 변경
-        
         if (seatImage === defaultStadium) {
           // Default 상태에서 클릭한 경우
           let matchedImage = defaultStadium;
@@ -152,10 +155,10 @@ const KtwizSeat = ({ screenWidth }: Props) => {
   };
   //
   return (
-    <div className="flex justify-center mt-6" onClick={() => setSeatImage(defaultStadium)}>
+    <div className="flex justify-center mt-6">
       <canvas
         ref={canvasRef}
-        className={`w-full max-w-[${getImageDimensions(StadiumType.SUWON_KT, screenWidth).height}px] mx-auto`}
+        className={`w-full max-w-[${getImageDimensions(StadiumType.SUWON_KT, screenWidth).width}px] mx-auto`}
         onClick={handleCanvasClick}
       />
     </div>
