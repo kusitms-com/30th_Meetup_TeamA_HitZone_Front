@@ -17,7 +17,7 @@ export default function SeatDropdown({ options, selectedOption, onSelect, select
 
 
   return (
-    <div className="relative w-[220px]">
+    <div className="relative w-[220px] bg-white rounded-lg">
       {/** 토글 버튼 */}
       <button
         onClick={toggleDropdown}
