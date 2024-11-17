@@ -98,7 +98,7 @@ const KtwizSeat = ({ screenWidth }: Props) => {
         }
       }
     };
-  }, [seatImage]);
+  }, [seatImage, seatImage.src]);
 
   useEffect(() => {
     loadImageToCanvas();
@@ -135,7 +135,6 @@ const KtwizSeat = ({ screenWidth }: Props) => {
         const [r, g, b] = [pixelData[0], pixelData[1], pixelData[2]];
 
         // 클릭한 색상에 따라 해당 좌석 이미지로 변경
-        
         if (seatImage === defaultStadium) {
           // Default 상태에서 클릭한 경우
           let matchedImage = defaultStadium;
@@ -156,7 +155,7 @@ const KtwizSeat = ({ screenWidth }: Props) => {
   };
   //
   return (
-    <div className="flex justify-center mt-6" onClick={() => setSeatImage(defaultStadium)}>
+    <div className="flex justify-center mt-6">
       <canvas
         ref={canvasRef}
         className={`w-full max-w-[${getImageDimensions(StadiumType.SUWON_KT, screenWidth).width}px] mx-auto`}
