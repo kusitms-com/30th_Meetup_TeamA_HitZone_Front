@@ -26,9 +26,11 @@ interface Props extends GuideGetParamsType {
 //export default function GuideDetailContent({stadiumName, zoneName, zoneColor, zoneNameList, onSelectZone}: Props) {
 export default function GuideDetailContent() {
   // 공통 클래스 정의
-  const containerClass = "bg-grayscale-0 p-3 rounded-lg";
-  const sectionTitleClass = "text-sm font-semibold text-grayscale-80 bg-gray-100 px-2 py-1 rounded inline-block";
-  const sectionContentClass = "text-sm font-regular text-black mt-2";
+  const containerClass = "bg-white";
+  const sectionTitleClass =
+    "text-sm font-semibold text-grayscale-80 px-2 py-[2px] mb-2 bg-grayscale-5 inline-block rounded-md";
+  const sectionContentClass =
+    "text-sm font-regular text-black mt-2 leading-relaxed";
   
   // 모달창 이벤트
   const { isOpen, openModal, closeModal } = useModal();
@@ -75,7 +77,7 @@ export default function GuideDetailContent() {
       <div className="sticky top-0 z-10 bg-white mb-[54px]">
         <Header />
       </div>
-      <div className="relative px-4 pb-20 pt-5 overflow-y-auto scrollbar-hide">
+      <div className="relative px-4 pb-20 pt-5 bg-grayscale-5 overflow-y-auto scrollbar-hide">
         {/* 가이드 데이터가 null이 아닐 때 렌더링 */}
         {guideData ? (
           <>
@@ -109,15 +111,15 @@ export default function GuideDetailContent() {
             {/* 구장 정보 */}
             <StadiumInfo stadiumName={stadiumName?? ""} firstBase={guideData.firstBaseSide} thirdBase={guideData.thirdBaseSide} />
 
-            <div className="bg-grayscale-5 p-4 rounded-lg mt-4">
+            <div className="bg-white mt-4 p-4 rounded-xl mb-2">
               {/* 상단 타이틀 섹션 */}
-              <div className={containerClass}>
+              <div className="bg-white">
                 <h2 className="text-lg font-bold"  style={{ color: guideData.zoneColor }}>{guideData.zoneName}</h2>
-                <p className="text-sm text-gray-700 mt-2">{guideData.explanation}</p>
+                <p className="text-sm font-semibold text-grayscale-80 mt-2 pb-4 border-b border-grayscale-10">{guideData.explanation}</p>
               </div>
 
               {/* 세부 정보 섹션 */}
-              <div className={`${containerClass} mt-3 space-y-4`}>
+              <div className={`${containerClass} space-y-4 mt-4`}>
                 {[
                   { title: "출입구 위치", contents: guideData.entrance },
                   { title: "단차 정보", contents: guideData.stepSpacing },
