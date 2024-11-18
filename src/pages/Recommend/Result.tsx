@@ -232,12 +232,13 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                 <div className="flex justify-start w-full mt-[20px] px-[16px]">
                     {/** 프로필 이미지 */}
                     <div className={`${rookieSize} relative`}>
-                        {/** Profile API 연동 데이터 : 더미 데이터(그냥 동그라미) */}
+                        {/** Profile API 연동 데이터: 프로필 이미지 */}
                         {profileData ? (
                             <Image src={profileData.imgUrl} alt="프로필 이미지" layout="fill" objectFit="cover "/>
-                        ) : 
-                        <div className="bg-main-5 border border-[0px] rounded-full w-full h-full" />
+                        ) : null
                         }
+                        {/** 프로필 백 그라운드: 연분홍 동그라미 */}
+                        <div className="bg-main-5 border border-[0px] rounded-full w-full h-full" />
                     </div>
 
                     {/** Profile API 연동 데이터 */}
