@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import coachMark1 from "../../../assets/webp/coachmark01.webp";
 import coachMark2 from "../../../assets/webp/coachmark02.webp";
 import coachMark3 from "../../../assets/webp/coachmark03.webp";
-import nextButtonIcon from "../../../assets/webp/next_button_white.webp";
-import backButtonIcon from "../../../assets/webp/back_button_white.webp";
 import closeButtonIcon from "../../../assets/webp/close_button_white.webp";
 
 interface CoachMarkProps {
@@ -14,7 +11,6 @@ interface CoachMarkProps {
 
 const CoachMark = ({ onClose }: CoachMarkProps) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const router = useRouter();
 
   const handleNext = () => {
     if (currentStep < 3) {
@@ -29,20 +25,15 @@ const CoachMark = ({ onClose }: CoachMarkProps) => {
   };
 
   const images = [coachMark1, coachMark2, coachMark3];
-
-  const handleClose = () => {
-    router.push("/");
-  };
-
+  
   // 버튼 스타일 정의
   const commonButtonClass = "absolute w-10 h-10 bg-white bg-opacity-40 rounded-full flex items-center justify-center transform -translate-y-1/2";
-
+  
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
-      <div className="relative w-full h-full max-w-[402px] flex">
-        {/* 닫기 버튼 */}
+      <div className="relative w-full h-full max-w-[402px] flex items-center justify-center">
         <button
-          onClick={handleClose}
+          onClick={onClose}
           className="absolute top-6 left-4 rounded-full flex items-center justify-center z-30"
         >
           <Image
@@ -67,15 +58,9 @@ const CoachMark = ({ onClose }: CoachMarkProps) => {
         {currentStep > 1 && (
           <button
             onClick={handlePrev}
-            className={`${commonButtonClass} left-4 top-1/2`}
+            className={`${commonButtonClass} left-[10px] top-1/2`}
           >
-            <Image
-              src={backButtonIcon}
-              alt="이전 버튼"
-              width={24}
-              height={24}
-              objectFit="contain"
-            />
+            <span>&larr;</span>
           </button>
         )}
 
@@ -83,15 +68,9 @@ const CoachMark = ({ onClose }: CoachMarkProps) => {
         {currentStep < 3 && (
           <button
             onClick={handleNext}
-            className={`${commonButtonClass} right-4 top-1/2`}
+            className={`${commonButtonClass} right-[10px] top-1/2`}
           >
-            <Image
-              src={nextButtonIcon}
-              alt="다음 버튼"
-              width={24}
-              height={24}
-              objectFit="contain"
-            />
+            <span>&rarr;</span>
           </button>
         )}
 
