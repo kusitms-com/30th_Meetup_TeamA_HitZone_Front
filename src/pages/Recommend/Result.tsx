@@ -297,7 +297,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                             const closeModal = () => setOpenModalIndex(null);
                     
                             return (
-                                <div key={index} className="bg-grayscale-5 border border-[0px] rounded-[4px] h-[104px] mt-[12px] p-[12px]">
+                                <div key={index} className="bg-grayscale-5 border border-[0px] rounded-[4px] min-h-[104px] mt-[12px] p-[12px]">
                                     <Image src={selectedCrownIcon} alt="왕관 이미지" className="w-[17px] h-[9px]"/>
                                     <div className="flex w-full justify-between ">
                                         <div className="flex w-full justify-start items-center">
