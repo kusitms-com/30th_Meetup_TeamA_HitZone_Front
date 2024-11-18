@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import stadiumDropdownIcon from "../../../assets/webp/stadium_dropdown.webp";
 
+import { useOutsideClick } from "@/src/hooks/useOutsideClick";
+
 interface SeatDropdownProps {
   options: string[];
   selectedOption: string;
@@ -15,9 +17,11 @@ export default function SeatDropdown({ options, selectedOption, onSelect, select
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
+  // 드롭다운 외부 클릭시 드롭다운 닫히는 이벤트
+  const dropdownRef = useOutsideClick(() => setIsDropdownOpen(false));
 
   return (
-    <div className="relative w-[220px] bg-white rounded-lg">
+    <div ref={dropdownRef} className="relative w-[220px] bg-white rounded-lg">
       {/** 토글 버튼 */}
       <button
         onClick={toggleDropdown}

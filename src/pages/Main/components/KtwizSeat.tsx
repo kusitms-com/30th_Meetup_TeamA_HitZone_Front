@@ -22,8 +22,8 @@ import { getImageDimensions } from "@/src/constants/ReactionData"
 // 각 색상별 이미지와 오차값 포함
 const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } } = {
   "#B23039": { image: cheerSeat, tolerance: 10 },       // 빨간색 좌석: cheerSeat
-  "#65C5DE": { image: skySeat, tolerance: 20 },         // 하늘색 좌석: skySeat
-  "#292F46": { image: skyZoneSeat, tolerance: 35 },     // 남색 좌석: skyZoneSeat
+  "#65C5DE": { image: skySeat, tolerance: 15 },         // 하늘색 좌석: skySeat
+  "#292F46": { image: skyZoneSeat, tolerance: 20 },     // 남색 좌석: skyZoneSeat
   "#008FD7": { image: kidsLandSeat, tolerance: 35 },    // 파랑 좌석: kidsLandSeat
   "#5E346E": { image: centralSeat, tolerance: 20 },     // 보라색 좌석: centralSeat
   "#599741": { image: genieTvSeat, tolerance: 10 },     // 녹색 좌석: genieTvSeat

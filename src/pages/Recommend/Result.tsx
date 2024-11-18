@@ -21,6 +21,10 @@ import { ZoneGetResponseType } from "../../api/ResultApiType";
 import { handleProfile, handlePrint } from "../../api/ResultApiHandler";
 import { ProfileGetResponseType } from "../../api/ResultApiType";
 
+// 자세히 보러가기 클릭시 현재 야구장의 모든 좌석 리스트 API 관련
+import { handleGetStadiumInfo } from "@/src/api/StadiumApiHandler";
+import { ZoneGetParamsType } from "@/src/api/StadiumApiType";
+
 // TIP 모달창 관련
 import useModal from '@/src/hooks/useModal';
 import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
@@ -110,14 +114,36 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
     const [openModalIndex, setOpenModalIndex] = useState<number | null>(null); // 열린 모달의 인덱스를 저장
     
 
+    
+    /////////////////////////////////////////////
+    // 선택된 스타디움의 좌석 정보 가져오는 API 호출 이벤트
+    const handleStadiumInfo = async () => {
+        const params: ZoneGetParamsType = {
+            stadiumName: selectedStadium as string,
+        };
+
+        const stadiumApiData = await handleGetStadiumInfo(params);
+        if (stadiumApiData) {
+            const stadiumInfo = stadiumApiData;
+            const zoneNameList = stadiumApiData.zones.map((zone) => zone.zoneName);
+
+            return zoneNameList;
+        }
+
+        return [];
+    };
 
     /////////////////////////////////////////////
     // 지세히 보러가기 이벤트
-    const handleDetailPage = (index: number) => {
-        moveDetailPage(index);
+    const handleDetailPage = async (index: number) => {
+        // zoneNameList 가져오기
+        const zoneNameList = await handleStadiumInfo();
+        
+        // 비동기 작업(handleStadiumInfo) 완료 후 페이지 전환
+        moveDetailPage(index, zoneNameList);
     }
 
-    const moveDetailPage = (index: number) => {
+    const moveDetailPage = (index: number, zoneNameList: string[]) => {
         // 선택된 섹션에 따라 리다이렉트
         router.push({
         pathname: '/guide/zone',  // 리다이렉트할 경로
@@ -125,7 +151,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
             stadiumName: selectedStadium,
             zoneName: recommendedZoneList[index].name,
             zoneColor: recommendedZoneList[index].color,
-            zoneNameList: [],
+            zoneNameList: zoneNameList,
         },
         });
     }

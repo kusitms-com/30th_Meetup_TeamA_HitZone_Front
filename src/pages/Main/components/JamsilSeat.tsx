@@ -24,7 +24,7 @@ const colorMap: { [key: string]: { image: StaticImageData; tolerance: number } }
   "#7C0065": { image: tableStadium, tolerance: 20 },    // 보라색 좌석: tolerance 20
   "#185DDD": { image: premiumStadium, tolerance: 25 },  // 프리미엄 블루 좌석: tolerance 25
   "#339600": { image: greenStadium, tolerance: 35 },    // 녹색 좌석: tolerance 35
-  "#6D6D6D": { image: excitingStadium, tolerance: 30 }, // 노랑색 좌석: tolerance 15
+  "#FFE23E": { image: excitingStadium, tolerance: 30 }, // 노랑색 좌석: tolerance 15
 };
 
 // HEX 색상을 RGB로 변환하는 함수
