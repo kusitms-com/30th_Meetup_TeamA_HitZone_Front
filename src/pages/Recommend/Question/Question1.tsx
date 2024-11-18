@@ -57,7 +57,7 @@ const Page = ({previousStep, nextStep, selectedSeat, setSelectedSeat}: Props) =>
                         </p>
                     </div>
                 </div>
-                <p className="text-xs text-grayscale-60 font-regular mt-[12px]">
+                <p className="text-xs text-grayscale-60 font-regular mt-[12px] z-10">
                     ※ 참고로, 홈팀 석이 더 쾌적하게 관람할 수 있어요!
                 </p>
             </div>
