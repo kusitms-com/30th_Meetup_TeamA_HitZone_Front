@@ -16,15 +16,15 @@ export interface ImageSize {
 
 export const ImageDimensions: Record<StadiumType, Record<ScreenWidthSize, ImageSize>> = {
     [StadiumType.JAMSIL]: {
-        [ScreenWidthSize.SMALL]: { width: 337, height: 319 },
+        [ScreenWidthSize.SMALL]: { width: 328, height: 311 },
         [ScreenWidthSize.MEDIUM]: { width: 347, height: 329 },
-        [ScreenWidthSize.LARGE]: { width: 376, height: 356 },
+        [ScreenWidthSize.LARGE]: { width: 383, height: 363 },
         [ScreenWidthSize.EXTRA_LARGE]: { width: 476, height: 451 },
     },
     [StadiumType.SUWON_KT]: {
-        [ScreenWidthSize.SMALL]: { width: 316, height: 345 },
-        [ScreenWidthSize.MEDIUM]: { width: 337, height: 368 },
-        [ScreenWidthSize.LARGE]: { width: 366, height: 400 },
+        [ScreenWidthSize.SMALL]: { width: 293, height: 320 },
+        [ScreenWidthSize.MEDIUM]: { width: 308, height: 337 },
+        [ScreenWidthSize.LARGE]: { width: 397, height: 434 },
         [ScreenWidthSize.EXTRA_LARGE]: { width: 467, height: 510 },
     },
 
