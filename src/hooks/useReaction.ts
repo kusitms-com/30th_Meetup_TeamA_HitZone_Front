@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 
+import { ScreenWidthSize } from "@/src/constants/ReactionData";
+
 interface ScreenSizeState {
   isSmall: boolean; // <= 360px
-  isMedium: boolean; // > 360px and <= 390px
-  isLarge: boolean; // > 390px and <= 410px
-  isExtraLarge: boolean; // > 410px
+  isMedium: boolean; // > 360px and < 400px
+  isLarge: boolean; // >= 400px and < 500px
+  isExtraLarge: boolean; // >= 500px
 }
 
 /**
@@ -23,10 +25,10 @@ export const useScreenWidth = (): ScreenSizeState => {
     const handleResize = () => {
       const width = window.innerWidth;
       setScreenSize({
-        isSmall: width <= 360,
-        isMedium: width > 360 && width <= 390,
-        isLarge: width > 390 && width <= 410,
-        isExtraLarge: width > 410,
+        isSmall: width <= ScreenWidthSize.SMALL,
+        isMedium: width > ScreenWidthSize.SMALL && width < ScreenWidthSize.LARGE,
+        isLarge: width > ScreenWidthSize.LARGE && width < ScreenWidthSize.EXTRA_LARGE,
+        isExtraLarge: width > ScreenWidthSize.EXTRA_LARGE,
       });
     };
 
