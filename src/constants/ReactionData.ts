@@ -23,7 +23,7 @@ export const ImageDimensions: Record<StadiumType, Record<ScreenWidthSize, ImageS
     },
     [StadiumType.SUWON_KT]: {
         [ScreenWidthSize.SMALL]: { width: 316, height: 345 },
-        [ScreenWidthSize.MEDIUM]: { width: 337, height: 368 },
+        [ScreenWidthSize.MEDIUM]: { width: 308, height: 337 },
         [ScreenWidthSize.LARGE]: { width: 366, height: 400 },
         [ScreenWidthSize.EXTRA_LARGE]: { width: 467, height: 510 },
     },
