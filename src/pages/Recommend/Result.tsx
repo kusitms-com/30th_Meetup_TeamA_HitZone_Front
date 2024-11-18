@@ -28,6 +28,9 @@ import SeatTipDialog from "@/src/components/dialogs/SeatTipDialog";
 // 예약 모달창 관련
 import ChooseBaseballTeamDialog from "@/src/components/dialogs/ChooseBaseballTeamDialog";
 
+// 반응형 이벤트
+import { useScreenWidth } from "@/src/hooks/useReaction";
+
 // zone 관리: KT or 잠실
 // 부모로부터 인자로 받기
 export interface Props {
@@ -144,10 +147,75 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
     // 예매하러 가기 버튼 클릭 시 모달창 띄우기 이벤트
     const {isOpen:isReservationOpen, openModal:openReservationModal, closeModal:closeReservationModal } = useModal();
     
+    // 버튼 클릭시 리다이렉트 이벤트가 아닌 모달창 이벤트 활성화하기로 함
+    /*
     const handleBooking = () => {
         // 예매 페이지로 리다이렉트
-        //router.push('/booking');  // '/booking'은 예매 페이지의 URL입니다. 수정할 수 있습니다.
+        router.push('/booking');
     };
+    */
+
+
+    /////////////////////////////////////////////
+    // 반응형 이벤트
+    const { isSmall, isMedium, isLarge, isExtraLarge } = useScreenWidth();
+
+    const rookieSize = isSmall
+        ? "w-[80px] h-[80px] "
+        : isMedium
+        ? "w-[97px] h-[97px] "
+        : isLarge
+        ? "w-[102px] h-[102px] "
+        : "w-[106px] h-[106px] ";
+
+    const textProfileSize = isSmall
+        ? "text-xs"
+        : isMedium
+        ? "text-md"
+        : isLarge
+        ? "text-lg "
+        : "text-lg ";
+
+    const textNickNameSize = isSmall
+        ? "text-lg "
+        : isMedium
+        ? "text-2xl "
+        : isLarge
+        ? "text-3xl "
+        : "text-3xl ";
+
+    const textHashtagSize = isSmall
+        ? "text-xxxxs"
+        : isMedium
+        ? "text-xxxs"
+        : isLarge
+        ? "text-xs "
+        : "text-xs ";
+
+    const textTypeSize = isSmall
+        ? "text-xxxs"
+        : isMedium
+        ? "text-xs"
+        : isLarge
+        ? "text-sm "
+        : "text-sm ";
+
+    const textZonePropileSize = isSmall
+        ? "text-md"
+        : isMedium
+        ? "text-md "
+        : isLarge
+        ? "text-md "
+        : "text-md ";
+
+    const textZoneSize = isSmall
+        ? "text-sm"
+        : isMedium
+        ? "text-md"
+        : isLarge
+        ? "text-md "
+        : "text-md ";
+    
 
 
     return (
@@ -163,7 +231,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                 {/** 야구장 유형 */}
                 <div className="flex justify-start w-full mt-[20px] px-[16px]">
                     {/** 프로필 이미지 */}
-                    <div className="w-[102px] h-[102px] relative">
+                    <div className={`${rookieSize} relative`}>
                         {/** Profile API 연동 데이터 : 더미 데이터(그냥 동그라미) */}
                         {profileData ? (
                             <Image src={profileData.imgUrl} alt="프로필 이미지" layout="fill" objectFit="cover "/>
@@ -174,17 +242,17 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
 
                     {/** Profile API 연동 데이터 */}
                     <div className="flex-grow ml-[16px]">
-                        <p className="text-lg text-grayscale-90 font-semibold">
+                        <p className={`${textProfileSize} text-grayscale-90 font-semibold`}>
                             나의 야구장 유형은
                         </p>
-                        <p className="text-3xl text-main-50 font-black relative top-[-5px]">
+                        <p className={`${textNickNameSize} text-main-50 font-black relative top-[-5px]`}>
                             {profileData?.nickname}
                         </p>
-                        <div className="relative text-start bg-main-5 text-sm text-main-90 font-medium px-[14px] py-[8px] mt-[2px] rounded-lg w-full text-center">
+                        <div className={`relative text-start bg-main-5 ${textTypeSize} text-main-90 font-medium px-[14px] py-[8px] mt-[2px] rounded-lg w-full text-center`}>
                             <div className="flex gap-[6px] mb-[6px] ">
                                 {/** 해시 태그 */}
                                 {profileData?.hashTags !== null ? (profileData?.hashTags.map((hashTag, index) => (
-                                    <p key={index} className="text-xs px-[6px] py-[2px] text-grayscale-90 font-medium bg-main-0 border border-0 rounded-md">
+                                    <p key={index} className={`${textHashtagSize} px-[6px] py-[2px] text-grayscale-90 font-medium bg-main-0 border border-0 rounded-md`}>
                                         {hashTag}
                                     </p>
                                 ))
@@ -209,7 +277,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                 {/** 추천 구역 */}
                 <div className="w-full px-[16px] mt-[32px]">
                     {/** 타이틀 */}
-                    <p className="text-md text-grayscale-90 font-bold ">
+                    <p className={`${textZonePropileSize} text-grayscale-90 font-bold`}>
                         나의 추천 구역
                     </p>
                     
@@ -232,7 +300,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                                     <Image src={selectedCrownIcon} alt="왕관 이미지" className="w-[17px] h-[9px]"/>
                                     <div className="flex w-full justify-between ">
                                         <div className="flex w-full justify-start items-center">
-                                            <p className="text-md text-grayscale-90 font-semibold mr-[8px]">
+                                            <p className={`${textZoneSize} text-grayscale-90 font-semibold mr-[8px]`}>
                                                 {index+1} {zone.name}
                                             </p>
                                             <Image src={tipPinkIcon} alt="핑크색 팁 이미지" className="w-[12px] h-[12px] cursor-pointer " onClick={openModal}/>
