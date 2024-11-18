@@ -16,7 +16,11 @@ export default function Dropdown({ options, selectedOption, onSelect }: Dropdown
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
+<<<<<<< design/#52-recommendedResultReaction
     <div className="relative w-[220px] bg-main-0">
+=======
+    <div className="relative w-[220px] bg-white rounded-lg">
+>>>>>>> develop
       <button
         onClick={toggleDropdown}
         className="flex items-center justify-between py-[6px] px-3 border rounded-lg w-[220px] h-[36px] text-md font-semibold text-grayscale-80"
