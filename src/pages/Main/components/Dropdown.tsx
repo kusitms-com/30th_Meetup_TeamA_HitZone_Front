@@ -3,6 +3,7 @@ import Image from "next/image";
 import stadiumDropdownIcon from "../../../assets/webp/stadium_dropdown.webp";
 
 import { StadiumType } from "@/src/constants/ZoneData";
+import { useOutsideClick } from "@/src/hooks/useOutsideClick";
 
 interface DropdownProps {
   options: StadiumType[];
@@ -15,8 +16,11 @@ export default function Dropdown({ options, selectedOption, onSelect }: Dropdown
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
+  // 드롭다운 외부 클릭시 드롭다운 닫히는 이벤트
+  const dropdownRef = useOutsideClick(() => setIsDropdownOpen(false));
+
   return (
-    <div className="relative w-[220px] bg-white rounded-lg">
+    <div ref={dropdownRef} className="relative w-[220px] bg-white rounded-lg">
       <button
         onClick={toggleDropdown}
         className="flex items-center justify-between py-[6px] px-3 border rounded-lg w-[220px] h-[36px] text-md font-semibold text-grayscale-80"
