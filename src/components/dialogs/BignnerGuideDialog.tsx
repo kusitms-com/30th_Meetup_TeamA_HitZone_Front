@@ -55,10 +55,11 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
             </span>
             {tips[activeTipIndex].title}
           </div>
-          <Image 
-            src={tips[activeTipIndex].image} 
+          <img 
+            src={tips[activeTipIndex].image.src} 
             alt={`Tip ${activeTipIndex + 1}`} 
-            className="w-full h-auto mb-2 rounded-lg" 
+            className="block " 
+            loading="eager"
           />
           <p className="text-[12px] font-regular text-grayscale-90 bg-grayscale-5 p-3 rounded-lg min-h-[79px]"
             style={{ textAlign: 'justify' }}>
