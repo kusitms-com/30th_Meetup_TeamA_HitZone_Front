@@ -26,7 +26,7 @@ export interface Props {
 const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false); // 준비 중 팝업 상태
-  const [showCoachMark, setShowCoachMark] = useState(true); // 코치마크 표시 상태
+  //const [showCoachMark, setShowCoachMark] = useState(true); // 코치마크 표시 상태
 
   const handleStadiumSelect = (stadium: StadiumType) => {
     // 선택 가능한 구장인지 확인
@@ -66,65 +66,69 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
     return <div>Loading...</div>;
   }
 
+
   return (
-    <div className="flex flex-col w-full overflow-hidden">
-      {/* 코치마크 */}
+    <div className="flex flex-col w-full h-screen overflow-hidden">
+      {/* 코치마크 
       {showCoachMark && <CoachMark onClose={() => setShowCoachMark(false)} />}
-
-      {/* 코치마크가 비활성화된 경우에만 메인 콘텐츠 렌더링 */}
+      */}
+      {/* 코치마크가 비활성화된 경우에만 메인 콘텐츠 렌더링 
       {!showCoachMark && (
-        <>
-          <Header />
+      */}
+      <>
+        <Header />
 
-          <div className="flex-1 overflow-y-auto scrollbar-hide px-4 pb-24">
-            <p className="text-xl font-bold text-grayscale-90 pt-5 text-left w-full">
-              오늘은 어느 야구장에 방문하시나요?
-            </p>
+        <div className="flex-1 overflow-y-auto scrollbar-hide px-4 pb-24 bg-grayscale-5">
+          <p className="text-xl font-bold text-grayscale-90 pt-5 text-left w-full">
+            오늘은 어느 야구장에 방문하시나요?
+          </p>
 
-            {/* 야구장 드롭다운 */}
-            <div className="flex items-center gap-4 justify-between mt-4 w-full">
-              <Dropdown
-                options={stadiumList}
-                selectedOption={selectedStadium}
-                onSelect={handleStadiumSelect}
-              />
-              {/* 초보자 구역 가이드 버튼 */}
-              <BignnerGuide onClick={toggleModal} />
-            </div>
-
-            {/* 초보자 구역 가이드 모달 */}
-            <BignnerGuideDialog isOpen={isModalOpen} onClose={toggleModal} />
-
-            {/* 야구장 좌석 이미지 선택 */}
-            <div className="mt-4 flex justify-center">
-              {selectedStadium === StadiumType.JAMSIL ? (
-                <JamsilSeat screenWidth={window.innerWidth} />
-              ) : selectedStadium === StadiumType.SUWON_KT ? (
-                <KtwizSeat screenWidth={window.innerWidth} />
-              ) : (
-                <p className="text-grayscale-90">해당 구장은 추후 업데이트 예정입니다 :)</p>
-              )}
-            </div>
-
-            {/* 구장 정보 */}
-            <StadiumInfo stadiumName={selectedStadium} />
-
-            {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
-            <div className="flex justify-center">
-              <SeatRecommendButton stadiumName={selectedStadium} />
-            </div>
+          {/* 야구장 드롭다운 */}
+          <div className="flex items-center gap-4 justify-between mt-4 w-full">
+            <Dropdown
+              options={stadiumList}
+              selectedOption={selectedStadium}
+              onSelect={handleStadiumSelect}
+            />
+            {/* 초보자 구역 가이드 버튼 */}
+            <BignnerGuide onClick={toggleModal} />
           </div>
 
-          {/* 하단 네비게이션 바 */}
-          <NavBar />
+          {/* 초보자 구역 가이드 모달 */}
+          <BignnerGuideDialog isOpen={isModalOpen} onClose={toggleModal} />
 
-          {/* 플로팅 챗봇 버튼 */}
-          <ChatBot />
+          {/* 야구장 좌석 이미지 선택 */}
+          <div className="mt-4 flex justify-center">
+            {selectedStadium === StadiumType.JAMSIL ? (
+              <JamsilSeat screenWidth={window.innerWidth} />
+            ) : selectedStadium === StadiumType.SUWON_KT ? (
+              <KtwizSeat screenWidth={window.innerWidth} />
+            ) : (
+              <p className="text-grayscale-90">해당 구장은 추후 업데이트 예정입니다 :)</p>
+            )}
+          </div>
 
-          {/* 준비 중인 구장 선택 시 나오는 팝업 */}
-          <ReadyStadiumDialog isOpen={isPopupOpen} onClose={closePopup} />
-        </>
+          {/* 구장 정보 */}
+          <StadiumInfo stadiumName={selectedStadium} />
+
+          {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
+          <div className="flex justify-center">
+            <SeatRecommendButton stadiumName={selectedStadium} />
+          </div>
+        </div>
+
+        {/* 하단 네비게이션 바 */}
+        <NavBar />
+
+        {/* 플로팅 챗봇 버튼 */}
+        <ChatBot />
+
+        {/* 준비 중인 구장 선택 시 나오는 팝업 */}
+        <ReadyStadiumDialog isOpen={isPopupOpen} onClose={closePopup} />
+      </>
+      {/*s
       )}
+      */}
     </div>
   );
 };

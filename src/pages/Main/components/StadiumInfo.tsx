@@ -19,7 +19,7 @@ function StadiumInfo({ stadiumName, firstBase, thirdBase }: StadiumInfoProps) {
         <span>{defaultFirstBase}</span>
       </div>
       <div className="text-center flex items-center gap-2">
-        <span className="px-2 py-[2px] bg-grayscale-5 text-grayscale-80 rounded-md">3루</span>
+        <span className="px-2 py-[2px] bg-grayscale-0 text-grayscale-80 rounded-md">3루</span>
         <span>{defaultThirdBase}</span>
       </div>
     </div>
