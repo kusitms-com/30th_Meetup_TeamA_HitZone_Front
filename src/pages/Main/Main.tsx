@@ -68,7 +68,7 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
 
 
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full h-screen overflow-hidden">
       {/* 코치마크 
       {showCoachMark && <CoachMark onClose={() => setShowCoachMark(false)} />}
       */}
@@ -78,7 +78,7 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
       <>
         <Header />
 
-        <div className="flex-1 overflow-y-auto scrollbar-hide px-4 pb-24">
+        <div className="flex-1 overflow-y-auto scrollbar-hide px-4 pb-24 bg-grayscale-5">
           <p className="text-xl font-bold text-grayscale-90 pt-5 text-left w-full">
             오늘은 어느 야구장에 방문하시나요?
           </p>
