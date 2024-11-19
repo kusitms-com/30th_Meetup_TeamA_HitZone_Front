@@ -104,6 +104,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
   return (
     <>
     <Head>
+      <title>HitZone</title>
+      <meta name="description" content="큐시즘 30th 밋업 A팀 히트존" />
       {/* 기본 Favicon */}
       <link rel="icon" href="/favicon.ico" />
 
