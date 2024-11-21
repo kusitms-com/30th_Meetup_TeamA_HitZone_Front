@@ -1,7 +1,7 @@
-import beginnerGuide01 from "../assets/svg/bignnerGuide01.svg";
-import beginnerGuide02 from "../assets/svg/bignnerGuide02.svg";
-import beginnerGuide03 from "../assets/svg/bignnerGuide03.svg";
-import beginnerGuide04 from "../assets/svg/bignnerGuide04.svg";
+import beginnerGuide01 from "../assets/webp/bignnerGuide01.webp";
+import beginnerGuide02 from "../assets/webp/bignnerGuide02.webp";
+import beginnerGuide03 from "../assets/webp/bignnerGuide03.webp";
+import beginnerGuide04 from "../assets/webp/bignnerGuide04.webp";
 
 export const tips = [
   { 
