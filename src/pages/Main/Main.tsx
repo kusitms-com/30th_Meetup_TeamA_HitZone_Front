@@ -150,14 +150,15 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
           <StadiumInfo stadiumName={selectedStadium} />
 
           {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
-          <div className="flex justify-center relative">
+          <div className="flex justify-center">
+            {/**부모 */}
             <SeatRecommendButton stadiumName={selectedStadium} />
-            
-            {/* ScrollAppeal 컴포넌트 */}
-            {renderScrollApil()}
           </div>
         </div>
 
+        {/* ScrollAppeal 컴포넌트 */}
+        {renderScrollApil()}
+        
         {/* 하단 네비게이션 바 */}
         <NavBar />
 
