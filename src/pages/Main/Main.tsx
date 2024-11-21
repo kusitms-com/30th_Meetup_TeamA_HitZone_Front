@@ -15,6 +15,8 @@ import SeatRecommendButton from "./components/SeatRecommendButton";
 import ChatBot from "../../components/button/FloatingChatbotButton";
 import CoachMark from "./components/CoachMark";
 
+import ScrollAppeal from "./components/ScrollAppeal";
+
 // Enum으로 추천 구역 Data 관리
 import { StadiumType, stadiumList } from "../../constants/ZoneData";
 
@@ -115,6 +117,9 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
           <div className="flex justify-center">
             <SeatRecommendButton stadiumName={selectedStadium} />
           </div>
+
+          {/* 맨 아래 겹쳐 보이는 텍스트 컴포넌트 */}
+          <ScrollAppeal/>
         </div>
 
         {/* 하단 네비게이션 바 */}
