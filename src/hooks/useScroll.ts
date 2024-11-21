@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+// 전역(window) 스크롤 감지 훅
 const useScroll = () => {
   const [scrollDirection, setScrollDirection] = useState<"up" | "down" | null>(
     null
