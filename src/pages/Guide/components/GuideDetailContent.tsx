@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import StadiumInfo from "../../Main/components/StadiumInfo";
 import SeatDropdown from "./SeatDropdown";
-import tipIcon from "../../../assets/svg/tip_button.svg";
+import tipIcon from "../../../assets/svg/guide_tip_button.svg";
 
 import { handleGuide } from "@/src/api/StadiumApiHandler";
 import { GuideGetParamsType, GuideGetResponseType, ReferenceGroup, Reference, ZoneType } from "@/src/api/StadiumApiType";
@@ -90,7 +90,7 @@ export default function GuideDetailContent() {
                   selectedColor={guideData.zoneColor?? zoneColor}
                 />
                 <button className="ml-auto w-[54px] h-[30px] flex items-center justify-center">
-                  <Image src={tipIcon} alt="Tip" width={54} height={30} onClick={openModal} />
+                  <Image src={tipIcon} alt="Tip" width={54} height={30} onClick={openModal}/>
                 </button>
                 {isOpen && guideData.referencesGroup && guideData.referencesGroup.length > 0 && (
                   <SeatTipDialog
