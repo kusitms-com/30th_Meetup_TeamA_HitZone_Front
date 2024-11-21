@@ -8,7 +8,7 @@ import Image from 'next/image';
 import crownGoldIcon from '@/src/assets/webp/recommend_crown_gold.webp';
 import crownSilverIcon from '@/src/assets/webp/recommend_crown_silver.webp';
 import crownBronzeIcon from '@/src/assets/webp/recommend_crown_bronze.webp';
-import tipPinkIcon from '@/src/assets/webp/recommend_tip_pink.webp';
+import tipPinkIcon from '@/src/assets/svg/recommend_tip_pink.svg';
 import rightArrowIcon from "@/src/assets/webp/recommend_right_arrow.webp"
 
 // Enum으로 추천 구역 Data 관리
