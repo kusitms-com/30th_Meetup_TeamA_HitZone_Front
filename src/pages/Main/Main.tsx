@@ -3,6 +3,7 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 // import { useRouter } from "next/router";
 
 import useRefScroll from "@/src//hooks/useRefScroll";
+import useVisibilityWithFade from "@/src/hooks/useVisibilityWithFade";
 
 import Header from "../../components/layout/MainHeader";
 import NavBar from "../../components/layout/NavBar";
@@ -72,8 +73,36 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   }
 
 
-  const { scrollDirection, scrollPosition, containerRef } = useRefScroll<HTMLDivElement>();
-  
+  // 스크롤 이벤트
+  const { scrollDirection, scrollPosition, containerRef } = useRefScroll<HTMLDivElement>(); // 스크롤 감지 훅
+  const animationDuration = 3000; // 3초, 사라지는 애니메이션 길이
+  const { isVisible, isFadingOut } = useVisibilityWithFade(scrollDirection, { // 스크롤 내림 감지시 컴포넌트 숨기는 훅
+    animationDuration,
+  });
+  const renderScrollState = () => {
+    return (
+      <>
+        <p>스크롤 방향: {scrollDirection || "아직 없음"}</p>
+        <p>현재 스크롤 위치: {scrollPosition}px</p>
+      </>
+    );
+  }
+  const renderScrollApil = () => {
+    if (!isVisible) return null;
+
+    return (
+      <div
+        className={`transition-opacity ${
+          isFadingOut ? "opacity-0" : "opacity-100"
+        }`}
+        style={{
+          transitionDuration: `${animationDuration}ms`, // 15초 애니메이션
+        }}
+      >
+        <ScrollAppeal />
+      </div>
+    );
+  }
 
   return (
     <div 
@@ -87,9 +116,6 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
       */}
       <>
         <Header />
-        <p>스크롤 방향: {scrollDirection || "아직 없음"}</p>
-        <p>현재 스크롤 위치: {scrollPosition}px</p>
-
         <div className="flex-1 px-4 pb-24 bg-grayscale-5">
           <p className="text-xl font-bold text-grayscale-90 pt-5 text-left w-full">
             오늘은 어느 야구장에 방문하시나요?
@@ -127,11 +153,11 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
           <div className="flex justify-center">
             <SeatRecommendButton stadiumName={selectedStadium} />
           </div>
-
-          {/* 맨 아래 겹쳐 보이는 텍스트 컴포넌트 */}
           
           {/* ScrollAppeal 컴포넌트 */}
-          <ScrollAppeal />
+          <>
+            {renderScrollApil()}
+          </>
         </div>
 
         {/* 하단 네비게이션 바 */}
