@@ -364,8 +364,8 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                     )}
                     {/** 다음 버튼, 맨 아래에 배치 */}
                     <div className="relative flex justify-center items-center text-center border border-0 rounded-[8px] mb-24 h-[48px] w-full gap-[8px] mt-5">
-                        <div className="bg-main-10 border border-0 rounded-[8px] cursor-pointer" onClick={handleRedirectToRecommendation}>
-                            <p className="text-md text-main-70 font-semibold min-w-[135px] px-[8px] py-[12px]">
+                        <div className="bg-white border border-grayscale-30 rounded-[8px] cursor-pointer" onClick={handleRedirectToRecommendation}>
+                            <p className="text-md text-grayscale-60 font-semibold min-w-[135px] px-[8px] py-[12px]">
                                 추천 다시 받기
                             </p>
                         </div>
