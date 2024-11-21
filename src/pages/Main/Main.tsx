@@ -2,6 +2,8 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 // import { useSession } from "next-auth/react";
 // import { useRouter } from "next/router";
 
+import useRefScroll from "@/src//hooks/useRefScroll";
+
 import Header from "../../components/layout/MainHeader";
 import NavBar from "../../components/layout/NavBar";
 import BignnerGuide from "../../components/chips/BignnerGuide";
@@ -39,6 +41,7 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   const closePopup = () => setIsPopupOpen(false);
+  
 
   ///////////////////////////////////////////////////////////
   // 🐻 INAE 추가 코드
@@ -69,8 +72,13 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   }
 
 
+  const { scrollDirection, scrollPosition, containerRef } = useRefScroll<HTMLDivElement>();
+  
+
   return (
-    <div className="flex flex-col w-full min-h-screen overflow-auto scrollbar-hide">
+    <div 
+      ref={containerRef} // 스크롤을 감지할 특정 div에 Ref를 바인딩
+      className="flex flex-col w-full min-h-screen overflow-auto scrollbar-hide">
       {/* 코치마크 
       {showCoachMark && <CoachMark onClose={() => setShowCoachMark(false)} />}
       */}
@@ -79,6 +87,8 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
       */}
       <>
         <Header />
+        <p>스크롤 방향: {scrollDirection || "아직 없음"}</p>
+        <p>현재 스크롤 위치: {scrollPosition}px</p>
 
         <div className="flex-1 px-4 pb-24 bg-grayscale-5">
           <p className="text-xl font-bold text-grayscale-90 pt-5 text-left w-full">
@@ -119,7 +129,9 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
           </div>
 
           {/* 맨 아래 겹쳐 보이는 텍스트 컴포넌트 */}
-          <ScrollAppeal/>
+          
+          {/* ScrollAppeal 컴포넌트 */}
+          <ScrollAppeal />
         </div>
 
         {/* 하단 네비게이션 바 */}
