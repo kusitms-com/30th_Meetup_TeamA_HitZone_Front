@@ -2,6 +2,9 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 // import { useSession } from "next-auth/react";
 // import { useRouter } from "next/router";
 
+import useRefScroll from "@/src//hooks/useRefScroll";
+import useVisibilityWithFade from "@/src/hooks/useVisibilityWithFade";
+
 import Header from "../../components/layout/MainHeader";
 import NavBar from "../../components/layout/NavBar";
 import BignnerGuide from "../../components/chips/BignnerGuide";
@@ -14,6 +17,8 @@ import StadiumInfo from "./components/StadiumInfo";
 import SeatRecommendButton from "./components/SeatRecommendButton";
 import ChatBot from "../../components/button/FloatingChatbotButton";
 import CoachMark from "./components/CoachMark";
+
+import ScrollAppeal from "./components/ScrollAppeal";
 
 // Enum으로 추천 구역 Data 관리
 import { StadiumType, stadiumList } from "../../constants/ZoneData";
@@ -37,6 +42,7 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   const closePopup = () => setIsPopupOpen(false);
+  
 
   ///////////////////////////////////////////////////////////
   // 🐻 INAE 추가 코드
@@ -67,8 +73,41 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   }
 
 
+  // 스크롤 이벤트
+  const { scrollDirection, scrollPosition, containerRef } = useRefScroll<HTMLDivElement>(); // 스크롤 감지 훅
+  const animationDuration = 3000; // 3초, 사라지는 애니메이션 길이
+  const { isVisible, isFadingOut } = useVisibilityWithFade(scrollDirection, { // 스크롤 내림 감지시 컴포넌트 숨기는 훅
+    animationDuration,
+  });
+  const renderScrollState = () => {
+    return (
+      <>
+        <p>스크롤 방향: {scrollDirection || "아직 없음"}</p>
+        <p>현재 스크롤 위치: {scrollPosition}px</p>
+      </>
+    );
+  }
+  const renderScrollApil = () => {
+    if (!isVisible) return null;
+
+    return (
+      <div
+        className={`transition-opacity ${
+          isFadingOut ? "opacity-0" : "opacity-100"
+        }`}
+        style={{
+          transitionDuration: `${animationDuration}ms`, // 15초 애니메이션
+        }}
+      >
+        <ScrollAppeal />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col w-full h-screen overflow-hidden">
+    <div 
+      ref={containerRef} // 스크롤을 감지할 특정 div에 Ref를 바인딩
+      className="flex flex-col w-full min-h-screen overflow-auto scrollbar-hide">
       {/* 코치마크 
       {showCoachMark && <CoachMark onClose={() => setShowCoachMark(false)} />}
       */}
@@ -77,8 +116,7 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
       */}
       <>
         <Header />
-
-        <div className="flex-1 overflow-y-auto scrollbar-hide px-4 pb-24 bg-grayscale-5">
+        <div className="flex-1 px-4 pb-24 bg-grayscale-5">
           <p className="text-xl font-bold text-grayscale-90 pt-5 text-left w-full">
             오늘은 어느 야구장에 방문하시나요?
           </p>
@@ -113,10 +151,14 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
 
           {/* 나에게 맞는 구역 찾으러 가기 버튼 */}
           <div className="flex justify-center">
+            {/**부모 */}
             <SeatRecommendButton stadiumName={selectedStadium} />
           </div>
         </div>
 
+        {/* ScrollAppeal 컴포넌트 */}
+        {renderScrollApil()}
+        
         {/* 하단 네비게이션 바 */}
         <NavBar />
 
