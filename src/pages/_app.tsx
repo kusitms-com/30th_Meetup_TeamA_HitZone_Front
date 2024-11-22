@@ -118,6 +118,20 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
       {/* 메타 데이터 */}
       <meta name="theme-color" content="#ffffff" />
       <meta name="description" content="A Progressive Web App" />
+      
+      {/* Microsoft Clarity 스크립트 */}
+      <script
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "p1x3mhnt0o");
+          `,
+        }}
+      />
     </Head>
 
       {/*<SessionProvider session={session}>*/}
