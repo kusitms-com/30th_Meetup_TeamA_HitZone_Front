@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import Image from "next/image";
 import plusIcon from "../../../assets/webp/chatbot_plus.webp";
 import chatbotClickIcon from "../../../assets/svg/chatbot_click.svg";
-import OptionsList from "./OptionsList";
+import FAQCategoryBar from "./FAQCategoryBar";
 
 const ChatInput = () => {
-  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
 
   const toggleOptions = () => {
-    setIsOptionsOpen((prev) => !prev);
+    setIsFAQCategoryVisible((prev) => !prev);
   };
 
   return (
     <>
       {/* 플러스 버튼 리스트 */}
-      <OptionsList isOpen={isOptionsOpen} />
+      <FAQCategoryBar isVisible={isFAQCategoryVisible} />
 
       {/* 입력창 */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full p-2 bg-white flex justify-center items-center">
