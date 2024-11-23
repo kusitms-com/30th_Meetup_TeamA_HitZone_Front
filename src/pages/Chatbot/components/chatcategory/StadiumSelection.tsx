@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import stadiumIcon from "@/src/assets/svg/chatbot_select_stadium.svg";
 
@@ -10,18 +10,34 @@ interface StadiumSelectionProps {
 }
 
 const StadiumSelection = ({ stadiums, onSelect }: StadiumSelectionProps) => {
-  
+  // 선택한 구장 저장
+  const [selectedStadium, setSelectedStadium] = useState<string>("");
+
+  // 1번 선택시 더 이상 선택 불가하도록
+  const handleClick = (stadium: string) => {
+    if (isProvidedStadium(stadium) && !selectedStadium) {
+      setSelectedStadium(stadium);
+      onSelect(stadium); // 부모로 선택된 값 전달
+    }
+  };
+
+  // 선택 가능한지 여부를 판단하는 함수
+  const isProvidedStadium = (stadium: string): boolean =>
+    stadium === StadiumType.JAMSIL || stadium === StadiumType.SUWON_KT;
+
+
   // 카테고리에서 스타디움 리스트를 렌더링하는 함수
   const renderStadium = (stadium: string) => {
-    const selectable = stadium === StadiumType.JAMSIL || stadium === StadiumType.SUWON_KT;
-
     return (
       <div
         key={stadium}
-        onClick={selectable ? () => onSelect(stadium) : undefined}
-        className={`bg-grayscale-5 py-2 rounded-md text-center
+        onClick={() => handleClick(stadium)}
+        className={`py-2 rounded-md text-center
           ${
-            stadium !== StadiumType.JAMSIL && stadium !== StadiumType.SUWON_KT ? "text-grayscale-30" : "text-grayscale-90 cursor-pointer hover:bg-grayscale-10"
+            stadium === selectedStadium? "bg-grayscale-10 text-grayscale-30" :   // 선택한 구장인 경우
+            isProvidedStadium(stadium)? "bg-grayscale-5 text-grayscale-90 cursor-pointer hover:bg-grayscale-10":  // 제공하는 구장이고 선택한 구장이 없는 경우
+            isProvidedStadium(stadium) && selectedStadium? "bg-grayscale-5 text-grayscale-90":    // 제공하는 구장이고 선택한 구장이 있는 경우
+            "bg-grayscale-5 text-grayscale-30" // 제공하지 않는 구장인 경우
           }`
         }>
         {stadium}
