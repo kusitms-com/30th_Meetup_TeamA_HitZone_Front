@@ -9,6 +9,7 @@ import DateBanner from "./components/DateBanner";
 import { questionCategories } from "@/src/constants/ChatbotData";
 
 import RookieChat from "./components/RookieChat";
+import UserChat from "./components/UserChat";
 
 const Chatbot = () => {
   const [selectedStadium, setSelectedStadium] = useState<string | null>(null);
@@ -62,11 +63,7 @@ const Chatbot = () => {
               
               {/* 채팅2: 구장 선택시, 사용자 답변, 필수 출력 */}
               {selectedStadium && (
-                <div className="flex justify-end mb-4">
-                  <div className="bg-main-5 px-3 py-2 rounded-lg text-grayscale-90 max-w-xs text-xs font-regular">
-                    {selectedStadium}
-                  </div>
-                </div>
+                <UserChat messageList={[selectedStadium]}/>
               )}
             </div>
           </div>
