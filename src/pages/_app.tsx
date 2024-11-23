@@ -72,6 +72,12 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
   useEffect(() => {
     // 클라이언트 측에서 경로 설정
     setCurrentPath(window.location.pathname);
+
+    // Kakao SDK 초기화
+    if (typeof window !== "undefined" && window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init("d4d5e84e53ce18afa1d4f5ecbc14a552");
+      console.log("Kakao SDK 초기화:", window.Kakao.isInitialized());
+    }
   }, []);
 
 
@@ -125,6 +131,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         {renderComponent()}
       </div>
       {/*</SessionProvider> */}
+
+      <script src="https://developers.kakao.com/sdk/js/kakao.min.js" async></script>
     </>
   );
 };

@@ -1,8 +1,9 @@
-import Image from 'next/image';
+import React from 'react';
 
-import shareButtonGrayIcon from '../../assets/webp/share_gray.webp';
+// 카카오톡 공유 기능
+import KakaoShareButton from "../../components/button/KakaoShareButton";
 
-const Bar = () => {
+const ResultHeader = () => {
     return (
         <div className="flex justify-between w-full border-b border-grayscale-10 p-[15px]">
             <div className="flex justify-center items-center w-full">
@@ -10,10 +11,10 @@ const Bar = () => {
                     야구장 유형 테스트 결과
                 </p>
             </div>
-            <Image src={shareButtonGrayIcon} alt="공유 버튼" width={28} height={24} className="cursor-pointer"/>
+            <KakaoShareButton />
         </div>
     )
 }
 
 
-export default Bar
+export default ResultHeader
