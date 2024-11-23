@@ -61,9 +61,23 @@ const Chatbot = () => {
 
 
               
-              {/* 채팅2: 구장 선택시, 사용자 답변, 필수 출력 */}
+              {/* 야구장 선택시 */}
               {selectedStadium && (
-                <UserChat messageList={[selectedStadium]}/>
+                <>
+                  {/* 채팅2: 사용자 답변, 필수 출력 */}
+                  <UserChat messageList={[selectedStadium]}/>
+
+                  {/* 채팅3: */}
+                  <RookieChat 
+                    initialMessage={[`'${selectedStadium}'을(를) 선택하셨군요!😁`]} 
+                    contentList={[
+                      {
+                        type: "textList",
+                        content: questionCategories.baseballCategories.userMessage
+                      }
+                    ]}
+                />
+                </>
               )}
             </div>
           </div>

@@ -12,7 +12,7 @@ export const questionCategories = {
   baseballCategories: {
     frontendValues: stadiumList,  // 챗봇 구단별 구장명 (프론트에서 보여주는 값)
     backendParameters: ["lg", "kt", "kiwoom", "kia", "samsung", "hanhwa", "lotte", "ssg", "nc"],  // 챗봇 구단별 구장명 (백엔드에 API 파라미터로 넘겨주는 값)
-    userMessage: ["을 선택하셨군요!😁", "야구에 관련된 궁금한 점이 있으신가요?", "1. 궁금한 내용을 언제든 자유롭게 입력해주세요", "2. 아래 질문 카테고리 선택을 해주시면, ‘자주 물어보는 질문’을 물어볼 수 있어요!"]
+    userMessage: ["야구에 관련된 궁금한 점이 있으신가요?", "1. 궁금한 내용을 언제든 자유롭게 입력해주세요", "2. 아래 질문 카테고리 선택을 해주시면, ‘자주 물어보는 질문’을 물어볼 수 있어요!"]
   },
   
   // 챗봇 질문 카테고리 데이터
