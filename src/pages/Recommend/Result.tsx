@@ -367,7 +367,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                         </div>
                     )}
                     {/** 다음 버튼, 맨 아래에 배치 */}
-                    <div className="relative flex justify-center items-center text-center border border-0 rounded-[8px] mb-24 h-[48px] w-full gap-[8px] mt-5">
+                    <div className="relative flex justify-center items-center text-center border border-0 rounded-[8px] mb-3 h-[48px] w-full gap-[8px] mt-5">
                         <div className="bg-white border border-grayscale-30 rounded-[8px] cursor-pointer" onClick={handleRedirectToRecommendation}>
                             <p className="text-md text-grayscale-60 font-semibold min-w-[135px] px-[8px] py-[12px]">
                                 추천 다시 받기
@@ -376,6 +376,18 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                         <div className="bg-main-50 border border-0 rounded-[8px] w-full cursor-pointer" onClick={openReservationModal}>
                             <p className="text-md text-main-0 font-semibold px-[8px] py-[12px]">
                                 예매하러 가기
+                            </p>
+                        </div>
+                    </div>
+                    {/** 야구 문화 이동 버튼 */}
+                    <div className="relative flex justify-center items-center text-center mb-24">
+                        {/* 이후에 잠실, KT 야구장 각각 다르게 설정 필요 */}
+                        <div 
+                            className="bg-main-10 rounded-[8px] cursor-pointer w-full py-3"
+                            onClick={() => window.location.href = "/culture"}
+                        >
+                            <p className="text-md text-main-60 font-semibold">
+                                직관 필수 코스, 한눈에 살펴보기!
                             </p>
                         </div>
                     </div>
