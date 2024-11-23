@@ -58,7 +58,7 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
           <img 
             src={tips[activeTipIndex].image.src} 
             alt={`Tip ${activeTipIndex + 1}`} 
-            className="block " 
+            className="block mb-2" 
             loading="eager"
           />
           <p className="text-[12px] font-regular text-grayscale-90 bg-grayscale-5 p-3 rounded-lg min-h-[79px]"
@@ -88,7 +88,7 @@ const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
         {/* 챗봇 질문 버튼 고정 */}
         <div className="px-5 pb-5 mt-[18px]">
           <button 
-            className="w-full py-3 text-center font-medium text-xs text-main-50 bg-main-5 rounded-lg"
+            className="w-full py-3 text-center font-medium text-sm text-main-50 bg-main-5 rounded-lg"
             onClick={() => router.push("/chatbot")}
           >
             챗봇에게 질문하러 가기

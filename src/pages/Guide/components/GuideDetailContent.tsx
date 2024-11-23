@@ -30,7 +30,7 @@ export default function GuideDetailContent() {
   const sectionTitleClass =
     "text-sm font-semibold text-grayscale-80 px-2 py-[2px] mb-2 bg-grayscale-5 inline-block rounded-md";
   const sectionContentClass =
-    "text-sm font-regular text-black mt-2 leading-relaxed";
+    "text-sm font-regular text-black leading-relaxed";
   
   // 모달창 이벤트
   const { isOpen, openModal, closeModal } = useModal();
@@ -115,11 +115,11 @@ export default function GuideDetailContent() {
               {/* 상단 타이틀 섹션 */}
               <div className="bg-white">
                 <h2 className="text-lg font-bold"  style={{ color: guideData.zoneColor }}>{guideData.zoneName}</h2>
-                <p className="text-sm font-semibold text-grayscale-80 mt-2 pb-4 border-b border-grayscale-10">{guideData.explanation}</p>
+                <p className="text-sm font-semibold text-grayscale-80 mt-[2px] pb-4 border-b border-grayscale-10">{guideData.explanation}</p>
               </div>
 
               {/* 세부 정보 섹션 */}
-              <div className={`${containerClass} space-y-4 mt-4`}>
+              <div className={`${containerClass} space-y-3 mt-4`}>
                 {[
                   { title: "출입구 위치", contents: guideData.entrance },
                   { title: "단차 정보", contents: guideData.stepSpacing },
