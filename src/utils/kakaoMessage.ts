@@ -7,38 +7,18 @@ export const createKakaoShareMessage = (
       throw new Error("resultId가 없습니다. 메시지를 생성할 수 없습니다.");
     }
   
-    const resultPageUrl = `https://www.hitzone.site/recommend/results?resultId=${resultId}`;
-    const formattedHashTags = hashTags?.length
-      ? hashTags.map((tag) => `#${tag}`).join(" ")
-      : "#HitZone"; // 기본 해시태그 설정
+    const firstHashTag = hashTags[0] ? `${hashTags[0]}` : "HitZone"; // 첫 번째 해시태그
+    const secondHashTag = hashTags[1] ? `${hashTags[1]}` : ""; // 두 번째 해시태그
   
+    // Kakao 메시지 데이터 반환
     return {
-      objectType: "feed",
-      content: {
-        title: `${nickname || "익명의 사용자"}`,
-        description: `${formattedHashTags}`,
-        imageUrl: `${window.location.origin}/assets/webp/kakao_share.webp`,
-        link: {
-          mobileWebUrl: resultPageUrl,
-          webUrl: resultPageUrl,
-        },
+      templateId: 114573, // Kakao 템플릿 ID
+      templateArgs: {
+        NICKNAME: nickname || "없는 유형", // 유형 이름
+        FIRST_HASHTAG: firstHashTag, // 첫 번째 해시태그
+        SECOND_HASHTAG: secondHashTag, // 두 번째 해시태그
+        resultId: resultId,
       },
-      buttons: [
-        {
-          title: "결과 자세히 보기",
-          link: {
-            mobileWebUrl: resultPageUrl,
-            webUrl: resultPageUrl,
-          },
-        },
-        {
-          title: "나도 나만의 HitZone 찾아보기",
-          link: {
-            mobileWebUrl: "https://www.hitzone.site/",
-            webUrl: "https://www.hitzone.site/",
-          },
-        },
-      ],
     };
   };
   

@@ -1,45 +1,51 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { createKakaoShareMessage } from "@/src/utils/kakaoMessage";
 import Image from "next/image";
 import shareButtonGrayIcon from "@/src/assets/webp/share_gray.webp";
-import { createKakaoShareMessage } from "@/src/utils/kakaoMessage";
 
 interface KakaoShareButtonProps {
-  resultId: number | null; // 결과 페이지로 연결하기 위한 resultId
+  resultId: number | null; // 결과 ID
   nickname: string | undefined; // 유형 닉네임
-  hashTags?: string[]; // 해시태그 리스트
+  hashTags: string[]; // 해시태그 배열
 }
 
-const KakaoShareButton: React.FC<KakaoShareButtonProps> = ({ resultId, nickname, hashTags = [] }) => {
+const KakaoShareButton: React.FC<KakaoShareButtonProps> = ({
+  resultId,
+  nickname,
+  hashTags,
+}) => {
   const [isKakaoInitialized, setIsKakaoInitialized] = useState(false);
 
   useEffect(() => {
-    // Kakao SDK가 클라이언트에서만 실행되도록 처리
-    if (typeof window !== "undefined") {
-      const checkKakaoLoaded = setInterval(() => {
-        if (window.Kakao) {
-          clearInterval(checkKakaoLoaded); // Kakao SDK 로드 완료 시 반복 중지
-          if (!window.Kakao.isInitialized()) {
-            window.Kakao.init("d4d5e84e53ce18afa1d4f5ecbc14a552"); // 발급받은 JavaScript 키
-            console.log("Kakao SDK initialized");
-          }
-          setIsKakaoInitialized(true);
-        }
-      }, 100); // 100ms 간격으로 Kakao 로드 상태 확인
+    // Kakao SDK 초기화
+    if (typeof window !== "undefined" && window.Kakao) {
+      if (!window.Kakao.isInitialized()) {
+        window.Kakao.init("d4d5e84e53ce18afa1d4f5ecbc14a552");
+        console.log("Kakao SDK 초기화 완료");
+      }
+      setIsKakaoInitialized(true);
     }
   }, []);
 
   const handleShare = () => {
-    if (isKakaoInitialized && window.Kakao) {
-      try {
-        const message = createKakaoShareMessage(resultId, nickname, hashTags); // 메시지 생성
-        window.Kakao.Share.sendDefault(message); // 메시지 전달
-      } catch (error) {
-        console.error("Kakao 공유 실행 중 오류 발생:", error);
-      }
-    } else {
+    if (!isKakaoInitialized) {
       console.error("Kakao SDK가 초기화되지 않았습니다.");
+      return;
+    }
+
+    if (!resultId) {
+      console.error("resultId가 없습니다.");
+      return;
+    }
+
+    try {
+      // Kakao 메시지 생성 및 공유
+      const message = createKakaoShareMessage(resultId, nickname, hashTags);
+      window.Kakao.Share.sendCustom(message);
+    } catch (error) {
+      console.error("Kakao 공유 중 오류 발생:", error);
     }
   };
 
