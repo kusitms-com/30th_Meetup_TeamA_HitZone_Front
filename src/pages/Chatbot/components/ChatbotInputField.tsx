@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import plusIcon from "../../../assets/webp/chatbot_plus.webp";
 import chatbotClickIcon from "../../../assets/svg/chatbot_click.svg";
 import FAQCategoryBar from "./FAQCategoryBar";
 import FAQCategoryButton from "./FAQCategoryButton";
@@ -14,9 +13,9 @@ const ChatbotInputField = () => {
 
   const renderFAQCategory = () => {
     if(isFAQCategoryVisible) {
-      return <FAQCategoryBar />
+      return <FAQCategoryBar setIsFAQCategoryVisible={setIsFAQCategoryVisible} />
     }else {
-      return <FAQCategoryButton />
+      return <FAQCategoryButton setIsFAQCategoryVisible={setIsFAQCategoryVisible} />
     }
   };
 
@@ -27,14 +26,6 @@ const ChatbotInputField = () => {
 
       {/* 입력창 */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full p-2 bg-white flex justify-center items-center">
-        <Image
-          src={plusIcon}
-          alt="첨부 아이콘"
-          width={18}
-          height={18}
-          className="mr-3 cursor-pointer"
-          onClick={toggleOptions}
-        />
         <div className="flex items-center w-full max-w-[450px] bg-grayscale-5 rounded-full px-2 py-1">
           <input
             type="text"
