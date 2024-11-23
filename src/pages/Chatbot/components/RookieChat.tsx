@@ -31,7 +31,7 @@ const RookieChat = ({initialMessage, contentList}: RookieChatProps) => {
 
                 {/* 첫 번째 말풍선 */}
                 {initialMessage && (
-                    <RookieMessageWithTail messageList={questionCategories.greetings}/>
+                    <RookieMessageWithTail messageList={initialMessage}/>
                 )}
                 
                 {/* 이미지와 텍스트 리스트 */}
