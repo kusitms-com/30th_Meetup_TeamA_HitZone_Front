@@ -3,11 +3,17 @@ import { questionCategories } from "@/src/constants/ChatbotData";
 
 interface Props {
   setIsFAQCategoryVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  onSelect: (category: string) => void;
 }
 
-const FAQCategoryBar = ({setIsFAQCategoryVisible}: Props) => {
+const FAQCategoryBar = ({ setIsFAQCategoryVisible, onSelect }: Props) => {
   const { baseballCategories, questionCategories: categories } = questionCategories;
   
+  // 카테고리 선택시 발동하는 이벤트 핸들
+  const handleClick = (category: string) => {
+    onSelect(category);
+  };
+
   return (
     <div className="fixed bottom-[60px] left-1/2 transform -translate-x-1/2 max-w-[500px] w-full bg-grayscale-5 rounded-t-2xl transition-transform pb-2">
       {/** 상태 바 */}
@@ -22,9 +28,12 @@ const FAQCategoryBar = ({setIsFAQCategoryVisible}: Props) => {
         {Object.keys(categories).map((key) => {
             const category = categories[key as keyof typeof categories];
             return (
-              <div className="cursor-pointer px-5 py-1.5 hover:bg-grayscale-10">
+              <div 
+                key={key}
+                onClick={() => handleClick(category.frontendValue)}
+                className="cursor-pointer px-5 py-1.5 hover:bg-grayscale-10" 
+                >
                 <p
-                  key={key}
                   className="text-sm flex text-grayscale-90 font-regular "
                 >
                   {category.frontendValue}

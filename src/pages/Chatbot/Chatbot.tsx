@@ -13,10 +13,10 @@ import UserChat from "./components/UserChat";
 
 const Chatbot = () => {
   // 스타디움 선택 관련
-  const [selectedStadium, setSelectedStadium] = useState<string | null>(null);
-  const isStadiumSelected = selectedStadium !== null && selectedStadium !== "";
-  const [showInitialMessages, setShowInitialMessages] = useState(false);
-
+  const [selectedStadium, setSelectedStadium] = useState<string | null>(null);  // 선택한 스타디움 저장
+  const isStadiumSelected = selectedStadium !== null && selectedStadium !== ""; // 스타디움 선택 여부
+  const [showInitialMessages, setShowInitialMessages] = useState(false);        // 초기 메시지 출력 여부
+  
   const handleStadiumSelect = (stadium: string) => {
     setSelectedStadium(stadium);
   };
@@ -33,6 +33,13 @@ const Chatbot = () => {
   }, []);
 
 
+  // 카테고리 선택 관련
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+
   // 자동 스크롤 기능
   const chatContainerRef = useRef<HTMLDivElement>(null);
   // 채팅이 추가될 때 스크롤 맨 아래로 이동
@@ -43,7 +50,7 @@ const Chatbot = () => {
   };
   useEffect(() => {
     scrollToBottom();
-  }, [selectedStadium]);
+  }, [selectedStadium, selectedCategory]);
 
 
   return (
@@ -105,7 +112,7 @@ const Chatbot = () => {
           
 
           {/* 4. 채팅 입력창 */}
-          <ChatbotInputField isStadiumSelected={isStadiumSelected}/>
+          <ChatbotInputField isStadiumSelected={isStadiumSelected} onSelect={handleCategorySelect} />
         </div>
       </div>
     </>

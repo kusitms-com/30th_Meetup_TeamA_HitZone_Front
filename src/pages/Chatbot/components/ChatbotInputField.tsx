@@ -7,14 +7,15 @@ import FAQCategoryButton from "./category/FAQCategoryButton";
 
 interface Props {
   isStadiumSelected: boolean; // boolean 값을 props로 받음
+  onSelect: (category: string) => void;
 }
 
-const ChatbotInputField = ({isStadiumSelected}: Props) => {
+const ChatbotInputField = ({isStadiumSelected, onSelect}: Props) => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
 
   const renderFAQCategory = () => {
     if(isFAQCategoryVisible) {
-      return <FAQCategoryBar setIsFAQCategoryVisible={setIsFAQCategoryVisible} />
+      return <FAQCategoryBar setIsFAQCategoryVisible={setIsFAQCategoryVisible} onSelect={onSelect}/>
     }else {
       return <FAQCategoryButton setIsFAQCategoryVisible={setIsFAQCategoryVisible} />
     }
