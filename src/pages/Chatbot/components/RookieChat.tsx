@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import RookieProfile from "./rookie/RookieProfile";
-import RookieMessageWithTail from "./ message/RookieMessageWithTail";
-import RookieMessage from "./ message/RookieMessage";
+import RookieMessageWithTail from "./message/RookieMessageWithTail";
+import RookieMessage from "./message/RookieMessage";
 
 import { questionCategories } from "@/src/constants/ChatbotData";
 
