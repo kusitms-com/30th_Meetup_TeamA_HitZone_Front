@@ -4,7 +4,12 @@ import chatbotClickIcon from "../../../assets/svg/chatbot_click.svg";
 import FAQCategoryBar from "./category/FAQCategoryBar";
 import FAQCategoryButton from "./category/FAQCategoryButton";
 
-const ChatbotInputField = () => {
+
+interface Props {
+  isStadiumSelected: boolean; // boolean 값을 props로 받음
+}
+
+const ChatbotInputField = ({isStadiumSelected}: Props) => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
 
   const renderFAQCategory = () => {
@@ -18,7 +23,8 @@ const ChatbotInputField = () => {
   return (
     <>
       {/* 플러스 버튼 리스트 */}
-      {renderFAQCategory()}
+      {/* 야구장 구역을 선택한 경우에만 함수 호출 */}
+      {isStadiumSelected && renderFAQCategory()}
 
       {/* 입력창 */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full bg-white flex justify-center items-center px-2 pt-3 pb-4">

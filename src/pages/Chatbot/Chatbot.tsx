@@ -12,6 +12,7 @@ import RookieChat from "./components/RookieChat";
 
 const Chatbot = () => {
   const [selectedStadium, setSelectedStadium] = useState<string | null>(null);
+  const isStadiumSelected = selectedStadium !== null && selectedStadium !== "";
   const [showInitialMessages, setShowInitialMessages] = useState(false);
   
   useEffect(() => {
@@ -43,8 +44,8 @@ const Chatbot = () => {
 
             {/* 3. 채팅 내역  */}
             <div className="px-1">
-
-              {/* 시작 내용: 구장 선택 */}
+              
+              {/* 채팅1: 구장 선택, 루키 시작 인사말, 필수 출력 */}
               {showInitialMessages && (
                 <RookieChat 
                   initialMessage={questionCategories.greetings} 
@@ -56,12 +57,23 @@ const Chatbot = () => {
                   ]}
                 />
               )}
+
+
+              
+              {/* 채팅2: 구장 선택시, 사용자 답변, 필수 출력 */}
+              {selectedStadium && (
+                <div className="flex justify-end mb-4">
+                  <div className="bg-main-5 px-3 py-2 rounded-lg text-grayscale-90 max-w-xs text-xs font-regular">
+                    {selectedStadium}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           
 
           {/* 4. 채팅 입력창 */}
-          <ChatbotInputField />
+          <ChatbotInputField isStadiumSelected={isStadiumSelected}/>
         </div>
       </div>
     </>
