@@ -53,7 +53,7 @@ const Chatbot = () => {
         <BackLogoBar />
       </div>
 
-      <div className="flex justify-center items-center min-h-screen bg-grayscale-50 mt-[55px]">
+      <div className="flex justify-center items-center min-h-screen bg-grayscale-50 mt-[55px] pb-[60px]">
         <div className="flex flex-col h-full max-w-[500px] w-full bg-grayscale-10">
           {/* 채팅 영역 */}
           <div
