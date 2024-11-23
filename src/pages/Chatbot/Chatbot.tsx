@@ -5,22 +5,13 @@ import ChatbotStart from "./components/ChatbotStart";
 import StadiumSelection from "./components/StadiumSelection";
 import ChatInput from "./components/ChatInput";
 
+import DateBanner from "./components/DateBanner";
+
 const Chatbot = () => {
   const [selectedStadium, setSelectedStadium] = useState<string | null>(null);
   const [showInitialMessages, setShowInitialMessages] = useState(false);
-  const [currentDate, setCurrentDate] = useState("");
-
-  // 날짜 받아오기
+  
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString("ko-KR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      weekday: "long",
-    });
-    setCurrentDate(formattedDate);
-
     // 챗봇 페이지 들어온 후 초기 메시지 표시
     const timer = setTimeout(() => {
       setShowInitialMessages(true);
@@ -43,11 +34,7 @@ const Chatbot = () => {
           <div className="flex-1 p-4 overflow-y-auto mb-10">
       
             {/* 오늘 날짜 */}
-            <div className="flex justify-center mb-6">
-              <span className="bg-grayscale-5 px-6 py-[3px] text-grayscale-90 text-xs font-regular rounded-full">
-                {currentDate}
-              </span>
-            </div>
+            <DateBanner date={new Date()} />
 
             {/* 시작 메시지 */}
             {showInitialMessages && <ChatbotStart />}
