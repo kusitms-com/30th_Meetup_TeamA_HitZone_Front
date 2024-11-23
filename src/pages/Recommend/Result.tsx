@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 
-import HeaderBar from "@/src/components/layout/ResultHeader";
+import ResultHeader from "@/src/components/layout/ResultHeader";
 import NavBar from "@/src/components/layout/NavBar";
 
 import Image from 'next/image';
@@ -252,7 +252,11 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                 <SeatTipDialog/> */}
 
                 {/** 헤더 */}
-                <HeaderBar />
+                <ResultHeader
+                resultId={resultId}
+                nickname={profileData?.nickname || "기본 닉네임"}
+                hashTags={profileData?.hashTags ?? []}
+                />
                 
                 {/** 야구장 유형 */}
                 <div className="flex justify-start w-full mt-[20px] px-[16px]">
