@@ -6,8 +6,8 @@ interface Props {
     messageList: string[]
 }
 
-/** 꼬랑지가 붙은 버젼 */
-const ChatbotStart = ({messageList}: Props) => {
+// 유저 말풍선 컴포넌트 타입1 (꼬랑지가 붙은 버젼)
+const UserMessageWithTail = ({messageList}: Props) => {
   return (
     <div className="relative bg-main-5 p-3 rounded-lg text-xs font-regular text-grayscale-90 max-w-xs">
         {/* 말풍선 꼬랑지 */}
@@ -21,4 +21,4 @@ const ChatbotStart = ({messageList}: Props) => {
   );
 };
 
-export default ChatbotStart;
+export default UserMessageWithTail;
