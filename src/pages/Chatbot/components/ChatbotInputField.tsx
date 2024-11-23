@@ -7,10 +7,6 @@ import FAQCategoryButton from "./FAQCategoryButton";
 const ChatbotInputField = () => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
 
-  const toggleOptions = () => {
-    setIsFAQCategoryVisible((prev) => !prev);
-  };
-
   const renderFAQCategory = () => {
     if(isFAQCategoryVisible) {
       return <FAQCategoryBar setIsFAQCategoryVisible={setIsFAQCategoryVisible} />
@@ -33,7 +29,7 @@ const ChatbotInputField = () => {
             className="border-none bg-transparent text-grayscale-60 text-xs font-medium outline-none px-2"
           />
         </div>
-        <button className="ml-2 bg-main-50 rounded-full p-2 flex items-center justify-center text-xxs">
+        <button className="ml-2 bg-main-50 rounded-full p-2 flex items-center justify-center text-xxs hover:bg-mainhover-50">
           <Image src={chatbotClickIcon} alt="메시지 보내기 아이콘" width={20} height={20} />
         </button>
       </div>

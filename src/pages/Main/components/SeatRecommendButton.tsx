@@ -34,7 +34,7 @@ export default function FindSectionButton({stadiumName}: Props) {
         {/** z-10 relative: 맨 위에 배치 */}
         <button
           onClick={handleClick}
-          className="flex justify-center items-center w-full rounded-[8px] h-[60px] bg-main-50 text-grayscale-0 text-lg font-bold hover:bg-main-60 z-0"
+          className="flex justify-center items-center w-full rounded-[8px] h-[60px] bg-main-50 text-grayscale-0 text-lg font-bold hover:bg-mainhover-50 z-0"
         >
           나에게 맞는 구역 찾으러 가기
         </button>

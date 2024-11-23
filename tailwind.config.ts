@@ -38,6 +38,9 @@ export default {
           80: "#892439",
           90: "#691C2B",
         },
+        mainhover: {
+          50: "#F82A53", // main에서 채도랑 명도 올림
+        },
         grayscale: {
           0: "#ffffff",
           5: "#F2F3F6",
