@@ -7,8 +7,6 @@ import ChatInput from "./components/ChatInput";
 
 import DateBanner from "./components/DateBanner";
 
-import ChabotDataTestPage from "@/src/pages/Chatbot/components/ChabotDataTestPage";
-
 const Chatbot = () => {
   const [selectedStadium, setSelectedStadium] = useState<string | null>(null);
   const [showInitialMessages, setShowInitialMessages] = useState(false);
@@ -31,13 +29,32 @@ const Chatbot = () => {
       <div>
         <BackLogoBar />
       </div>
-      <div className="flex justify-center items-center h-screen bg-grayscale-50 mt-[55px] mb-10">
+      <div className="flex justify-center items-center h-screen bg-grayscale-50 mt-[55px]">
         <div className="flex flex-col h-full max-w-[500px] w-full bg-grayscale-10">
           <div className="flex-1 p-4 overflow-y-auto mb-10">
       
             {/* 오늘 날짜 */}
             <DateBanner date={new Date()} />
-            <ChabotDataTestPage/>
+
+            {/* 시작 메시지 */}
+            {showInitialMessages && <ChatbotStart />}
+
+            {/* 구장 선택 */}
+            {showInitialMessages && (
+              <StadiumSelection 
+                stadiums={stadiumList} 
+                onSelect={handleStadiumSelect} 
+              />
+            )}
+
+            {/* 선택한 구장 */}
+            {selectedStadium && (
+              <div className="flex justify-end mb-4">
+                <div className="bg-main-5 px-3 py-2 rounded-lg text-grayscale-90 max-w-xs text-xs font-regular">
+                  {selectedStadium}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* 채팅 입력창 */}
