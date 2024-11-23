@@ -9,7 +9,7 @@ interface StadiumSelectionProps {
 
 const StadiumSelection = ({ stadiums, onSelect }: StadiumSelectionProps) => {
   return (
-    <div className="flex items-start mb-4 ml-10 transition-opacity duration-500">
+    <div className="flex">
       <div className="bg-white rounded-lg max-w-[245px] w-full">
         <Image src={stadiumIcon} alt="구장 선택" width={245} height={99} />
         <div className="grid grid-cols-1 gap-2 p-3 text-xs font-regular">
