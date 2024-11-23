@@ -1,5 +1,5 @@
 import React from "react";
-import { questionCategories } from "@/src/constants/ChatbotData"; // 파일 경로에 맞게 수정하세요
+import { questionCategories } from "@/src/constants/ChatbotData";
 
 // API 호출 함수 (예제)
 const callApi = (parameter: number) => {

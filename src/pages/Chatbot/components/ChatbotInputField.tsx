@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import chatbotClickIcon from "../../../assets/svg/chatbot_click.svg";
-import FAQCategoryBar from "./FAQCategoryBar";
-import FAQCategoryButton from "./FAQCategoryButton";
+import FAQCategoryBar from "./category/FAQCategoryBar";
+import FAQCategoryButton from "./category/FAQCategoryButton";
 
 const ChatbotInputField = () => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
