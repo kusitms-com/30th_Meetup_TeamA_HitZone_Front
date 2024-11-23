@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BackLogoBar from "../../components/layout/BackLogoBar";
 import { stadiumList } from "../../constants/ZoneData";
 import StadiumSelection from "./components/chatcategory/StadiumSelection";
@@ -12,10 +12,17 @@ import RookieChat from "./components/RookieChat";
 import UserChat from "./components/UserChat";
 
 const Chatbot = () => {
+  // 스타디움 선택 관련
   const [selectedStadium, setSelectedStadium] = useState<string | null>(null);
   const isStadiumSelected = selectedStadium !== null && selectedStadium !== "";
   const [showInitialMessages, setShowInitialMessages] = useState(false);
+
+  const handleStadiumSelect = (stadium: string) => {
+    setSelectedStadium(stadium);
+  };
   
+
+  // 챗봇 첫 인사 렌더링 관련
   useEffect(() => {
     // 챗봇 페이지 들어온 후 초기 메시지 표시
     const timer = setTimeout(() => {
@@ -25,9 +32,19 @@ const Chatbot = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleStadiumSelect = (stadium: string) => {
-    setSelectedStadium(stadium);
+
+  // 자동 스크롤 기능
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  // 채팅이 추가될 때 스크롤 맨 아래로 이동
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   };
+  useEffect(() => {
+    scrollToBottom();
+  }, [selectedStadium]);
+
 
   return (
     <>
@@ -36,9 +53,13 @@ const Chatbot = () => {
         <BackLogoBar />
       </div>
 
-      <div className="flex justify-center items-center min-h-screen bg-grayscale-50 mt-[55px] mb-5">
+      <div className="flex justify-center items-center min-h-screen bg-grayscale-50 mt-[55px]">
         <div className="flex flex-col h-full max-w-[500px] w-full bg-grayscale-10">
-          <div className="flex-1 p-4 overflow-y-auto mb-10">
+          {/* 채팅 영역 */}
+          <div
+            ref={chatContainerRef}
+            className="flex-1 p-4 overflow-y-auto mb-10"
+          >
       
             {/* 2. 오늘 날짜 */}
             <DateBanner date={new Date()} />
