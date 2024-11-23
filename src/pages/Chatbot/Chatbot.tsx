@@ -15,7 +15,7 @@ const Chatbot = () => {
     // 챗봇 페이지 들어온 후 초기 메시지 표시
     const timer = setTimeout(() => {
       setShowInitialMessages(true);
-    }, 1000);
+    }, );
 
     return () => clearTimeout(timer);
   }, []);
