@@ -3,18 +3,27 @@ import Image from "next/image";
 import plusIcon from "../../../assets/webp/chatbot_plus.webp";
 import chatbotClickIcon from "../../../assets/svg/chatbot_click.svg";
 import FAQCategoryBar from "./FAQCategoryBar";
+import FAQCategoryButton from "./FAQCategoryButton";
 
-const ChatInput = () => {
+const ChatbotInputField = () => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
 
   const toggleOptions = () => {
     setIsFAQCategoryVisible((prev) => !prev);
   };
 
+  const renderFAQCategory = () => {
+    if(isFAQCategoryVisible) {
+      return <FAQCategoryBar />
+    }else {
+      return <FAQCategoryButton />
+    }
+  };
+
   return (
     <>
       {/* 플러스 버튼 리스트 */}
-      <FAQCategoryBar isVisible={isFAQCategoryVisible} />
+      {renderFAQCategory()}
 
       {/* 입력창 */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full p-2 bg-white flex justify-center items-center">
@@ -41,4 +50,4 @@ const ChatInput = () => {
   );
 };
 
-export default ChatInput;
+export default ChatbotInputField;

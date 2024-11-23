@@ -3,7 +3,7 @@ import BackLogoBar from "../../components/layout/BackLogoBar";
 import { stadiumList } from "../../constants/ZoneData";
 import ChatbotStart from "./components/ChatbotStart";
 import StadiumSelection from "./components/StadiumSelection";
-import ChatInput from "./components/ChatInput";
+import ChatbotInputField from "./components/ChatbotInputField";
 
 import DateBanner from "./components/DateBanner";
 
@@ -58,7 +58,7 @@ const Chatbot = () => {
           </div>
 
           {/* 채팅 입력창 */}
-          <ChatInput />
+          <ChatbotInputField />
         </div>
       </div>
     </>
