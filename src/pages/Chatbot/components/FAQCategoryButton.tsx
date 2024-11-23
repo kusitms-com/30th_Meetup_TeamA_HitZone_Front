@@ -1,7 +1,7 @@
 import React from "react";
 
 import Image from "next/image";
-import openButtonIcon from "@/src/assets/svg/chatbot_category_open_button_gray.svg"
+import openButtonIcon from "@/src/assets/svg/chatbot_category_open_button_gray.svg";
 
 interface Props {
   setIsFAQCategoryVisible: React.Dispatch<React.SetStateAction<boolean>>;

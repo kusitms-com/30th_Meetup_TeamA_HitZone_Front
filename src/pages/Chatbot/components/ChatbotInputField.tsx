@@ -25,17 +25,17 @@ const ChatbotInputField = () => {
       {renderFAQCategory()}
 
       {/* 입력창 */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full p-2 bg-white flex justify-center items-center">
-        <div className="flex items-center w-full max-w-[450px] bg-grayscale-5 rounded-full px-2 py-1">
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full bg-white flex justify-center items-center px-2 pt-3 pb-4">
+        <div className="flex items-center w-full bg-grayscale-5 rounded-full px-2 py-[10px]">
           <input
             type="text"
             placeholder="챗봇에게 메시지 보내기"
-            className="flex-1 border-none bg-transparent text-grayscale-60 text-xs font-medium outline-none"
+            className="border-none bg-transparent text-grayscale-60 text-xs font-medium outline-none px-2"
           />
-          <button className="ml-2 bg-main-50 rounded-full p-2 flex items-center justify-center text-xxs">
-            <Image src={chatbotClickIcon} alt="메시지 보내기 아이콘" width={20} height={20} />
-          </button>
         </div>
+        <button className="ml-2 bg-main-50 rounded-full p-2 flex items-center justify-center text-xxs">
+          <Image src={chatbotClickIcon} alt="메시지 보내기 아이콘" width={20} height={20} />
+        </button>
       </div>
     </>
   );
