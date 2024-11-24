@@ -1,6 +1,10 @@
 import React from "react";
 import { questionCategories } from "@/src/constants/ChatbotData";
 
+import Image from "next/image";
+import tailIcon from "@/src/assets/webp/chatbot_message_left_tail_white_big.webp";  // 꼬랑지
+
+
 // API 호출 함수 (예제)
 const callApi = (parameter: number) => {
   console.log("API 호출:", parameter);
@@ -30,11 +34,11 @@ const CategoryChat = ({categoryFrontName}: Props) => {
             {/* 프론트에서 처리하는 데이터: 텍스트 출력 */}
             {/* answer 값이 있는 경우: answer 렌더링 */}
             {"answer" in categoryData && categoryData.answer && (
-                <ul className="space-y-1">
+                <ul className="space-y-1.5">
                     {categoryData.answer.map((answer, index) => (
                         <li
                         key={index}
-                        className="py-1 px-2 bg-gray-100 rounded-md text-gray-800 hover:bg-gray-200"
+                        className="py-1 px-2 text-xs w-full text-center font-regular text-grayscale-90 bg-grayscale-5 hover:bg-grayscale-10 rounded-md"
                         >
                         {answer}
                         </li>
@@ -59,11 +63,11 @@ const CategoryChat = ({categoryFrontName}: Props) => {
             {/* 백엔드에서 받아오기 전 세부 카테고리 데이터: 리스트 출력 */}
             {/* subcategories 값이 있는 경우: subcategories 렌더링 */}
             {"subcategories" in categoryData && categoryData.subcategories && (
-                <ul className="space-y-1">
+                <ul className="space-y-1.5">
                     {categoryData.subcategories.frontendValues.map((value, index) => (
                         <li
                         key={index}
-                        className="py-1 px-2 bg-gray-100 rounded-md text-grayscale-50 hover:bg-blue-100 cursor-pointer"
+                        className="py-1 px-2 text-xs w-full text-center font-regular text-grayscale-90 bg-grayscale-5 hover:bg-grayscale-10 rounded-md cursor-pointer"
                         onClick={() =>
                             callApi(categoryData.subcategories.backendParameters[index])
                         }
@@ -82,13 +86,16 @@ const CategoryChat = ({categoryFrontName}: Props) => {
     }
 
     return (
-        <>
+        <div className="relative min-w-[200px]">
+            {/* 말풍선 꼬랑지 */}
+            <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
+
             <ul>
             {Object.entries(categories).map(([key, category]) => {
                 return filteredCategory === category ? (
-                <li key={key} className="p-4 bg-gray-50 rounded-lg shadow">
+                <li key={key} className="p-4 bg-main-0 rounded-lg shadow">
                     {/* 선택한 카테고리에 따른 컴포 제목 */}
-                    <h3 className="text-md font-semibold text-gray-700 mb-2">
+                    <h3 className="text-xs font-regular text-grayscale-90 mb-2">
                         {category.frontendValue}
                     </h3>
 
@@ -98,7 +105,7 @@ const CategoryChat = ({categoryFrontName}: Props) => {
                 ) : null;
             })}
             </ul>
-        </>
+        </div>
     );
 };
   

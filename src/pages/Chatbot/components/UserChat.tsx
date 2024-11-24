@@ -10,7 +10,7 @@ interface Props {
 const RookieChat = ({messageList}: Props) => {
 
     return (
-        <div className="flex justify-end mb-4">
+        <div className="flex justify-end">
             <UserMessageWithTail messageList={messageList} />
         </div>
     );

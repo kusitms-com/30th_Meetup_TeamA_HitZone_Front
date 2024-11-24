@@ -123,9 +123,16 @@ const Chatbot = () => {
                   <>
                     {/* 사용자 답변 출력 */}
                     <UserChat messageList={[categoryFrontName]} />
-                    
+
                     {/* 선택된 카테고리에 대한 챗봇 응답 출력 */}
-                    <CategoryChat categoryFrontName={categoryFrontName} />
+                    <RookieChat 
+                      contentList={[
+                        {
+                        type: "component",
+                        content: <CategoryChat categoryFrontName={categoryFrontName} />
+                        }
+                      ]}
+                      />
                   </>
                 </div>
               ))}
