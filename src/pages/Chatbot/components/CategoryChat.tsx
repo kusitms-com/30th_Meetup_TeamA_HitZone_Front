@@ -86,7 +86,7 @@ const CategoryChat = ({categoryFrontName}: Props) => {
     }
 
     return (
-        <div className="relative min-w-[200px]">
+        <div className="relative min-w-[200px] max-w-[300px]">
             {/* 말풍선 꼬랑지 */}
             <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
 
