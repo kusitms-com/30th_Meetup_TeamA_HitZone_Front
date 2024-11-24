@@ -20,6 +20,7 @@ export const questionCategories = {
   questionCategories: {
     chatbot: {
       frontendValue: `🔎 챗봇 ${chatbotName} 사용방법`,
+      icon: null,
       answer: [`반갑습니다! 저는 챗봇 ${chatbotName} 입니다.`,
         "저에게 궁금하신 점이 있으시면 무엇이든 언제나 물어보세요!",
         "저에게 질문하는 방법은 2가지입니다.",
@@ -28,6 +29,7 @@ export const questionCategories = {
     },
     stadium: {
       frontendValue: "👟 야구장 가이드",
+      icon: "👟",
       subcategories: {
         frontendValues: ["야구장 입장시간",
           "좌석에 음식물 반입 여부",
@@ -43,6 +45,7 @@ export const questionCategories = {
     },
     baseball: {
       frontendValue: "⚾️ 야구 가이드",
+      icon: "⚾️",
       subcategories: {
         frontendValues: ["우천취소", "경기 시간 및 일정"],
         backendParameters: [1, 2]
@@ -50,6 +53,7 @@ export const questionCategories = {
     },
     manner: {
       frontendValue: "🫵 직관 매너",
+      icon: "🫵",
       subcategories: {
         frontendValues: ["야구장 관람 매너"],
         backendParameters: [1]
@@ -57,6 +61,7 @@ export const questionCategories = {
     },
     facility: {
       frontendValue: "💬 야구장 편의시설",
+      icon: "💬",
       subcategories: {
         frontendValues: ["물품 보관소의 위치",
           "화장실 위치",
@@ -70,6 +75,7 @@ export const questionCategories = {
     },
     prohibition: {
       frontendValue: "🚫 반입 금지 물품",
+      icon: null,
       image: prohibitedItemsIcon,
       answer: [
         "모든 유리병 금지 (소주병X)",
@@ -84,6 +90,7 @@ export const questionCategories = {
     },
     parking: {
       frontendValue: "🚘 교통 및 주차 정보",
+      icon: "🚘",
       subcategories: {
         frontendValues: [
           "경기장까지 가는 방법",

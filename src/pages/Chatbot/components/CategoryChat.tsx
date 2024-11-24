@@ -95,8 +95,11 @@ const CategoryChat = ({categoryFrontName}: Props) => {
                 return filteredCategory === category ? (
                 <li key={key} className="p-4 bg-main-0 rounded-lg shadow">
                     {/* 선택한 카테고리에 따른 컴포 제목 */}
+                    
                     <h3 className="text-xs font-regular text-grayscale-90 mb-2">
-                        {category.frontendValue}
+                        {
+                            category.icon? category.icon + " 어떤 점이 궁금하신가요?" : null
+                        }
                     </h3>
 
                     {/* 선택한 카테고리에 따른 세부 내용 렌더링 함수 호출 */}
