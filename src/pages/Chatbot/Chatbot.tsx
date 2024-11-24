@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import BackLogoBar from "../../components/layout/BackLogoBar";
 import { stadiumList } from "../../constants/ZoneData";
-import StadiumSelection from "./components/chatcategory/StadiumSelection";
+import StadiumSelection from "./components/stadiumcategory/StadiumSelection";
 import ChatbotInputField from "./components/ChatbotInputField";
 
 import DateBanner from "./components/DateBanner";
@@ -10,6 +10,7 @@ import { questionCategories } from "@/src/constants/ChatbotData";
 
 import RookieChat from "./components/RookieChat";
 import UserChat from "./components/UserChat";
+import CategoryChat from "./components/CategoryChat";
 
 const Chatbot = () => {
   // 스타디움 선택 관련
@@ -33,10 +34,18 @@ const Chatbot = () => {
   }, []);
 
 
-  // 카테고리 선택 관련
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // 카테고리 선택 관련 (배열로 저장해야 프론트에서 관리 및 계속 대화 생성 가능)
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const MAX_CATEGORIES = 15; // 카테고리 최대 개수 지정
   const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category);
+    setSelectedCategories((prevCategories) => {
+      // 배열이 최대 개수를 넘으면 가장 오래된 항목 제거 후 새로운 항목 추가
+      const updatedCategories = [...prevCategories, category];
+      if (updatedCategories.length > MAX_CATEGORIES) {
+        updatedCategories.shift(); // 가장 오래된 항목 제거
+      }
+      return updatedCategories;
+    });
   };
 
 
@@ -50,7 +59,7 @@ const Chatbot = () => {
   };
   useEffect(() => {
     scrollToBottom();
-  }, [selectedStadium, selectedCategory]);
+  }, [selectedStadium, selectedCategories]);
 
 
   return (
@@ -107,6 +116,19 @@ const Chatbot = () => {
                 />
                 </>
               )}
+
+              {/* 카테고리 선택시 배열에 저장 및 순차 출력 */}
+              {selectedCategories.map((categoryFrontName, index) => (
+                <div key={index}>
+                  <>
+                    {/* 사용자 답변 출력 */}
+                    <UserChat messageList={[categoryFrontName]} />
+                    
+                    {/* 선택된 카테고리에 대한 챗봇 응답 출력 */}
+                    <CategoryChat categoryFrontName={categoryFrontName} />
+                  </>
+                </div>
+              ))}
             </div>
           </div>
           
