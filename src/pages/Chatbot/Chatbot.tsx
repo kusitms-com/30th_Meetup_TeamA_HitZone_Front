@@ -39,8 +39,9 @@ const Chatbot = () => {
   const MAX_CATEGORIES = 15; // 카테고리 최대 개수 지정
   const handleCategorySelect = (category: string) => {
     setSelectedCategories((prevCategories) => {
-      // 배열이 최대 개수를 넘으면 가장 오래된 항목 제거 후 새로운 항목 추가
       const updatedCategories = [...prevCategories, category];
+
+      // 배열이 최대 개수를 넘으면 가장 오래된 항목 제거 후 새로운 항목 추가
       if (updatedCategories.length > MAX_CATEGORIES) {
         updatedCategories.shift(); // 가장 오래된 항목 제거
       }
@@ -48,13 +49,12 @@ const Chatbot = () => {
     });
   };
 
-
   // 가이드 챗봇 답변 관련
-  const [responseGuideData, setResponseGuideData] = useState<GuideResponseData[]>([]); // 세부 카테고리 index와 매핑하여 API 응답 저장
+  const [responseGuideDataList, setResponseGuideDataList] = useState<GuideResponseData[]>([]); // 세부 카테고리 index와 매핑하여 API 응답 저장
 
   // API 응답을 category index에 매핑하여 저장
   const handleGuideResponseUpdate = (response: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
-    setResponseGuideData((prev) => [
+    setResponseGuideDataList((prev) => [
       ...prev,
       
       {
@@ -101,7 +101,7 @@ const Chatbot = () => {
   };
   useEffect(() => {
     scrollToBottom();
-  }, [selectedStadium, selectedCategories, responseGuideData]);
+  }, [selectedStadium, selectedCategories, responseGuideDataList]);
 
 
   return (
@@ -176,20 +176,23 @@ const Chatbot = () => {
                           }
                         ]}
                       />
-
-                      {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
-                      {responseGuideData
-                        .filter((responseData) => responseData.categoryNumber === index) // 현재 카테고리에 해당하는 데이터만 필터링
-                        .map((responseData, responseIndex) => (
-                          <div key={responseIndex}>
-                            {renderGuideAnswerData(responseData.answer)}
-                          </div>
-                      ))}
                     </>
                   </div>
                 </>
               ))}
-              
+
+              {/* 서브 카테고리 선택시 순차 출력 */}
+              {selectedStadium && responseGuideDataList  && responseGuideDataList.map((responseGuideData, index) => (
+                <>
+                  <UserChat messageList={[responseGuideData.categoryName + " ▶︎ " + responseGuideData.subCategoryName]}/>
+
+                  {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
+                  <div>
+                    {renderGuideAnswerData(responseGuideData.answer)}
+                  </div>
+                </>
+              ))}
+
             </div>
           </div>
           

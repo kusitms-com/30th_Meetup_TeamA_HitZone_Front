@@ -28,7 +28,6 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
     ) || "";
 
 
-
     // 카테고리 클릭시 하위 값 존재 여부에 따른 렌더링 함수
     const renderCategoryDetails = (categoryData: typeof categories[keyof typeof categories]) => (
         <div>
@@ -88,7 +87,7 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
                     
                     {/* 세부 카테고리 내용 */}
                     <ul className="space-y-1.5">
-                        {categoryData.subcategories.frontendValues.map((value, index) => (
+                        {categoryData.subcategories.frontendValues.map((subcategoryName, index) => (
                             <li
                                 key={index}
                                 className="py-1 px-2 text-xs min-w-[180px] w-full text-center font-regular text-grayscale-90 bg-grayscale-5 hover:bg-grayscale-10 rounded-md cursor-pointer"
@@ -104,15 +103,16 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
                                     // 로컬에도 응답 저장
                                     setResponseData(response);
                                     
-                                    // 부모 컴포넌트로 응답 전달
-                                    onResponseUpdate(response, categoryKey, categoryData.frontendValue, index, value);
+                                    // 서브카테고리 선택 이벤트: 부모 컴포넌트로 응답 전달
+                                    onResponseUpdate(response, categoryKey, categoryData.frontendValue, index, subcategoryName);
                                     //alert(`응답 데이터: ${response}`);
                                 } catch (error) {
                                     //alert("API 호출에 실패했습니다.");
                                 }
                                 }}
                             >
-                            {value}
+                            {/* 리스트에 값 넣기*/}
+                            {subcategoryName}
                             </li>
                         ))}
                     </ul>
