@@ -49,6 +49,13 @@ const Chatbot = () => {
   };
 
 
+  // 가이드 챗봇 답변 관련
+  const [responseGuideData, setResponseGuideData] = useState<string[]>([]); // API 응답 저장
+  const handleGuideResponseUpdate = (response: string) => {
+    setResponseGuideData((prev) => [...prev, response]); // 새 응답 데이터 추가
+  };
+  
+
   // 자동 스크롤 기능
   const chatContainerRef = useRef<HTMLDivElement>(null);
   // 채팅이 추가될 때 스크롤 맨 아래로 이동
@@ -129,7 +136,7 @@ const Chatbot = () => {
                       contentList={[
                         {
                         type: "component",
-                        content: <CategoryChat stadiumName={selectedStadium} categoryFrontName={categoryFrontName} />
+                        content: <CategoryChat stadiumName={selectedStadium} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
                         }
                       ]}
                       />

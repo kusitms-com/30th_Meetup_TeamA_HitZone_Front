@@ -9,11 +9,12 @@ import { handleGetGuideAnswer } from "@/src/api/ChatbotApiHandler";
 interface Props {
     stadiumName: string,
     categoryFrontName: string
+    onResponseUpdate: (response: string) => void; // 부모로 데이터 전달 콜백
 }
 
 
 // 사용자가 카테고리 클릭시 나오는 커스텀 대화창
-const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
+const CategoryChat = ({stadiumName, categoryFrontName, onResponseUpdate}: Props) => {
 
     // API 응답 데이터를 저장할 상태
     const [responseData, setResponseData] = useState<string | null>(null);
@@ -97,9 +98,12 @@ const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
                                         orderNumber:
                                             categoryData.subcategories.backendParameters[index],
                                     });
-                                    alert(`응답 데이터: ${response}`);
+                                    
+                                    // 부모 컴포넌트로 응답 전달
+                                    onResponseUpdate(response);
+                                    //alert(`응답 데이터: ${response}`);
                                 } catch (error) {
-                                    alert("API 호출에 실패했습니다.");
+                                    //alert("API 호출에 실패했습니다.");
                                 }
                                 }}
                             >
@@ -129,21 +133,6 @@ const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
                 ) : null;
             })}
             </ul>
-
-
-
-
-
-
-            {/* API 호출 결과 렌더링 */}
-            <div className="mt-4">
-                {responseData && (
-                <div className="p-4 bg-grayscale-10 rounded-md">
-                    <h4 className="text-sm font-bold">응답 데이터:</h4>
-                    <p className="text-xs">{responseData}</p>
-                </div>
-                )}
-            </div>
         </div>
     );
 };
