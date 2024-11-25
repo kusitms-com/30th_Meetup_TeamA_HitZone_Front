@@ -1,24 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { questionCategories } from "@/src/constants/ChatbotData";
 
 import Image from "next/image";
 import tailIcon from "@/src/assets/webp/chatbot_message_left_tail_white_big.webp";  // 꼬랑지
 
-
-// API 호출 함수 (예제)
-const callApi = (parameter: number) => {
-  console.log("API 호출:", parameter);
-  // 실제 API 호출 로직 작성
-};
+import { handleGetGuideAnswer } from "@/src/api/ChatbotApiHandler";
 
 interface Props {
+    stadiumName: string,
     categoryFrontName: string
 }
 
 
 // 사용자가 카테고리 클릭시 나오는 커스텀 대화창
-const CategoryChat = ({categoryFrontName}: Props) => {
+const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
 
+    // API 응답 데이터를 저장할 상태
+    const [responseData, setResponseData] = useState<string | null>(null);
     const categories = questionCategories.questionCategories;
 
     // prop으로 받은 카테고리와 일치하는 항목 필터링
@@ -66,11 +64,21 @@ const CategoryChat = ({categoryFrontName}: Props) => {
                 <ul className="space-y-1.5">
                     {categoryData.subcategories.frontendValues.map((value, index) => (
                         <li
-                        key={index}
-                        className="py-1 px-2 text-xs w-full text-center font-regular text-grayscale-90 bg-grayscale-5 hover:bg-grayscale-10 rounded-md cursor-pointer"
-                        onClick={() =>
-                            callApi(categoryData.subcategories.backendParameters[index])
-                        }
+                            key={index}
+                            className="py-1 px-2 text-xs w-full text-center font-regular text-grayscale-90 bg-grayscale-5 hover:bg-grayscale-10 rounded-md cursor-pointer"
+                            onClick={async () => {
+                            try {
+                                const response = await handleGetGuideAnswer({
+                                    stadiumName,
+                                    categoryName: categoryData.backendValue,
+                                    orderNumber:
+                                        categoryData.subcategories.backendParameters[index],
+                                });
+                                alert(`응답 데이터: ${response}`);
+                            } catch (error) {
+                                alert("API 호출에 실패했습니다.");
+                            }
+                            }}
                         >
                         {value}
                         </li>
@@ -108,6 +116,21 @@ const CategoryChat = ({categoryFrontName}: Props) => {
                 ) : null;
             })}
             </ul>
+
+
+
+
+
+
+            {/* API 호출 결과 렌더링 */}
+            <div className="mt-4">
+                {responseData && (
+                <div className="p-4 bg-grayscale-10 rounded-md">
+                    <h4 className="text-sm font-bold">응답 데이터:</h4>
+                    <p className="text-xs">{responseData}</p>
+                </div>
+                )}
+            </div>
         </div>
     );
 };

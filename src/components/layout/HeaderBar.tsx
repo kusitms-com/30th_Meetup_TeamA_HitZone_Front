@@ -21,7 +21,7 @@ const Bar = ({stadium, closeEvent}: Props) => {
         : "text-lg";
 
     return (
-        <div className="flex justify-between w-full border-b border-grayscale-10 p-[15px]">
+        <div className="flex justify-between w-full border-b border-grayscale-10 p-[15px] z-20">
             <div className="flex justify-center items-center w-full">
                 <p className={`${textSize} text-grayscale-90 font-semibold text-center`}>
                     내가 갈 곳은? {stadium}

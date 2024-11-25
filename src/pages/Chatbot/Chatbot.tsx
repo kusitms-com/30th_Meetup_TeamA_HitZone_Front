@@ -118,7 +118,7 @@ const Chatbot = () => {
               )}
 
               {/* 카테고리 선택시 배열에 저장 및 순차 출력 */}
-              {selectedCategories.map((categoryFrontName, index) => (
+              {selectedStadium && selectedCategories.map((categoryFrontName, index) => (
                 <div key={index}>
                   <>
                     {/* 사용자 답변 출력 */}
@@ -129,7 +129,7 @@ const Chatbot = () => {
                       contentList={[
                         {
                         type: "component",
-                        content: <CategoryChat categoryFrontName={categoryFrontName} />
+                        content: <CategoryChat stadiumName={selectedStadium} categoryFrontName={categoryFrontName} />
                         }
                       ]}
                       />

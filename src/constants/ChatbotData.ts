@@ -20,6 +20,7 @@ export const questionCategories = {
   questionCategories: {
     chatbot: {
       frontendValue: `🔎 챗봇 ${chatbotName} 사용방법`,
+      backendValue: "chatbot",
       icon: null,
       answer: [`반갑습니다! 저는 챗봇 ${chatbotName} 입니다.`,
         "저에게 궁금하신 점이 있으시면 무엇이든 언제나 물어보세요!",
@@ -29,6 +30,7 @@ export const questionCategories = {
     },
     stadium: {
       frontendValue: "👟 야구장 가이드",
+      backendValue: "stadium",
       icon: "👟",
       subcategories: {
         frontendValues: ["야구장 입장시간",
@@ -45,6 +47,7 @@ export const questionCategories = {
     },
     baseball: {
       frontendValue: "⚾️ 야구 가이드",
+      backendValue: "baseball",
       icon: "⚾️",
       subcategories: {
         frontendValues: ["우천취소", "경기 시간 및 일정"],
@@ -53,6 +56,7 @@ export const questionCategories = {
     },
     manner: {
       frontendValue: "🫵 직관 매너",
+      backendValue: "manner",
       icon: "🫵",
       subcategories: {
         frontendValues: ["야구장 관람 매너"],
@@ -61,6 +65,7 @@ export const questionCategories = {
     },
     facility: {
       frontendValue: "💬 야구장 편의시설",
+      backendValue: "facility",
       icon: "💬",
       subcategories: {
         frontendValues: ["물품 보관소의 위치",
@@ -75,6 +80,7 @@ export const questionCategories = {
     },
     prohibition: {
       frontendValue: "🚫 반입 금지 물품",
+      backendValue: "prohibition",
       icon: null,
       image: prohibitedItemsIcon,
       answer: [
@@ -90,6 +96,7 @@ export const questionCategories = {
     },
     parking: {
       frontendValue: "🚘 교통 및 주차 정보",
+      backendValue: "parking",
       icon: "🚘",
       subcategories: {
         frontendValues: [
