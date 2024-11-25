@@ -54,7 +54,20 @@ const Chatbot = () => {
   const handleGuideResponseUpdate = (response: string) => {
     setResponseGuideData((prev) => [...prev, response]); // 새 응답 데이터 추가
   };
-  
+  const renderGuideData = (contents: string) => {
+    return (
+      <div>
+        <RookieChat 
+          contentList={[
+            {
+            type: "textList",
+            content: [contents],
+            }
+          ]}
+        />
+      </div>
+    );
+  }
 
   // 자동 스크롤 기능
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -139,7 +152,13 @@ const Chatbot = () => {
                         content: <CategoryChat stadiumName={selectedStadium} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
                         }
                       ]}
-                      />
+                    />
+                    {/* Guide API 답변 순차 출력:  사용자가 선택한 세부 카테고리 렌더링 후 API 호출 결과 렌더링 */}
+                    {selectedStadium && responseGuideData.map((response, index) => (
+                      <div key={index}>
+                        {renderGuideData(response)}
+                      </div>
+                    ))}
                   </>
                 </div>
               ))}

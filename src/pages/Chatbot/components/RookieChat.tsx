@@ -36,6 +36,7 @@ const RookieChat = ({initialMessage, contentList}: RookieChatProps) => {
                 
                 {/* 이미지와 텍스트 리스트 */}
                 {contentList &&
+                    // 이미지인 경우: 이미지 CSS 조정해서 반환
                     contentList.map((item, index) => {
                     if (item.type === "image") {
                         return (
@@ -46,12 +47,16 @@ const RookieChat = ({initialMessage, contentList}: RookieChatProps) => {
                             className="w-[70%] h-auto rounded-md object-cover"
                         />
                         );
+                    
+                    // 컴포넌트인 경우: 컴포넌트(item) 그대로 반환
                     } else if (item.type == "component") {
                         return (
                             <div key={index}>
                                 {item.content}
                             </div>
                         );
+
+                    // 텍스트인 경우: 루키 말풍선 컴포에 담아서 반환
                     } else if (item.type === "textList") {
                         return (
                             <div key={index}>
