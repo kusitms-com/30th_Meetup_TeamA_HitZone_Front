@@ -7,8 +7,7 @@ import { getStadiumChatApiData } from "@/src/constants/ChatbotData";
 export const handleGetGuideAnswer = async ({stadiumName, categoryName, orderNumber}: GuideGetParamsType) => {
     try {
         const stadiumApiData = getStadiumChatApiData(stadiumName);
-        console.log(stadiumApiData);
-
+        
         // API 요청
         const response = await getGuide(
             {
@@ -20,9 +19,16 @@ export const handleGetGuideAnswer = async ({stadiumName, categoryName, orderNumb
         
         console.log("챗봇 가이드 데이터 받았당 >> ", response);
 
-        // 파싱: 답변 배열 빈환
-        const data = response.payload.answers;
-        return data;
+        // 파싱
+        const data = response.payload;
+        const parsedData = {
+            answer: data.answer,
+            imageUrl: data.imgUrl ?? "", // imgUrl이 null일 경우 빈 문자열 반환
+        };
+
+        console.log(parsedData);
+        
+        return parsedData;
 
     } catch (error) {
         console.error('챗봇 가이드 데이터 가져오는 중 오류 발생:', error);

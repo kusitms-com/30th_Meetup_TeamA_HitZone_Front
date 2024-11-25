@@ -33,6 +33,6 @@ export interface GuideGetParamsType {
 
 // GET 응답
 export interface GuideGetResponseType {
-    answer: string[];
+    answer: string;
     imgUrl: string | null;
 }
