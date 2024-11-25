@@ -8,7 +8,7 @@ const BackBar = () => {
     const router = useRouter();
 
     return (
-        <div className="px-[15px]">
+        <div className="px-[15px] z-20">
             <Image
                 src={backLeftButtonGrayIcon}
                 alt="뒤로가기 버튼"

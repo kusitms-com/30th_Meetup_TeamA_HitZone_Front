@@ -10,7 +10,7 @@ const BackBar = () => {
     const router = useRouter();
 
     return (
-        <div className="fixed top-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full flex items-center justify-between py-[14px] px-4 bg-white">
+        <div className="fixed top-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full flex items-center justify-between py-[14px] px-4 bg-white z-20">
             <div className="flex justify-start">
                 <Image
                     src={backLeftButtonGrayIcon}
