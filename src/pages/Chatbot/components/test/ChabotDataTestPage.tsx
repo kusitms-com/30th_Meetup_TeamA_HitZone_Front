@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { questionCategories } from "@/src/constants/ChatbotData";
 
 // API 호출 함수 (예제)
@@ -89,8 +90,8 @@ const QuestionCategoriesComponent = () => {
                 {/* 타입 좁히기: image가 있는 경우 */}
                 {"image" in category && category.image && (
                   <div className="mt-4">
-                    <img
-                      src={category.image.src || category.image}
+                    <Image
+                      src={category.image}
                       alt="Category Icon"
                       className="max-w-full h-auto rounded-md"
                     />

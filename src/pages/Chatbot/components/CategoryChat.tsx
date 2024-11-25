@@ -38,8 +38,8 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
             {"image" in categoryData && categoryData.image && (
                 <div className="mb-2">
                     {/* 이미지 내용 */}
-                    <img
-                        src={categoryData.image.src || categoryData.image}
+                    <Image
+                        src={categoryData.image}
                         alt="Category Icon"
                         className="max-w-full h-auto rounded-md"
                     />
