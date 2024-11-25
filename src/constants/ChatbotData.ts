@@ -1,4 +1,5 @@
 import prohibitedItemsIcon from "@/src/assets/webp/chatbot_prohibition.webp";
+import chatbotManualIcon from "@/src/assets/webp/chatbot_manual.webp";
 
 import { stadiumList } from "@/src/constants/ZoneData";
 
@@ -22,6 +23,7 @@ export const questionCategories = {
       frontendValue: `🔎 챗봇 ${chatbotName} 사용방법`,
       backendValue: "chatbot",
       icon: null,
+      image: chatbotManualIcon,
       answer: [`반갑습니다! 저는 챗봇 ${chatbotName} 입니다.`,
         "저에게 궁금하신 점이 있으시면 무엇이든 언제나 물어보세요!",
         "저에게 질문하는 방법은 2가지입니다.",

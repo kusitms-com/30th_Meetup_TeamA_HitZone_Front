@@ -34,11 +34,7 @@ const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
             {/* 프론트에서 처리하는 데이터: 이미지 출력 */}
             {/* image 값이 있는 경우: image 렌더링 */}
             {"image" in categoryData && categoryData.image && (
-                <div className="p-4 bg-main-0 rounded-lg shadow mb-2">
-
-                    {/* 말풍선 꼬랑지 */}
-                    <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
-                    
+                <div className="mb-2">
                     {/* 이미지 내용 */}
                     <img
                         src={categoryData.image.src || categoryData.image}
@@ -55,7 +51,7 @@ const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
                 <div className="p-4 bg-main-0 rounded-lg shadow mb-2">
 
                     {/* 말풍선 꼬랑지 */}
-                    <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
+                    <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] w-5 h-5"/>
                     
                     {/* 답변 내용 */}
                     <ul className="space-y-1.5">
