@@ -5,23 +5,6 @@ import { StadiumType, stadiumStringList } from "@/src/constants/ZoneData";
 
 export const chatbotName = "루키";
 
-
-export const getStadiumChatApiData = (frontendValue: string): string => {
-  const { frontendValues, backendParameters } = questionCategories.baseballCategories;
-
-  // 해당 frontendValue의 인덱스 찾기
-  const index = frontendValues.indexOf(frontendValue);
-
-  // 유효하지 않은 frontendValue에 대한 처리
-  //if (index < 0 || index >= stadiumList.length) {
-  if (index === -1) {   // Array.indexOf는 배열의 유효한 인덱스 또는 -1을 반환
-    throw new Error(`Frontend value "${frontendValue}" not found.`);
-  }
-
-  // backendParameters에서 매칭되는 값 반환
-  return backendParameters[index];
-};
-
 export const questionCategories = {
   // 기본 데이터
   chatbotName,
@@ -129,6 +112,23 @@ export const questionCategories = {
       }
     }
   }
+};
+
+// 프론트에 보이는 스타디움 값 -> 백엔드에 전송할 스타디움 값으로 맵핑하는 함수
+export const getStadiumChatApiData = (frontendStadiumValue: string): string => {
+  // 전체 스타디움 리스트 가져오기
+  const { frontendValues, backendParameters } = questionCategories.baseballCategories;
+
+  // 해당 frontendValue의 인덱스 찾기
+  const index = frontendValues.indexOf(frontendStadiumValue);
+
+  // 유효하지 않은 frontendValue에 대한 처리
+  if (index === -1) {   // Array.indexOf는 배열의 유효한 인덱스 또는 -1을 반환
+    throw new Error(`Frontend value "${frontendStadiumValue}" not found.`);
+  }
+
+  // backendParameters에서 매칭되는 값 반환
+  return backendParameters[index];
 };
 
 export interface GuideResponseData {
