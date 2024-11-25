@@ -13,6 +13,7 @@ export enum StadiumType {
     CHANDWON_NC_PARK = "창원 NC 파크 (창원)"
 }
 
+// Enum type 배열
 export const stadiumList = [
     StadiumType.JAMSIL,
     StadiumType.SUWON_KT,
@@ -24,6 +25,12 @@ export const stadiumList = [
     StadiumType.SSG_LENDERS_FIELD,
     StadiumType.CHANDWON_NC_PARK
 ];
+
+// String type 배열
+function convertEnumArrayToStringArray(stadiumList: StadiumType[]): string[] {
+    return stadiumList.map(stadium => stadium.toString());
+}
+export const stadiumStringList = convertEnumArrayToStringArray(stadiumList);
 
 // 잠실 Zone 관리
 

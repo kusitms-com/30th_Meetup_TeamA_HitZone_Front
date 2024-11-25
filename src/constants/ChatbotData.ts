@@ -1,9 +1,27 @@
 import prohibitedItemsIcon from "@/src/assets/webp/chatbot_prohibition.webp";
 import chatbotManualIcon from "@/src/assets/webp/chatbot_manual.webp";
 
-import { stadiumList } from "@/src/constants/ZoneData";
+import { StadiumType, stadiumStringList } from "@/src/constants/ZoneData";
 
 export const chatbotName = "루키";
+
+
+export const getStadiumChatApiData = (frontendValue: string): string => {
+  const { frontendValues, backendParameters } = questionCategories.baseballCategories;
+
+  // 해당 frontendValue의 인덱스 찾기
+  const index = frontendValues.indexOf(frontendValue);
+
+  // 유효하지 않은 frontendValue에 대한 처리
+  //if (index < 0 || index >= stadiumList.length) {
+  if (index === -1) {   // Array.indexOf는 배열의 유효한 인덱스 또는 -1을 반환
+    throw new Error(`Frontend value "${frontendValue}" not found.`);
+  }
+
+  // backendParameters에서 매칭되는 값 반환
+  return backendParameters[index];
+};
+
 export const questionCategories = {
   // 기본 데이터
   chatbotName,
@@ -11,7 +29,7 @@ export const questionCategories = {
   
   // 필수로 선택해야하는 데이터
   baseballCategories: {
-    frontendValues: stadiumList,  // 챗봇 구단별 구장명 (프론트에서 보여주는 값)
+    frontendValues: stadiumStringList,  // 챗봇 구단별 구장명 (프론트에서 보여주는 값)
     backendParameters: ["lg", "kt", "kiwoom", "kia", "samsung", "hanhwa", "lotte", "ssg", "nc"],  // 챗봇 구단별 구장명 (백엔드에 API 파라미터로 넘겨주는 값)
     userMessage: ["야구에 관련된 궁금한 점이 있으신가요?", "1. 궁금한 내용을 언제든 자유롭게 입력해주세요", "2. 아래 질문 카테고리 선택을 해주시면, ‘자주 물어보는 질문’을 물어볼 수 있어요!"]
   },

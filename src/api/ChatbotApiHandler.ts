@@ -2,12 +2,17 @@
 import { getGuide } from "./ChatbotApiService";
 import { GuideGetParamsType } from "./ChatbotApiType";
 
+import { getStadiumChatApiData } from "@/src/constants/ChatbotData";
+
 export const handleGetGuideAnswer = async ({stadiumName, categoryName, orderNumber}: GuideGetParamsType) => {
     try {
+        const stadiumApiData = getStadiumChatApiData(stadiumName);
+        console.log(stadiumApiData);
+
         // API 요청
         const response = await getGuide(
             {
-                stadiumName: stadiumName,
+                stadiumName: stadiumApiData,
                 categoryName: categoryName,
                 orderNumber: orderNumber,
             }
