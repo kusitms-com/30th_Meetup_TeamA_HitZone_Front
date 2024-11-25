@@ -29,26 +29,17 @@ const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
     // 카테고리 클릭시 하위 값 존재 여부에 따른 렌더링 함수
     const renderCategoryDetails = (categoryData: typeof categories[keyof typeof categories]) => (
         <div>
-            {/* 프론트에서 처리하는 데이터: 텍스트 출력 */}
-            {/* answer 값이 있는 경우: answer 렌더링 */}
-            {"answer" in categoryData && categoryData.answer && (
-                <ul className="space-y-1.5">
-                    {categoryData.answer.map((answer, index) => (
-                        <li
-                        key={index}
-                        className="py-1 px-2 text-xs w-full text-center font-regular text-grayscale-90 bg-grayscale-5 hover:bg-grayscale-10 rounded-md"
-                        >
-                        {answer}
-                        </li>
-                    ))}
-                </ul>
-            )}
 
-            
+
             {/* 프론트에서 처리하는 데이터: 이미지 출력 */}
             {/* image 값이 있는 경우: image 렌더링 */}
             {"image" in categoryData && categoryData.image && (
-                <div className="mt-4">
+                <div className="p-4 bg-main-0 rounded-lg shadow mb-2">
+
+                    {/* 말풍선 꼬랑지 */}
+                    <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
+                    
+                    {/* 이미지 내용 */}
                     <img
                         src={categoryData.image.src || categoryData.image}
                         alt="Category Icon"
@@ -58,32 +49,69 @@ const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
             )}
 
             
+            {/* 프론트에서 처리하는 데이터: 텍스트 출력 */}
+            {/* answer 값이 있는 경우: answer 렌더링 */}
+            {"answer" in categoryData && categoryData.answer && (
+                <div className="p-4 bg-main-0 rounded-lg shadow mb-2">
+
+                    {/* 말풍선 꼬랑지 */}
+                    <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
+                    
+                    {/* 답변 내용 */}
+                    <ul className="space-y-1.5">
+                        {categoryData.answer.map((answer, index) => (
+                            <li
+                            key={index}
+                            className="px-2 text-xs min-w-[180px] w-full text-left font-regular text-grayscale-90 rounded-md"
+                            >
+                            {answer}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            
             {/* 백엔드에서 받아오기 전 세부 카테고리 데이터: 리스트 출력 */}
             {/* subcategories 값이 있는 경우: subcategories 렌더링 */}
             {"subcategories" in categoryData && categoryData.subcategories && (
-                <ul className="space-y-1.5">
-                    {categoryData.subcategories.frontendValues.map((value, index) => (
-                        <li
-                            key={index}
-                            className="py-1 px-2 text-xs w-full text-center font-regular text-grayscale-90 bg-grayscale-5 hover:bg-grayscale-10 rounded-md cursor-pointer"
-                            onClick={async () => {
-                            try {
-                                const response = await handleGetGuideAnswer({
-                                    stadiumName,
-                                    categoryName: categoryData.backendValue,
-                                    orderNumber:
-                                        categoryData.subcategories.backendParameters[index],
-                                });
-                                alert(`응답 데이터: ${response}`);
-                            } catch (error) {
-                                alert("API 호출에 실패했습니다.");
-                            }
-                            }}
-                        >
-                        {value}
-                        </li>
-                    ))}
-                </ul>
+                <div className="p-4 bg-main-0 rounded-lg shadow mb-2">
+
+                    {/* 말풍선 꼬랑지 */}
+                    <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
+                    
+                    {/* 선택한 카테고리에 따른 컴포 제목 */}
+                    <h3 className="text-xs font-regular text-grayscale-90 mb-2">
+                        {
+                            categoryData.icon? categoryData.icon + " 어떤 점이 궁금하신가요?" : null
+                        }
+                    </h3>
+                    
+                    {/* 세부 카테고리 내용 */}
+                    <ul className="space-y-1.5">
+                        {categoryData.subcategories.frontendValues.map((value, index) => (
+                            <li
+                                key={index}
+                                className="py-1 px-2 text-xs min-w-[180px] w-full text-center font-regular text-grayscale-90 bg-grayscale-5 hover:bg-grayscale-10 rounded-md cursor-pointer"
+                                onClick={async () => {
+                                try {
+                                    const response = await handleGetGuideAnswer({
+                                        stadiumName,
+                                        categoryName: categoryData.backendValue,
+                                        orderNumber:
+                                            categoryData.subcategories.backendParameters[index],
+                                    });
+                                    alert(`응답 데이터: ${response}`);
+                                } catch (error) {
+                                    alert("API 호출에 실패했습니다.");
+                                }
+                                }}
+                            >
+                            {value}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             )}
         </div>
     );
@@ -94,22 +122,11 @@ const CategoryChat = ({stadiumName, categoryFrontName}: Props) => {
     }
 
     return (
-        <div className="relative min-w-[200px] max-w-[300px]">
-            {/* 말풍선 꼬랑지 */}
-            <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
-
+        <div className="relative max-w-[250px]">
             <ul>
             {Object.entries(categories).map(([key, category]) => {
                 return filteredCategory === category ? (
-                <li key={key} className="p-4 bg-main-0 rounded-lg shadow">
-                    {/* 선택한 카테고리에 따른 컴포 제목 */}
-                    
-                    <h3 className="text-xs font-regular text-grayscale-90 mb-2">
-                        {
-                            category.icon? category.icon + " 어떤 점이 궁금하신가요?" : null
-                        }
-                    </h3>
-
+                <li key={key}>
                     {/* 선택한 카테고리에 따른 세부 내용 렌더링 함수 호출 */}
                     {renderCategoryDetails(category)}
                 </li>
