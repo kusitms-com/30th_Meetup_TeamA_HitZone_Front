@@ -245,7 +245,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
 
 
     return (
-        <div className="flex justify-center items-start bg-main-0 w-full h-screen bg-fff overflow-y-auto scrollbar-hide">
+        <div className="flex justify-center items-start bg-grayscale-5 w-full h-screen bg-fff overflow-y-auto scrollbar-hide">
             <div className="relative flex flex-col items-center w-full h-screen">
                 {/** 임시 확인
                 <ChooseBaseballTeamDialog/>
@@ -268,7 +268,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                         ) : null
                         }
                         {/** 프로필 백 그라운드: 연분홍 동그라미 */}
-                        <div className="bg-main-5 border border-[0px] rounded-full w-full h-full" />
+                        <div className="bg-grayscale-0 border border-[0px] rounded-full w-full h-full" />
                     </div>
 
                     {/** Profile API 연동 데이터 */}
@@ -279,11 +279,11 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                         <p className={`${textNickNameSize} text-main-50 font-black relative top-[-5px]`}>
                             {profileData?.nickname}
                         </p>
-                        <div className={`relative text-start bg-main-5 ${textTypeSize} text-main-90 font-medium px-[14px] py-[8px] mt-[2px] rounded-lg w-full text-center`}>
+                        <div className={`relative text-start bg-main-0 ${textTypeSize} text-grayscale-90 font-medium px-[14px] py-[8px] mt-[2px] rounded-lg w-full text-center`}>
                             <div className="flex gap-[6px] mb-[6px] ">
                                 {/** 해시 태그 */}
                                 {profileData?.hashTags !== null ? (profileData?.hashTags.map((hashTag, index) => (
-                                    <p key={index} className={`${textHashtagSize} px-[6px] py-[2px] text-grayscale-90 font-medium bg-main-0 border border-0 rounded-md`}>
+                                    <p key={index} className={`${textHashtagSize} px-[6px] py-[2px] text-main-70 font-medium bg-main-5 border border-0 rounded-md`}>
                                         {hashTag}
                                     </p>
                                 ))
@@ -293,7 +293,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                                 )}
                             </div>
                             {profileData?.type}
-                            <div className="absolute top-2 left-[-12px] w-0 h-0 border-b-[12px] border-r-[12px] border-t-transparent border-b-transparent border-r-main-5"/>
+                            <div className="absolute top-2 left-[-12px] w-0 h-0 border-b-[12px] border-r-[12px] border-t-transparent border-b-transparent border-r-main-0"/>
 
                             {/** 문구
                             <p>
@@ -327,8 +327,8 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                             const closeModal = () => setOpenModalIndex(null);
                     
                             return (
-                                <div key={index} className="bg-grayscale-5 border border-[0px] rounded-[4px] min-h-[104px] mt-[12px] p-[12px]">
-                                    <Image src={selectedCrownIcon} alt="왕관 이미지" className="w-[17px] h-[9px]"/>
+                                <div key={index} className="bg-grayscale-0 border border-[0px] rounded-lg mt-[12px] px-3 pt-3 pb-[10px]">
+                                    <Image src={selectedCrownIcon} alt="왕관 이미지" className="w-[17px] h-[9px] left-[-2px]"/>
                                     <div className="flex w-full justify-between ">
                                         <div className="flex w-full justify-start items-center">
                                             <p className={`${textZoneSize} text-grayscale-90 font-semibold mr-[8px]`}>
@@ -347,13 +347,13 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                                         </div>
                                         <div className="flex flex-glow justify-end  items-center text-center min-w-[100px] gap-[4px] cursor-pointer "
                                              onClick={() => handleDetailPage(index)}>
-                                            <p className="text-xxs text-grayscale-30 font-medium ">
+                                            <p className="text-xxs text-grayscale-40 font-medium ">
                                                 자세히 보러가기
                                             </p>
                                             <Image src={rightArrowIcon} alt="자세히 보러가기 아이콘" width={5} height={5} className="flex-glow justify-end "/>
                                         </div>
                                     </div>
-                                    <div className="bg-main-0 border border-[0px] rounded-[4px] mt-[4px]">
+                                    <div className="mt-[4px]">
                                         <p className="text-xs text-grayscale-90 font-regular px-[8px] py-[5px]">
                                             {zone.explanations}
                                         </p>
@@ -367,7 +367,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                         </div>
                     )}
                     {/** 다음 버튼, 맨 아래에 배치 */}
-                    <div className="relative flex justify-center items-center text-center border border-0 rounded-[8px] mb-24 h-[48px] w-full gap-[8px] mt-5">
+                    <div className="relative flex justify-center items-center text-center border border-0 rounded-[8px] mb-3 h-[48px] w-full gap-[8px] mt-5">
                         <div className="bg-white border border-grayscale-30 rounded-[8px] cursor-pointer" onClick={handleRedirectToRecommendation}>
                             <p className="text-md text-grayscale-60 font-semibold min-w-[135px] px-[8px] py-[12px]">
                                 추천 다시 받기
@@ -376,6 +376,18 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                         <div className="bg-main-50 border border-0 rounded-[8px] w-full cursor-pointer" onClick={openReservationModal}>
                             <p className="text-md text-main-0 font-semibold px-[8px] py-[12px]">
                                 예매하러 가기
+                            </p>
+                        </div>
+                    </div>
+                    {/** 야구 문화 이동 버튼 */}
+                    <div className="relative flex justify-center items-center text-center mb-24">
+                        {/* 이후에 잠실, KT 야구장 각각 다르게 설정 필요 */}
+                        <div 
+                            className="bg-main-10 rounded-[8px] cursor-pointer w-full py-3"
+                            onClick={() => window.location.href = "/culture"}
+                        >
+                            <p className="text-md text-main-60 font-semibold">
+                                직관 필수 코스, 한눈에 살펴보기!
                             </p>
                         </div>
                     </div>
