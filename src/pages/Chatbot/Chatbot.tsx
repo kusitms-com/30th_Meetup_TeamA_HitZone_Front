@@ -165,7 +165,7 @@ const Chatbot = () => {
                   <div key={index}>
                     <>
                       {/* 사용자 답변 출력 */}
-                      <UserChat messageList={[categoryFrontName]} />
+                      <UserChat messageList={[categoryFrontName]}/>
 
                       {/* 선택된 카테고리에 대한 챗봇 응답 출력 */}
                       <RookieChat 
@@ -187,7 +187,7 @@ const Chatbot = () => {
                             <UserChat messageList={[responseGuideData.categoryName + " ▶︎ " + responseGuideData.subCategoryName]}/>
 
                             {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
-                            <div key={responseIndex}>
+                            <div key={responseIndex} className="py-2">
                               {renderGuideAnswerData(responseGuideData.answer)}
                             </div>
                           </>
