@@ -9,7 +9,7 @@ import { handleGetGuideAnswer } from "@/src/api/ChatbotApiHandler";
 interface Props {
     stadiumName: string,
     categoryFrontName: string
-    onResponseUpdate: (response: string) => void; // 부모로 데이터 전달 콜백
+    onResponseUpdate: (response: string, index: number) => void; // 부모로 데이터 전달 콜백
 }
 
 
@@ -100,7 +100,7 @@ const CategoryChat = ({stadiumName, categoryFrontName, onResponseUpdate}: Props)
                                     });
                                     
                                     // 부모 컴포넌트로 응답 전달
-                                    onResponseUpdate(response);
+                                    onResponseUpdate(response, index);
                                     //alert(`응답 데이터: ${response}`);
                                 } catch (error) {
                                     //alert("API 호출에 실패했습니다.");

@@ -50,9 +50,14 @@ const Chatbot = () => {
 
 
   // 가이드 챗봇 답변 관련
-  const [responseGuideData, setResponseGuideData] = useState<string[]>([]); // API 응답 저장
-  const handleGuideResponseUpdate = (response: string) => {
-    setResponseGuideData((prev) => [...prev, response]); // 새 응답 데이터 추가
+  const [responseGuideData, setResponseGuideData] = useState<Record<number, string[]>>({}); // 세부 카테고리 index와 매핑하여 API 응답 저장
+
+  // API 응답을 category index에 매핑하여 저장
+  const handleGuideResponseUpdate = (response: string, index: number) => {
+    setResponseGuideData((prev) => ({
+      ...prev,
+      [index]: [...(prev[index] || []), response], // 세부 카테고리 index와 매핑되는 응답 추가
+    }));
   };
   const renderGuideData = (contents: string) => {
     return (
@@ -133,35 +138,40 @@ const Chatbot = () => {
                         content: questionCategories.baseballCategories.userMessage
                       }
                     ]}
-                />
+                  />
                 </>
               )}
 
               {/* 카테고리 선택시 배열에 저장 및 순차 출력 */}
               {selectedStadium && selectedCategories.map((categoryFrontName, index) => (
-                <div key={index}>
-                  <>
-                    {/* 사용자 답변 출력 */}
-                    <UserChat messageList={[categoryFrontName]} />
+                <>
+                  <div key={index}>
+                    <>
+                      {/* 사용자 답변 출력 */}
+                      <UserChat messageList={[categoryFrontName]} />
 
-                    {/* 선택된 카테고리에 대한 챗봇 응답 출력 */}
-                    <RookieChat 
-                      contentList={[
-                        {
-                        type: "component",
-                        content: <CategoryChat stadiumName={selectedStadium} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
-                        }
-                      ]}
-                    />
-                    {/* Guide API 답변 순차 출력:  사용자가 선택한 세부 카테고리 렌더링 후 API 호출 결과 렌더링 */}
-                    {selectedStadium && responseGuideData.map((response, index) => (
-                      <div key={index}>
+                      {/* 선택된 카테고리에 대한 챗봇 응답 출력 */}
+                      <RookieChat 
+                        contentList={[
+                          {
+                          type: "component",
+                          content: <CategoryChat stadiumName={selectedStadium} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
+                          }
+                        ]}
+                      />
+                    </>
+                  </div>
+                  
+                  {/* Guide API 답변 순차 출력:  사용자가 선택한 세부 카테고리 렌더링 후 매핑되는 API 호출 결과만 렌더링 */}
+                  {selectedStadium && responseGuideData[index] &&
+                    responseGuideData[index].map((response, responseIndex) => (
+                      <div key={responseIndex}>
                         {renderGuideData(response)}
                       </div>
-                    ))}
-                  </>
-                </div>
+                  ))}
+                </>
               ))}
+              
             </div>
           </div>
           
