@@ -75,7 +75,7 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
 
   // 스크롤 이벤트
   const { scrollDirection, scrollPosition, containerRef } = useRefScroll<HTMLDivElement>(); // 스크롤 감지 훅
-  const animationDuration = 3000; // 3초, 사라지는 애니메이션 길이
+  const animationDuration = 1500; // 1.5초, 사라지는 애니메이션 길이
   const { isVisible, isFadingOut } = useVisibilityWithFade(scrollDirection, { // 스크롤 내림 감지시 컴포넌트 숨기는 훅
     animationDuration,
   });

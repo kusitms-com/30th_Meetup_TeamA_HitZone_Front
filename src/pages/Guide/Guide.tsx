@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Header from "../../components/layout/HeaderCenter";
+import Header from "../../components/layout/MainHeader";
 import NavBar from "../../components/layout/NavBar";
 import Dropdown from "../Main/components/Dropdown";
 import GuideDetailContent from "./components/GuideDetailContent";
