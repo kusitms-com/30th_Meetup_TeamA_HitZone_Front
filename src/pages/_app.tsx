@@ -35,6 +35,8 @@ import Chatbot from './Chatbot/Chatbot';
 import GuideDetailContent from './Guide/components/GuideDetailContent';
 
 
+import Script from 'next/script';
+
 // 전역 소셜로그인 상태 관리
 import { SessionProvider } from "next-auth/react";
 
@@ -126,16 +128,15 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
       <meta name="description" content="A Progressive Web App" />
       
       {/* Microsoft Clarity 스크립트 */}
-      <script
-        type="text/javascript"
+      <Script
+        id="ms-clarity"
+        strategy="afterInteractive" // 스크립트가 사용자 인터랙션 후 로드되도록 설정
         dangerouslySetInnerHTML={{
-          __html: `
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "p1x3mhnt0o");
-          `,
+          __html: `(function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "p2zzif1xu0");`,
         }}
       />
     </Head>
