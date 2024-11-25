@@ -53,13 +53,13 @@ const Chatbot = () => {
   const [responseGuideData, setResponseGuideData] = useState<Record<number, string[]>>({}); // 세부 카테고리 index와 매핑하여 API 응답 저장
 
   // API 응답을 category index에 매핑하여 저장
-  const handleGuideResponseUpdate = (response: string, index: number) => {
+  const handleGuideResponseUpdate = (response: string, categoryKey: number, subCategoryKey: number) => {
     setResponseGuideData((prev) => ({
       ...prev,
-      [index]: [...(prev[index] || []), response], // 세부 카테고리 index와 매핑되는 응답 추가
+      [categoryKey]: [...(prev[categoryKey] || []), response], // 세부 카테고리 index와 매핑되는 응답 추가
     }));
   };
-  const renderGuideData = (contents: string) => {
+  const renderGuideAnswerData = (contents: string) => {
     return (
       <div>
         <RookieChat 
@@ -155,7 +155,7 @@ const Chatbot = () => {
                         contentList={[
                           {
                           type: "component",
-                          content: <CategoryChat stadiumName={selectedStadium} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
+                          content: <CategoryChat stadiumName={selectedStadium} categoryKey={index} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
                           }
                         ]}
                       />
@@ -163,12 +163,15 @@ const Chatbot = () => {
                   </div>
                   
                   {/* Guide API 답변 순차 출력:  사용자가 선택한 세부 카테고리 렌더링 후 매핑되는 API 호출 결과만 렌더링 */}
-                  {selectedStadium && responseGuideData[index] &&
-                    responseGuideData[index].map((response, responseIndex) => (
-                      <div key={responseIndex}>
-                        {renderGuideData(response)}
-                      </div>
-                  ))}
+                  {selectedStadium && responseGuideData[index] && (
+                    <div>
+                      {responseGuideData[index].map((response, responseIndex) => (
+                        <div key={responseIndex}>
+                          {renderGuideAnswerData(response)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </>
               ))}
               

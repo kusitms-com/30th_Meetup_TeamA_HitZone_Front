@@ -8,16 +8,18 @@ import { handleGetGuideAnswer } from "@/src/api/ChatbotApiHandler";
 
 interface Props {
     stadiumName: string,
+    categoryKey: number,
     categoryFrontName: string
-    onResponseUpdate: (response: string, index: number) => void; // 부모로 데이터 전달 콜백
+    onResponseUpdate: (response: string, categoryKey: number, subCategoryKey: number) => void; // 부모로 데이터 전달 콜백
 }
 
 
 // 사용자가 카테고리 클릭시 나오는 커스텀 대화창
-const CategoryChat = ({stadiumName, categoryFrontName, onResponseUpdate}: Props) => {
+const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUpdate}: Props) => {
 
     // API 응답 데이터를 저장할 상태
     const [responseData, setResponseData] = useState<string | null>(null);
+
     const categories = questionCategories.questionCategories;
 
     // prop으로 받은 카테고리와 일치하는 항목 필터링
@@ -98,9 +100,12 @@ const CategoryChat = ({stadiumName, categoryFrontName, onResponseUpdate}: Props)
                                         orderNumber:
                                             categoryData.subcategories.backendParameters[index],
                                     });
+
+                                    // 로컬에도 응답 저장
+                                    setResponseData(response);
                                     
                                     // 부모 컴포넌트로 응답 전달
-                                    onResponseUpdate(response, index);
+                                    onResponseUpdate(response, categoryKey, index);
                                     //alert(`응답 데이터: ${response}`);
                                 } catch (error) {
                                     //alert("API 호출에 실패했습니다.");
