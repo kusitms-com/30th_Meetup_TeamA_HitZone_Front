@@ -176,19 +176,23 @@ const Chatbot = () => {
                           }
                         ]}
                       />
+
+
+                      {/* 서브 카테고리 선택시 순차 출력 */}
+                      {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
+                      {responseGuideDataList
+                        .filter((responseGuideData) => responseGuideData.categoryNumber === index) // 현재 카테고리에 해당하는 데이터만 필터링
+                        .map((responseGuideData, responseIndex) => (
+                          <>
+                            <UserChat messageList={[responseGuideData.categoryName + " ▶︎ " + responseGuideData.subCategoryName]}/>
+
+                            {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
+                            <div key={responseIndex}>
+                              {renderGuideAnswerData(responseGuideData.answer)}
+                            </div>
+                          </>
+                      ))}
                     </>
-                  </div>
-                </>
-              ))}
-
-              {/* 서브 카테고리 선택시 순차 출력 */}
-              {selectedStadium && responseGuideDataList  && responseGuideDataList.map((responseGuideData, index) => (
-                <>
-                  <UserChat messageList={[responseGuideData.categoryName + " ▶︎ " + responseGuideData.subCategoryName]}/>
-
-                  {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
-                  <div>
-                    {renderGuideAnswerData(responseGuideData.answer)}
                   </div>
                 </>
               ))}
