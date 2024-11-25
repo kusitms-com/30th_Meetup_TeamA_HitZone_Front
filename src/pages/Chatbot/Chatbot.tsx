@@ -84,7 +84,7 @@ const Chatbot = () => {
   };
   useEffect(() => {
     scrollToBottom();
-  }, [selectedStadium, selectedCategories]);
+  }, [selectedStadium, selectedCategories, responseGuideData]);
 
 
   return (
