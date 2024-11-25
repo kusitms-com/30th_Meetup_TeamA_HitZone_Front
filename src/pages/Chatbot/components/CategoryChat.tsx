@@ -10,7 +10,7 @@ interface Props {
     stadiumName: string,
     categoryKey: number,
     categoryFrontName: string
-    onResponseUpdate: (response: string, categoryKey: number, subCategoryKey: number) => void; // 부모로 데이터 전달 콜백
+    onResponseUpdate: (response: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
 }
 
 
@@ -100,12 +100,12 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
                                         orderNumber:
                                             categoryData.subcategories.backendParameters[index],
                                     });
-
+                                    
                                     // 로컬에도 응답 저장
                                     setResponseData(response);
                                     
                                     // 부모 컴포넌트로 응답 전달
-                                    onResponseUpdate(response, categoryKey, index);
+                                    onResponseUpdate(response, categoryKey, categoryData.frontendValue, index, value);
                                     //alert(`응답 데이터: ${response}`);
                                 } catch (error) {
                                     //alert("API 호출에 실패했습니다.");

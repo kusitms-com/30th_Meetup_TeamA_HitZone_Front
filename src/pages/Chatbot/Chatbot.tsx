@@ -6,7 +6,7 @@ import ChatbotInputField from "./components/ChatbotInputField";
 
 import DateBanner from "./components/DateBanner";
 
-import { questionCategories } from "@/src/constants/ChatbotData";
+import { questionCategories, GuideResponseData } from "@/src/constants/ChatbotData";
 
 import RookieChat from "./components/RookieChat";
 import UserChat from "./components/UserChat";
@@ -50,18 +50,29 @@ const Chatbot = () => {
 
 
   // 가이드 챗봇 답변 관련
-  const [responseGuideData, setResponseGuideData] = useState<Record<number, string[]>>({}); // 세부 카테고리 index와 매핑하여 API 응답 저장
+  const [responseGuideData, setResponseGuideData] = useState<GuideResponseData[]>([]); // 세부 카테고리 index와 매핑하여 API 응답 저장
 
   // API 응답을 category index에 매핑하여 저장
-  const handleGuideResponseUpdate = (response: string, categoryKey: number, subCategoryKey: number) => {
-    setResponseGuideData((prev) => ({
+  const handleGuideResponseUpdate = (response: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
+    setResponseGuideData((prev) => [
       ...prev,
-      [categoryKey]: [...(prev[categoryKey] || []), response], // 세부 카테고리 index와 매핑되는 응답 추가
-    }));
+      
+      {
+        answer: response,
+        categoryNumber: categoryKey,
+        categoryName: categoryName,
+        subcategoryNumber: subCategoryKey,
+        subCategoryName: subCategoryName,
+      },
+    ]);
   };
+  // 가이드 답변 렌더링
   const renderGuideAnswerData = (contents: string) => {
+    
+    console.log(contents);
     return (
       <div>
+        {/* 첫 번째 문자열은 꼬랑지 말풍선에 출력 */}
         <RookieChat 
           contentList={[
             {
@@ -70,6 +81,12 @@ const Chatbot = () => {
             }
           ]}
         />
+
+        {/* 두 번째 이상 문자열은 일반 말풍선에 출력 
+        {contents.length > 1 && contentsL.map((content, index) => (
+             
+        ))}
+        */}
       </div>
     );
   }
@@ -159,19 +176,17 @@ const Chatbot = () => {
                           }
                         ]}
                       />
+
+                      {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
+                      {responseGuideData
+                        .filter((responseData) => responseData.categoryNumber === index) // 현재 카테고리에 해당하는 데이터만 필터링
+                        .map((responseData, responseIndex) => (
+                          <div key={responseIndex}>
+                            {renderGuideAnswerData(responseData.answer)}
+                          </div>
+                      ))}
                     </>
                   </div>
-                  
-                  {/* Guide API 답변 순차 출력:  사용자가 선택한 세부 카테고리 렌더링 후 매핑되는 API 호출 결과만 렌더링 */}
-                  {selectedStadium && responseGuideData[index] && (
-                    <div>
-                      {responseGuideData[index].map((response, responseIndex) => (
-                        <div key={responseIndex}>
-                          {renderGuideAnswerData(response)}
-                        </div>
-                      ))}
-                    </div>
-                  )}
                 </>
               ))}
               
