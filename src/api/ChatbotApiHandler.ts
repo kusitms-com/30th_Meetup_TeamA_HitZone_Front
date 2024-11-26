@@ -26,7 +26,7 @@ export const handleGetGuideAnswer = async ({stadiumName, categoryName, orderNumb
             imageUrl: data.imgUrl ?? "", // imgUrl이 null일 경우 빈 문자열 반환
         };
 
-        console.log(parsedData);
+        //console.log(parsedData);
         
         return parsedData;
 

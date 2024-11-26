@@ -4,22 +4,20 @@ import { questionCategories } from "@/src/constants/ChatbotData";
 import Image from "next/image";
 import tailIcon from "@/src/assets/webp/chatbot_message_left_tail_white_big.webp";  // 꼬랑지
 
+import { GuideGetResponseType } from "@/src/api/ChatbotApiType";
 import { handleGetGuideAnswer } from "@/src/api/ChatbotApiHandler";
 
 interface Props {
     stadiumName: string,
     categoryKey: number,
     categoryFrontName: string
-    onResponseUpdate: (response: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
+    onResponseUpdate: (answer: string, imgUrl: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
 }
 
 
 // 사용자가 카테고리 클릭시 나오는 커스텀 대화창
 const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUpdate}: Props) => {
-
-    // API 응답 데이터를 저장할 상태
-    const [responseData, setResponseData] = useState<string | null>(null);
-
+    // 사용자가 선택한 카테고리
     const categories = questionCategories.questionCategories;
 
     // prop으로 받은 카테고리와 일치하는 항목 필터링
@@ -99,12 +97,27 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
                                         orderNumber:
                                             categoryData.subcategories.backendParameters[index],
                                     });
+
+                                    if (!response) {
+                                        // response가 undefined인 경우 undefined 반환
+                                        return undefined;
+                                    }
                                     
-                                    // 로컬에도 응답 저장
-                                    setResponseData(response);
+                                    // 부모 컴포넌트에 업데이트
+                                    onResponseUpdate(
+                                        response.answer ?? "",          // answer가 없으면 빈 문자열
+                                        response.imageUrl ?? null,      // imageUrl이 없으면 null
+                                        categoryKey,                    // categoryKey (props에서 전달받은 값)
+                                        categoryData.frontendValue,     // categoryName (props에서 전달받은 값)
+                                        index,                          // subCategoryKey
+                                        subcategoryName                 // subCategoryName
+                                    );
+
+                                    return {
+                                        answer: response.answer ?? "", // answer가 없는 경우 빈 문자열 반환
+                                        imgUrl: response.imageUrl ?? null, // imageUrl이 없는 경우 null 반환
+                                    };
                                     
-                                    // 서브카테고리 선택 이벤트: 부모 컴포넌트로 응답 전달
-                                    onResponseUpdate(response, categoryKey, categoryData.frontendValue, index, subcategoryName);
                                     //alert(`응답 데이터: ${response}`);
                                 } catch (error) {
                                     //alert("API 호출에 실패했습니다.");

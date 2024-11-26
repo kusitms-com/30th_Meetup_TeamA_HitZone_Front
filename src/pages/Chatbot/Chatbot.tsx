@@ -7,6 +7,7 @@ import ChatbotInputField from "./components/ChatbotInputField";
 import DateBanner from "./components/DateBanner";
 
 import { questionCategories, GuideResponseData } from "@/src/constants/ChatbotData";
+import { GuideGetResponseType } from "@/src/api/ChatbotApiType";
 
 import RookieChat from "./components/RookieChat";
 import UserChat from "./components/UserChat";
@@ -53,12 +54,13 @@ const Chatbot = () => {
   const [responseGuideDataList, setResponseGuideDataList] = useState<GuideResponseData[]>([]); // 세부 카테고리 index와 매핑하여 API 응답 저장
 
   // API 응답을 category index에 매핑하여 저장
-  const handleGuideResponseUpdate = (response: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
+  const handleGuideResponseUpdate = (answer: string, imgUrl: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
     setResponseGuideDataList((prev) => [
       ...prev,
       
       {
-        answer: response,
+        answer: answer,
+        imgUrl: imgUrl,
         categoryNumber: categoryKey,
         categoryName: categoryName,
         subcategoryNumber: subCategoryKey,
@@ -67,17 +69,33 @@ const Chatbot = () => {
     ]);
   };
   // 가이드 답변 렌더링
-  const renderGuideAnswerData = (contents: string) => {
-    
-    console.log(contents);
+  const renderGuideAnswerData = (response: GuideGetResponseType) => {
+    const answerImageUrl = response.imgUrl;
+    const answerString = response.answer;
+
+    console.log(answerImageUrl);
+    console.log(answerString);
+
     return (
       <div>
+        {/* 이미지 출력 */}
+        {answerImageUrl  ?
+        <RookieChat 
+          contentList={[
+            {
+            type: "image",
+            content: answerImageUrl,
+            }
+          ]}
+        />
+        : null}
+
         {/* 첫 번째 문자열은 꼬랑지 말풍선에 출력 */}
         <RookieChat 
           contentList={[
             {
             type: "textList",
-            content: [contents],
+            content: [answerString],
             }
           ]}
         />
@@ -188,7 +206,7 @@ const Chatbot = () => {
 
                             {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
                             <div key={responseIndex} className="py-2">
-                              {renderGuideAnswerData(responseGuideData.answer)}
+                              {renderGuideAnswerData(responseGuideData)}
                             </div>
                           </>
                       ))}
