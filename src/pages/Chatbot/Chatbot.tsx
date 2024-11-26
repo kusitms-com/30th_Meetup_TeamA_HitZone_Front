@@ -73,9 +73,6 @@ const Chatbot = () => {
     const answerImageUrl = response.imgUrl;
     const answerString = response.answer;
 
-    console.log(answerImageUrl);
-    console.log(answerString);
-
     return (
       <div>
         {/* 이미지 출력 */}
