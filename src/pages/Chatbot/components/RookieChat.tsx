@@ -7,6 +7,7 @@ import RookiePreformattedMessageWithTail from "@/src/pages/Chatbot/components/me
 import RookiePreformattedMessage from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedMessage";
 import RookieImageMessage from "@/src/pages/Chatbot/components/message/custom/RookieImageMessage";
 import RookieImgUrlMessage from "@/src/pages/Chatbot/components/message/custom/RookieImgUrlMessage";
+import RookiePreformattedButtonMessageWithTail from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedButtonMessageWithTail";
 
 import { questionCategories } from "@/src/constants/ChatbotData";
 
@@ -32,17 +33,24 @@ import { questionCategories } from "@/src/constants/ChatbotData";
 //      -> (ex) "안녕하세요\n나는 박인애입니다."
 // 7. 문자열
 //      -> \n 을 줄바꿈으로 인식하는 일반 말풍선에 출력
+// 8. 버튼 + 문자열 with tail
+//      -> \n 을 줄바꿈으로 인식하는 버튼이 달린 꼬랑지 말풍선에 출력
+// 9. 버튼 + 문자열
+//      -> \n 을 줄바꿈으로 인식하는 버튼이 달린 일반 말풍선에 출력
 interface RookieChatProps { /*
     initialMessage?: string[];
     initialPreformattedMessage?: string; */
     contentList?: Array<
-    { type: "image"; content: string } | 
-    { type: "imgUrl"; content: string } | 
-    { type: "component"; content: React.ReactNode} | 
-    { type: "textListWithTail"; content: string[] } | 
-    { type: "textList"; content: string[] } | 
-    { type: "preformattedTextWithTail"; content: string } |
-    { type: "preformattedText"; content: string }>;
+        { type: "image"; content: string } | 
+        { type: "imgUrl"; content: string } | 
+        { type: "component"; content: React.ReactNode} | 
+        { type: "textListWithTail"; content: string[] } | 
+        { type: "textList"; content: string[] } | 
+        { type: "preformattedTextWithTail"; content: string } |
+        { type: "preformattedText"; content: string } |
+        { type: "preformattedTextButtonWithTail"; content: string; buttonContent:string; url: string; } |
+        { type: "preformattedTextButton"; content: string; buttonContent:string; url: string; }
+    >;
 }
 
 // 루키 채팅 한 세트를 그룹화한 컴포넌트
@@ -112,6 +120,22 @@ const RookieChat = ({contentList}: RookieChatProps) => {
                         return (
                             <div key={index}>
                                 <RookiePreformattedMessage message={item.content} />
+                            </div>
+                        );
+                    
+                    // string인 경우: \n을 줄바꿈으로 인식하는 버튼이 달린 루키 [꼬랑지] 말풍선 컴포에 담아서 반환
+                    case "preformattedTextButtonWithTail":
+                        return (
+                            <div key={index}>
+                                <RookiePreformattedButtonMessageWithTail message={item.content} buttonMsg={item.buttonContent} buttonLinkUrl={item.url} />
+                            </div>
+                        );
+                    
+                    // string인 경우: \n을 줄바꿈으로 인식하는 버튼이 달린 루키 말풍선 컴포에 담아서 반환
+                    case "preformattedTextButton":
+                        return (
+                            <div key={index}>
+                                <RookiePreformattedButtonMessage message={item.content} buttonMsg={item.buttonContent} buttonLinkUrl={item.url} />
                             </div>
                         );
 
