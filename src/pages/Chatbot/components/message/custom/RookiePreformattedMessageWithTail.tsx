@@ -6,7 +6,7 @@ interface Props {
     messageList: string[]
 }
 
-// 챗봇 커스텀 말풍선 컴포넌트
+// 챗봇 커스텀 말풍선 컴포넌트 (꼬랑지가 붙은 버젼)
 // /n(new line) 등이 반영되도록 whitespace-pre-wrap 스타일 적용한 말풍선
 const RookiePreformattedMessage = ({messageList}: Props) => {
   return (
