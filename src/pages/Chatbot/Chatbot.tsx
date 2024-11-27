@@ -69,35 +69,35 @@ const Chatbot = () => {
       },
     ]);
   };
+
+  
   // 가이드 답변 렌더링
   const renderGuideAnswerData = (response: GuideGetResponseType) => {
     const answerImageUrl = response.imgUrl;
     const answerString = response.answer;
-    const contentList = [
+
+    const answerListWithImg = [
       { type: "imgUrl", content: answerImageUrl },
       { type: "preformattedText", content: answerString }
     ];
+    const answerList = [
+      { type: "preformattedTextWithTail", content: answerString },
+    ];
 
     return (
-      <div>
-        {/* 이미지 출력 */}
+      <>
         {answerImageUrl  ?
+          // 이미지, 답변 출력
           <RookieChat 
-            contentList={contentList}
+            contentList={answerListWithImg}
           />
         : 
-        <RookieChat 
-          initialPreformattedMessage={answerString}
-        />}
-
-        {/* 첫 번째 문자열은 꼬랑지 말풍선에 출력 */}
-
-        {/* 두 번째 이상 문자열은 일반 말풍선에 출력 
-        {contents.length > 1 && contentsL.map((content, index) => (
-             
-        ))}
-        */}
-      </div>
+          // 답변 출력
+          <RookieChat 
+            contentList={answerList}
+          />
+        }
+      </>
     );
   }
 
@@ -142,9 +142,9 @@ const Chatbot = () => {
 
 
   return (
-    <>
-      {/* 1. 헤더바 */}
+    <div>
       <div>
+        {/* 1. 헤더바 */}
         <BackLogoBar />
       </div>
 
@@ -165,8 +165,11 @@ const Chatbot = () => {
               {/* 채팅1: 구장 선택, 루키 시작 인사말, 필수 출력 */}
               {showInitialMessages && (
                 <RookieChat 
-                  initialMessage={questionCategories.greetings} 
                   contentList={[
+                    {
+                      type: "textListWithTail",
+                      content: questionCategories.greetings
+                    },
                     {
                       type: "component",
                       content: renderInitialMessage()
@@ -184,9 +187,15 @@ const Chatbot = () => {
                   <UserChat messageList={[selectedStadium]}/>
 
                   {/* 채팅3: */}
+                  {/* 첫 번째 내용물은 꼬랑지 말풍선에 출력 */}
+                  {/* 두 번째 내용물은 일반 말풍선에 출력 */}
                   <RookieChat 
-                    initialMessage={[`'${selectedStadium}'을(를) 선택하셨군요!😁`]} 
                     contentList={[
+                      {
+                        type: "textListWithTail",
+                        content: [`'${selectedStadium}'을(를) 선택하셨군요!😁`]
+                      },
+
                       {
                         type: "textList",
                         content: questionCategories.baseballCategories.userMessage
@@ -208,8 +217,8 @@ const Chatbot = () => {
                       <RookieChat 
                         contentList={[
                           {
-                          type: "component",
-                          content: <CategoryChat stadiumName={selectedStadium} categoryKey={index} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
+                            type: "component",
+                            content: <CategoryChat stadiumName={selectedStadium} categoryKey={index} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
                           }
                         ]}
                       />
@@ -236,13 +245,13 @@ const Chatbot = () => {
 
             </div>
           </div>
-          
+
 
           {/* 4. 채팅 입력창 */}
           <ChatbotInputField isStadiumSelected={isStadiumSelected} onSelect={handleCategorySelect} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

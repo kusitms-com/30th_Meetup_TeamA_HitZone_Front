@@ -7,7 +7,7 @@ interface Props {
 }
 
 // 사용자 채팅 한 세트를 그룹화한 컴포넌트
-const RookieChat = ({messageList}: Props) => {
+const UserChat = ({messageList}: Props) => {
 
     return (
         <div className="flex justify-end">
@@ -16,4 +16,4 @@ const RookieChat = ({messageList}: Props) => {
     );
 };
 
-export default RookieChat;
+export default UserChat;
