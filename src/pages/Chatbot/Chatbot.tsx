@@ -13,6 +13,9 @@ import RookieChat from "./components/RookieChat";
 import UserChat from "./components/UserChat";
 import CategoryChat from "./components/CategoryChat";
 
+import RookieImageMessage from "./components/message/custom/RookieImageMessage";
+import chatbotManualIcon from "@/src/assets/webp/chatbot_manual.webp";
+
 const Chatbot = () => {
   // 스타디움 선택 관련
   const [selectedStadium, setSelectedStadium] = useState<string | null>(null);  // 선택한 스타디움 저장
@@ -114,6 +117,21 @@ const Chatbot = () => {
   }, [selectedStadium, selectedCategories, responseGuideDataList]);
 
 
+
+  // 처음에 보여줄 컨텐츠
+  const renderInitialMessage = () => {
+    return (
+      <>
+        {/* 루키 사용 설명서 */}
+        <RookieImageMessage imgUrl={chatbotManualIcon} />
+        
+        {/* 스타디움 선택창 */}
+        <StadiumSelection stadiums={stadiumList} onSelect={handleStadiumSelect} />
+      </>
+    );
+  }
+
+
   return (
     <>
       {/* 1. 헤더바 */}
@@ -142,7 +160,7 @@ const Chatbot = () => {
                   contentList={[
                     {
                       type: "component",
-                      content: <StadiumSelection stadiums={stadiumList} onSelect={handleStadiumSelect} />
+                      content: renderInitialMessage()
                     }
                   ]}
                 />
