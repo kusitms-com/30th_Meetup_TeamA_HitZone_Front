@@ -22,7 +22,7 @@ const RookieImageMessage = ({imgIcon}: Props) => {
             src={imgIcon}
             alt="채팅창 이미지"
             className={`${maxChatWidth} h-auto rounded-md cursor-pointer`}
-            onClick={() => openModal(imgUrl)}
+            onClick={() => openModal(imgIcon)}
         />
 
         {/* 이미지를 모달창으로 띄우기 */}
