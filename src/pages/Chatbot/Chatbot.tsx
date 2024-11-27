@@ -21,9 +21,11 @@ const Chatbot = () => {
   const [selectedStadium, setSelectedStadium] = useState<string | null>(null);  // 선택한 스타디움 저장
   const isStadiumSelected = selectedStadium !== null && selectedStadium !== ""; // 스타디움 선택 여부
   const [showInitialMessages, setShowInitialMessages] = useState(false);        // 초기 메시지 출력 여부
+  const [isLoading, setIsLoading] = useState(true);   // 로딩 상태 추가 // 초기에는 자동 스크롤 실행되지 않도록 하기 위함
   
   const handleStadiumSelect = (stadium: string) => {
     setSelectedStadium(stadium);
+    setIsLoading(false); // 로딩이 끝나면 isLoading을 false로 설정
   };
   
 
@@ -100,7 +102,7 @@ const Chatbot = () => {
     );
   }
 
-  
+
   // 스크롤을 조작할 영역(채팅창 div) 지정
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -119,7 +121,9 @@ const Chatbot = () => {
     }
   };
   useEffect(() => {
-    scrollToBottom();
+    if (!isLoading) {
+      scrollToBottom();
+    }
   }, [selectedStadium, selectedCategories, responseGuideDataList]);
 
 
