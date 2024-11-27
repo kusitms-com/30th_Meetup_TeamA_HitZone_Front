@@ -11,12 +11,12 @@ interface Props {
 const RookiePreformattedMessage = ({message}: Props) => {
   return (
     // 메시지를 string으로 받고 줄바꿈을 \n 값으로 구분해서 출력하기
-    <div className="whitespace-pre-wrap bg-main-0 p-3 rounded-lg text-xs font-regular text-grayscale-90 max-w-xs">
+    <div className="relative whitespace-pre-wrap bg-main-0 p-3 rounded-lg text-xs font-regular text-grayscale-90 max-w-xs">
         {/* 말풍선 꼬랑지 */}
         <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
         
         {/* 메시지 출력 */}
-        {[message]}
+        {message}
     </div>
   );
 };
