@@ -5,6 +5,7 @@ import Tabs from "./components/Tabs";
 import dummyData from "../../constants/CultureData";
 import CategoryHeader from "./components/CategoryHeader";
 import CategoryRow from "./components/CategoryRow";
+import Modal from "./components/CultureModal";
 
 type CategoryType = "먹거리" | "즐길거리";
 type CategoryKeyType = "내부" | "외부";
@@ -32,11 +33,10 @@ type InternalData = {
   후식류: FoodType[];
 };
 
-// 외부 데이터 타입
-type ExternalData = FoodType[] | ActivityType[];
-
 const Culture = () => {
   const [selectedTab, setSelectedTab] = useState<CategoryType>("먹거리");
+  const [modalData, setModalData] = useState<FoodType | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isInternalData = (data: unknown): data is InternalData => {
     return (
@@ -47,13 +47,9 @@ const Culture = () => {
     );
   };
 
-  const isActivityData = (data: unknown): data is ActivityType[] => {
-    return (
-      Array.isArray(data) &&
-      data.length > 0 &&
-      "description" in data[0] &&
-      "image" in data[0]
-    );
+  const handleCardClick = (data: FoodType) => {
+    setModalData(data);
+    setIsModalOpen(true);
   };
 
   const renderCategory = (category: CategoryKeyType) => {
@@ -64,9 +60,17 @@ const Culture = () => {
         <>
           <CategoryHeader title={`구장 ${category}`} level={1} />
           <CategoryHeader title="식사류" level={2} showButton />
-          <CategoryRow data={data.식사류} isActivity={false} />
+          <CategoryRow
+            data={data.식사류}
+            isActivity={false}
+            onCardClick={handleCardClick}
+          />
           <CategoryHeader title="후식류" level={2} showButton />
-          <CategoryRow data={data.후식류} isActivity={false} />
+          <CategoryRow
+            data={data.후식류}
+            isActivity={false}
+            onCardClick={handleCardClick}
+          />
         </>
       );
     }
@@ -78,6 +82,7 @@ const Culture = () => {
           <CategoryRow
             data={data}
             isActivity={selectedTab === "즐길거리"}
+            onCardClick={handleCardClick}
           />
         </>
       );
@@ -97,6 +102,11 @@ const Culture = () => {
         {renderCategory("외부")}
       </div>
       <NavBar />
+      <Modal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      data={modalData}
+    />
     </div>
   );
 };

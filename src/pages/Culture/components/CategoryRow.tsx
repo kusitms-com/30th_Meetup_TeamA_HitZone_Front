@@ -12,15 +12,17 @@ interface CategoryRowProps {
     image: string;
   }[];
   isActivity: boolean; // true면 즐길거리, false면 먹거리
+  onCardClick: (data: any) => void;
 }
 
-const CategoryRow = ({ data, isActivity }: CategoryRowProps) => {
+const CategoryRow = ({ data, isActivity, onCardClick }: CategoryRowProps) => {
   return (
     <div className="flex gap-4 overflow-x-auto scrollbar-hide mb-8">
       {data.map((item, index) => (
         <div
           key={index}
-          className="flex-shrink-0 w-[173px] bg-white rounded-lg"
+          className="flex-shrink-0 w-[173px] bg-white rounded-lg cursor-pointer"
+          onClick={() => onCardClick(item)}
         >
           <Image
             src={item.image}
