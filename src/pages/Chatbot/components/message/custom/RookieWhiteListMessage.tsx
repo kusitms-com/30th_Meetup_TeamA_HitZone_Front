@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-    messageList: string[]
+    messageList: string[];
 }
 
 // 챗봇 커스텀 말풍선 컴포넌트

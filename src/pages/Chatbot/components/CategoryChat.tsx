@@ -11,9 +11,9 @@ import { GuideGetResponseType } from "@/src/api/ChatbotApiType";
 import { handleGetGuideAnswer } from "@/src/api/ChatbotApiHandler";
 
 interface Props {
-    stadiumName: string,
-    categoryKey: number,
-    categoryFrontName: string
+    stadiumName: string;
+    categoryKey: number;
+    categoryFrontName: string;
     onResponseUpdate: (answer: string, imgUrl: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
 }
 

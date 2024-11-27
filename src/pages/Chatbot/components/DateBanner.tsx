@@ -1,7 +1,7 @@
 import { getFormattedDate1 } from "@/src/hooks/useDate";
 
 interface Props {
-    date: Date
+    date: Date;
 }
 
 // 채팅창 상단에 뜨는 날짜 헤더 바

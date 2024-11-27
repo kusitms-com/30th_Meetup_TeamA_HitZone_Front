@@ -3,7 +3,7 @@ import Image from "next/image";
 import tailIcon from "@/src/assets/webp/chatbot_message_right_tail_pink_big.webp";  // 꼬랑지
 
 interface Props {
-    messageList: string[]
+    messageList: string[];
 }
 
 // 유저 말풍선 컴포넌트 타입1 (꼬랑지가 붙은 버젼)
