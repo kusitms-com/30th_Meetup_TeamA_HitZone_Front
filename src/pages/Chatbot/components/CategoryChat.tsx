@@ -14,7 +14,7 @@ interface Props {
     stadiumName: string;
     categoryKey: number;
     categoryFrontName: string;
-    onResponseUpdate: (answer: string, imgUrl: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
+    onResponseUpdate: (answer: string, imgUrl: string, linkName: string, link: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
 }
 
 
@@ -93,6 +93,8 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
                                     onResponseUpdate(
                                         response.answer ?? "",          // answer가 없으면 빈 문자열
                                         response.imageUrl ?? null,      // imageUrl이 없으면 null
+                                        response.linkName ?? null,
+                                        response.link ?? null,
                                         categoryKey,                    // categoryKey (props에서 전달받은 값)
                                         categoryData.frontendValue,     // categoryName (props에서 전달받은 값)
                                         index,                          // subCategoryKey
@@ -102,6 +104,8 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
                                     return {
                                         answer: response.answer ?? "", // answer가 없는 경우 빈 문자열 반환
                                         imgUrl: response.imageUrl ?? null, // imageUrl이 없는 경우 null 반환
+                                        linkName: response.linkName ?? null,
+                                        link: response.link ?? null,
                                     };
                                     
                                     //alert(`응답 데이터: ${response}`);

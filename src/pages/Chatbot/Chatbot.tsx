@@ -55,14 +55,15 @@ const Chatbot = () => {
   const [responseGuideDataList, setResponseGuideDataList] = useState<GuideResponseData[]>([]); // 세부 카테고리 index와 매핑하여 API 응답 저장
 
   // API 응답을 category index에 매핑하여 저장
-  const handleGuideResponseUpdate = (answer: string, imgUrl: string, link: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
+  const handleGuideResponseUpdate = (answer: string, imgUrl: string, linkName: string, link: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
     setResponseGuideDataList((prev) => [
       ...prev,
       
       {
         answer: answer,
         imgUrl: imgUrl,
-        link; link,
+        linkName: linkName,
+        link: link,
         categoryNumber: categoryKey,
         categoryName: categoryName,
         subcategoryNumber: subCategoryKey,
@@ -79,15 +80,18 @@ const Chatbot = () => {
     const answerLinkName = response.linkName;
     const answerLink = response.link;
 
+    console.log(answerLinkName);
+    console.log(answerLink);
+
     const answerListWithImg = [
       { type: "imgUrl", content: answerImageUrl },
       { type: "preformattedText", content: answerString }
     ];
     const answerList = [
-      { type: "preformattedTextButtonWithTail", content: answerString },
+      { type: "preformattedTextWithTail", content: answerString },
     ];
     const answerListWithBtn = [
-      { type: "preformattedTextWithTail", content: answerString, buttonMsg: answerLinkName, buttonLinkUrl: answerLink },
+      { type: "preformattedTextButtonWithTail", content: answerString, buttonContent: answerLinkName, url: answerLink },
     ];
 
     return (
