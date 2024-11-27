@@ -171,7 +171,11 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
 
     /////////////////////////////////////////////
     // 예매하러 가기 버튼 클릭 시 모달창 띄우기 이벤트
-    const {isOpen:isReservationOpen, openModal:openReservationModal, closeModal:closeReservationModal } = useModal();
+    const {
+        isOpen: isReservationOpen,
+        openModal: openReservationModal,
+        closeModal: closeReservationModal,
+    } = useModal();
     
     // 버튼 클릭시 리다이렉트 이벤트가 아닌 모달창 이벤트 활성화하기로 함
     /*
@@ -245,7 +249,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
 
 
     return (
-        <div className="flex justify-center items-start bg-grayscale-5 w-full h-screen bg-fff overflow-y-auto scrollbar-hide">
+        <div className="flex justify-center items-start bg-grayscale-5 w-full h-screen bg-fff overflow-y-auto scrollbar-hide pt-14">
             <div className="relative flex flex-col items-center w-full h-screen">
                 {/** 임시 확인
                 <ChooseBaseballTeamDialog/>
@@ -398,11 +402,14 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                 {renderContents()}
                 */}
 
-                {isReservationOpen && (
+                {isReservationOpen && selectedStadium && (
                 <ChooseBaseballTeamDialog
-                  onClose={closeReservationModal} // 모달 닫기 함수
+                    stadiumName={selectedStadium}
+                    onClose={() => {
+                    closeReservationModal();
+                    }}
                 />
-              )}
+                )}
               <NavBar />
             </div>
         </div>

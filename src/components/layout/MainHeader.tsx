@@ -29,7 +29,7 @@ const MainHeader = () => {
   return (
     <>
       <div className={`${isCoachMarkVisible ? "hidden" : "block"}`}>
-        <div className="flex justify-between items-center p-4 border-b border-grayscale-10 w-full z-20">
+        <div className="flex justify-between items-center p-4 border-b border-grayscale-10 w-full z-20 fixed top-0 bg-white max-w-[500px] mx-auto">
           {/* 히트존 로고 */}
           <Link href="/">
             <Image

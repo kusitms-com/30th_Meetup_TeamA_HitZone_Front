@@ -10,8 +10,8 @@ const BackBar = () => {
     const router = useRouter();
 
     return (
-        <div className="fixed top-0 left-1/2 transform -translate-x-1/2 max-w-[500px] w-full flex items-center justify-between py-[14px] px-4 bg-white z-20">
-            <div className="flex justify-start">
+        <div className="fixed top-0 max-w-[500px] justify-center w-full flex items-center py-[14px] px-4 bg-white z-20">
+            <div className="absolute left-2 flex items-center">
                 <Image
                     src={backLeftButtonGrayIcon}
                     alt="뒤로가기 버튼"
@@ -21,7 +21,7 @@ const BackBar = () => {
                     onClick={() => router.back()}
                 />
             </div>
-            <div className="flex justify-center flex-grow">
+            <div className="">
                 <Link href="/">
                     <Image src={logoIcon} alt="Logo" width={154} height={27} className="cursor-pointer"/>
                 </Link>

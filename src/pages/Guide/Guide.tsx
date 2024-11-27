@@ -103,7 +103,7 @@ const Guide = () => {
   }, [router.pathname]);
 
   return (
-    <div className="flex flex-col w-full h-screen bg-grayscale-5">
+    <div className="flex flex-col w-full h-screen bg-grayscale-5 pt-16">
       <div className="sticky top-0 z-10 bg-white">
         <Header />
       </div>

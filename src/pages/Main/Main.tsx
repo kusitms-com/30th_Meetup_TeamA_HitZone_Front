@@ -107,7 +107,7 @@ const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
   return (
     <div 
       ref={containerRef} // 스크롤을 감지할 특정 div에 Ref를 바인딩
-      className="flex flex-col w-full min-h-screen overflow-auto scrollbar-hide">
+      className="flex flex-col w-full min-h-screen overflow-auto scrollbar-hide pt-14">
       {/* 코치마크 
       {showCoachMark && <CoachMark onClose={() => setShowCoachMark(false)} />}
       */}
