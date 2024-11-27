@@ -1,12 +1,16 @@
 import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import chatbotClickIcon from "@/src/assets/svg/chatbot_click.svg";
+
 import FAQCategoryBar from "./FAQCategoryBar";
 import FAQCategoryButton from "./FAQCategoryButton";
+
+import ChatbotClovaLoading from "@/src/pages/Chatbot/components/loading/ChatbotClovaLoading"
 
 // 외부 클릭시 닫히는 이벤트 훅
 import { useOutsideClick } from "@/src/hooks/useOutsideClick";
 
+// 클로바 API
 import { handleGetClovaAnswer } from "@/src/api/ChatbotApiHandler";
 
 interface Props {
@@ -18,8 +22,10 @@ interface Props {
 const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}: Props) => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
   const [inputClovaMessage, setInputClovaMessage] = useState("");   // 클로바에게 보낼 메시지
+  const [isLoading, setIsLoading] = useState(false);  // 로딩 상태 관리
 
-
+  ///////////////////////////////////////////////
+  ////// 카테고리 관련
   // FAQCategory 컴포넌트 외부 클릭 시 카테고리바 닫기
   const closeFAQCategory = () => {
     setIsFAQCategoryVisible(false);
@@ -41,6 +47,9 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
     }
   };
 
+
+  ///////////////////////////////////////////////
+  ////// 클로바 관련
   // 전송 버튼 클릭시 클로바에게 메시지 전송
   const handleSendButton = useCallback(async () => {
     // 빈 메시지인 경우 처리하지 않음
@@ -50,7 +59,8 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
 
     // 전송 후 입력창 비우기 (빠르게 상태 업데이트)
     setInputClovaMessage("");
-    
+    setIsLoading(true); // 로딩 시작
+
 
     try {
       // 메시지를 API 파라미터로 전송 및 응답 받기
@@ -69,9 +79,17 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
       );
 
     } catch (error) {
-        //alert("API 호출에 실패했습니다.");
+        // 부모 컴포넌트에 업데이트
+        onClovaResponseUpdate(
+          response.answer ?? "클로바 답변을 받는 것에 실패하였습니다 (에러명: "+error+")",
+        );
+
+    } finally {
+      setIsLoading(false); // 로딩 종료
     }
+
   }, [inputClovaMessage, onClovaResponseUpdate]);
+
 
   return (
     <>
@@ -97,6 +115,11 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
           <Image src={chatbotClickIcon} alt="메시지 보내기 아이콘" width={20} height={20} />
         </button>
       </div>
+
+      {/* 로딩 상태일 때 렌더링 */}
+      {isLoading && (
+        <ChatbotClovaLoading/>
+      )}
     </>
   );
 };
