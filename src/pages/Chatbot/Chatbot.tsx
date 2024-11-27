@@ -238,11 +238,11 @@ const Chatbot = () => {
             </div>
           </div>
           
-        </div>
-      </div>
 
           {/* 4. 채팅 입력창 */}
           <ChatbotInputField isStadiumSelected={isStadiumSelected} onSelect={handleCategorySelect} />
+        </div>
+      </div>
     </>
   );
 };
