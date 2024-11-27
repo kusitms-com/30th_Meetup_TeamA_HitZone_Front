@@ -39,14 +39,16 @@ const RookieChat = ({initialMessage, initialPreformattedMessage, contentList}: R
                 {/* 챗봇 이름 */}
                 <p className="text-[14px] font-medium text-black">챗봇 {questionCategories.chatbotName}</p>
 
-                {/* 첫 번째 말풍선 */}
+                {/* 첫 번째는 꼬랑지 말풍선, 내용물이 string[]인 case */}
                 {initialMessage && (
                     <RookieMessageWithTail messageList={initialMessage}/>
                 )}
+                {/* 첫 번째는 꼬랑지 말풍선, 내용물이 string+'\n'인 case */}
                 {initialPreformattedMessage && (
                     <RookiePreformattedMessageWithTail message={initialPreformattedMessage} />
                 )}
                 
+                {/* 두 번째 이상 메세지는 일반 말풍선 */}
                 {/* 이미지와 텍스트 리스트 */}
                 {contentList &&
                     // 이미지인 경우: 이미지 CSS 조정해서 반환
