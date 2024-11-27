@@ -11,7 +11,11 @@ const FAQCategoryBar = ({ setIsFAQCategoryVisible, onSelect }: Props) => {
   
   // 카테고리 선택시 발동하는 이벤트 핸들
   const handleClick = (category: string) => {
+    // 선택한 카테고리 저장
     onSelect(category);
+    
+    // 카테고리바 닫기
+    setIsFAQCategoryVisible(false);
   };
 
   return (
