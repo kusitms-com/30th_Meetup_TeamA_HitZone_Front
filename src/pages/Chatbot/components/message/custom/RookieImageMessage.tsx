@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { maxChatWidth } from "@/src/constants/ChatbotData";
 import ImageModal from "@/src/components/dialogs/ImageModal";
+import useImageModal from "@/src/hooks/useImageModal";
 
 interface Props {
   imgUrl: string;
@@ -10,19 +11,9 @@ interface Props {
 // 챗봇 커스텀 말풍선 컴포넌트
 // 이미지를 출력하는 말풍선
 const RookieImageMessage = ({imgUrl}: Props) => {
-  // 이미지 모달 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string>("");
+  // 이미지 모달 훅
+  const { isModalOpen, selectedImage, openModal, closeModal } = useImageModal();  // 훅 사용
 
-  const openModal = (imageSrc: string) => {
-    setSelectedImage(imageSrc);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedImage("");
-  };
 
   return (
     <div className="mb-2">
