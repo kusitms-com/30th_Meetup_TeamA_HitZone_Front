@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import HitzoneLogo from "../../assets/svg/hitzone_logo.svg";
 import GuideIcon from "../../assets/webp/guide_header.webp";
 import NotificationIcon from "../../assets/webp/notification_gray.webp";
 import CoachMark from "../../pages/Main/components/CoachMark";
 
-const Header = () => {
+const MainHeader = () => {
   const [isCoachMarkVisible, setIsCoachMarkVisible] = useState(false);
+  const router = useRouter();
 
   // 코치마크 아이콘 클릭 시 상태 변경
   const handleGuideClick = () => {
     setIsCoachMarkVisible(true);
+  };
+
+  // 알림 버튼 클릭 시 Alarm 페이지로 이동
+  const handleNotificationClick = () => {
+    router.push("/alarm");
   };
 
   // 코치마크 닫기
@@ -50,6 +57,7 @@ const Header = () => {
               width={24}
               height={24}
               className="cursor-pointer"
+              onClick={handleNotificationClick}
             />
           </div>
         </div>
@@ -65,4 +73,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default MainHeader;

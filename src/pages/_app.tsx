@@ -33,7 +33,7 @@ import Culture from './Culture/Culture';
 import MyPage from './MyPage/MyPage';
 import Chatbot from './Chatbot/Chatbot';
 import GuideDetailContent from './Guide/components/GuideDetailContent';
-
+import Alarm from './Alarm/Alarm';
 
 import Script from 'next/script';
 
@@ -106,6 +106,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
             return <MyPage />;
         case '/chatbot':
             return <Chatbot />;
+        case '/alarm':
+            return <Alarm />;
     }
   };
   

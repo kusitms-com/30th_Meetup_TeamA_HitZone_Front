@@ -353,9 +353,9 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
                                             <Image src={rightArrowIcon} alt="자세히 보러가기 아이콘" width={5} height={5} className="flex-glow justify-end "/>
                                         </div>
                                     </div>
-                                    <div className="mt-[4px]">
+                                    <div className="mt-[4px] whitespace-pre-wrap text-justify">
                                         <p className="text-xs text-grayscale-90 font-regular px-[8px] py-[5px]">
-                                            {zone.explanations}
+                                            {[zone.explanations]}
                                         </p>
                                     </div>
                                 </div>
