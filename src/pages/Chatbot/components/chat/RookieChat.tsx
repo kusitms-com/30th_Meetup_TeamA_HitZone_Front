@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import RookieProfile from "./rookie/RookieProfile";
-import RookieMessageWithTail from "./message/RookieMessageWithTail";
-import RookieMessage from "./message/RookieMessage";
+import RookieProfile from "@/src/pages/Chatbot/components/rookie/RookieProfile";
+import RookieMessageWithTail from "@/src/pages/Chatbot/components/message/RookieMessageWithTail";
+import RookieMessage from "@/src/pages/Chatbot/components/message/RookieMessage";
 import RookiePreformattedMessageWithTail from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedMessageWithTail";
 import RookiePreformattedMessage from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedMessage";
 import RookieImageMessage from "@/src/pages/Chatbot/components/message/custom/RookieImageMessage";

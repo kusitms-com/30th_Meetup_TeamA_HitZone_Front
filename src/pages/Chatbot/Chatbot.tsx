@@ -9,9 +9,9 @@ import DateBanner from "./components/DateBanner";
 import { questionCategories, GuideResponseData } from "@/src/constants/ChatbotData";
 import { GuideGetResponseType } from "@/src/api/ChatbotApiType";
 
-import RookieChat from "./components/RookieChat";
-import UserChat from "./components/UserChat";
-import CategoryChat from "./components/CategoryChat";
+import RookieChat from "./components/chat/RookieChat";
+import UserChat from "./components/chat/UserChat";
+import CategoryChat from "./components/chat/CategoryChat";
 
 import RookieImageMessage from "./components/message/custom/RookieImageMessage";
 import chatbotManualIcon from "@/src/assets/webp/chatbot_manual.webp";
@@ -95,9 +95,6 @@ const Chatbot = () => {
     const answerString = response.answer;
     const answerLinkName = response.linkName;
     const answerLink = response.link;
-
-    console.log(answerLinkName);
-    console.log(answerLink);
 
     const answerListWithImg = [
       { type: "imgUrl", content: answerImageUrl },

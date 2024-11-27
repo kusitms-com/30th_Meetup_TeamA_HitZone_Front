@@ -1,6 +1,6 @@
 import React from "react";
 
-import UserMessageWithTail from "./message/UserMessageWithTail";
+import UserMessageWithTail from "@/src/pages/Chatbot/components/message/UserMessageWithTail";
 
 interface Props {
     messageList: string[];
