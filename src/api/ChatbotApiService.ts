@@ -9,7 +9,7 @@ import { clovaURL, ClovaPostParamsType, ClovaPostRequestType,
 /** 백엔드와 API 연동 */
 // 추가: POST 요청 및 응답받기
 export const postClova = async (
-  {  }: ClovaPostParamsType,
+  //{  }: ClovaPostParamsType,
   {message}: ClovaPostRequestType) => {
   
   try {

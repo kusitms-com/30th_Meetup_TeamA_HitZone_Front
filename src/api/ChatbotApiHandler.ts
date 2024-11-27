@@ -1,6 +1,6 @@
 
 import { postClova, getGuide } from "./ChatbotApiService";
-import { ClovaPostParamsType, GuideGetParamsType } from "./ChatbotApiType";
+import { ClovaPostRequestType, GuideGetParamsType } from "./ChatbotApiType";
 
 import { getStadiumChatApiData } from "@/src/constants/ChatbotData";
 
@@ -39,8 +39,9 @@ export const handleGetGuideAnswer = async ({stadiumName, categoryName, orderNumb
 };
 
 
-export const handleGetClovaAnswer = async ({message}: GuideGetParamsType) => {
+export const handleGetClovaAnswer = async ({message}: ClovaPostRequestType) => {
     try {
+        
         // API 요청
         const response = await postClova(
             {

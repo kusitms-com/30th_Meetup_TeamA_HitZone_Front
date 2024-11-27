@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import chatbotClickIcon from "@/src/assets/svg/chatbot_click.svg";
 import FAQCategoryBar from "./FAQCategoryBar";
@@ -12,10 +12,10 @@ import { handleGetClovaAnswer } from "@/src/api/ChatbotApiHandler";
 interface Props {
   isStadiumSelected: boolean; // boolean 값을 props로 받음
   onSelect: (category: string) => void;
-  onResponseUpdate: (answer: string) => void;
+  onClovaResponseUpdate: (answer: string) => void;
 }
 
-const ChatbotInputField = ({isStadiumSelected, onSelect, onResponseUpdate}: Props) => {
+const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}: Props) => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
   const [inputClovaMessage, setInputClovaMessage] = useState("");   // 클로바에게 보낼 메시지
 
@@ -42,33 +42,32 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onResponseUpdate}: Prop
   };
 
   // 전송 버튼 클릭시 클로바에게 메시지 전송
-  const handleSendButton = () => {
+  const handleSendButton = useCallback(async () => {
     // 빈 메시지인 경우 처리하지 않음
     if (inputClovaMessage.trim() === "") {
       return;
     }
 
-    async () => {
-      try {
-          // 메시지를 API 파라미터로 전송 및 응답 받기
-          const response = await handleGetClovaAnswer({
-            inputClovaMessage,
-          });
+    try {
+      // 메시지를 API 파라미터로 전송 및 응답 받기
+      const response = await handleGetClovaAnswer({
+        message: inputClovaMessage,
+      });
+      console.log(response);
 
-          if (!response) {
-            return; // response가 없으면 종료
-          }
-          
-          // 부모 컴포넌트에 업데이트
-          onResponseUpdate(
-              response.answer ?? "",
-          );
-
-      } catch (error) {
-          //alert("API 호출에 실패했습니다.");
+      if (!response) {
+        return; // response가 없으면 종료
       }
+      
+      // 부모 컴포넌트에 업데이트
+      onClovaResponseUpdate(
+          response.answer ?? "",
+      );
+
+    } catch (error) {
+        //alert("API 호출에 실패했습니다.");
     }
-  };
+  }, [inputClovaMessage, onClovaResponseUpdate]);
 
   return (
     <>

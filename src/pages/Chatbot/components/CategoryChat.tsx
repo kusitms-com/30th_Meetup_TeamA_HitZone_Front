@@ -14,12 +14,12 @@ interface Props {
     stadiumName: string;
     categoryKey: number;
     categoryFrontName: string;
-    onResponseUpdate: (answer: string, imgUrl: string, linkName: string, link: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
+    onGuideResponseUpdate: (answer: string, imgUrl: string, linkName: string, link: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
 }
 
 
 // 사용자가 카테고리 클릭시 나오는 커스텀 대화창
-const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUpdate}: Props) => {
+const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onGuideResponseUpdate}: Props) => {
     // 사용자가 선택한 카테고리
     const categories = questionCategories.questionCategories;
 
@@ -90,7 +90,7 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
                                     }
                                     
                                     // 부모 컴포넌트에 업데이트
-                                    onResponseUpdate(
+                                    onGuideResponseUpdate(
                                         response.answer ?? "",          // answer가 없으면 빈 문자열
                                         response.imageUrl ?? null,      // imageUrl이 없으면 null
                                         response.linkName ?? null,

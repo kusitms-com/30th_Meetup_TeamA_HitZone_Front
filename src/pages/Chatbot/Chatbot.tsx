@@ -54,7 +54,8 @@ const Chatbot = () => {
   // 가이드 챗봇 답변 관련
   const [responseGuideDataList, setResponseGuideDataList] = useState<GuideResponseData[]>([]); // 세부 카테고리 index와 매핑하여 API 응답 저장
 
-  // API 응답을 category index에 매핑하여 저장
+  // Guide API 응답을 category index에 매핑하여 저장
+  // 채팅창에 렌더링하게 위한 용도
   const handleGuideResponseUpdate = (answer: string, imgUrl: string, linkName: string, link: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
     setResponseGuideDataList((prev) => [
       ...prev,
@@ -68,6 +69,21 @@ const Chatbot = () => {
         categoryName: categoryName,
         subcategoryNumber: subCategoryKey,
         subCategoryName: subCategoryName,
+      },
+    ]);
+  };
+
+
+  // 클로바 챗봇 답변 관련
+  const [responseClovaDataList, setResponseClovaDataList] = useState<string[]>([]); // 세부 카테고리 index와 매핑하여 API 응답 저장
+
+  // Clova API 응답을 category index에 매핑하여 저장
+  // 채팅창에 렌더링하게 위한 용도
+  const handleClovaResponseUpdate = (answer: string) => {
+    setResponseClovaDataList((prev) => [
+      ...prev,
+      {
+        answer: answer,
       },
     ]);
   };
@@ -232,7 +248,7 @@ const Chatbot = () => {
                       contentList={[
                         {
                           type: "component",
-                          content: <CategoryChat stadiumName={selectedStadium} categoryKey={index} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
+                          content: <CategoryChat stadiumName={selectedStadium} categoryKey={index} categoryFrontName={categoryFrontName} onGuideResponseUpdate={handleGuideResponseUpdate} />
                         }
                       ]}
                     />
@@ -245,7 +261,7 @@ const Chatbot = () => {
                       .map((responseGuideData, responseIndex) => (
                         <div key={responseIndex}>
                           <UserChat messageList={[responseGuideData.categoryName + " ▶︎ " + responseGuideData.subCategoryName]}/>
-
+                          
                           {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
                           <div className="py-2">
                             {renderGuideAnswerData(responseGuideData)}
@@ -261,7 +277,7 @@ const Chatbot = () => {
 
 
           {/* 4. 채팅 입력창 */}
-          <ChatbotInputField isStadiumSelected={isStadiumSelected} onSelect={handleCategorySelect} />
+          <ChatbotInputField isStadiumSelected={isStadiumSelected} onSelect={handleCategorySelect} onClovaResponseUpdate={handleClovaResponseUpdate}/>
         </div>
       </div>
     </div>
