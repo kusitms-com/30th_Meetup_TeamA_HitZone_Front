@@ -5,6 +5,7 @@ import closeIcon from "../../assets/webp/close_button_gray.webp";
 import nextButtonIcon from "../../assets/webp/next_button.webp";
 import backButtonIcon from "../../assets/webp/back_button.webp";
 import { tips } from "../../constants/tipData";
+import { usePreventScroll } from "@/src/hooks/usePreventScroll";
 
 interface ChipModalProps {
   isOpen: boolean;
@@ -14,6 +15,8 @@ interface ChipModalProps {
 const BignnerGuideDialog = ({ isOpen, onClose }: ChipModalProps) => {
   const [activeTipIndex, setActiveTipIndex] = useState(0);
   const router = useRouter();
+
+  usePreventScroll(isOpen);
 
   const handleClose = () => {
     setActiveTipIndex(0); // 모달 닫힐 때 인덱스를 0으로 초기화
