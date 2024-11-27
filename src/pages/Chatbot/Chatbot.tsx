@@ -89,12 +89,7 @@ const Chatbot = () => {
 
         {/* 첫 번째 문자열은 꼬랑지 말풍선에 출력 */}
         <RookieChat 
-          contentList={[
-            {
-            type: "textList",
-            content: [answerString],
-            }
-          ]}
+          initialPreformattedMessage={answerString}
         />
 
         {/* 두 번째 이상 문자열은 일반 말풍선에 출력 
