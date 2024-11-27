@@ -30,11 +30,7 @@ const Chatbot = () => {
   // 챗봇 첫 인사 렌더링 관련
   useEffect(() => {
     // 챗봇 페이지 들어온 후 초기 메시지 표시
-    const timer = setTimeout(() => {
-      setShowInitialMessages(true);
-    }, );
-
-    return () => clearTimeout(timer);
+    setShowInitialMessages(true);
   }, []);
 
 
@@ -104,10 +100,20 @@ const Chatbot = () => {
     );
   }
 
-  // 자동 스크롤 기능
+  
+  // 스크롤을 조작할 영역(채팅창 div) 지정
   const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  // 자동 스크롤 기능
   // 채팅이 추가될 때 스크롤 맨 아래로 이동
   const scrollToBottom = () => {
+    // 채팅 영역을 넘어서 전체 페이지를 맨 아래로 스크롤
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',  // 부드러운 스크롤
+    });
+    
+    // 채팅 영역 맨 아래로 스크롤
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
@@ -139,12 +145,12 @@ const Chatbot = () => {
         <BackLogoBar />
       </div>
 
-      <div className="flex justify-center items-center min-h-screen bg-grayscale-50 mt-[55px] pb-[60px]">
+      <div className="flex justify-center items-center h-full min-h-screen bg-grayscale-10 mt-[55px] pb-14">
         <div className="flex flex-col h-full max-w-[500px] w-full bg-grayscale-10">
           {/* 채팅 영역 */}
           <div
             ref={chatContainerRef}
-            className="flex-1 p-4 overflow-y-auto mb-10"
+            className="flex-1 px-3 py-4 h-full overflow-y-auto mb-10"
           >
       
             {/* 2. 오늘 날짜 */}
@@ -228,11 +234,11 @@ const Chatbot = () => {
             </div>
           </div>
           
+        </div>
+      </div>
 
           {/* 4. 채팅 입력창 */}
           <ChatbotInputField isStadiumSelected={isStadiumSelected} onSelect={handleCategorySelect} />
-        </div>
-      </div>
     </>
   );
 };
