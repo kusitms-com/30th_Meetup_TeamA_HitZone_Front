@@ -13,7 +13,6 @@ const ServiceReady = () => {
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
-      <div className="mb-4">
         <Image
           src={serviceReadyImage}
           alt="서비스 준비 이미지"
@@ -21,7 +20,8 @@ const ServiceReady = () => {
           height={192}
           objectFit="contain"
         />
-      </div>
+      <p className="text-lg font-semibold mb-3 text-grayscale-90">서비스 준비 중이에요!
+      </p>
       <button
         onClick={handleButtonClick}
         className="px-2 py-[6px] bg-grayscale-5 text-xs font-medium rounded-lg focus:outline-none"
