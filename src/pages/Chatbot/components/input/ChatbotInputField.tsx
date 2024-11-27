@@ -48,6 +48,10 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
       return;
     }
 
+    // 전송 후 입력창 비우기 (빠르게 상태 업데이트)
+    setInputClovaMessage("");
+    
+
     try {
       // 메시지를 API 파라미터로 전송 및 응답 받기
       const response = await handleGetClovaAnswer({
