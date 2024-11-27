@@ -5,6 +5,7 @@ import RookieMessageWithTail from "./message/RookieMessageWithTail";
 import RookieMessage from "./message/RookieMessage";
 import RookiePreformattedMessageWithTail from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedMessageWithTail";
 import RookiePreformattedMessage from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedMessage";
+import RookieImageMessage from "@/src/pages/Chatbot/components/message/custom/RookieImageMessage";
 
 import { questionCategories } from "@/src/constants/ChatbotData";
 
@@ -52,12 +53,9 @@ const RookieChat = ({initialMessage, initialPreformattedMessage, contentList}: R
                     contentList.map((item, index) => {
                     if (item.type === "image") {
                         return (
-                        <img
-                            key={index}
-                            src={item.content}
-                            alt={`챗봇 이미지 ${index + 1}`}
-                            className="w-[70%] h-auto rounded-md object-cover"
-                        />
+                            <div key={index}>
+                                <RookieImageMessage imgUrl={item.content} />
+                            </div>
                         );
                     
                     // 컴포넌트인 경우: 컴포넌트(item) 그대로 반환
