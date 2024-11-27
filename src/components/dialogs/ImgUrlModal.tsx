@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import closeButtonIcon from "@/src/assets/svg/chatbot_imagemodal_close_button.svg";
 
 const ImgUrlModal = ({ imageUrl, onClose }: { imageUrl: string, onClose: () => void }) => {
     return (
@@ -7,12 +8,12 @@ const ImgUrlModal = ({ imageUrl, onClose }: { imageUrl: string, onClose: () => v
           {/* imageUrl이 외부 url(https://) 이면 Image 컴포넌트로 띄우면 오류가 발생해서 img tag로 출력 */}
           <img 
             src={imageUrl} 
-            alt="Enlarged" 
+            alt="확대 이미지" 
             className="max-w-full max-h-full" />
           <button 
             onClick={onClose} 
-            className="absolute top-0 right-0 w-5 h-5 text-xl mr-3 text-grayscale-50 p-2 rounded-full">
-            X
+            className="absolute top-0 right-0 text-grayscale-50 p-2 rounded-full">
+            <Image src={closeButtonIcon} alt="닫기 버튼"  width={24} height={24}/>
           </button>
         </div>
       </div>
