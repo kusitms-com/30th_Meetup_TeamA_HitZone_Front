@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import stadiumDropdownIcon from "../../../assets/webp/stadium_dropdown.webp";
+import stadiumDropdownIcon from "../../../assets/svg/stadium_dropdown.svg";
 
 import { useOutsideClick } from "@/src/hooks/useOutsideClick";
 
@@ -28,7 +28,7 @@ export default function SeatDropdown({ options, selectedOption, onSelect, select
         className="flex items-center justify-between py-[6px] px-3 border border-gray-300 rounded-lg w-full h-[36px] text-md font-semibold text-gray-800"
       >
         <span>{selectedOption || "구역을 선택하세요"}</span>
-        <Image src={stadiumDropdownIcon} alt="dropdown icon" width={16} height={16} />
+        <Image src={stadiumDropdownIcon} alt="dropdown icon" width={12} height={12} />
       </button>
 
       {/** 좌석 메뉴 */}
