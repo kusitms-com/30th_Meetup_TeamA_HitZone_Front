@@ -55,13 +55,14 @@ const Chatbot = () => {
   const [responseGuideDataList, setResponseGuideDataList] = useState<GuideResponseData[]>([]); // 세부 카테고리 index와 매핑하여 API 응답 저장
 
   // API 응답을 category index에 매핑하여 저장
-  const handleGuideResponseUpdate = (answer: string, imgUrl: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
+  const handleGuideResponseUpdate = (answer: string, imgUrl: string, link: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => {
     setResponseGuideDataList((prev) => [
       ...prev,
       
       {
         answer: answer,
         imgUrl: imgUrl,
+        link; link,
         categoryNumber: categoryKey,
         categoryName: categoryName,
         subcategoryNumber: subCategoryKey,
@@ -75,13 +76,18 @@ const Chatbot = () => {
   const renderGuideAnswerData = (response: GuideGetResponseType) => {
     const answerImageUrl = response.imgUrl;
     const answerString = response.answer;
+    const answerLinkName = response.linkName;
+    const answerLink = response.link;
 
     const answerListWithImg = [
       { type: "imgUrl", content: answerImageUrl },
       { type: "preformattedText", content: answerString }
     ];
     const answerList = [
-      { type: "preformattedTextWithTail", content: answerString },
+      { type: "preformattedTextButtonWithTail", content: answerString },
+    ];
+    const answerListWithBtn = [
+      { type: "preformattedTextWithTail", content: answerString, buttonMsg: answerLinkName, buttonLinkUrl: answerLink },
     ];
 
     return (
@@ -90,6 +96,11 @@ const Chatbot = () => {
           // 이미지, 답변 출력
           <RookieChat 
             contentList={answerListWithImg}
+          />
+        : answerLink  ?
+          // 이미지, 답변, 링크로 이동하는 버튼 출력
+          <RookieChat 
+            contentList={answerListWithBtn}
           />
         : 
           // 답변 출력

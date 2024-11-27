@@ -34,5 +34,7 @@ export interface GuideGetParamsType {
 // GET 응답
 export interface GuideGetResponseType {
     answer: string;
-    imgUrl: string | null;
+    imgUrl: string | null;      // 이미지
+    linkName: string | null;    // 이동 경로명
+    link: string | null;        // 이동 경로
 }

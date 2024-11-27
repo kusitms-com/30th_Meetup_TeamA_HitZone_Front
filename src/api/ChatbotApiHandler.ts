@@ -23,7 +23,9 @@ export const handleGetGuideAnswer = async ({stadiumName, categoryName, orderNumb
         const data = response.payload;
         const parsedData = {
             answer: data.answer,
-            imageUrl: data.imgUrl ?? "", // imgUrl이 null일 경우 빈 문자열 반환
+            imageUrl: data.imgUrl ?? "",    // imgUrl이 null일 경우 빈 문자열 반환
+            linkName: data.linkName ?? "",  // linkName이 null일 경우 빈 문자열 반환
+            link: data.link ?? "",          // link가 null일 경우 빈 문자열 반환
         };
 
         //console.log(parsedData);
