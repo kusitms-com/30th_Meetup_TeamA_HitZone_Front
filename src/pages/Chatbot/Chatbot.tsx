@@ -207,40 +207,38 @@ const Chatbot = () => {
 
               {/* 카테고리 선택시 배열에 저장 및 순차 출력 */}
               {selectedStadium && selectedCategories.map((categoryFrontName, index) => (
-                <>
-                  <div key={index}>
-                    <>
-                      {/* 사용자 답변 출력 */}
-                      <UserChat messageList={[categoryFrontName]}/>
+                <div key={index}>
+                  <>
+                    {/* 사용자 답변 출력 */}
+                    <UserChat messageList={[categoryFrontName]}/>
 
-                      {/* 선택된 카테고리에 대한 챗봇 응답 출력 */}
-                      <RookieChat 
-                        contentList={[
-                          {
-                            type: "component",
-                            content: <CategoryChat stadiumName={selectedStadium} categoryKey={index} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
-                          }
-                        ]}
-                      />
+                    {/* 선택된 카테고리에 대한 챗봇 응답 출력 */}
+                    <RookieChat 
+                      contentList={[
+                        {
+                          type: "component",
+                          content: <CategoryChat stadiumName={selectedStadium} categoryKey={index} categoryFrontName={categoryFrontName} onResponseUpdate={handleGuideResponseUpdate} />
+                        }
+                      ]}
+                    />
 
 
-                      {/* 서브 카테고리 선택시 순차 출력 */}
-                      {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
-                      {responseGuideDataList
-                        .filter((responseGuideData) => responseGuideData.categoryNumber === index) // 현재 카테고리에 해당하는 데이터만 필터링
-                        .map((responseGuideData, responseIndex) => (
-                          <>
-                            <UserChat messageList={[responseGuideData.categoryName + " ▶︎ " + responseGuideData.subCategoryName]}/>
+                    {/* 서브 카테고리 선택시 순차 출력 */}
+                    {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
+                    {responseGuideDataList
+                      .filter((responseGuideData) => responseGuideData.categoryNumber === index) // 현재 카테고리에 해당하는 데이터만 필터링
+                      .map((responseGuideData, responseIndex) => (
+                        <div key={responseIndex}>
+                          <UserChat messageList={[responseGuideData.categoryName + " ▶︎ " + responseGuideData.subCategoryName]}/>
 
-                            {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
-                            <div key={responseIndex} className="py-2">
-                              {renderGuideAnswerData(responseGuideData)}
-                            </div>
-                          </>
-                      ))}
-                    </>
-                  </div>
-                </>
+                          {/* Guide API 답변 출력: 해당 카테고리에만 매핑되는 데이터를 필터링하여 출력 */}
+                          <div className="py-2">
+                            {renderGuideAnswerData(responseGuideData)}
+                          </div>
+                        </div>
+                    ))}
+                  </>
+                </div>
               ))}
 
             </div>
