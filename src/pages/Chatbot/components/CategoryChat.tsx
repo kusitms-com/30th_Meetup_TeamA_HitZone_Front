@@ -4,6 +4,9 @@ import { questionCategories } from "@/src/constants/ChatbotData";
 import Image from "next/image";
 import tailIcon from "@/src/assets/webp/chatbot_message_left_tail_white_big.webp";  // 꼬랑지
 
+import RookieWhiteListMessageWithTail from "@/src/pages/Chatbot/components/message/custom/RookieWhiteListMessageWithTail";
+import RookieImageMessage from "@/src/pages/Chatbot/components/message/custom/RookieImageMessage";
+
 import { GuideGetResponseType } from "@/src/api/ChatbotApiType";
 import { handleGetGuideAnswer } from "@/src/api/ChatbotApiHandler";
 
@@ -35,12 +38,8 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
             {/* image 값이 있는 경우: image 렌더링 */}
             {"image" in categoryData && categoryData.image && (
                 <div className="mb-2">
-                    {/* 이미지 내용 */}
-                    <Image
-                        src={categoryData.image}
-                        alt="Category Icon"
-                        className="max-w-full h-auto rounded-md"
-                    />
+                    {/* 이미지 내용 출력*/}
+                    <RookieImageMessage imgUrl={categoryData.image} />
                 </div>
             )}
 
@@ -48,22 +47,9 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
             {/* 프론트에서 처리하는 데이터: 텍스트 출력 */}
             {/* answer 값이 있는 경우: answer 렌더링 */}
             {"answer" in categoryData && categoryData.answer && (
-                <div className="p-4 bg-main-0 rounded-lg shadow mb-2">
-
-                    {/* 말풍선 꼬랑지 */}
-                    <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] w-5 h-5"/>
-                    
-                    {/* 답변 내용 */}
-                    <ul className="space-y-1.5">
-                        {categoryData.answer.map((answer, index) => (
-                            <li
-                            key={index}
-                            className="px-2 text-xs min-w-[180px] w-full text-left font-regular text-grayscale-90 rounded-md"
-                            >
-                            {answer}
-                            </li>
-                        ))}
-                    </ul>
+                <div className="mb-2">
+                    {/* 답변 내용 출력 */}
+                    <RookieWhiteListMessageWithTail messageList={categoryData.answer} />
                 </div>
             )}
 
