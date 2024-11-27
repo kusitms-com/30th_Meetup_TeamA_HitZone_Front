@@ -1,9 +1,13 @@
 import prohibitedItemsIcon from "@/src/assets/webp/chatbot_prohibition.webp";
 import chatbotManualIcon from "@/src/assets/webp/chatbot_manual.webp";
 
-import { stadiumList } from "@/src/constants/ZoneData";
+import { StadiumType, stadiumStringList } from "@/src/constants/ZoneData";
 
 export const chatbotName = "루키";
+
+export const maxChatWidth = "max-w-[270px]";      // 채팅 말풍선 최대 크기
+export const minCategoryWidth = "min-w-[180px]";  // 채팅 내부 카테고리 최소 크기
+
 export const questionCategories = {
   // 기본 데이터
   chatbotName,
@@ -11,7 +15,7 @@ export const questionCategories = {
   
   // 필수로 선택해야하는 데이터
   baseballCategories: {
-    frontendValues: stadiumList,  // 챗봇 구단별 구장명 (프론트에서 보여주는 값)
+    frontendValues: stadiumStringList,  // 챗봇 구단별 구장명 (프론트에서 보여주는 값)
     backendParameters: ["lg", "kt", "kiwoom", "kia", "samsung", "hanhwa", "lotte", "ssg", "nc"],  // 챗봇 구단별 구장명 (백엔드에 API 파라미터로 넘겨주는 값)
     userMessage: ["야구에 관련된 궁금한 점이 있으신가요?", "1. 궁금한 내용을 언제든 자유롭게 입력해주세요", "2. 아래 질문 카테고리 선택을 해주시면, ‘자주 물어보는 질문’을 물어볼 수 있어요!"]
   },
@@ -113,8 +117,26 @@ export const questionCategories = {
   }
 };
 
+// 프론트에 보이는 스타디움 값 -> 백엔드에 전송할 스타디움 값으로 맵핑하는 함수
+export const getStadiumChatApiData = (frontendStadiumValue: string): string => {
+  // 전체 스타디움 리스트 가져오기
+  const { frontendValues, backendParameters } = questionCategories.baseballCategories;
+
+  // 해당 frontendValue의 인덱스 찾기
+  const index = frontendValues.indexOf(frontendStadiumValue);
+
+  // 유효하지 않은 frontendValue에 대한 처리
+  if (index === -1) {   // Array.indexOf는 배열의 유효한 인덱스 또는 -1을 반환
+    throw new Error(`Frontend value "${frontendStadiumValue}" not found.`);
+  }
+
+  // backendParameters에서 매칭되는 값 반환
+  return backendParameters[index];
+};
+
 export interface GuideResponseData {
   answer: string;             // 백엔드로부터 받은 챗봇 가이드 답변 데이터
+  imgUrl: string;             // 백엔드로부터 받은 챗봇 가이드 이미지 데이터
   categoryNumber: number;     // 사용자가 선택한 큰 카테고리
   categoryName: string;       // 사용자가 선택한 큰 카테고리명
   subcategoryNumber: number;  // 사용자가 선택한 세부 카테고리
