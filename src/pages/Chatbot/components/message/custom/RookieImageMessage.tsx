@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { maxChatWidth } from "@/src/constants/ChatbotData";
 
 interface Props {
   imgUrl: string;
@@ -14,7 +15,7 @@ const RookieImageMessage = ({imgUrl}: Props) => {
         <Image
             src={imgUrl}
             alt="Category Icon"
-            className="max-w-full h-auto rounded-md"
+            className={`${maxChatWidth} h-auto rounded-md`}
         />
     </div>
   );

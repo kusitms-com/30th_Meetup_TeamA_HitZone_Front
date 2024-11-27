@@ -5,6 +5,9 @@ import { StadiumType, stadiumStringList } from "@/src/constants/ZoneData";
 
 export const chatbotName = "루키";
 
+export const maxChatWidth = "max-w-[270px]";      // 채팅 말풍선 최대 크기
+export const minCategoryWidth = "min-w-[180px]";  // 채팅 내부 카테고리 최소 크기
+
 export const questionCategories = {
   // 기본 데이터
   chatbotName,

@@ -1,4 +1,5 @@
 import React from "react";
+import { maxChatWidth, minCategoryWidth } from "@/src/constants/ChatbotData";
 
 interface Props {
     messageList: string[];
@@ -8,13 +9,13 @@ interface Props {
 // 메시지를 리스트로 출력
 const RookieWhiteListMessage = ({messageList}: Props) => {
   return (
-    <div className="bg-main-0 p-3 rounded-lg text-xs font-regular text-grayscale-90 max-w-xs">
+    <div className={`bg-main-0 p-3 rounded-lg text-xs font-regular text-grayscale-90 ${maxChatWidth}`}>
         {/** 메시지 1줄 이상 배열로 받아서 여러 li 태그로 메시지 출력하기 */}
         <ul className="space-y-1.5">
             {messageList.map((message, index) => (
                 <li
-                key={index}
-                className="px-2 text-xs min-w-[180px] w-full text-left font-regular text-grayscale-90 rounded-md"
+                  key={index}
+                  className={`px-2 text-xs text-left font-regular text-grayscale-90 rounded-md ${minCategoryWidth} w-full`}
                 >
                   {message}
                 </li>

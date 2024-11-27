@@ -1,4 +1,5 @@
 import React from "react";
+import { maxChatWidth } from "@/src/constants/ChatbotData";
 
 interface Props {
     message: string;
@@ -9,7 +10,7 @@ interface Props {
 const RookiePreformattedMessage = ({message}: Props) => {
   return (
     // 메시지를 string으로 받고 줄바꿈을 \n 값으로 구분해서 출력하기
-    <div className="whitespace-pre-wrap bg-main-0 p-3 rounded-lg text-xs font-regular text-grayscale-90 max-w-xs">
+    <div className={`whitespace-pre-wrap bg-main-0 p-3 rounded-lg text-xs font-regular text-grayscale-90 ${maxChatWidth}`}>
       {[message]}
     </div>
   );

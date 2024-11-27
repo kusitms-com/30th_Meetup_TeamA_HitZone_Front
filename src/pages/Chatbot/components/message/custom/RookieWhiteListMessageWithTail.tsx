@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import tailIcon from "@/src/assets/webp/chatbot_message_left_tail_white_big.webp";  // 꼬랑지
+import { maxChatWidth, minCategoryWidth } from "@/src/constants/ChatbotData";
 
 interface Props {
     messageList: string[];
@@ -10,7 +11,7 @@ interface Props {
 // 메시지를 리스트로 출력
 const RookieWhiteListMessageWithTail = ({messageList}: Props) => {
   return (
-    <div className="relative bg-main-0 p-3 rounded-lg text-xs font-regular text-grayscale-90 max-w-xs">
+    <div className={`relative bg-main-0 p-3 rounded-lg text-xs font-regular text-grayscale-90 ${maxChatWidth}`}>
         {/* 말풍선 꼬랑지 */}
         <Image src={tailIcon} alt="꼬랑지" className="absolute left-[-12px] top-2 w-5 h-5"/>
 
@@ -18,8 +19,8 @@ const RookieWhiteListMessageWithTail = ({messageList}: Props) => {
         <ul className="space-y-1.5">
             {messageList.map((message, index) => (
                 <li
-                key={index}
-                className="px-2 text-xs min-w-[180px] w-full text-left font-regular text-grayscale-90 rounded-md"
+                  key={index}
+                  className={`px-2 text-xs text-left font-regular text-grayscale-90 rounded-md ${minCategoryWidth} w-full`}
                 >
                   {message}
                 </li>
