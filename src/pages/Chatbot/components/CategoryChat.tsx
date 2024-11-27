@@ -39,7 +39,7 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onResponseUp
             {"image" in categoryData && categoryData.image && (
                 <div className="mb-2">
                     {/* 이미지 내용 출력*/}
-                    <RookieImageMessage imgUrl={categoryData.image} />
+                    <RookieImageMessage imgIcon={categoryData.image} />
                 </div>
             )}
 

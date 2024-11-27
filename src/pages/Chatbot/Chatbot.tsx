@@ -73,25 +73,24 @@ const Chatbot = () => {
   const renderGuideAnswerData = (response: GuideGetResponseType) => {
     const answerImageUrl = response.imgUrl;
     const answerString = response.answer;
+    const contentList = [
+      { type: "imgUrl", content: answerImageUrl },
+      { type: "preformattedText", content: answerString }
+    ];
 
     return (
       <div>
         {/* 이미지 출력 */}
         {answerImageUrl  ?
-        <RookieChat 
-          contentList={[
-            {
-            type: "image",
-            content: answerImageUrl,
-            }
-          ]}
-        />
-        : null}
-
-        {/* 첫 번째 문자열은 꼬랑지 말풍선에 출력 */}
+          <RookieChat 
+            contentList={contentList}
+          />
+        : 
         <RookieChat 
           initialPreformattedMessage={answerString}
-        />
+        />}
+
+        {/* 첫 번째 문자열은 꼬랑지 말풍선에 출력 */}
 
         {/* 두 번째 이상 문자열은 일반 말풍선에 출력 
         {contents.length > 1 && contentsL.map((content, index) => (
@@ -133,7 +132,7 @@ const Chatbot = () => {
     return (
       <>
         {/* 루키 사용 설명서 */}
-        <RookieImageMessage imgUrl={chatbotManualIcon} />
+        <RookieImageMessage imgIcon={chatbotManualIcon} />
         
         {/* 스타디움 선택창 */}
         <StadiumSelection stadiums={stadiumList} onSelect={handleStadiumSelect} />

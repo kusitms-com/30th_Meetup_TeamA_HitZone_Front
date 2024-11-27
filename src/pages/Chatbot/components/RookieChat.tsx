@@ -6,6 +6,7 @@ import RookieMessage from "./message/RookieMessage";
 import RookiePreformattedMessageWithTail from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedMessageWithTail";
 import RookiePreformattedMessage from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedMessage";
 import RookieImageMessage from "@/src/pages/Chatbot/components/message/custom/RookieImageMessage";
+import RookieImgUrlMessage from "@/src/pages/Chatbot/components/message/custom/RookieImgUrlMessage";
 
 import { questionCategories } from "@/src/constants/ChatbotData";
 
@@ -25,7 +26,12 @@ import { questionCategories } from "@/src/constants/ChatbotData";
 interface RookieChatProps {
     initialMessage?: string[];
     initialPreformattedMessage?: string;
-    contentList?: Array<{ type: "image"; content: string } | { type: "component"; content: React.ReactNode} | { type: "textList"; content: string[] } | { type: "preformattedText"; content: string }>;
+    contentList?: Array<
+    { type: "image"; content: string } | 
+    { type: "imgUrl"; content: string } | 
+    { type: "component"; content: React.ReactNode} | 
+    { type: "textList"; content: string[] } | 
+    { type: "preformattedText"; content: string }>;
 }
 
 // 루키 채팅 한 세트를 그룹화한 컴포넌트
@@ -50,18 +56,26 @@ const RookieChat = ({initialMessage, initialPreformattedMessage, contentList}: R
                 
                 {/* 두 번째 이상 메세지는 일반 말풍선 */}
                 {/* 이미지와 텍스트 리스트 */}
-                {contentList &&
-                    // 이미지인 경우: 이미지 CSS 조정해서 반환
-                    contentList.map((item, index) => {
-                    if (item.type === "image") {
+                {contentList && contentList.map((item, index) => {
+                    switch (item.type) {
+                    // 프론트 단에서 관리하는 이미지인 경우: Image 태그
+                    case "image":
                         return (
                             <div key={index}>
-                                <RookieImageMessage imgUrl={item.content} />
+                                <RookieImageMessage imgIcon={item.content} />
                             </div>
                         );
                     
+                    // 백엔드에서 넘겨준 외부 이미지 URL 링크인 경우: img 태그
+                    case "imgUrl":
+                        return (
+                            <div key={index}>
+                                <RookieImgUrlMessage imgUrl={item.content} />
+                            </div>
+                        );
+
                     // 컴포넌트인 경우: 컴포넌트(item) 그대로 반환
-                    } else if (item.type == "component") {
+                    case "component":
                         return (
                             <div key={index}>
                                 {item.content}
@@ -69,23 +83,25 @@ const RookieChat = ({initialMessage, initialPreformattedMessage, contentList}: R
                         );
 
                     // string[]인 경우: 각 배열 원소를 줄바꿈으로 인식하는 루키 말풍선 컴포에 담아서 반환
-                    } else if (item.type === "textList") {
+                    case "textList":
                         return (
                             <div key={index}>
                                 <RookieMessage messageList={item.content} />
                             </div>
                         );
-
+                    
                     // string인 경우: \n을 줄바꿈으로 인식하는 루키 말풍선 컴포에 담아서 반환
-                    } else if (item.type === "textList") {
+                    case "preformattedText":
                         return (
                             <div key={index}>
-                                <RookiePreformattedMessage messageList={item.content} />
+                                <RookiePreformattedMessage message={item.content} />
                             </div>
                         );
+
+                    default:
+                        return null;
                     }
-                    return null;
-                    })}
+                })}
             </div>
         </div>
     );
