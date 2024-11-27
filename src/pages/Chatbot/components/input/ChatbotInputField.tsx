@@ -81,7 +81,7 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
           <input
             type="text"
             placeholder="챗봇에게 메시지 보내기"
-            className="border-none bg-transparent text-grayscale-60 text-xs font-medium outline-none px-2"
+            className="border-none w-full bg-transparent text-grayscale-60 text-xs font-medium outline-none px-2"
             value={inputClovaMessage} // input 값 초기화
             onChange={(e) => setInputClovaMessage(e.target.value)} // input 값이 변경될 때 상태 업데이트
           />
