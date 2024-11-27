@@ -7,21 +7,28 @@ import FAQCategoryButton from "./FAQCategoryButton";
 // 외부 클릭시 닫히는 이벤트 훅
 import { useOutsideClick } from "@/src/hooks/useOutsideClick";
 
+import { handleGetClovaAnswer } from "@/src/api/ChatbotApiHandler";
+
 interface Props {
   isStadiumSelected: boolean; // boolean 값을 props로 받음
   onSelect: (category: string) => void;
+  onResponseUpdate: (answer: string) => void;
 }
 
-const ChatbotInputField = ({isStadiumSelected, onSelect}: Props) => {
+const ChatbotInputField = ({isStadiumSelected, onSelect, onResponseUpdate}: Props) => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
+  const [inputClovaMessage, setInputClovaMessage] = useState("");   // 클로바에게 보낼 메시지
 
-  // 외부 클릭 시 실행될 함수
+
+  // FAQCategory 컴포넌트 외부 클릭 시 카테고리바 닫기
   const closeFAQCategory = () => {
     setIsFAQCategoryVisible(false);
   };
+
   // FAQCategory 컴포넌트 감지를 위한 ref
   const categoryRef = useOutsideClick(closeFAQCategory);
 
+  // 카테고리바 or 카테고리 버튼을 토글로 렌더링
   const renderFAQCategory = () => {
     if(isFAQCategoryVisible) {
       return (
@@ -31,6 +38,35 @@ const ChatbotInputField = ({isStadiumSelected, onSelect}: Props) => {
       );
     }else {
       return <FAQCategoryButton setIsFAQCategoryVisible={setIsFAQCategoryVisible} />
+    }
+  };
+
+  // 전송 버튼 클릭시 클로바에게 메시지 전송
+  const handleSendButton = () => {
+    // 빈 메시지인 경우 처리하지 않음
+    if (inputClovaMessage.trim() === "") {
+      return;
+    }
+
+    async () => {
+      try {
+          // 메시지를 API 파라미터로 전송 및 응답 받기
+          const response = await handleGetClovaAnswer({
+            inputClovaMessage,
+          });
+
+          if (!response) {
+            return; // response가 없으면 종료
+          }
+          
+          // 부모 컴포넌트에 업데이트
+          onResponseUpdate(
+              response.answer ?? "",
+          );
+
+      } catch (error) {
+          //alert("API 호출에 실패했습니다.");
+      }
     }
   };
 
@@ -47,9 +83,14 @@ const ChatbotInputField = ({isStadiumSelected, onSelect}: Props) => {
             type="text"
             placeholder="챗봇에게 메시지 보내기"
             className="border-none bg-transparent text-grayscale-60 text-xs font-medium outline-none px-2"
+            value={inputClovaMessage} // input 값 초기화
+            onChange={(e) => setInputClovaMessage(e.target.value)} // input 값이 변경될 때 상태 업데이트
           />
         </div>
-        <button className="ml-2 bg-main-50 rounded-full p-2 flex items-center justify-center text-xxs hover:bg-mainhover-50">
+        <button 
+          className="ml-2 bg-main-50 rounded-full p-2 flex items-center justify-center text-xxs hover:bg-mainhover-50"
+          onClick={handleSendButton}
+        >
           <Image src={chatbotClickIcon} alt="메시지 보내기 아이콘" width={20} height={20} />
         </button>
       </div>
