@@ -249,7 +249,7 @@ const Page = ({/*stadium,*/ resultId, setResultId}: Props) => {
 
 
     return (
-        <div className="flex justify-center items-start bg-grayscale-5 w-full h-screen bg-fff overflow-y-auto scrollbar-hide">
+        <div className="flex justify-center items-start bg-grayscale-5 w-full h-screen bg-fff overflow-y-auto scrollbar-hide pt-14">
             <div className="relative flex flex-col items-center w-full h-screen">
                 {/** 임시 확인
                 <ChooseBaseballTeamDialog/>
