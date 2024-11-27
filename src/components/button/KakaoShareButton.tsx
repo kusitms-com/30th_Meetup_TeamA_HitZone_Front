@@ -1,30 +1,39 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { createKakaoShareMessage } from "@/src/utils/kakaoMessage";
 import Image from "next/image";
 import shareButtonGrayIcon from "@/src/assets/webp/share_gray.webp";
 
-interface KakaoShareButtonProps {
+type KakaoShareButtonProps = {
   resultId: number | null; // 결과 ID
-  nickname: string | undefined; // 유형 닉네임
+  nickname?: string; // 유형 닉네임
   hashTags: string[]; // 해시태그 배열
-}
+};
 
-const KakaoShareButton: React.FC<KakaoShareButtonProps> = ({
-  resultId,
-  nickname,
-  hashTags,
-}) => {
+export default function KakaoShareButton({ resultId, nickname, hashTags }: KakaoShareButtonProps) {
   const [isKakaoInitialized, setIsKakaoInitialized] = useState(false);
 
   useEffect(() => {
     // Kakao SDK 초기화
-    if (typeof window !== "undefined" && window.Kakao) {
-      if (!window.Kakao.isInitialized()) {
-        window.Kakao.init("d4d5e84e53ce18afa1d4f5ecbc14a552");
-        console.log("Kakao SDK 초기화 완료");
-      }
+    if (!document.getElementById("kakao-sdk")) {
+      const script = document.createElement("script");
+      script.id = "kakao-sdk";
+      script.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
+      script.onload = () => {
+        console.log("Kakao SDK 로드 완료");
+        if (window.Kakao && !window.Kakao.isInitialized()) {
+          window.Kakao.init("d4d5e84e53ce18afa1d4f5ecbc14a552");
+          setIsKakaoInitialized(true);
+          console.log("Kakao SDK 초기화 완료");
+        }
+      };
+      script.onerror = () => {
+        console.error("Kakao SDK 스크립트 로드 실패");
+      };
+      document.head.appendChild(script);
+    } else if (window.Kakao && window.Kakao.isInitialized()) {
       setIsKakaoInitialized(true);
     }
   }, []);
@@ -50,10 +59,18 @@ const KakaoShareButton: React.FC<KakaoShareButtonProps> = ({
   };
 
   return (
-    <div onClick={handleShare} style={{ cursor: "pointer" }} aria-disabled={!isKakaoInitialized}>
-      <Image src={shareButtonGrayIcon} alt="공유 버튼" width={28} height={24} className="cursor-pointer" />
+    <div
+      onClick={handleShare}
+      style={{ cursor: isKakaoInitialized ? "pointer" : "not-allowed" }}
+      aria-disabled={!isKakaoInitialized}
+    >
+      <Image
+        src={shareButtonGrayIcon}
+        alt="공유 버튼"
+        width={28}
+        height={24}
+        className={`cursor-${isKakaoInitialized ? "pointer" : "not-allowed"}`}
+      />
     </div>
   );
-};
-
-export default KakaoShareButton;
+}
