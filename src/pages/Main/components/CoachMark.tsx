@@ -80,7 +80,7 @@ const CoachMark = ({ onClose }: CoachMarkProps) => {
             onClick={onClose}
             className="absolute left-1/2 transform -translate-x-1/2 bottom-4 w-[92%] h-[48px] bg-main-50 text-grayscale-0 text-md font-semibold rounded-[8px] hover:bg-main-60 z-0"
           >
-            HitZone 시작하기
+            HitZone으로 가기
           </button>
         )}
       </div>
