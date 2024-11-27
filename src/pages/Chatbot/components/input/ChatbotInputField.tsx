@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import chatbotClickIcon from "../../../assets/svg/chatbot_click.svg";
-import FAQCategoryBar from "./category/FAQCategoryBar";
-import FAQCategoryButton from "./category/FAQCategoryButton";
+import chatbotClickIcon from "@/src/assets/svg/chatbot_click.svg";
+import FAQCategoryBar from "./FAQCategoryBar";
+import FAQCategoryButton from "./FAQCategoryButton";
 
+// 외부 클릭시 닫히는 이벤트 훅
+import { useOutsideClick } from "@/src/hooks/useOutsideClick";
 
 interface Props {
   isStadiumSelected: boolean; // boolean 값을 props로 받음
@@ -13,9 +15,20 @@ interface Props {
 const ChatbotInputField = ({isStadiumSelected, onSelect}: Props) => {
   const [isFAQCategoryVisible, setIsFAQCategoryVisible] = useState(false);
 
+  // 외부 클릭 시 실행될 함수
+  const closeFAQCategory = () => {
+    setIsFAQCategoryVisible(false);
+  };
+  // FAQCategory 컴포넌트 감지를 위한 ref
+  const categoryRef = useOutsideClick(closeFAQCategory);
+
   const renderFAQCategory = () => {
     if(isFAQCategoryVisible) {
-      return <FAQCategoryBar setIsFAQCategoryVisible={setIsFAQCategoryVisible} onSelect={onSelect}/>
+      return (
+        <div ref={categoryRef}>
+          <FAQCategoryBar setIsFAQCategoryVisible={setIsFAQCategoryVisible} onSelect={onSelect} />
+        </div>
+      );
     }else {
       return <FAQCategoryButton setIsFAQCategoryVisible={setIsFAQCategoryVisible} />
     }

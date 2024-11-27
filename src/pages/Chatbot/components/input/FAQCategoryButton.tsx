@@ -7,7 +7,7 @@ interface Props {
   setIsFAQCategoryVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FAQCategoryBar = ({setIsFAQCategoryVisible}: Props) => {
+const FAQCategoryButton = ({setIsFAQCategoryVisible}: Props) => {
   return (
     <div className="fixed bottom-[60px] left-1/2 transform -translate-x-1/2 max-w-[500px] w-full px-5 py-3 bg-grayscale-0 rounded-t-2xl transition-transform cursor-pointer">
       <div className="flex justify-center gap-1"
@@ -21,4 +21,4 @@ const FAQCategoryBar = ({setIsFAQCategoryVisible}: Props) => {
   );
 };
 
-export default FAQCategoryBar;
+export default FAQCategoryButton;

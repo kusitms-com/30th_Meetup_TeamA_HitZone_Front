@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import BackLogoBar from "../../components/layout/BackLogoBar";
 import { stadiumList } from "../../constants/ZoneData";
 import StadiumSelection from "./components/stadiumcategory/StadiumSelection";
-import ChatbotInputField from "./components/ChatbotInputField";
+import ChatbotInputField from "./components/input/ChatbotInputField";
 
 import DateBanner from "./components/DateBanner";
 
