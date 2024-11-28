@@ -10,12 +10,12 @@ import signupZonePinkIcon from '../../../assets/svg/signup_zone_pink.svg';
 import onboardingRookieIcon from "@/src/assets/webp/onboarding_welcome_rookie.webp";
 import onboardingZoneBackgroundIcon from "@/src/assets/webp/onboarding_welcome_zone_background.webp";
 
-const Page = () => {
-    // 시작하기 버튼 이벤트
-    const handleStart = () => {
-        
-    }
 
+interface Props {
+    onComplete: () => void;
+}
+
+const Page = ({onComplete}: Props) => {
 
     return (
         <div className="relative justify-center items-center w-full h-screen ">
@@ -57,7 +57,7 @@ const Page = () => {
                     />
                     <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[40px]">
                         <p className="text-md text-white font-semibold ">
-                            <button onClick={handleStart}>Hitzone 시작하기</button>
+                            <button onClick={onComplete}>Hitzone 시작하기</button>
                         </p>
                     </div>
                 </div>

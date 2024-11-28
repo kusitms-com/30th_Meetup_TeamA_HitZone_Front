@@ -5,6 +5,7 @@ import CoachMark from "@/src/pages/Main/components/CoachMark";
 import Main from '@/src/pages/Main/Main'; // 메인 컴포넌트
 
 const HomePage = () => {
+    // 로직: init -> signup -> onboarding -> coachmark -> main
     const [currentPage, setCurrentPage] = useState<'init' | 'signup' | 'onboarding' | 'coachmark' | 'main'>('init'); // 페이지 상태
     
     useEffect(() => {
@@ -25,13 +26,13 @@ const HomePage = () => {
     return (
         <div>
             {/* 초기 페이지 */}
-            {currentPage === 'init' && <InitPage onComplete={() => setCurrentPage('signup')} />} 
+            {currentPage === 'init' && <InitPage onComplete={() => setCurrentPage('onboarding')} />} 
 
             {/* 온보딩 페이지 */}
-            {currentPage === 'onboarding' && <SignupPage3 />} 
+            {currentPage === 'onboarding' && <SignupPage3 onComplete={() => setCurrentPage('coachmark')}/>} 
 
             {/* 코치마크 페이지 */}
-            {currentPage === 'main' && <CoachMark />}
+            {currentPage === 'coachmark' && <CoachMark onClose={() => setCurrentPage('main')}/>}
 
             {/* 메인 페이지 */}
             {currentPage === 'main' && <Main />}
