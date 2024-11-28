@@ -7,7 +7,7 @@ import ChatbotInputField from "./components/input/ChatbotInputField";
 import DateBanner from "./components/DateBanner";
 
 import { questionCategories, GuideResponseData } from "@/src/constants/ChatbotData";
-import { GuideGetResponseType } from "@/src/api/ChatbotApiType";
+import { GuideGetResponseType, ClovaPostResponseType } from "@/src/api/ChatbotApiType";
 
 import RookieChat from "./components/chat/RookieChat";
 import UserChat from "./components/chat/UserChat";
@@ -189,12 +189,25 @@ const Chatbot = () => {
   }
 
   
-  // 클로바 챗봇 답변 관련
-  const [responseClovaData, setResponseClovaData] = useState<string>(); // 세부 카테고리 index와 매핑하여 API 응답 저장
-  // Clova API 응답을 category index에 매핑하여 저장
-  // 채팅창에 렌더링하게 위한 용도
-  const handleClovaResponseUpdate = (answer: string) => {
-    setResponseClovaData(answer);
+  // 쿨로바 답변 랜더링
+  const renderClovaAnswerData = (question: string, answer: ClovaPostResponseType) => {
+    const answerList = [
+      { type: "preformattedTextWithTail", content: answer },
+    ];
+    
+    // 렌더링할 챗 컴포넌트 추가
+    addChatComponent(
+      <>
+        {/* 사용자 질문 출력 */}
+        <UserChat
+          messageList={[question]}
+        />
+        {/* 클로바 답변 출력 */}
+        <RookieChat 
+          contentList={answerList}
+        />
+      </>
+    );
   };
 
 
@@ -261,7 +274,7 @@ const Chatbot = () => {
               )}
 
               {/* 카테고리 선택시 배열에 저장 및 순차 출력 */}
-              {selectedStadium && chatComponents.map((chatComponent, index) => (
+              {chatComponents.map((chatComponent, index) => (
                 <React.Fragment key={index}>{chatComponent}</React.Fragment>
               ))}
             </div>
@@ -269,7 +282,7 @@ const Chatbot = () => {
 
 
           {/* 4. 채팅 입력창 */}
-          <ChatbotInputField isStadiumSelected={isStadiumSelected} onSelect={renderCategoryChat} onClovaResponseUpdate={null}/>
+          <ChatbotInputField isStadiumSelected={isStadiumSelected} onSelect={renderCategoryChat} onClovaResponseUpdate={renderClovaAnswerData}/>
         </div>
       </div>
     </div>

@@ -52,6 +52,8 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
   ////// 클로바 관련
   // 전송 버튼 클릭시 클로바에게 메시지 전송
   const handleSendButton = useCallback(async () => {
+    const inputQuestion = inputClovaMessage;
+
     // 빈 메시지인 경우 처리하지 않음
     if (inputClovaMessage.trim() === "") {
       return;
@@ -75,13 +77,15 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
       
       // 부모 컴포넌트에 업데이트
       onClovaResponseUpdate(
-          response.answer ?? "",
+        inputQuestion?? "",
+        response.answer ?? "",
       );
 
     } catch (error) {
         // 부모 컴포넌트에 업데이트
         onClovaResponseUpdate(
-          response.answer ?? "클로바 답변을 받는 것에 실패하였습니다 (에러명: "+error+")",
+          inputQuestion ?? "",
+          "클로바 답변을 받는 것에 실패하였습니다 (에러명: "+error+")",
         );
 
     } finally {
