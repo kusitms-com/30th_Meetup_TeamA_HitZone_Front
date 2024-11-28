@@ -75,24 +75,32 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
         return; // response가 없으면 종료
       }
       
-      // 부모 컴포넌트에 업데이트
+      // 부모 컴포넌트에 클로바 데이터 업데이트
       onClovaResponseUpdate(
-        inputQuestion?? "",
-        response.answer ?? "",
+        inputQuestion?? "",     // 질문
+        response.answer ?? "",  // 답변
       );
 
     } catch (error) {
-        // 부모 컴포넌트에 업데이트
+        // 부모 컴포넌트에 클로바 데이터 업데이트
         onClovaResponseUpdate(
           inputQuestion ?? "",
           "클로바 답변을 받는 것에 실패하였습니다 (에러명: "+error+")",
         );
 
     } finally {
-      setIsLoading(false); // 로딩 종료
+      setIsLoading(false); // 로딩 상태 종료
     }
 
   }, [inputClovaMessage, onClovaResponseUpdate]);
+
+
+  // Enter 키 입력시 버튼 클릭 처리
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSendButton(); // Enter 키가 눌리면 handleSendButton 호출
+    }
+  };
 
 
   return (
@@ -110,6 +118,7 @@ const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}:
             className="border-none w-full bg-transparent text-grayscale-60 text-xs font-medium outline-none px-2"
             value={inputClovaMessage} // input 값 초기화
             onChange={(e) => setInputClovaMessage(e.target.value)} // input 값이 변경될 때 상태 업데이트
+            onKeyDown={handleKeyDown} // Enter 키 눌렀을 때 이벤트 처리
           />
         </div>
         <button 
