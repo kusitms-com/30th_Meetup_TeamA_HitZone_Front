@@ -7,6 +7,7 @@ import RookiePreformattedMessageWithTail from "@/src/pages/Chatbot/components/me
 import RookiePreformattedMessage from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedMessage";
 import RookieImageMessage from "@/src/pages/Chatbot/components/message/custom/RookieImageMessage";
 import RookieImgUrlMessage from "@/src/pages/Chatbot/components/message/custom/RookieImgUrlMessage";
+import RookiePreformattedButtonMessage from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedButtonMessage";
 import RookiePreformattedButtonMessageWithTail from "@/src/pages/Chatbot/components/message/custom/RookiePreformattedButtonMessageWithTail";
 
 import { questionCategories } from "@/src/constants/ChatbotData";
@@ -37,20 +38,22 @@ import { questionCategories } from "@/src/constants/ChatbotData";
 //      -> \n 을 줄바꿈으로 인식하는 버튼이 달린 꼬랑지 말풍선에 출력
 // 9. 버튼 + 문자열
 //      -> \n 을 줄바꿈으로 인식하는 버튼이 달린 일반 말풍선에 출력
+export type RookieChatContentType = |
+{ type: "image"; content: string } | 
+{ type: "imgUrl"; content: string } | 
+{ type: "component"; content: React.ReactNode} | 
+{ type: "textListWithTail"; content: string[] } | 
+{ type: "textList"; content: string[] } | 
+{ type: "preformattedTextWithTail"; content: string } |
+{ type: "preformattedText"; content: string } |
+{ type: "preformattedTextButtonWithTail"; content: string; buttonContent:string; url: string; } |
+{ type: "preformattedTextButton"; content: string; buttonContent:string; url: string; };
+
 interface RookieChatProps { /*
+
     initialMessage?: string[];
     initialPreformattedMessage?: string; */
-    contentList?: Array<
-        { type: "image"; content: string } | 
-        { type: "imgUrl"; content: string } | 
-        { type: "component"; content: React.ReactNode} | 
-        { type: "textListWithTail"; content: string[] } | 
-        { type: "textList"; content: string[] } | 
-        { type: "preformattedTextWithTail"; content: string } |
-        { type: "preformattedText"; content: string } |
-        { type: "preformattedTextButtonWithTail"; content: string; buttonContent:string; url: string; } |
-        { type: "preformattedTextButton"; content: string; buttonContent:string; url: string; }
-    >;
+    contentList?: Array<RookieChatContentType>;
 }
 
 // 루키 채팅 한 세트를 그룹화한 컴포넌트

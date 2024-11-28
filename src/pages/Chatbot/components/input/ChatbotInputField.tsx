@@ -16,7 +16,7 @@ import { handleGetClovaAnswer } from "@/src/api/ChatbotApiHandler";
 interface Props {
   isStadiumSelected: boolean; // boolean 값을 props로 받음
   onSelect: (category: string) => void;
-  onClovaResponseUpdate: (answer: string) => void;
+  onClovaResponseUpdate: (question: string, answer: string) => void;
 }
 
 const ChatbotInputField = ({isStadiumSelected, onSelect, onClovaResponseUpdate}: Props) => {

@@ -9,7 +9,7 @@ import DateBanner from "./components/DateBanner";
 import { questionCategories } from "@/src/constants/ChatbotData";
 import { GuideGetResponseType, ClovaPostResponseType } from "@/src/api/ChatbotApiType";
 
-import RookieChat from "./components/chat/RookieChat";
+import RookieChat, { RookieChatContentType } from "./components/chat/RookieChat";
 import UserChat from "./components/chat/UserChat";
 import CategoryChat from "./components/chat/CategoryChat";
 
@@ -88,7 +88,7 @@ const Chatbot = () => {
     return (
       <>
         {/* 루키 사용 설명서 */}
-        <RookieImageMessage imgIcon={chatbotManualIcon} />
+        <RookieImageMessage imgIcon={chatbotManualIcon.src} />
         
         {/* 스타디움 선택창 */}
         <StadiumSelection stadiums={stadiumList} onSelect={handleStadiumSelect} />
@@ -115,7 +115,7 @@ const Chatbot = () => {
         contentList={[
           {
             type: "component",
-            content: <CategoryChat stadiumName={selectedStadium} categoryKey={0} categoryFrontName={selectedCategoryFrontName} onGuideResponseUpdate={renderSubCategoryChat} />
+            content: <CategoryChat stadiumName={selectedStadium} categoryFrontName={selectedCategoryFrontName} onGuideResponseUpdate={renderSubCategoryChat} />
           }
         ]}
       />
@@ -146,51 +146,50 @@ const Chatbot = () => {
     );
   }
 
-
   // 가이드 답변 렌더링
   const renderGuideAnswerData = (response: GuideGetResponseType) => {
-    const answerImageUrl = response.imgUrl;
-    const answerString = response.answer;
-    const answerLinkName = response.linkName;
-    const answerLink = response.link;
+    const answerImageUrl = response.imgUrl ?? "";
+    const answerString = response.answer ?? "";
+    const answerLinkName = response.linkName ?? "";
+    const answerLink = response.link ?? "";
 
-    const answerListWithImg = [
+    const answerListWithImg: RookieChatContentType[] = [
       { type: "imgUrl", content: answerImageUrl },
       { type: "preformattedText", content: answerString }
     ];
-    const answerList = [
+    const answerList: RookieChatContentType[] = [
       { type: "preformattedTextWithTail", content: answerString },
     ];
-    const answerListWithBtn = [
+    const answerListWithBtn: RookieChatContentType[] = [
       { type: "preformattedTextButtonWithTail", content: answerString, buttonContent: answerLinkName, url: answerLink },
     ];
 
     return (
       <>
-        {answerImageUrl  ?
+        {answerImageUrl  ? (
           // 이미지, 답변 출력
           <RookieChat 
             contentList={answerListWithImg}
           />
-        : answerLink  ?
+        ): answerLink  ? (
           // 이미지, 답변, 링크로 이동하는 버튼 출력
           <RookieChat 
             contentList={answerListWithBtn}
           />
-        : 
+        ): (
           // 답변 출력
           <RookieChat 
             contentList={answerList}
           />
-        }
+        )}
       </>
     );
   }
 
   
   // 쿨로바 답변 랜더링
-  const renderClovaAnswerData = (question: string, answer: ClovaPostResponseType) => {
-    const answerList = [
+  const renderClovaAnswerData = (question: string, answer: string) => {
+    const answerList: RookieChatContentType[] = [
       { type: "preformattedTextWithTail", content: answer },
     ];
     
