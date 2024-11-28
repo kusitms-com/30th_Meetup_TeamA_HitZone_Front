@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import closeButtonIcon from "@/src/assets/svg/chatbot_imagemodal_close_button.svg";
 
 const ImgUrlModal = ({ imageUrl, onClose }: { imageUrl: string, onClose: () => void }) => {
