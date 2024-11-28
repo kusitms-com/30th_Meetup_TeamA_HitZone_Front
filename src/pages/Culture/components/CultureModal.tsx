@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import CloseButton from "../../../assets/webp/close_button_gray.webp";
 
 type ModalProps = {
@@ -12,7 +12,7 @@ type ModalProps = {
     price?: string;
     description?: string;
     tip?: string;
-    image: string;
+    image: string | StaticImageData;
   } | null;
 };
 
@@ -55,7 +55,7 @@ const CultureModal = ({ isOpen, onClose, data }: ModalProps) => {
                 alt={data.title}
                 width={500}
                 height={300}
-                className="w-full h-auto rounded-lg"
+                className="w-full rounded-lg object-cover max-h-[165px]"
               />
             </div>
 
@@ -91,7 +91,7 @@ const CultureModal = ({ isOpen, onClose, data }: ModalProps) => {
                 alt={data.title}
                 width={500}
                 height={300}
-                className="w-full h-auto rounded-lg"
+                className="w-full rounded-lg object-cover max-h-[165px]"
               />
             </div>
 

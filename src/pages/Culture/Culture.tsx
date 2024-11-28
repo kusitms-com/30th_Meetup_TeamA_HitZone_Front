@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { StaticImageData } from "next/image";
 import CultureHeader from "../../components/layout/CultureHeader";
 import NavBar from "../../components/layout/NavBar";
 import Tabs from "./components/Tabs";
@@ -16,7 +17,7 @@ type CategoryRowData = {
   menu?: string;
   price?: string;
   description?: string;
-  image: string;
+  image: string | StaticImageData;
 };
 
 type InternalData = {
@@ -28,7 +29,7 @@ type CategoryType = "먹거리" | "즐길거리";
 type CategoryKeyType = "내부" | "외부";
 
 const Culture = () => {
-  const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL); // 드롭다운 선택 상태
+  const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL);
   const [selectedTab, setSelectedTab] = useState<CategoryType>("먹거리");
   const [modalData, setModalData] = useState<CategoryRowData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,7 +57,6 @@ const Culture = () => {
   const renderCategory = (category: CategoryKeyType) => {
     const data = dummyData[selectedTab][category];
 
-    // 내부 데이터 (식사류, 후식류 포함)
     if (isInternalData(data) && selectedTab === "먹거리" && category === "내부") {
       return (
         <>
@@ -87,7 +87,6 @@ const Culture = () => {
       );
     }
 
-    // 외부 데이터 또는 즐길거리
     if ((selectedTab === "먹거리" || selectedTab === "즐길거리") && Array.isArray(data)) {
       return (
         <>
@@ -109,7 +108,6 @@ const Culture = () => {
     return null;
   };
 
-  // 전체보기
   if (viewAllType) {
     const title = viewAllType;
     let dataToRender: CategoryRowData[] = [];
@@ -129,7 +127,6 @@ const Culture = () => {
     return <Detail data={dataToRender} title={`전체보기: ${viewAllType}`} />;
   }
 
-  // 수원KT야구장 선택 시 준비 중인 서비스 표시
   if (selectedStadium === StadiumType.SUWON_KT) {
     return (
       <div className="flex flex-col h-screen bg-white -mt-2">

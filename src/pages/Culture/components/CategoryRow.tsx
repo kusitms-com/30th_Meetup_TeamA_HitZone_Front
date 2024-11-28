@@ -1,19 +1,20 @@
 import React from "react";
 import Image from "next/image";
+import { StaticImageData } from "next/image";
 import LocationIcon from "../../../assets/svg/culture_location.svg";
 import MenuIcon from "../../../assets/svg/culture_menu.svg";
 
 interface CategoryRowData {
   title: string;
-  location?: string; // 먹거리만 해당
-  menu?: string; // 먹거리만 해당
-  description?: string; // 즐길거리 전용
-  image: string;
+  location?: string;
+  menu?: string;
+  description?: string;
+  image: string | StaticImageData;
 }
 
 interface CategoryRowProps {
   data: CategoryRowData[];
-  isActivity: boolean; // true면 즐길거리, false면 먹거리
+  isActivity: boolean;
   onCardClick: (data: CategoryRowData) => void;
 }
 
@@ -33,7 +34,7 @@ const CategoryRow = ({ data, isActivity, onCardClick }: CategoryRowProps) => {
             height={150}
             className="w-full h-[150px] object-cover rounded-t-lg"
           />
-          <div className="p-3">
+          <div className="px-2 py-3">
             <h4 className="text-md font-bold text-grayscale-90 mb-[6px]">
               {item.title}
             </h4>
@@ -46,7 +47,10 @@ const CategoryRow = ({ data, isActivity, onCardClick }: CategoryRowProps) => {
                   height={14}
                   className="mt-[2px]"
                 />
-                <p className="text-xs font-medium text-grayscale-90">{item.location}</p>
+                <p className="text-xs font-medium">
+                  <span className="text-grayscale-70">위치</span>{" "}
+                  <span className="text-grayscale-90">{item.location}</span>
+                </p>
               </div>
             )}
             {item.menu && (
@@ -58,10 +62,12 @@ const CategoryRow = ({ data, isActivity, onCardClick }: CategoryRowProps) => {
                   height={14}
                   className="mt-[2px]"
                 />
-                <p className="text-xs font-medium text-grayscale-90">{item.menu}</p>
+                <p className="text-xs font-medium">
+                  <span className="text-grayscale-70">대표메뉴</span>{" "}
+                  <span className="text-grayscale-90">{item.menu}</span>
+                </p>
               </div>
             )}
-            {/* description은 즐길거리(isActivity === true)일 때만 렌더링 */}
             {isActivity && item.description && (
               <p className="text-xs font-medium text-grayscale-90">{item.description}</p>
             )}
