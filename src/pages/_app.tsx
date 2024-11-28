@@ -23,6 +23,7 @@ import type { AppProps } from 'next/app';
 import Head from "next/head";
 import '../styles/globals.css';
 
+import HomePage from "./Home/HomePage";
 import Onboarding from './Onboarding/Onboarding'; 
 import SignupPage from './Onboarding/Signup/SignupPage'; 
 import Main from './Main/Main';
@@ -91,7 +92,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps: { session, ...pagePro
         case '/onboarding':
             return <SignupPage />;
         case '/':
-            return <Main selectedStadium={selectedMainStadium} setSelectedStadium={setSelectedMainStadium}/>;
+            return <HomePage />;
         case '/recommend/question':
             return <Question /*stadium={selectedMainStadium}*/ setResultId={setResultId} recommendedZoneList={recommendedZoneList} setRecommendedZoneList={setRecommendedZoneList}/>;
         case '/recommend/results':

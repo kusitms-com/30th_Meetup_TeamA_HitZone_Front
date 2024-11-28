@@ -4,6 +4,7 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 
 import useRefScroll from "@/src//hooks/useRefScroll";
 import useVisibilityWithFade from "@/src/hooks/useVisibilityWithFade";
+import { useStadiumSelector } from '@/src/hooks/useStadiumSelector';
 
 import Header from "../../components/layout/MainHeader";
 import NavBar from "../../components/layout/NavBar";
@@ -23,15 +24,16 @@ import ScrollAppeal from "./components/ScrollAppeal";
 // Enum으로 추천 구역 Data 관리
 import { StadiumType, stadiumList } from "../../constants/ZoneData";
 
-export interface Props {
-  selectedStadium: StadiumType;
-  setSelectedStadium: Dispatch<SetStateAction<StadiumType>>;
-}
-
-const Main = ({ selectedStadium, setSelectedStadium }: Props) => {
+const Main = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false); // 준비 중 팝업 상태
   //const [showCoachMark, setShowCoachMark] = useState(true); // 코치마크 표시 상태
+
+  // 메인홈 스타디움 관리
+  const {
+    selectedStadium: selectedMainStadium,
+    setSelectedStadium: setSelectedMainStadium
+  } = useStadiumSelector();
 
   const handleStadiumSelect = (stadium: StadiumType) => {
     // 선택 가능한 구장인지 확인

@@ -19,10 +19,12 @@ const RookieImageMessage = ({imgIcon}: Props) => {
     <div className="mb-2">
         {/* 이미지 내용 */}
         <Image
-            src={imgIcon}
-            alt="채팅창 이미지"
-            className={`${maxChatWidth} h-auto rounded-md cursor-pointer`}
-            onClick={() => openModal(imgIcon)}
+          src={imgIcon}
+          alt="채팅창 이미지"
+          className={`${maxChatWidth} h-auto rounded-md cursor-pointer`}
+          onClick={() => openModal(imgIcon)}
+          width={500}  // 임시 너비
+          height={300} // 임시 높이
         />
 
         {/* 이미지를 모달창으로 띄우기 */}
