@@ -48,14 +48,15 @@ const Culture = () => {
     setIsModalOpen(true);
   };
 
-  const handleShowAll = (type: string) => {
-    setViewAllType(type);
+  const handleShowAll = (distance: CategoryType, location: CategoryKeyType, food?: string) => {
+    const title = food ? `${distance} - ${location} - ${food}` : `${distance} - ${location}`;
+    setViewAllType(title);
   };
-  
 
   const renderCategory = (category: CategoryKeyType) => {
     const data = dummyData[selectedTab][category];
 
+    // 내부 데이터 (식사류, 후식류 포함)
     if (isInternalData(data) && selectedTab === "먹거리" && category === "내부") {
       return (
         <>
@@ -64,7 +65,7 @@ const Culture = () => {
             title="식사류"
             level={2}
             showButton
-            onClick={() => handleShowAll("식사류")}
+            onClick={() => handleShowAll("먹거리", "내부", "식사류")}
           />
           <CategoryRow
             data={data.식사류}
@@ -75,7 +76,7 @@ const Culture = () => {
             title="후식류"
             level={2}
             showButton
-            onClick={() => handleShowAll("후식류")}
+            onClick={() => handleShowAll("먹거리", "내부", "후식류")}
           />
           <CategoryRow
             data={data.후식류}
@@ -86,10 +87,16 @@ const Culture = () => {
       );
     }
 
+    // 외부 데이터 또는 즐길거리
     if ((selectedTab === "먹거리" || selectedTab === "즐길거리") && Array.isArray(data)) {
       return (
         <>
-          <CategoryHeader title={`구장 ${category}`} level={1} />
+          <CategoryHeader
+            title={`구장 ${category}`}
+            level={1}
+            showButton
+            onClick={() => handleShowAll(selectedTab, category)}
+          />
           <CategoryRow
             data={data}
             isActivity={selectedTab === "즐길거리"}
@@ -104,19 +111,22 @@ const Culture = () => {
 
   // 전체보기
   if (viewAllType) {
-    const internalData = dummyData["먹거리"]["내부"];
-    const dataToRender =
-      viewAllType === "식사류"
-        ? (internalData as InternalData).식사류
-        : viewAllType === "후식류"
-        ? (internalData as InternalData).후식류
-        : [];
-    return (
-      <Detail
-        data={dataToRender}
-        title={`전체보기: ${viewAllType}`}
-      />
-    );
+    const title = viewAllType;
+    let dataToRender: CategoryRowData[] = [];
+
+    if (title.includes("식사류") || title.includes("후식류")) {
+      const internalData = dummyData["먹거리"]["내부"];
+      if (isInternalData(internalData)) {
+        dataToRender =
+          title.includes("식사류") ? internalData.식사류 : internalData.후식류;
+      }
+    } else if (title.includes("외부")) {
+      dataToRender = dummyData[selectedTab]["외부"] as CategoryRowData[];
+    } else {
+      dataToRender = dummyData[selectedTab]["내부"] as CategoryRowData[];
+    }
+
+    return <Detail data={dataToRender} title={`전체보기: ${viewAllType}`} />;
   }
 
   // 수원KT야구장 선택 시 준비 중인 서비스 표시
