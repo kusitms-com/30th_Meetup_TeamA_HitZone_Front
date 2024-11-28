@@ -77,9 +77,8 @@ const Chatbot = () => {
   
   // 새로 렌더링
   useEffect(() => {
-    if (!isLoading) {
-      scrollToBottom();
-    }
+    scrollToBottom();
+    
   }, [selectedStadium, selectedCategory, chatComponents]);
 
 
