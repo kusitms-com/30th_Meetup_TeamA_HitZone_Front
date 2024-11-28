@@ -42,7 +42,7 @@ const HomePage = () => {
     return (
         <div>
             {/* 초기 페이지 */}
-            {currentPage === 'init' && <InitPage onComplete={() => setCurrentPage('onboarding')} />} 
+            {currentPage === 'init' && <InitPage/>} 
 
             {/* 온보딩 페이지 */}
             {currentPage === 'onboarding' && <SignupPage3 onComplete={() => setCurrentPage('coachmark')}/>} 

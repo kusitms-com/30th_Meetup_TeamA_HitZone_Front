@@ -47,7 +47,7 @@ const SignupPage = () => {
         case 2:
             return <SignupPage2 previousStep={previousStep} nextStep={nextStep}/>;
         case 3:
-            return <SignupPage3 previousStep={previousStep} nextStep={nextStep} nickname={nickname}/>;
+            //return <SignupPage3 previousStep={previousStep} nextStep={nextStep} nickname={nickname}/>;
         default:
             return null;
     }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import HeaderCenterBar from "@/src/components/layout/HeaderCenter";
-import { Props } from "./SignupPage";
 
 import Image from 'next/image';
 import signupConfettiIcon from '../../../assets/svg/signup_confetti.svg';
