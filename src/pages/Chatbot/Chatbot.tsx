@@ -6,7 +6,7 @@ import ChatbotInputField from "./components/input/ChatbotInputField";
 
 import DateBanner from "./components/DateBanner";
 
-import { questionCategories, GuideResponseData } from "@/src/constants/ChatbotData";
+import { questionCategories } from "@/src/constants/ChatbotData";
 import { GuideGetResponseType, ClovaPostResponseType } from "@/src/api/ChatbotApiType";
 
 import RookieChat from "./components/chat/RookieChat";
@@ -78,7 +78,7 @@ const Chatbot = () => {
   // 새로 렌더링
   useEffect(() => {
     scrollToBottom();
-    
+
   }, [selectedStadium, selectedCategory, chatComponents]);
 
 
