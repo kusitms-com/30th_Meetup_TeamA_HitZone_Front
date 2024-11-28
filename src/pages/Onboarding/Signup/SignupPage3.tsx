@@ -10,12 +10,18 @@ import signupZonePinkIcon from '../../../assets/svg/signup_zone_pink.svg';
 import onboardingRookieIcon from "@/src/assets/webp/onboarding_welcome_rookie.webp";
 import onboardingZoneBackgroundIcon from "@/src/assets/webp/onboarding_welcome_zone_background.webp";
 
+import { onboardingHistoryName } from "@/src/pages/Home/HomePage";
 
 interface Props {
     onComplete: () => void;
 }
 
 const Page = ({onComplete}: Props) => {
+    const handleComplete = () => {
+        // 온보딩 완료 후 localStorage에 상태 저장
+        localStorage.setItem(onboardingHistoryName, 'true');
+        onComplete(); // 다음 페이지로 전환
+    };
 
     return (
         <div className="relative justify-center items-center w-full h-screen ">
@@ -57,7 +63,7 @@ const Page = ({onComplete}: Props) => {
                     />
                     <div className="flex justify-center items-center bg-main-50 border rounded-[8px] h-[48px] mb-[40px]">
                         <p className="text-md text-white font-semibold ">
-                            <button onClick={onComplete}>Hitzone 시작하기</button>
+                            <button onClick={handleComplete}>Hitzone 시작하기</button>
                         </p>
                     </div>
                 </div>
