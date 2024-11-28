@@ -39,7 +39,7 @@ const Page = ({onComplete}: Props) => {
             </div>
             
             <Image 
-                src={signupZonePinkIcon} 
+                src={onboardingZoneBackgroundIcon} 
                 alt="핑크 야구장 배경 아마자" 
                 className="absolute bottom-0 left-0 w-full z-[-1]" 
             />
@@ -51,7 +51,7 @@ const Page = ({onComplete}: Props) => {
                     <Image 
                         src={onboardingRookieIcon} 
                         alt="루키" 
-                        className="absolute bottom-[190px] left-1/2 transform -translate-x-1/2"
+                        className="absolute bottom-[170px] left-1/2 transform -translate-x-1/2"
                         width={255}
                         height={319}
                     />
