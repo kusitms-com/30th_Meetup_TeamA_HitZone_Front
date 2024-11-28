@@ -12,14 +12,13 @@ import { handleGetGuideAnswer } from "@/src/api/ChatbotApiHandler";
 
 interface Props {
     stadiumName: string;
-    categoryKey: number;
     categoryFrontName: string;
-    onGuideResponseUpdate: (answer: string, imgUrl: string, linkName: string, link: string, categoryKey: number, categoryName: string, subCategoryKey: number, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
+    onGuideResponseUpdate: (answer: string, imgUrl: string, linkName: string, link: string, categoryName: string, subCategoryName: string) => void; // 부모로 데이터 전달 콜백
 }
 
 
 // 사용자가 카테고리 클릭시 나오는 커스텀 대화창
-const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onGuideResponseUpdate}: Props) => {
+const CategoryChat = ({stadiumName, categoryFrontName, onGuideResponseUpdate}: Props) => {
     // 사용자가 선택한 카테고리
     const categories = questionCategories.questionCategories;
 
@@ -32,8 +31,7 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onGuideRespo
     // 카테고리 클릭시 하위 값 존재 여부에 따른 렌더링 함수
     const renderCategoryDetails = (categoryData: typeof categories[keyof typeof categories]) => (
         <div>
-
-
+            
             {/* 프론트에서 처리하는 데이터: 이미지 출력 */}
             {/* image 값이 있는 경우: image 렌더링 */}
             {"image" in categoryData && categoryData.image && (
@@ -84,6 +82,8 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onGuideRespo
                                             categoryData.subcategories.backendParameters[index],
                                     });
 
+                                    //console.log(response);
+
                                     if (!response) {
                                         // response가 undefined인 경우 undefined 반환
                                         return undefined;
@@ -91,22 +91,13 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onGuideRespo
                                     
                                     // 부모 컴포넌트에 업데이트
                                     onGuideResponseUpdate(
-                                        response.answer ?? "",          // answer가 없으면 빈 문자열
-                                        response.imageUrl ?? null,      // imageUrl이 없으면 null
+                                        response.answer ?? "",              // answer가 없으면 빈 문자열
+                                        response.imageUrl ?? null,          // imageUrl이 없으면 null
                                         response.linkName ?? null,
                                         response.link ?? null,
-                                        categoryKey,                    // categoryKey (props에서 전달받은 값)
-                                        categoryData.frontendValue,     // categoryName (props에서 전달받은 값)
-                                        index,                          // subCategoryKey
-                                        subcategoryName                 // subCategoryName
+                                        categoryData.frontendValue,   // categoryName (props에서 전달받은 값)
+                                        subcategoryName            // 선택한 subCategoryName
                                     );
-
-                                    return {
-                                        answer: response.answer ?? "", // answer가 없는 경우 빈 문자열 반환
-                                        imgUrl: response.imageUrl ?? null, // imageUrl이 없는 경우 null 반환
-                                        linkName: response.linkName ?? null,
-                                        link: response.link ?? null,
-                                    };
                                     
                                     //alert(`응답 데이터: ${response}`);
                                 } catch (error) {
@@ -114,8 +105,8 @@ const CategoryChat = ({stadiumName, categoryKey, categoryFrontName, onGuideRespo
                                 }
                                 }}
                             >
-                            {/* 리스트에 값 넣기*/}
-                            {subcategoryName}
+                                {/* 리스트에 값 넣기*/}
+                                {subcategoryName}
                             </li>
                         ))}
                     </ul>

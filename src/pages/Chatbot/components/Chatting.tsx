@@ -20,7 +20,6 @@ const ChatWithComponents = () => {
     return (
       <div
         ref={chatContainerRef}
-        style={{ height: "300px", overflowY: "auto", padding: "10px", border: "1px solid #ccc" }}
       >
         {/* 시간 순으로 추가된 컴포넌트 렌더링 */}
         {components.map((component, index) => (

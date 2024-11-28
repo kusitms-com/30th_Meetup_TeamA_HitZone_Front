@@ -133,12 +133,3 @@ export const getStadiumChatApiData = (frontendStadiumValue: string): string => {
   // backendParameters에서 매칭되는 값 반환
   return backendParameters[index];
 };
-
-export interface GuideResponseData {
-  answer: string;             // 백엔드로부터 받은 챗봇 가이드 답변 데이터
-  imgUrl: string;             // 백엔드로부터 받은 챗봇 가이드 이미지 데이터
-  categoryNumber: number;     // 사용자가 선택한 큰 카테고리
-  categoryName: string;       // 사용자가 선택한 큰 카테고리명
-  subcategoryNumber: number;  // 사용자가 선택한 세부 카테고리
-  subCategoryName: string;    // 사용자가 선택한 세부 카테고리명
-}
