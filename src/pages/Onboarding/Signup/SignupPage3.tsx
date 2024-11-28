@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BackLogoBar from "../../../components/layout/BackLogoBar"
+import HeaderCenterBar from "@/src/components/layout/HeaderCenter";
 import { Props } from "./SignupPage";
 
 import Image from 'next/image';
@@ -18,11 +18,8 @@ interface MyProps extends Props {
 const Page = ({previousStep, nextStep, nickname}: MyProps) => {
     return (
         <div className="relative justify-center items-center w-full h-screen ">
-            {/** 뒤로가기 바 */}
-            <div className="w-full border-b border-grayscale-10 py-[15px]"
-                 onClick={previousStep}>
-                <BackLogoBar />
-            </div>
+            {/** 헤더바 */}
+            <HeaderCenterBar />
             
             {/** 배경 이미지, 맨 뒤에, 중앙에 배치 */}
             <Image src={signupConfettiIcon} alt="축하 배경 이미지" className="absolute left-1/2 -translate-x-1/2 translate-y-[20px] justify-center z-[-1]" />
