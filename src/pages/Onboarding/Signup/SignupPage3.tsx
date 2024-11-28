@@ -35,7 +35,7 @@ const Page = ({previousStep, nextStep, nickname}: MyProps) => {
                         환영해요!
                     </p>
                     <p className="text-lg text-grayscale-90 font-semibold mt-[2px]">
-                        {nickname}님의 즐거운 야구 관람을 도와주는<br/>HitZone입니다
+                        나에게 가장 Fit한 Zone에서 <br/>야구를 즐겨보세요
                     </p>
                 </div>
             </div>
