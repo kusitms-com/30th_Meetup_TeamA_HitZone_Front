@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../../components/layout/MainHeader";
+import CultureHeader from "../../components/layout/CultureHeader";
 import NavBar from "../../components/layout/NavBar";
 import Tabs from "./components/Tabs";
 import dummyData from "../../constants/CultureData";
@@ -119,7 +119,7 @@ const Culture = () => {
   return (
     <div className="flex flex-col bg-grayscale-5 h-screen pb-14">
       <div className="sticky top-0 z-10 bg-white">
-        <Header />
+        <CultureHeader />
       </div>
       <div className="flex-1 p-6 overflow-y-auto scrollbar-hide">
         <Tabs selectedTab={selectedTab} onSelectTab={setSelectedTab} />
