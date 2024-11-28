@@ -31,10 +31,9 @@ const Main = () => {
 
   // 메인홈 스타디움 관리
   const {
-    selectedStadium: selectedMainStadium,
-    setSelectedStadium: setSelectedMainStadium
+    selectedStadium, setSelectedStadium
   } = useStadiumSelector();
-
+  
   const handleStadiumSelect = (stadium: StadiumType) => {
     // 선택 가능한 구장인지 확인
     if (stadium === StadiumType.JAMSIL || stadium === StadiumType.SUWON_KT) {
