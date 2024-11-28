@@ -3,16 +3,18 @@ import Image from "next/image";
 import LocationIcon from "../../../assets/svg/culture_location.svg";
 import MenuIcon from "../../../assets/svg/culture_menu.svg";
 
+interface CategoryRowData {
+  title: string;
+  location?: string; // 먹거리만 해당
+  menu?: string; // 먹거리만 해당
+  description?: string; // 즐길거리 전용
+  image: string;
+}
+
 interface CategoryRowProps {
-  data: {
-    title: string;
-    location?: string; // 먹거리만 해당
-    menu?: string; // 먹거리만 해당
-    description?: string; // 즐길거리 전용
-    image: string;
-  }[];
+  data: CategoryRowData[];
   isActivity: boolean; // true면 즐길거리, false면 먹거리
-  onCardClick: (data: any) => void;
+  onCardClick: (data: CategoryRowData) => void;
 }
 
 const CategoryRow = ({ data, isActivity, onCardClick }: CategoryRowProps) => {

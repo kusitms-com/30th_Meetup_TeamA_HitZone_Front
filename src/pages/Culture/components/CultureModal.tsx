@@ -2,18 +2,18 @@ import React from "react";
 import Image from "next/image";
 import CloseButton from "../../../assets/webp/close_button_gray.webp";
 
-interface ModalProps {
+type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   data: {
     title: string;
-    location: string;
-    menu: string;
-    price: string;
-    description: string;
+    location?: string;
+    menu?: string;
+    price?: string;
+    description?: string;
     image: string;
   } | null;
-}
+};
 
 const CultureModal = ({ isOpen, onClose, data }: ModalProps) => {
   if (!isOpen || !data) return null;
