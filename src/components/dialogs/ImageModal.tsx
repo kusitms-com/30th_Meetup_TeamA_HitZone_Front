@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import closeButtonIcon from "@/src/assets/svg/chatbot_imagemodal_close_button.svg";
 
 const ImageModal = ({ imageSrc, onClose }: { imageSrc: string, onClose: () => void }) => {
     return (
@@ -7,12 +8,12 @@ const ImageModal = ({ imageSrc, onClose }: { imageSrc: string, onClose: () => vo
         <div className="relative bg-white p-4 rounded-lg">
           <Image 
             src={imageSrc} 
-            alt="Enlarged" 
+            alt="확대 이미지" 
             className="max-w-full max-h-full" />
           <button 
             onClick={onClose} 
-            className="absolute top-0 right-0 w-5 h-5 text-xl mr-3 text-grayscale-50 p-2 rounded-full">
-            X
+            className="absolute top-0 right-0 text-grayscale-50 p-2 rounded-full">
+            <Image src={closeButtonIcon} alt="닫기 버튼"  width={24} height={24}/>
           </button>
         </div>
       </div>
