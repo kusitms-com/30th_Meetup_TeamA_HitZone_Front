@@ -1,35 +1,40 @@
 import { useEffect, useState } from 'react';
 import InitPage from '@/src/pages/Onboarding/Login/InitPage'; // 온보딩 컴포넌트
+import SignupPage3 from "@/src/pages/Onboarding/Signup/SignupPage3";
 import Main from '@/src/pages/Main/Main'; // 메인 컴포넌트
 
 const HomePage = () => {
-  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
-
-  useEffect(() => {
-    // localStorage에서 'hasCompletedOnboarding' 값을 확인
-    const onboardingStatus = localStorage.getItem('hasCompletedOnboarding');
+    const [currentPage, setCurrentPage] = useState<'init' | 'signup' | 'main'>('init'); // 현재 페이지 상태
+  
+    useEffect(() => {
+        // 1.5초 후 InitPage에서 SignupPage3로 전환
+        if (currentPage === 'init') {
+          const initTimer = setTimeout(() => {
+            setCurrentPage('signup'); // InitPage 후 SignupPage3로 전환
+          }, 1500); // 1.5초 대기
     
-    // 온보딩을 완료한 상태라면 메인 컴포넌트만 보여줌
-    if (onboardingStatus === 'true') {
-      setHasCompletedOnboarding(true);
-    }
-  }, []);
+          return () => clearTimeout(initTimer); // 타이머 정리
+        }
 
-  // 온보딩을 완료하면 localStorage에 상태 저장
-  const handleOnboardingComplete = () => {
-    localStorage.setItem('hasCompletedOnboarding', 'true');
-    setHasCompletedOnboarding(true); // 상태 업데이트
-  };
+        if (currentPage === 'signup') {
+          return () => clearTimeout(signupTimer); // 타이머 정리
+        }
+        
+    }, [currentPage]); // currentPage가 변경될 때마다 useEffect 실행
+    
 
-  return (
-    <div>
-      {hasCompletedOnboarding ? (
-        <Main /> // 온보딩을 완료했으면 메인 컴포넌트 표시
-      ) : (
-        <InitPage onComplete={handleOnboardingComplete} /> // 온보딩 컴포넌트 표시
-      )}
-    </div>
-  );
+    return (
+        <div>
+            {/* InitPage 표시 */}
+            {currentPage === 'init' && <InitPage onComplete={() => setCurrentPage('signup')} />} 
+
+            {/* SignupPage3 표시 */}
+            {currentPage === 'signup' && <SignupPage3 />} 
+
+            {/* Main 표시 */}
+            {currentPage === 'main' && <Main />}
+        </div>
+    );
 };
 
 export default HomePage;
