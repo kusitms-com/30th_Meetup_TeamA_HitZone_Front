@@ -9,7 +9,10 @@ const ImageModal = ({ imageSrc, onClose }: { imageSrc: string, onClose: () => vo
           <Image 
             src={imageSrc} 
             alt="확대 이미지" 
-            className="max-w-full max-h-full" />
+            className="max-w-full max-h-full"
+            width={500}  // 임시 너비
+            height={500} // 임시 높이
+          />
           <button 
             onClick={onClose} 
             className="absolute top-0 right-0 text-grayscale-50 p-2 rounded-full">
