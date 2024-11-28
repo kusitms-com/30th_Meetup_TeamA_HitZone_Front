@@ -6,7 +6,11 @@ import CoachMark from "../../pages/Main/components/CoachMark";
 import Dropdown from "../dropdown/BigDropdown";
 import { StadiumType } from "@/src/constants/ZoneData";
 
-const CultureHeader = () => {
+interface CultureHeaderProps {
+  onStadiumSelect: (stadium: StadiumType) => void;
+}
+
+const CultureHeader = ({ onStadiumSelect }: CultureHeaderProps) => {
   const [isCoachMarkVisible, setIsCoachMarkVisible] = useState(false);
 
   // 드롭다운 상태 관리
@@ -15,6 +19,7 @@ const CultureHeader = () => {
   // 드롭다운 선택 핸들러
   const handleDropdownSelect = (option: StadiumType) => {
     setSelectedOption(option);
+    onStadiumSelect(option);
   };
 
   // 코치마크 아이콘 클릭 시 상태 변경

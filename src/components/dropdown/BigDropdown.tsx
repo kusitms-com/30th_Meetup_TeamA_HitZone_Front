@@ -30,7 +30,7 @@ export default function BigDropdown({ options, selectedOption, onSelect }: BigDr
       </button>
 
       <div
-        className={`absolute left-0 w-full mt-2 font-medium bg-white shadow-lg text-sm z-10 transition-all duration-300 ease-in-out rounded-lg ${
+        className={`absolute left-0 w-full mt-[13px] font-medium bg-white shadow-lg text-sm z-10 transition-all duration-300 ease-in-out rounded-lg ${
           isDropdownOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0 scale-95"
         } overflow-hidden`}
       >

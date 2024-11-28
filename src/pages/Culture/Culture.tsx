@@ -7,6 +7,8 @@ import CategoryHeader from "./components/CategoryHeader";
 import CategoryRow from "./components/CategoryRow";
 import Modal from "./components/CultureModal";
 import Detail from "./components/Detail";
+import ServiceReady from "../../components/page/ServiceReady";
+import { StadiumType } from "@/src/constants/ZoneData";
 
 type CategoryRowData = {
   title: string;
@@ -26,6 +28,7 @@ type CategoryType = "먹거리" | "즐길거리";
 type CategoryKeyType = "내부" | "외부";
 
 const Culture = () => {
+  const [selectedStadium, setSelectedStadium] = useState<StadiumType>(StadiumType.JAMSIL); // 드롭다운 선택 상태
   const [selectedTab, setSelectedTab] = useState<CategoryType>("먹거리");
   const [modalData, setModalData] = useState<CategoryRowData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,7 +51,7 @@ const Culture = () => {
   const handleShowAll = (type: string) => {
     setViewAllType(type);
   };
-
+  
 
   const renderCategory = (category: CategoryKeyType) => {
     const data = dummyData[selectedTab][category];
@@ -116,10 +119,25 @@ const Culture = () => {
     );
   }
 
+  // 수원KT야구장 선택 시 준비 중인 서비스 표시
+  if (selectedStadium === StadiumType.SUWON_KT) {
+    return (
+      <div className="flex flex-col h-screen bg-white -mt-2">
+        <div className="sticky top-0 z-10">
+          <CultureHeader onStadiumSelect={setSelectedStadium} />
+        </div>
+        <div className="flex flex-1 items-center justify-center">
+          <ServiceReady />
+        </div>
+        <NavBar />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col bg-grayscale-5 h-screen pb-14">
       <div className="sticky top-0 z-10 bg-white">
-        <CultureHeader />
+        <CultureHeader onStadiumSelect={setSelectedStadium} />
       </div>
       <div className="flex-1 p-6 overflow-y-auto scrollbar-hide">
         <Tabs selectedTab={selectedTab} onSelectTab={setSelectedTab} />
